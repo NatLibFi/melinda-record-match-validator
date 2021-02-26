@@ -1,0 +1,20 @@
+{
+    "description": "Should not detect a match",
+    "expectedResults": {
+        "000": {
+            "recordBibLevel": "monograph",
+            "recordCompletionLevel": "unknown",
+            "recordState": "fixed",
+            "recordType": "text material"
+        },
+        "001": {
+            "isMelindaId": true,
+            "value": "001500014"
+        },
+        "005": "2014-08-20T00:24:31+03:00",
+        "identifiers": {
+            "standardIdentifiers": [],
+            "title": "De periodisering der geschiedenis"
+        }
+    }
+}
