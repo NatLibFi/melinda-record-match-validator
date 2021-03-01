@@ -103,7 +103,7 @@ export function getRecordInfo(record) {
   }
 
   function getRecordBibLevel() {
-
+    // onko tietueessa 773-kenttää. tässä siis isComponent: bibLevel: a, b, d ja/tai on 773-kenttä/kenttiä (edited). okei, osakohde kokoelmassa on siis d, ei c ...
     if (recordBibLevelRaw === 'a') {
       return {level: 'Monographic component part', code: 'a'};
     }

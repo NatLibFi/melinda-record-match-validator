@@ -1,22 +1,3 @@
 {
-    "description": "Should not detect a match",
-    "expectedResults": {
-        "000": {
-            "recordBibLevel": "monograph",
-            "recordCompletionLevel": "intermediate level",
-            "recordState": "fixed",
-            "recordType": "text material"
-        },
-        "001": {
-            "isMelindaId": true,
-            "value": "001590014"
-        },
-        "005": "2019-07-03T16:39:44+03:00",
-        "identifiers": {
-            "standardIdentifiers": [
-                "90-6779-080-X"
-            ],
-            "title": "European citizenship"
-        }
-    }
+    "description": "Should not detect a match"
 }
