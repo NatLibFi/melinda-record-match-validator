@@ -46,5 +46,6 @@ function callback({getFixture, expectedResults}) {
   const record = new MarcRecord(getFixture('inputRecord.json'), {subfieldValues: false});
   //console.log(JSON.stringify(record)); // eslint-disable-line
   const recordValues = collectRecordValues(record);
+  console.log(recordValues); // eslint-disable-line
   expect(recordValues).to.eql(expectedResults);
 }

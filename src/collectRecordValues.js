@@ -26,18 +26,21 @@
 *
 */
 
-import {getRecordTitle, getRecordStandardIdentifiers} from '@natlibfi/melinda-commons';
+import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getRecordInfo} from './collectFunctions/leader';
 import {get001, get005} from './collectFunctions/controlFields';
+import {getCAT} from './collectFunctions/fields';
 
 export function collectRecordValues(record) {
   return {
     'identifiers': {
       title: getRecordTitle(record),
-      standardIdentifiers: getRecordStandardIdentifiers(record)
+      standardIdentifiers: getRecordStandardIdentifiers(record),
+      deleted: isDeletedRecord(record)
     },
     '000': getRecordInfo(record),
     '001': get001(record),
-    '005': get005(record)
+    '005': get005(record),
+    'CAT': getCAT(record)
   };
 }

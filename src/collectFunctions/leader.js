@@ -4,7 +4,7 @@ export function getRecordInfo(record) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:leader');
 
   const {leader} = record;
-  const [,,,,, recordStateRaw, recordTypeRaw, recordBibLevelRaw,,,,,,,,,, recordCompletionLevel] = leader;
+  const [, , , , , recordStateRaw, recordTypeRaw, recordBibLevelRaw, , , , , , , , , , recordCompletionLevel] = leader;
 
   debug('Record state raw: %o', recordStateRaw);
   debug('Record type raw: %o', recordTypeRaw);
@@ -20,23 +20,23 @@ export function getRecordInfo(record) {
 
   function getRecordState() {
     if (recordStateRaw === 'a') {
-      return 'updated';
+      return {level: 'Increase in encoding level', code: 'a'};
     }
 
     if (recordStateRaw === 'c') {
-      return 'fixed';
+      return {level: 'Corrected or revised', code: 'c'};
     }
 
     if (recordStateRaw === 'd') {
-      return 'deleted';
+      return {level: 'Deleted', code: 'd'};
     }
 
     if (recordStateRaw === 'n') {
-      return 'new';
+      return {level: 'New', code: 'n'};
     }
 
     if (recordStateRaw === 'p') {
-      return 'updated foreknowledge';
+      return {level: 'Increase in encoding level from prepublication', code: 'p'};
     }
 
     throw new Error('Invalid record state');
@@ -44,59 +44,59 @@ export function getRecordInfo(record) {
 
   function getRecordType() {
     if (recordTypeRaw === 'a') {
-      return 'text material';
+      return {level: 'Language material', code: 'a'};
     }
 
     if (recordTypeRaw === 'c') {
-      return 'sheet music release';
+      return {level: 'Notated music', code: 'c'};
     }
 
     if (recordTypeRaw === 'd') {
-      return 'sheet music script';
+      return {level: 'Manuscript notated music', code: 'd'};
     }
 
     if (recordTypeRaw === 'e') {
-      return 'map material';
+      return {level: 'Cartographic material', code: 'e'};
     }
 
     if (recordTypeRaw === 'f') {
-      return 'map script';
+      return {level: 'Manuscript cartographic material', code: 'f'};
     }
 
     if (recordTypeRaw === 'g') {
-      return 'projectable medium';
+      return {level: 'Projected medium', code: 'g'};
     }
 
     if (recordTypeRaw === 'i') {
-      return 'voice record';
+      return {level: 'Nonmusical sound recording', code: 'i'};
     }
 
     if (recordTypeRaw === 'j') {
-      return 'music record';
+      return {level: 'Musical sound recording', code: 'j'};
     }
 
     if (recordTypeRaw === 'k') {
-      return 'image';
+      return {level: 'Two-dimensional nonprojectable graphic', code: 'k'};
     }
 
     if (recordTypeRaw === 'm') {
-      return 'electronic material';
+      return {level: 'Computer file', code: 'm'};
     }
 
     if (recordTypeRaw === 'o') {
-      return 'multicast';
+      return {level: 'Kit', code: 'o'};
     }
 
     if (recordTypeRaw === 'p') {
-      return 'random material';
+      return {level: 'Mixed materials', code: 'p'};
     }
 
     if (recordTypeRaw === 'r') {
-      return 'item';
+      return {level: 'Three-dimensional artifact or naturally occurring object', code: 'r'};
     }
 
     if (recordTypeRaw === 't') {
-      return 'text script';
+      return {level: 'Manuscript language material', code: 't'};
     }
 
     throw new Error('Invalid record type');
@@ -105,63 +105,76 @@ export function getRecordInfo(record) {
   function getRecordBibLevel() {
 
     if (recordBibLevelRaw === 'a') {
-      return 'sub-item in the monograph';
+      return {level: 'Monographic component part', code: 'a'};
     }
 
     if (recordBibLevelRaw === 'b') {
-      return 'sub-item in the periodical';
+      return {level: 'Serial component part', code: 'b'};
     }
 
     if (recordBibLevelRaw === 'c') {
-      return 'collection';
+      return {level: 'Collection', code: 'c'};
     }
 
     if (recordBibLevelRaw === 'd') {
-      return 'sub-item in the collection';
+      return {level: 'Subunit', code: 'd'};
     }
 
     if (recordBibLevelRaw === 'i') {
-      return 'updated publication';
+      return {level: 'Integrating resource', code: 'i'};
     }
 
     if (recordBibLevelRaw === 'm') {
-      return 'monograph';
+      return {level: 'Monograph/Item', code: 'm'};
     }
 
     if (recordBibLevelRaw === 's') {
-      return 'periodical';
+      return {level: 'Serial', code: 's'};
     }
 
     throw new Error('Invalid record bib level');
   }
 
   function getRecordCompletionLevel() {
-
     if (recordCompletionLevel === ' ') {
-      return 'perfect - certified';
-    }
-    if (recordCompletionLevel === '1') {
-      return 'perfect - non certified';
-    }
-    if (recordCompletionLevel === '2') {
-      return 'scarcer than perfect, non certified';
-    }
-    if (recordCompletionLevel === '3') {
-      return 'scarcer than minimum recommended level';
-    }
-    if (recordCompletionLevel === '4') {
-      return 'intermediate level';
-    }
-    if (recordCompletionLevel === '5') {
-      return 'foreknowledge';
-    }
-    if (recordCompletionLevel === '7') {
-      return 'unknown';
-    }
-    if (recordCompletionLevel === '8') {
-      return 'Unsuitable';
+      return {level: 'Full level', code: ' '};
     }
 
+    if (recordCompletionLevel === '1') {
+      return {level: 'Full level, material not examined', code: '1'};
+    }
+
+    if (recordCompletionLevel === '2') {
+      return {level: 'Less-than-full level, material not examined', code: '2'};
+    }
+
+    if (recordCompletionLevel === '3') {
+      return {level: 'Abbreviated level', code: '3'};
+    }
+
+    if (recordCompletionLevel === '4') {
+      return {level: 'Core level', code: '4'};
+    }
+
+    if (recordCompletionLevel === '5') {
+      return {level: 'Partial (preliminary) level', code: '5'};
+    }
+
+    if (recordCompletionLevel === '7') {
+      return {level: 'Minimal level', code: '7'};
+    }
+
+    if (recordCompletionLevel === '8') {
+      return {level: 'Prepublication level', code: '8'};
+    }
+
+    if (recordCompletionLevel === 'u') {
+      return {level: 'Unknown', code: 'u'};
+    }
+
+    if (recordCompletionLevel === 'z') {
+      return {level: 'Not applicable', code: 'z'};
+    }
 
     throw new Error('Invalid record completion level');
   }
