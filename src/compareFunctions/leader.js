@@ -15,28 +15,10 @@ export function compareRecordInfo(recordValuesA, recordValuesB) {
   const f000B = recordValuesB['000'];
 
   return {
-    recordState: compareRecordState(),
     recordType: compareRecordType(),
     recordBibLevel: compareRecordBibLevel(),
     recordCompletionLevel: compareRecordCompletionLevel()
   };
-
-  function compareRecordState() {
-    debug('Record A state: %o', f000A.recordState);
-    debug('Record B state: %o', f000B.recordState);
-
-    /*
-    a - Increase in encoding level
-    c - Corrected or revised
-    d - Deleted
-    n - New
-    p - Increase in encoding level from prepublication
-    */
-
-    const rateArray = ['a', 'c', 'd', 'n', 'p'];
-
-    return rateValues(f000A.recordState, f000B.recordState, rateArray);
-  }
 
   function compareRecordType() {
     debug('Record A type: %o', f000A.recordType);
@@ -68,7 +50,7 @@ export function compareRecordInfo(recordValuesA, recordValuesB) {
     u - Unknown
     z - Not applicable
     */
-    const rateArray = [' ', '1', '2', '3', '4', '5', '7', '8', 'u', 'z'];
+    const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
 
     return rateValues(f000A.recordCompletionLevel, f000B.recordCompletionLevel, rateArray);
   }

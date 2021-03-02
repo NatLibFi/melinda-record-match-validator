@@ -32,43 +32,17 @@ export function getRecordInfo(record) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:leader');
 
   const {leader} = record;
-  const [, , , , , recordStateRaw, recordTypeRaw, recordBibLevelRaw, , , , , , , , , , recordCompletionLevel] = leader;
+  const [, , , , , , recordTypeRaw, recordBibLevelRaw, , , , , , , , , , recordCompletionLevel] = leader;
 
-  debug('Record state raw: %o', recordStateRaw);
   debug('Record type raw: %o', recordTypeRaw);
   debug('Record bib level raw: %o', recordBibLevelRaw);
   debug('Record completion level raw: %o', recordCompletionLevel);
 
   return {
-    recordState: getRecordState(),
     recordType: getRecordType(),
     recordBibLevel: getRecordBibLevel(),
     recordCompletionLevel: getRecordCompletionLevel()
   };
-
-  function getRecordState() {
-    if (recordStateRaw === 'a') {
-      return {level: 'Increase in encoding level', code: 'a'};
-    }
-
-    if (recordStateRaw === 'c') {
-      return {level: 'Corrected or revised', code: 'c'};
-    }
-
-    if (recordStateRaw === 'd') {
-      return {level: 'Deleted', code: 'd'};
-    }
-
-    if (recordStateRaw === 'n') {
-      return {level: 'New', code: 'n'};
-    }
-
-    if (recordStateRaw === 'p') {
-      return {level: 'Increase in encoding level from prepublication', code: 'p'};
-    }
-
-    throw new Error('Invalid record state');
-  }
 
   function getRecordType() {
     if (recordTypeRaw === 'a') {
