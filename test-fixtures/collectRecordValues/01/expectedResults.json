@@ -1,0 +1,114 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": null,
+    "numberOfPartInSectionOfAWork": null,
+    "title": "European citizenship /"
+  },
+  "336": {
+    "contentTypes": [
+      "txt"
+    ]
+  },
+  "337": {
+    "mediaTypes": [
+      "n"
+    ]
+  },
+  "338": {
+    "carrierTypes": [
+      "nc"
+    ]
+  },
+  "773": [],
+  "000": {
+    "recordBibLevel": {
+      "code": "m",
+      "level": "Monograph/Item"
+    },
+    "recordCompletionLevel": {
+      "code": "4",
+      "level": "Core level"
+    },
+    "recordState": {
+      "code": "c",
+      "level": "Corrected or revised"
+    },
+    "recordType": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "001590014"
+  },
+  "005": "2019-07-03T16:39:44+03:00",
+  "042": [],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-YSO",
+      "time": "2019-07-05T11:35:00+03:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "LOAD-YSO",
+        "time": "2019-07-03T16:39:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-HELKA",
+        "time": "2018-05-03T23:28:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-FIX",
+        "time": "2017-06-29T18:58:00+03:00"
+      },
+      {
+        "cataloger": "CONV-RDA",
+        "time": "2016-03-19T08:35:00+02:00"
+      },
+      {
+        "cataloger": "LOAD-FIX",
+        "time": "2014-12-31T10:18:00+02:00"
+      },
+      {
+        "cataloger": "undefined",
+        "time": "2009-05-29T17:40:00+03:00"
+      },
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-02T08:29:00+03:00"
+      }
+    ]
+  },
+  "LOW": [
+    "SELMA",
+    "JOSKU",
+    "HELKA",
+    "ALMA"
+  ],
+  "SID": [
+    {
+      "database": "helka",
+      "id": "772700"
+    },
+    {
+      "database": "alma",
+      "id": "225753"
+    },
+    {
+      "database": "josku",
+      "id": "271085"
+    },
+    {
+      "database": "selma",
+      "id": "197324"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "90-6779-080-X"
+    ],
+    "title": "European citizenship"
+  }
+}

@@ -1,3 +1,31 @@
+/**
+*
+* @licstart  The following is the entire license notice for the JavaScript code in this file.
+*
+* Melinda record match validator modules for Javascript
+*
+* Copyright (C) 2020 University Of Helsinki (The National Library Of Finland)
+*
+* This file is part of melinda-record-match-validator
+*
+* melinda-record-match-validator program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* melinda-record-match-validator is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+* @licend  The above is the entire license notice
+* for the JavaScript code in this file.
+*
+*/
+
 import createDebugLogger from 'debug';
 
 export function getRecordInfo(record) {
@@ -103,7 +131,7 @@ export function getRecordInfo(record) {
   }
 
   function getRecordBibLevel() {
-    // onko tietueessa 773-kenttää. tässä siis isComponent: bibLevel: a, b, d ja/tai on 773-kenttä/kenttiä (edited). okei, osakohde kokoelmassa on siis d, ei c ...
+    // onko tietueessa 773-kenttää. tässä siis isComponent: bibLevel: a, b, d ja/tai on 773-kenttä/kenttiä
     if (recordBibLevelRaw === 'a') {
       return {level: 'Monographic component part', code: 'a'};
     }

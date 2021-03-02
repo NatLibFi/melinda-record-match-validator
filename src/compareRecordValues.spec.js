@@ -28,13 +28,12 @@
 
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
-import {MarcRecord} from '@natlibfi/marc-record';
 import generateTests from '@natlibfi/fixugen';
-import {collectRecordValues} from './collectRecordValues';
+import {compareRecordValues} from './compareRecordValues';
 
 generateTests({
   callback,
-  path: [__dirname, '..', 'test-fixtures', 'collectRecordValues'],
+  path: [__dirname, '..', 'test-fixtures', 'compareRecordValues'],
   useMetadataFile: true,
   recurse: false,
   fixura: {
@@ -47,8 +46,9 @@ function callback({getFixture, enabled}) {
     console.log('TEST DISABLED!'); // eslint-disable-line no-console
     return;
   }
-  const record = new MarcRecord(getFixture('inputRecord.json'), {subfieldValues: false});
+  const recordValuesA = getFixture('inputRecordValuesA.json');
+  const recordValuesB = getFixture('inputRecordValuesB.json');
   const expectedResults = getFixture('expectedResults.json');
-  const recordValues = collectRecordValues(record);
-  expect(recordValues).to.eql(expectedResults);
+  const compareResults = compareRecordValues(recordValuesA, recordValuesB);
+  expect(compareResults).to.eql(expectedResults);
 }

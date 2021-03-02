@@ -29,7 +29,7 @@
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getRecordInfo} from './collectFunctions/leader';
 import {get001, get005} from './collectFunctions/controlFields';
-import {get336bContentType, get337bMediaType, get338bCarrierType, getCAT, getLOW, getSID} from './collectFunctions/fields';
+import {get042, get245, get336bContentType, get337bMediaType, get338bCarrierType, get773, getCAT, getLOW, getSID} from './collectFunctions/fields';
 
 export function collectRecordValues(record) {
   return {
@@ -41,9 +41,12 @@ export function collectRecordValues(record) {
     '000': getRecordInfo(record),
     '001': get001(record),
     '005': get005(record),
+    '042': get042(record),
+    '245': get245(record),
     '336': get336bContentType(record),
     '337': get337bMediaType(record),
     '338': get338bCarrierType(record),
+    '773': get773(record),
     'CAT': getCAT(record),
     'LOW': getLOW(record),
     'SID': getSID(record)
