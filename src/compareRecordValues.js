@@ -26,6 +26,10 @@
 *
 */
 import createDebugLogger from 'debug';
+import {compareSID, compareCAT, compareLOW} from './compareFunctions/alephInternalFields';
+import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
+import {compare001, compare005} from './compareFunctions/controlFields';
+import {compare042, compare773, compare336ContentType, compare337MediaType, compare338CarrierType, compare245} from './compareFunctions/fields';
 import {compareRecordInfo} from './compareFunctions/leader';
 
 export function compareRecordValues(recordValuesA, recordValuesB) {
@@ -34,29 +38,19 @@ export function compareRecordValues(recordValuesA, recordValuesB) {
   debug('Record values B: %o', recordValuesB);
 
   return {
-    '336': true, // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
-    '337': 'partialA', // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
-    '338': false, // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
-    '773': {
-      'enumerationAndFirstPage': false,
-      'recordControlNumber': true,
-      'relatedParts': true
-    },
+    'commonIdentifiers': compareCommonIdentifiers(recordValuesA, recordValuesB),
     '000': compareRecordInfo(recordValuesA, recordValuesB),
-    '001': false,
-    '005': 'A', // A is more recently updated
-    '042': false, // A nor B has any fikka or viola
-    'CAT': {
-      'latest': 'A', // Needs some planing
-      'otherCats': true
-    },
-    'LOW': false,
-    'SID': true,
-    'commonIdentifiers': {
-      'deleted': true, // Both has false
-      'standardIdentifiers': true, // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
-      'title': true // Both have same title
-    }
+    '001': compare001(recordValuesA, recordValuesB),
+    '005': compare005(recordValuesA, recordValuesB), // A is more recently updated
+    '042': compare042(recordValuesA, recordValuesB), // A nor B has any fikka or viola
+    '245': compare245(recordValuesA, recordValuesB),
+    '336': compare336ContentType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
+    '337': compare337MediaType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
+    '338': compare338CarrierType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
+    '773': compare773(recordValuesA, recordValuesB),
+    'SID': compareSID(recordValuesA, recordValuesB),
+    'CAT': compareCAT(recordValuesA, recordValuesB),
+    'LOW': compareLOW(recordValuesA, recordValuesB)
   };
 }
 

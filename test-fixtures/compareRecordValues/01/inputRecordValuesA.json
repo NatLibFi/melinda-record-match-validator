@@ -1,60 +1,63 @@
 {
-    "245": {
-      "nameOfPartInSectionOfAWork": null,
-      "numberOfPartInSectionOfAWork": null,
-      "title": "Kuinka äkäpussi kesytetään."
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "Kuinka äkäpussi kesytetään."
+  },
+  "336": {
+    "contentTypes": [
+      "txt"
+    ]
+  },
+  "337": {
+    "mediaTypes": [
+      "c"
+    ]
+  },
+  "338": {
+    "carrierTypes": [
+      "cr"
+    ]
+  },
+  "773": [],
+  "000": {
+    "recordBibLevel": {
+      "code": "m",
+      "level": "Monograph/Item"
     },
-    "336": {
-      "contentTypes": [
-        "txt"
-      ]
+    "recordCompletionLevel": {
+      "code": "8",
+      "level": "Prepublication level"
     },
-    "337": {
-      "mediaTypes": [
-        "c"
-      ]
-    },
-    "338": {
-      "carrierTypes": [
-        "cr"
-      ]
-    },
-    "773": [],
-    "000": {
-      "recordBibLevel": {
-        "code": "m",
-        "level": "Monograph/Item"
-      },
-      "recordCompletionLevel": {
-        "code": "8",
-        "level": "Prepublication level"
-      },
-      "recordType": {
-        "code": "a",
-        "level": "Language material"
-      }
-    },
-    "001": {
-      "isMelindaId": false,
-      "value": "016658170"
-    },
-    "005": "2020-11-19T12:39:08+02:00",
-    "042": [
-      "finb"
-    ],
-    "CAT": {
-      "latest": null,
-      "otherCats": []
-    },
-    "LOW": [
-      "FIKKA"
-    ],
-    "SID": [],
-    "commonIdentifiers": {
-      "deleted": false,
-      "standardIdentifiers": [
-        "978-951-0-42533-6"
-      ],
-      "title": "Kuinka äkäpussi kesytetään"
+    "recordType": {
+      "code": "a",
+      "level": "Language material"
     }
+  },
+  "001": {
+    "isMelindaId": false,
+    "value": "016658170"
+  },
+  "005": "2020-11-19T12:39:08+02:00",
+  "042": [
+    "finb"
+  ],
+  "CAT": {
+    "latest": {
+      "cataloger": "undefined",
+      "time": "undefined"
+    },
+    "otherCats": []
+  },
+  "LOW": [
+    "FIKKA"
+  ],
+  "SID": [],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "978-951-0-42533-6"
+    ],
+    "title": "Kuinka äkäpussi kesytetään"
   }
+}

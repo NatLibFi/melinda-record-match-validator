@@ -1,7 +1,7 @@
 {
   "245": {
-    "nameOfPartInSectionOfAWork": null,
-    "numberOfPartInSectionOfAWork": null,
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
     "title": "Lippulaulu."
   },
   "336": {
@@ -19,13 +19,9 @@
   },
   "773": [
     {
-      "enumerationAndFirstPage": [],
-      "recordControlNumber": [
-        "(FI-MELINDA)015633197"
-      ],
-      "relatedParts": [
-        "Raita 7"
-      ]
+      "enumerationAndFirstPage": "undefined",
+      "recordControlNumber": "(FI-MELINDA)015633197",
+      "relatedParts": "Raita 7"
     }
   ],
   "000": {

@@ -1,0 +1,71 @@
+{
+    "245": {
+        "nameOfPartInSectionOfAWork": "undefined",
+        "numberOfPartInSectionOfAWork": "undefined",
+        "title": "Studia Romanica Upsaliensia."
+    },
+    "336": {
+        "contentTypes": [
+            "txt"
+        ]
+    },
+    "337": {
+        "mediaTypes": [
+            "n"
+        ]
+    },
+    "338": {
+        "carrierTypes": [
+            "nc"
+        ]
+    },
+    "773": [],
+    "000": {
+        "recordBibLevel": {
+            "code": "s",
+            "level": "Serial"
+        },
+        "recordCompletionLevel": {
+            "code": "3",
+            "level": "Abbreviated level"
+        },
+        "recordType": {
+            "code": "a",
+            "level": "Language material"
+        }
+    },
+    "001": {
+        "isMelindaId": true,
+        "value": "004633754"
+    },
+    "005": "2002-03-21T15:48:55+02:00",
+    "042": [],
+    "CAT": {
+        "latest": {
+            "cataloger": "CONV-RDA",
+            "time": "2016-03-19T08:39:00+02:00"
+        },
+        "otherCats": [
+            {
+                "cataloger": "CONV-ISBD",
+                "time": "2012-04-02T09:08:00+03:00"
+            }
+        ]
+    },
+    "LOW": [
+        "VAARI"
+    ],
+    "SID": [
+        {
+            "database": "vaari",
+            "id": "873414"
+        }
+    ],
+    "commonIdentifiers": {
+        "deleted": false,
+        "standardIdentifiers": [
+            "0562-3022"
+        ],
+        "title": "Studia Romanica Upsaliensia"
+    }
+}

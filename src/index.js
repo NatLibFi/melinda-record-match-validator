@@ -28,16 +28,23 @@
 
 import createDebugLogger from 'debug';
 import {collectRecordValues} from './collectRecordValues';
+import {compareRecordValues} from './compareRecordValues';
+import {validateCompareResults} from './validateRecordCompareResults';
 
-export default (record, compareRecord) => {
+// {Record, source, yms}
+export default (recordA, recordB) => {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
-  if (record === undefined || compareRecord === undefined) { // eslint-disable-line functional/no-conditional-statement
+  if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
     throw new Error('Record missing!');
   }
 
-  const recordValues = collectRecordValues(record);
-  debug('Record values: %o', recordValues);
-  const compareRecordValues = collectRecordValues(compareRecord);
-  debug('Compare record values: %o', compareRecordValues);
+  const recordValuesA = collectRecordValues(recordA);
+  debug('Record values A: %o', recordValuesA);
+  const recordValuesB = collectRecordValues(recordB);
+  debug('Record values B: %o', recordValuesB);
+  const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
+  debug('Compared record values: %o', comparedRecordValues);
+
+  return validateCompareResults(comparedRecordValues);
 };

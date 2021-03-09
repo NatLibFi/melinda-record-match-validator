@@ -25,10 +25,10 @@
     "lint:dev": "eslint --fix src",
     "test:base": "cross-env NODE_ENV=test nyc mocha --require @babel/register",
     "test": "npm run lint && npm run test:base -- --recursive src",
-    "test:dev": "npm run lint:dev && npm run test:base -- --recursive src && npm run coverage",
+    "test:dev": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- --recursive src && npm run coverage",
     "coverage": "nyc check-coverage --per-file",
     "build": "babel src --source-maps --copy-files --delete-dir-on-start --out-dir=dist",
-    "watch:test": "cross-env DEBUG=1 NODE_ENV=test nodemon -w src -w test-fixtures --exec 'npm run test:dev'"
+    "watch:test": "cross-env NODE_ENV=test nodemon -w src -w test-fixtures --exec 'npm run test:dev'"
   },
   "dependencies": {
     "@natlibfi/marc-record": "^6.1.1",

@@ -9,7 +9,7 @@
 import createDebugLogger from 'debug';
 
 export function compareRecordInfo(recordValuesA, recordValuesB) {
-  const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:leader');
+  const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:leader');
 
   const f000A = recordValuesA['000'];
   const f000B = recordValuesB['000'];
@@ -63,10 +63,15 @@ export function compareRecordInfo(recordValuesA, recordValuesB) {
     }
 
     if (rateArray) {
-      const ratingOfA = rateArray.indexOf(valueA) + 1;
-      const ratingOfB = rateArray.indexOf(valueB) + 1;
+      const ratingOfA = rateArray.indexOf(valueA.code) + 1;
+      const ratingOfB = rateArray.indexOf(valueB.code) + 1;
 
-      if (ratingOfA > ratingOfB) {
+      if (ratingOfA === 0 || ratingOfB === 0) {
+        debug('Value not found from array');
+        return false;
+      }
+
+      if (ratingOfA < ratingOfB) {
         debug('A better: returning A');
         return 'A';
       }

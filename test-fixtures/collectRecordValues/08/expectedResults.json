@@ -1,0 +1,83 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "Kårkalendern /"
+  },
+  "336": {
+    "contentTypes": [
+      "txt"
+    ]
+  },
+  "337": {
+    "mediaTypes": [
+      "n"
+    ]
+  },
+  "338": {
+    "carrierTypes": [
+      "nc"
+    ]
+  },
+  "773": [],
+  "000": {
+    "recordBibLevel": {
+      "code": "s",
+      "level": "Serial"
+    },
+    "recordCompletionLevel": {
+      "code": "u",
+      "level": "Unknown"
+    },
+    "recordType": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "000141102"
+  },
+  "005": "2019-07-08T18:34:07+03:00",
+  "042": [],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-ELAID",
+      "time": "2021-01-17T16:32:00+02:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "LOAD-ELAID",
+        "time": "2021-01-16T19:27:00+02:00"
+      },
+      {
+        "cataloger": "LOAD-YSO",
+        "time": "2019-07-08T18:34:00+03:00"
+      },
+      {
+        "cataloger": "CONV-RDA",
+        "time": "2016-03-19T08:14:00+02:00"
+      },
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-01T20:44:00+03:00"
+      }
+    ]
+  },
+  "LOW": [
+    "ALMA"
+  ],
+  "SID": [
+    {
+      "database": "alma",
+      "id": "304673"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "0786-6917"
+    ],
+    "title": "Kårkalendern"
+  }
+}

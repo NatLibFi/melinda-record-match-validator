@@ -27,7 +27,7 @@
 */
 
 import createDebugLogger from 'debug';
-import moment from 'moment';
+import {hasFields, getSubfield} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:fields');
 
@@ -46,8 +46,8 @@ export function get245(record) {
 
   function f245ToJSON(field) {
     const title = getSubfield(field, 'a');
-    const numberOfPartInSectionOfAWork = getSubfield(field, 'n') || null;
-    const nameOfPartInSectionOfAWork = getSubfield(field, 'p') || null;
+    const numberOfPartInSectionOfAWork = getSubfield(field, 'n');
+    const nameOfPartInSectionOfAWork = getSubfield(field, 'p');
 
     return {title, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
   }
@@ -89,74 +89,10 @@ export function get773(record) {
   return F773s;
 
   function f733ToJSON(f773) {
-    const recordControlNumber = f773.subfields.filter(sub => sub.code === 'w').map(sub => sub.value);
-    const relatedParts = f773.subfields.filter(sub => sub.code === 'g').map(sub => sub.value);
-    const enumerationAndFirstPage = f773.subfields.filter(sub => sub.code === 'q').map(sub => sub.value);
+    const recordControlNumber = getSubfield(f773, 'w');
+    const relatedParts = getSubfield(f773, 'g');
+    const enumerationAndFirstPage = getSubfield(f773, 'q');
 
     return {recordControlNumber, relatedParts, enumerationAndFirstPage};
   }
-}
-
-export function getCAT(record) {
-  // if not fields []
-  const CATs = hasFields('CAT', record, catToJSON);
-  const [latest, ...otherCats] = CATs.reverse(); // eslint-disable-line functional/immutable-data
-
-  if (latest === undefined) {
-    return {latest: null, otherCats: []};
-  }
-
-  debug('Latest CAT: %o', latest);
-  debug('Other CATs: %o', otherCats);
-
-  return {latest, otherCats};
-
-  function catToJSON(cat) {
-    const [catalogerSubfield] = cat.subfields.filter(sub => sub.code === 'a').map(sub => sub.value);
-    const cataloger = catalogerSubfield === undefined ? 'undefined' : catalogerSubfield;
-    const catDate = cat.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
-    const catClock = cat.subfields.filter(sub => sub.code === 'h').map(sub => sub.value);
-    const time = moment(catDate + catClock, ['YYYYMMDDHHmm'], true).format();
-
-    return {cataloger, time};
-  }
-}
-
-export function getLOW(record) {
-  const LOWs = hasFields('LOW', record, getSubfield, 'a');
-  debug('LOWs: %o', LOWs);
-
-  return LOWs;
-}
-
-export function getSID(record) {
-  const SIDs = hasFields('SID', record).map(field => sidToJson(field));
-  debug('SIDs: %o', SIDs);
-
-  return SIDs;
-
-  function sidToJson(sid) {
-    const [database] = sid.subfields.filter(sub => sub.code === 'b').map(sub => sub.value);
-    const [id] = sid.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
-
-    return {id, database};
-  }
-}
-
-function hasFields(tag, record, useFunction, useFunctionParameters) {
-  const fields = record.get(tag);
-  if (fields === []) {
-    return [];
-  }
-
-  if (useFunction !== undefined) {
-    return fields.map(field => useFunction(field, useFunctionParameters));
-  }
-
-  return fields;
-}
-
-function getSubfield(field, subfieldCode) {
-  const [value] = field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
-  return value;
 }

@@ -1,0 +1,34 @@
+{
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": true,
+    "title": true
+  },
+  "000": {
+    "recordBibLevel": true,
+    "recordCompletionLevel": "B",
+    "recordType": true
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": false
+  },
+  "005": "B",
+  "042": "B",
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": true
+  },
+  "336": true,
+  "337": true,
+  "338": true,
+  "773": {
+    "enumerationAndFirstPage": true,
+    "recordControlNumber": true,
+    "relatedParts": true
+  },
+  "CAT": false,
+  "LOW": false,
+  "SID": false
+}
