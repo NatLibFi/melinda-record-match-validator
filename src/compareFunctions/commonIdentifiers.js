@@ -10,7 +10,7 @@ export function compareCommonIdentifiers(recordValuesA, recordValuesB) {
   debug('%o vs %o', commonIdentifiersA, commonIdentifiersB);
 
   return {
-    'deleted': commonIdentifiersA.deleted && commonIdentifiersB.deleted,
+    'deleted': commonIdentifiersA.deleted || commonIdentifiersB.deleted,
     'standardIdentifiers': compareArrayContent(commonIdentifiersA.standardIdentifiers, commonIdentifiersB.standardIdentifiers, true),
     'title': compareValueContent(commonIdentifiersA.title, commonIdentifiersB.title)
   };

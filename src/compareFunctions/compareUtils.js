@@ -32,7 +32,7 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
       return 'B';
     }
 
-    debug('Array A or B both empty or contains different values');
+    debug('Array A or B both contains different values');
     return false;
   }
 

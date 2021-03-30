@@ -27,11 +27,19 @@ export function compareCAT(recordValuesA, recordValuesB) {
   }
 
   if (resultA.commonOtherCats.length > 0) {
-    if (resultB.updatesAfterCommonCAT === 0 && resultA.updatesAfterCommonCAT > 0) {
+    if (resultB.updatesAfterCommonCAT.length === 0 && resultA.updatesAfterCommonCAT.length > 0) {
       return 'A';
     }
 
-    if (resultA.updatesAfterCommonCAT === 0 && resultB.updatesAfterCommonCAT > 0) {
+    if (resultA.updatesAfterCommonCAT.length === 0 && resultB.updatesAfterCommonCAT.length > 0) {
+      return 'B';
+    }
+
+    if (resultA.nonCompCats.length > 0 && resultB.nonCompCats.length === 0) {
+      return 'A';
+    }
+
+    if (resultB.nonCompCats.length > 0 && resultA.nonCompCats.length === 0) {
       return 'B';
     }
 
@@ -51,19 +59,19 @@ export function compareCAT(recordValuesA, recordValuesB) {
     const updatesAfterCommonCAT = CATsCompareTo.otherCats.indexOf(commonOtherCats[0]);
     debug('Contains %o CATs after common CAT', updatesAfterCommonCAT);
 
-    const nonImpOrLoadCats = catsContainNonImpOrLoad(CATsA.latest, CATsA.otherCats);
-    debug('CATs contains NON "IMP-" or "LOAD-" or "CONV-" CATs: %o', nonImpOrLoadCats);
+    const nonCompCats = catsContainNonImpOrLoad(CATsCompareTo.latest, CATsCompareTo.otherCats);
+    debug('CATs contains NON "IMP-" or "LOAD-" or "CONV-" CATs: %o', nonCompCats);
 
     return {
       isAheadOfOther,
       commonOtherCats,
       updatesAfterCommonCAT,
-      nonImpOrLoadCats
+      nonCompCats
     };
   }
 
   function catsContainNonImpOrLoad(latest, otherCats) {
-    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !(/^LOAD-\w*|^IMP-\w*|^CONV-\w*/u).test(cat.cataloger));
+    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !(/^LOAD-\w*|^IMP-\w*|^CONV-\w*|^REM-\w*/u).test(cat.cataloger));
   }
 
   function compareIfArrayContainsCat(catToCompare, catArray) {
@@ -98,18 +106,23 @@ export function compareSID(recordValuesA, recordValuesB) {
       return true;
     }
 
-    const SIDsBContainsFromA = SIDsA.filter(SIDA => SIDsB.some(SIDB => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
-    const SIDsAContainsFromB = SIDsB.filter(SIDB => SIDsA.some(SIDA => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
-
-    if (SIDsA.length > 0 && SIDsB === 0) {
+    if (SIDsA.length > 0 && SIDsB.length === 0) {
       debug('SIDs A contains values and B is empty');
       return 'A';
     }
 
-    if (SIDsB.length > 0 && SIDsA === 0) {
+    if (SIDsB.length > 0 && SIDsA.length === 0) {
       debug('SIDs B contains values and A is empty');
-      return 'A';
+      return 'B';
     }
+
+    // Same database & different id => HARD failure
+    if (SIDsA.some(sidA => SIDsB.some(sidB => sidA.database === sidB.database && sidA.id !== sidB.id))) {
+      return false;
+    }
+
+    const SIDsBContainsFromA = SIDsA.filter(SIDA => SIDsB.some(SIDB => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
+    const SIDsAContainsFromB = SIDsB.filter(SIDB => SIDsA.some(SIDA => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
 
     if (SIDsB.length > 0 && JSON.stringify(SIDsAContainsFromB) === JSON.stringify(SIDsB)) {
       debug('SIDs A contains all values from B');
@@ -119,6 +132,10 @@ export function compareSID(recordValuesA, recordValuesB) {
     if (SIDsA.length > 0 && JSON.stringify(SIDsBContainsFromA) === JSON.stringify(SIDsA)) {
       debug('SIDs B contains all values from A');
       return 'B';
+    }
+
+    if (SIDsAContainsFromB === 0 && SIDsBContainsFromA === 0 && SIDsA.length > 0 && SIDsB.length > 0) {
+      return true;
     }
 
     debug('SIDs A or B does not contain all values from other');

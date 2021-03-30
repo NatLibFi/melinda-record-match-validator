@@ -11,6 +11,10 @@ export function hasFields(tag, record, useFunction, useFunctionParameters) {
   return fields;
 }
 
+// Check 773 multiple sub code w & g
+// Check 245 multiple sub code n & p
+// Check 042 multiple sub code a
+
 export function getSubfield(field, subfieldCode) {
   const [value] = field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 

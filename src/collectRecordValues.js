@@ -35,7 +35,7 @@ import {get042, get245, get336bContentType, get337bMediaType, get338bCarrierType
 export function collectRecordValues(record) {
   return {
     'commonIdentifiers': {
-      title: getRecordTitle(record),
+      title: getRecordTitle(record), // not needed
       standardIdentifiers: getRecordStandardIdentifiers(record),
       deleted: isDeletedRecord(record)
     },

@@ -9,11 +9,11 @@ export function validatePriority(comparedRecordValues) {
   const prioOrder = [
     {name: 'recordCompletionLevel', value: isValidValue(comparedRecordValues['000'].recordCompletionLevel, wantedValues)},
     {name: 'isMelindaId', value: isValidValue(comparedRecordValues['001'].isMelindaId, wantedValues)},
+    {name: 'isViolaOrFikka', value: isValidValue(comparedRecordValues['042'], wantedValues)},
     {name: 'commonIdentifiers', value: isValidValue(comparedRecordValues.commonIdentifiers.standardIdentifiers, wantedValues)},
     {name: 'LOW', value: isValidValue(comparedRecordValues.LOW, wantedValues)},
     {name: 'SID', value: isValidValue(comparedRecordValues.SID, wantedValues)},
     {name: 'CAT', value: isValidValue(comparedRecordValues.CAT, wantedValues)},
-    {name: 'isViolaOrFikka', value: isValidValue(comparedRecordValues['042'], wantedValues)},
     {name: 'recordControlNumber', value: isValidValue(comparedRecordValues['773'].recordControlNumber, wantedValues)},
     {name: 'contentTypes', value: isValidValue(comparedRecordValues['336'], wantedValues)},
     {name: 'mediaTypes', value: isValidValue(comparedRecordValues['337'], wantedValues)},

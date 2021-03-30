@@ -61,36 +61,57 @@ export function compare338CarrierType(recordValuesA, recordValuesB) {
 }
 
 export function compare773(recordValuesA, recordValuesB) {
-  debug('**********************************************************************************************************');
-  const f773sA = recordValuesA['773'];
-  const f773sB = recordValuesB['773'];
-  debug('%o vs %o', f773sA, f773sB);
+  // Matters if starts with (FI-MELINDA) (FIN01) FCC
+  const f773sA = recordValuesA['773']
+    .filter(field => (/^\(FI-MELINDA\)\d*|^\(FIN01\)\d*|^FCC\d*/u).test(field.recordControlNumber))
+    .map(field => ({
+      'enumerationAndFirstPage': field.enumerationAndFirstPage,
+      'recordControlNumber': field.recordControlNumber.replace(/\(FI-MELINDA\)|\(FIN01\)|FCC/u, ''),
+      'relatedParts': field.relatedParts
+    }));
+  const f773sB = recordValuesB['773']
+    .filter(field => (/^\(FI-MELINDA\)\d*|^\(FIN01\)\d*|^FCC\d*/u).test(field.recordControlNumber))
+    .map(field => ({
+      'enumerationAndFirstPage': field.enumerationAndFirstPage,
+      'recordControlNumber': field.recordControlNumber.replace(/\(FI-MELINDA\)|\(FIN01\)|FCC/u, ''),
+      'relatedParts': field.relatedParts
+    }));
+  debug('Collected f773s: %o vs %o', f773sA, f773sB);
 
-  const collectedValuesA = collectValues(f773sA);
-  const collectedValuesB = collectValues(f773sB);
-  debug('# # %o vs %o', collectedValuesA, collectedValuesB);
+  // filter sames out!
+  const collectedUniqsA = collectUnique773s(f773sA, f773sB);
+  const collectedUniqsB = collectUnique773s(f773sB, f773sA);
+  debug('Collected f773s: %o vs %o', collectedUniqsA, collectedUniqsB);
 
-  const enumerationAndFirstPageResult = compareArrayContent(collectedValuesA.enumerationAndFirstPages, collectedValuesB.enumerationAndFirstPages);
-  debug('Enumeration and first page compare results %o', enumerationAndFirstPageResult);
+  if (collectedUniqsA.length === 0 && collectedUniqsB.length === 0) {
+    debug('All same returning true');
+    return true;
+  }
 
-  const recordControlNumberResult = compareArrayContent(collectedValuesA.recordControlNumbers, collectedValuesB.recordControlNumbers);
-  debug('Record control number compare results %o', recordControlNumberResult);
+  if (collectedUniqsA.length > 0 && f773sB.length === 0) {
+    debug('A has uniques and B empty');
+    return 'A';
+  }
 
-  const relatedPartsResult = compareArrayContent(collectedValuesA.relatedParts, collectedValuesB.relatedParts);
-  debug('Related parts compare results %o', relatedPartsResult);
+  if (collectedUniqsB.length > 0 && f773sA.length === 0) {
+    debug('B has uniques and A empty');
+    return 'B';
+  }
 
-  debug('**********************************************************************************************************');
-  return {
-    'enumerationAndFirstPage': enumerationAndFirstPageResult,
-    'recordControlNumber': recordControlNumberResult,
-    'relatedParts': relatedPartsResult
-  };
+  // Hard failure if there are 773 $w:s that have a Melinda-ID, but none of the match between records
+  if (collectedUniqsA.length === f773sA.length) {
+    debug('Both have uniques but non matching');
+    return false;
+  }
 
-  function collectValues(fieldArray) {
-    return {
-      enumerationAndFirstPages: fieldArray.filter(field => field.enumerationAndFirstPage !== 'undefined').map(field => field.enumerationAndFirstPage),
-      recordControlNumbers: fieldArray.filter(field => field.recordControlNumber !== 'undefined').map(field => field.recordControlNumber),
-      relatedParts: fieldArray.filter(field => field.relatedParts !== 'undefined').map(field => field.relatedParts)
-    };
+  return false;
+
+  function collectUnique773s(fieldArrayA, fieldArrayB) {
+    return fieldArrayA.filter(fieldA => !fieldArrayB.some(fieldB => {
+      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage;
+      const recordControlNumber = fieldA.recordControlNumber === fieldB.recordControlNumber;
+      const relatedParts = fieldA.relatedParts === fieldB.relatedParts;
+      return enumerationAndFirstPage && recordControlNumber && relatedParts;
+    }));
   }
 }

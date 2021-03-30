@@ -43,9 +43,21 @@ export function validateCompareResults(comparedRecordValues) {
   }
   */
 
-  if (validateFailure(comparedRecordValues)) {
-    return {merge: false, prio: ''};
+  // Actions:
+  // 'update' = full override
+  // 'merge' = run merge, use profile x and prio A or B
+  // 'create' = create new record
+  // false = send back conflict
+
+  // Prio:
+  // 'True'
+  // 'A'
+  // 'B'
+  const validationFailureResults = validateFailure(comparedRecordValues);
+
+  if (validationFailureResults.failure) {
+    return {action: false, prio: false, message: validationFailureResults.reason};
   }
 
-  return {merge: true, prio: validatePriority(comparedRecordValues)};
+  return {action: 'merge', prio: validatePriority(comparedRecordValues)};
 }

@@ -53,7 +53,7 @@ export function get245(record) {
   }
 }
 
-// 300 laajuus
+// Later 300 subfields 3, a, e (needs alot parsing)
 
 /*
 336, 337, 338 $b:t

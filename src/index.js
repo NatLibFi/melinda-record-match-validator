@@ -43,6 +43,10 @@ export default (recordA, recordB) => {
   debug('Record values A: %o', recordValuesA);
   const recordValuesB = collectRecordValues(recordB);
   debug('Record values B: %o', recordValuesB);
+
+  // Check record type if e & f -> false
+
+
   const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
   debug('Compared record values: %o', comparedRecordValues);
 
