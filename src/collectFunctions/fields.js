@@ -89,7 +89,10 @@ export function get773(record) {
   return F773s;
 
   function f773ToJSON(f773) {
-    const recordControlNumber = getSubfield(f773, 'w'); // NB! It is legal to have multiple $w subfields!
+    // NB! It is legal to have multiple $w subfields in a field!
+    // We oft see both Arto and Melinda ID in the same record.
+    // Thus this is a bad idea (even though we have been moving Melinda id first elsewhere).
+    const recordControlNumber = getSubfield(f773, 'w');
     const relatedParts = getSubfield(f773, 'g');
     const enumerationAndFirstPage = getSubfield(f773, 'q');
 
