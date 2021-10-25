@@ -40,9 +40,10 @@ export function validateFailure(comparedRecordValues) {
     return {failure: true, reason: 'Same source SID mismatch', field: 'SID'};
   }
 
-  if (!comparedRecordValues['773'].recordControlNumber) {
-    debug('Record control number links (773) mismatch');
-    return {failure: true, reason: 'Record control number links (773) mismatch', field: '773'};
+  if (!comparedRecordValues['773']) {
+    const message = 'Host item entries (773) mismatch'
+    debug(message);
+    return {failure: true, reason: message, field: '773'};
   }
 
   return {failure: false};
