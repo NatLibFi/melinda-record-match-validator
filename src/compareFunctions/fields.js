@@ -62,18 +62,23 @@ export function compare338CarrierType(recordValuesA, recordValuesB) {
 
 export function compare773(recordValuesA, recordValuesB) {
   // Matters if starts with (FI-MELINDA) (FIN01) FCC
+  // nvolk: NB! Also other (WHATEVER)0000006666 id's should matter!
+  // Meaning that one record can not contains (FOO)123 and the other (FOO)321.
+  const melindaIdRegexp = /^(?:\(FI-MELINDA\)|\(FIN01\)|FCC)[0-9]{9}$/u;
+  const melindaPrefixRegexp = /^(?:\(FI-MELINDA\)|\(FIN01\)|FCC)/u;
+  const melindaNormalizedPrefix = ''; // '(FI-MELINDA)' etc.
   const f773sA = recordValuesA['773']
-    .filter(field => (/^\(FI-MELINDA\)\d*|^\(FIN01\)\d*|^FCC\d*/u).test(field.recordControlNumber))
+    .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber.replace(/\(FI-MELINDA\)|\(FIN01\)|FCC/u, ''),
+      'recordControlNumber': field.recordControlNumber.replace(melindaPrefixRegexp, melindaNormalizedPrefix),
       'relatedParts': field.relatedParts
     }));
   const f773sB = recordValuesB['773']
-    .filter(field => (/^\(FI-MELINDA\)\d*|^\(FIN01\)\d*|^FCC\d*/u).test(field.recordControlNumber))
+    .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber.replace(/\(FI-MELINDA\)|\(FIN01\)|FCC/u, ''),
+      'recordControlNumber': field.recordControlNumber.replace(melindaPrefixRegexp, melindaNormalizedPrefix),
       'relatedParts': field.relatedParts
     }));
   debug('Collected f773s: %o vs %o', f773sA, f773sB);
@@ -108,9 +113,11 @@ export function compare773(recordValuesA, recordValuesB) {
 
   function collectUnique773s(fieldArrayA, fieldArrayB) {
     return fieldArrayA.filter(fieldA => !fieldArrayB.some(fieldB => {
-      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage;
+      // $w subfields must agree:
       const recordControlNumber = fieldA.recordControlNumber === fieldB.recordControlNumber;
-      const relatedParts = fieldA.relatedParts === fieldB.relatedParts;
+      // $g and $q are optional:
+      const relatedParts = fieldA.relatedParts === fieldB.relatedParts || !fieldA.relatedParts || !fieldB.relatedParts;
+      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage || !fieldA.enumerationAndFirstPage || !fieldB.enumerationAndFirstPage; 
       return enumerationAndFirstPage && recordControlNumber && relatedParts;
     }));
   }
