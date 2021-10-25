@@ -83,13 +83,13 @@ export function get338bCarrierType(record) {
 }
 
 export function get773(record) {
-  const F773s = hasFields('773', record).map(f773 => f733ToJSON(f773));
+  const F773s = hasFields('773', record).map(f773 => f773ToJSON(f773));
   debug('Field 773s: %o', F773s);
 
   return F773s;
 
-  function f733ToJSON(f773) {
-    const recordControlNumber = getSubfield(f773, 'w');
+  function f773ToJSON(f773) {
+    const recordControlNumber = getSubfield(f773, 'w'); // NB! It is legal to have multiple $w subfields!
     const relatedParts = getSubfield(f773, 'g');
     const enumerationAndFirstPage = getSubfield(f773, 'q');
 
