@@ -20,7 +20,9 @@
   "773": [
     {
       "enumerationAndFirstPage": "undefined",
-      "recordControlNumber": "(FI-MELINDA)015633197",
+      "recordControlNumber": [
+        "(FI-MELINDA)015633197"
+      ],
       "relatedParts": "Raita 7"
     }
   ],
