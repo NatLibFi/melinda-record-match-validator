@@ -41,24 +41,24 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
   return false;
 }
 
-export function compareValueContent(valueA, valueB) {
+export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
-    debug('Value A and B are "undefined"');
+    debug(`${prefix}Value A and B are "undefined"`);
     return 'undefined';
   }
 
   if (valueA === 'undefined') {
-    debug('Value A is "undefined"');
+    debug(`${prefix}Value A is "undefined"`);
     return 'B';
   }
 
   if (valueB === 'undefined') {
-    debug('Value B is "undefined"');
+    debug(`${prefix}Value B is "undefined"`);
     return 'A';
   }
 
   if (valueA === valueB) {
-    debug('Value A and B are same');
+    debug(`${prefix}Value A and B are same`);
     return true;
   }
 
@@ -66,7 +66,7 @@ export function compareValueContent(valueA, valueB) {
   const valueBContainsAAvg = compareStrings(valueB, valueA);
 
   if (valueAContainsBAvg === 1 && valueBContainsAAvg === 1) {
-    debug('Normalized values of A and B are same', valueAContainsBAvg);
+    debug("Normalized values of A and B are same: %o", valueAContainsBAvg);
     return true;
   }
 
@@ -82,7 +82,7 @@ export function compareValueContent(valueA, valueB) {
 
   debug('Value A contains %o of B', valueAContainsBAvg);
   debug('Value B contains %o of A', valueBContainsAAvg);
-  debug('Minimium of 0.5 did not happen setting: false');
+  debug(`${prefix}Minimium of 0.5 did not happen setting: false`);
 
   return false;
 
