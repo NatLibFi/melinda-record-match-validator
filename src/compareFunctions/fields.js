@@ -68,14 +68,14 @@ export function compare773(recordValuesA, recordValuesB) {
     .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber
+      'recordControlNumber': field.recordControlNumber,
       'relatedParts': field.relatedParts
     }));
   const f773sB = recordValuesB['773']
     .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber
+      'recordControlNumber': field.recordControlNumber,
       'relatedParts': field.relatedParts
     }));
   debug('Collected f773s: %o vs %o', f773sA, f773sB);
