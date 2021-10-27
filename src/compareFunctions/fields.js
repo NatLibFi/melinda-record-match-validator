@@ -61,24 +61,21 @@ export function compare338CarrierType(recordValuesA, recordValuesB) {
 }
 
 export function compare773(recordValuesA, recordValuesB) {
-  // Matters if starts with (FI-MELINDA) (FIN01) FCC
-  // nvolk: NB! Also other (WHATEVER)0000006666 id's should matter!
-  // Meaning that one record can not contains (FOO)123 and the other (FOO)321.
-  const melindaIdRegexp = /^(?:\(FI-MELINDA\)|\(FIN01\)|FCC)[0-9]{9}$/u;
-  const melindaPrefixRegexp = /^(?:\(FI-MELINDA\)|\(FIN01\)|FCC)/u;
-  const melindaNormalizedPrefix = ''; // '(FI-MELINDA)' etc.
+  // Prefix has been normalized to (FI-MELINDA)
+  const melindaIdRegexp = /^\(FI-MELINDA\)[0-9]{9}$/u;
+
   const f773sA = recordValuesA['773']
     .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber.replace(melindaPrefixRegexp, melindaNormalizedPrefix),
+      'recordControlNumber': field.recordControlNumber
       'relatedParts': field.relatedParts
     }));
   const f773sB = recordValuesB['773']
     .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber.replace(melindaPrefixRegexp, melindaNormalizedPrefix),
+      'recordControlNumber': field.recordControlNumber
       'relatedParts': field.relatedParts
     }));
   debug('Collected f773s: %o vs %o', f773sA, f773sB);
