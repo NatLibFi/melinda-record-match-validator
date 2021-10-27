@@ -21,9 +21,9 @@ export function compare245(recordValuesA, recordValuesB) {
   debug('%o vs %o', f245A, f245B);
 
   return {
-    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork),
-    'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork),
-    'title': compareValueContent(f245A.title, f245B.title)
+    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 name: '),
+    'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 number: '),
+    'title': compareValueContent(f245A.title, f245B.title, '245 title: ')
   };
 
 }
@@ -61,7 +61,7 @@ export function compare338CarrierType(recordValuesA, recordValuesB) {
 }
 
 export function compare773(recordValuesA, recordValuesB) {
-  // Prefix has been normalized to (FI-MELINDA)
+  // NB! Melinds's record control number prefix has been normalized to (FI-MELINDA)
   const melindaIdRegexp = /^\(FI-MELINDA\)[0-9]{9}$/u;
 
   const f773sA = recordValuesA['773']
@@ -86,23 +86,24 @@ export function compare773(recordValuesA, recordValuesB) {
   debug('Collected f773s: %o vs %o', collectedUniqsA, collectedUniqsB);
 
   if (collectedUniqsA.length === 0 && collectedUniqsB.length === 0) {
-    debug('All same returning true');
+    debug('All 773 fields are equal. Returning true');
     return true;
   }
 
   if (collectedUniqsA.length > 0 && f773sB.length === 0) {
-    debug('A has uniques and B empty');
+    debug('A has unique 773s and B empty');
     return 'A';
   }
 
   if (collectedUniqsB.length > 0 && f773sA.length === 0) {
-    debug('B has uniques and A empty');
+    debug('B has unique 773s and A empty');
     return 'B';
   }
 
-  // Hard failure if there are 773 $w:s that have a Melinda-ID, but none of the match between records
+  // Hard failure if there are 773 $w subfields that have a Melinda-ID, but none of them match between records
   if (collectedUniqsA.length === f773sA.length) {
-    debug('Both have uniques but non matching');
+    debug('Both have unique 773 fields but non matching');
+
     return false;
   }
 
