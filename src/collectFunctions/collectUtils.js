@@ -24,3 +24,7 @@ export function getSubfield(field, subfieldCode) {
 
   return value;
 }
+
+export function getSubfields(field, subfieldCode) {
+  return field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
+}
