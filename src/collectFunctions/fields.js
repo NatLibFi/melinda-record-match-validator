@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2020 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020-2021 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -27,7 +27,7 @@
 */
 
 import createDebugLogger from 'debug';
-import {hasFields, getSubfield} from './collectUtils';
+import {hasFields, getSubfield, getSubfields} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:fields');
 
@@ -92,7 +92,7 @@ export function get773(record) {
     // NB! It is legal to have multiple $w subfields in a field!
     // We oft see both Arto and Melinda ID in the same record.
     // Thus this is a bad idea (even though we have been moving Melinda id first elsewhere).
-    const recordControlNumber = getSubfield(f773, 'w');
+    const recordControlNumber = getSubfields(f773, 'w');
     const relatedParts = getSubfield(f773, 'g');
     const enumerationAndFirstPage = getSubfield(f773, 'q');
 
