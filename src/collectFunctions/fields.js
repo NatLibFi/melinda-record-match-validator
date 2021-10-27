@@ -88,11 +88,28 @@ export function get773(record) {
 
   return F773s;
 
+  function normalize773w(value) {
+    // NB! melindaPrefix is referred to in compareFunctions/fields.js!
+    // We should configure this somewhere on a lower level.
+    const melindaPrefix = '(FI-MELINDA)';
+    if ( /^FCC[0-9]{9}$/u.test(value) ) {
+        return `${melindaPrefix}${value.substring(3)}`;
+    }
+    if ( /^(FIN01)[0-9]{9}$/u.test(value) ) {
+      return `${melindaPrefix}${value.substring(7)}`;
+    }
+    if ( /^(FI-MELINDA)[0-9]{9}$/u.test(value) ) {
+      return `${melindaPrefix}${value.substring(12)}`;
+    }
+
+    return value;
+  }
+
   function f773ToJSON(f773) {
     // NB! It is legal to have multiple $w subfields in a field!
     // We oft see both Arto and Melinda ID in the same record.
     // Thus this is a bad idea (even though we have been moving Melinda id first elsewhere).
-    const recordControlNumber = getSubfields(f773, 'w');
+    const recordControlNumber = getSubfields(f773, 'w').map(value => normalize773w(value));
     const relatedParts = getSubfield(f773, 'g');
     const enumerationAndFirstPage = getSubfield(f773, 'q');
 
