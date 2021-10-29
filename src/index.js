@@ -42,22 +42,6 @@ import debug from 'debug';
 
 /*
 export function validateFailure(comparedRecordValues) {
-
-  if (!comparedRecordValues['336']) {
-    debug('Record content type (336) mismatch');
-    return {failure: true, reason: 'Record content type (336) mismatch', field: '336'};
-  }
-
-  if (!comparedRecordValues['337']) {
-    debug('Media type (337) mismatch');
-    return {failure: true, reason: 'Media type (337) mismatch', field: '337'};
-  }
-
-  if (!comparedRecordValues['338']) {
-    debug('Carrier type (338) mismatch');
-    return {failure: true, reason: 'Carrier type (338) mismatch', field: '338'};
-  }
-
   if (!comparedRecordValues.SID) {
     debug('Same source SID mismatch');
     return {failure: true, reason: 'Same source SID mismatch', field: 'SID'};
@@ -170,7 +154,7 @@ function fieldGetNonRepeatableValue(field, subfieldCode) {
       return null;
     }
   }
-  nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
+  //nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
   return subfieldValues[0];
 }
 
@@ -182,7 +166,7 @@ function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
     nvdebug(`fieldHasValidNonRepeatableSubfield() returns false`);
     return false;
   }
-  nvdebug(`fieldHasValidNonRepeatableSubfield() returns true`);
+  //nvdebug(`fieldHasValidNonRepeatableSubfield() returns true`);
   return true;
 }
 function isComponentPart(record) {
@@ -228,8 +212,8 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   // Called by 33X$b (field having exactly one instance of $b is checked elsewhere)
   const subfieldValues1 = fields1.map(field => getSubfieldValue(field, subfieldCode));
   const subfieldValues2 = fields2.map(field => getSubfieldValue(field, subfieldCode));
-  nvdebug("SSAE1: '"+subfieldValues1.join("' - '")+"'");
-  nvdebug("SSAE2: '"+subfieldValues2.join("' - '")+"'");
+  //nvdebug("SSAE1: '"+subfieldValues1.join("' - '")+"'");
+  //nvdebug("SSAE2: '"+subfieldValues2.join("' - '")+"'");
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
 
@@ -277,12 +261,44 @@ function check338(record1, record2, checkPreference = true) {
   return check33X(record1, record2, '338', checkPreference);
 }
 
+function isMergableSID(sidField, otherSidFields) {
+  const subfieldB = getSubfieldValue(sidField, 'b');
+  if (!subfieldB) { return false; }
+  if ( otherSidFields.some(sidField2 => {
+    const subfieldB2 = getSubfieldValue(sidField2, 'b');
+    if (!subfieldB2) { return false; }
+    if (subfieldB === subfieldB2) {
+      // However, it might be ok, if SID$c subfields are equal as well!?!
+      return true;
+    }
+    return false;
+  })) {
+    return false;
+  }
+  return true;
+}
+
+function checkSID(record1, record2, checkPreference = true) {
+  const fields1 = record1.get('SID');
+  const fields2 = record2.get('SID');
+  // array.some(...) returns false on empty arrays... Handle them first:
+  if ( fields1.length === 0 || fields2.length === 0) {
+    return true;
+  }
+  // SID's $b contains owner info
+  if ( !fields1.some(field => isMergableSID(field, fields2)) || !fields2.some(field => isMergableSID(field, fields1))) {
+    return false;
+  }
+  return true;
+}
+
 const comparisonTasks = [
   { 'description': 'existence test', 'function': checkExistence },
   { 'description': 'leader test', 'function': checkLeader },
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
-  { 'description': 'field 338 (carrier type) test', 'function': check338 }
+  { 'description': 'field 338 (carrier type) test', 'function': check338 },
+  { 'description': 'SID test', 'function': checkSID}
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
