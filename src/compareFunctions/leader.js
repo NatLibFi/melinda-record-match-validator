@@ -50,7 +50,7 @@ export function compareRecordBibLevel(a, b) {
   debug('Record A bib level: %o', a);
   debug('Record B bib level: %o', b);
 
-  return rateValues(f000A.recordBibLevel, f000B.recordBibLevel);
+  return rateValues(a, b);
 }
 
 export function compareRecordCompletionLevel(a, b) {
@@ -80,7 +80,7 @@ export function compareRecordInfo(recordValuesA, recordValuesB) {
 
   return {
     recordType: compareRecordType(f000A.recordType, f000B.recordType),
-    recordBibLevel: compareRecordBibLevel(),
+    recordBibLevel: compareRecordBibLevel(f000A.recordCompletionLevel, f000B.recordCompletionLevel),
     recordCompletionLevel: compareRecordCompletionLevel(f000A.recordCompletionLevel, f000B.recordCompletionLevel)
   };
 }
