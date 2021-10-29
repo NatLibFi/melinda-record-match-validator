@@ -85,7 +85,7 @@ export function mapBibliographicalLevel(bibliographicalLevel) {
   throw new Error('Invalid record bib level');
 }
 
-export function EncodingLevel(encodingLevel) {
+export function mapEncodingLevel(encodingLevel) {
   if ( encodingLevel in encodingLevelHash) {
     return {level: encodingLevelHash[encodingLevel], code: encodingLevel};
   }
