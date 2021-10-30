@@ -30,7 +30,7 @@ import createDebugLogger from 'debug';
 import {collectRecordValues} from './collectRecordValues';
 import {compareRecordValues} from './compareRecordValues';
 import {validateCompareResults} from './validateRecordCompareResults';
-
+import {normalize773w} from './collectFunctions/fields'
 
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
@@ -40,24 +40,7 @@ import debug from 'debug';
 
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
-/*
-export function validateFailure(comparedRecordValues) {
-  if (!comparedRecordValues.SID) {
-    debug('Same source SID mismatch');
-    return {failure: true, reason: 'Same source SID mismatch', field: 'SID'};
-  }
 
-  if (!comparedRecordValues['773']) {
-    // Fixed a bug here. At least no 773 combo did not work.
-    // NB! Check whether 773 combos work.
-    const message = 'Host item entries (773) mismatch'
-    debug(message);
-    return {failure: true, reason: message, field: '773'};
-  }
-
-  return {failure: false};
-}
-*/
 
 function fieldToString(f) {
   if ('subfields' in f) {
@@ -261,22 +244,113 @@ function check338(record1, record2, checkPreference = true) {
   return check33X(record1, record2, '338', checkPreference);
 }
 
-function isMergableSID(sidField, otherSidFields) {
-  const subfieldB = getSubfieldValue(sidField, 'b');
-  if (!subfieldB) { return false; }
-  if ( otherSidFields.some(sidField2 => {
-    const subfieldB2 = getSubfieldValue(sidField2, 'b');
-    if (!subfieldB2) { return false; }
-    if (subfieldB === subfieldB2) {
-      // However, it might be ok, if SID$c subfields are equal as well!?!
-      return true;
-    }
-    return false;
-  })) {
-    return false;
+function check773(record1, record2, checkPreference = true) {
+  // Viola's multihosts are sometimes stored in non-standard 973 field.
+  const fields1 = record1.get('[79]73');
+  const fields2 = record2.get('[79]73'); 
+  if ( fields1.length === 0 || fields2.lenght === 0 ) {
+    // I don't think 773 field should determine record preference
+    return true;
   }
-  return true;
+  // 773$w is so rare, that we don't need to cache these, do we?
+  // I think noConflicts is transitive...
+  return fields1.every(field => noConflicts(field, fields2));
+
+  function getRelevantSubfieldWValues(field) {
+    return getSubfieldValues(field, 'w')
+    .map(value => normalize773w(value))
+    .filter(value => /^\(FI-MELINDA\)[0-9]{9}$/u.test(value));
+  }
+
+  function stripControlNumberPart(id) {
+    // return "(FOO)" from "(FOO)BAR"
+    if ( /^\([^\)]+\)[0-9]+$/u.test(id) ) {
+      return id.substr(0, id.indexOf(')')+1);
+    }
+    return null; // Not exactly sure what failure should return...
+  }
+
+
+  function noConflictBetweenTwoIds(id1, id2) {
+    if ( id1 === id2 ) { return true; } // eg. "(FOO)BAR" === "(FOO)BAR"
+    if ( stripControlNumberPart(id1) === stripControlNumberPart(id2) ) {
+      nvdebug(`ID check failed '${id1}' vs '${id2}`);
+      return false;
+    } // "(FOO)LORUM" vs "(FOO)IPSUM"
+    return true; // IDs come from different databases
+  }
+
+  function noConflictBetweenWSubfields(fieldA, fieldB) {
+    // Check that two fields agree.
+    // 1. No conflicting $w subfields
+    const wValuesA = getRelevantSubfieldWValues(fieldA);
+    if ( wValuesA.length === 0 ) { return true; }
+    const wValuesB = getRelevantSubfieldWValues(fieldB);
+    if ( wValuesB.length === 0 ) { return true; }
+    if (!wValuesA.every(valueA => wValuesB.every(valueB => noConflictBetweenTwoIds(valueA, valueB))) || !wValuesB.every(valueB => wValuesA.every(valueA => noConflictBetweenTwoIds(valueA, valueB)))){
+      return false;
+    }
+    return true;
+  }
+
+  function noConflictBetweenSubfields(fieldA, fieldB, subfieldCode) {
+    const g1 = getSubfieldValues(fieldA, subfieldCode);
+    if ( g1.length === 0 ) { return true; }
+    const g2 = getSubfieldValues(fieldB, subfieldCode);
+    if ( g2.length === 0 ) { return true; }
+    if ( g1.length !== g2.length ) { return false; }
+    return g1.every(value => g2.includes(value)) && g2.every(value => g1.includes(value));
+  }
+
+
+  function noConflictBetweenTwoFields(fieldA, fieldB) {
+    // Check that two fields agree. 
+    // 1. No conflicting $w subfields
+    if ( !noConflictBetweenWSubfields(fieldA, fieldB)) {
+      nvdebug("773$w check failed");
+      return false;
+    }
+    // 2. No conflicting $g subfields
+    if ( !noConflictBetweenSubfields(fieldA, fieldB, 'g')) {
+      nvdebug("773$g check failed");
+      return false;
+    }
+    // 3. No conflicting $q
+    if ( !noConflictBetweenSubfields(fieldA, fieldB, 'q')) {
+      nvdebug("773$q check failed");
+      return false;
+    }
+    nvdebug(`773OK: '${fieldToString(fieldA)}' vs '${fieldToString(fieldB)}'`);
+    return true;
+
+  }
+
+  function noConflicts(field, opposingFields) {
+    // Check that no opposing field causes trouble:
+    nvdebug("noConflicts() in...")
+    return opposingFields.every(otherField => noConflictBetweenTwoFields(field, otherField));
+  }
+
+  /*
+  const valuesW1 = fields1.map(field => getSubfieldValues(field, 'w').map(value => normalize773w(value)));
+  const valuesW2 = fields2.map(field => getSubfieldValues(field, 'w').map(value => normalize773w(value)));
+  const valuesG1 = fields1.map(field => getSubfieldValues(field, 'g');
+  const valuesG2 = fields2.map(field => getSubfieldValues(field, 'g');
+  const valuesQ1 = fields1.map(field => getSubfieldValues(field, 'q');
+  const valuesQ2 = fields2.map(field => getSubfieldValues(field, 'q');
+  nvdebug(JSON.stringify(valuesW1));
+  nvdebug(JSON.stringify(valuesW2));
+  if ( noConflict() ) {
+    return true;
+  }
+  return false;
+  function noConflict() {
+    foreach
+  }*/
+
 }
+
+
 
 function checkSID(record1, record2, checkPreference = true) {
   const fields1 = record1.get('SID');
@@ -290,6 +364,23 @@ function checkSID(record1, record2, checkPreference = true) {
     return false;
   }
   return true;
+
+  function isMergableSID(sidField, otherSidFields) {
+    const subfieldB = getSubfieldValue(sidField, 'b');
+    if (!subfieldB) { return false; }
+    if ( otherSidFields.some(sidField2 => {
+      const subfieldB2 = getSubfieldValue(sidField2, 'b');
+      if (!subfieldB2) { return false; }
+      if (subfieldB === subfieldB2) {
+        // However, it might be ok, if SID$c subfields are equal as well!?!
+        return true;
+      }
+      return false;
+    })) {
+      return false;
+    }
+    return true;
+  }
 }
 
 const comparisonTasks = [
@@ -298,7 +389,8 @@ const comparisonTasks = [
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
-  { 'description': 'SID test', 'function': checkSID}
+  { 'description': 'SID test', 'function': checkSID},
+  { 'description': '773 $wgq test', 'function': check773 }
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
