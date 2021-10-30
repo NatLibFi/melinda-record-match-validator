@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2020 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020-2021 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -34,10 +34,8 @@ import {normalize773w} from './collectFunctions/fields'
 
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
-import {mapTypeOfRecord, mapBibliographicalLevel, mapEncodingLevel} from './collectFunctions/leader';
-import {compareRecordCompletionLevel as compareEncodingLevel}  from './compareFunctions/leader';
 import debug from 'debug';
-
+import {checkLeader} from './leader';
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
 
@@ -62,44 +60,6 @@ function checkExistence(record1, record2, checkPreference = true) {
   if ( record1 === undefined || record2 === undefined ) { return false; }
   if ( isDeletedRecord(record1) || isDeletedRecord(record2) ) { return false; }
   return true;
-}
-
-function getTypeOfRecord(record) {
-  const description = mapTypeOfRecord(record.leader[6]); // Will trigger error, if value is invalid
-  if (description) {
-    return description.code;
-  }
-  return null;
-}
-
-function getBibliographicalLevel(record) {
-  const description = mapBibliographicalLevel(record.leader[7]); // Will trigger error, if value is invalid
-  if (description) {
-    return description.code;
-  }
-  return null;
-}
-
-function getEncodingLevel(record) {
-  const description = mapEncodingLevel(record.leader[17]); // Will trigger error, if value is invalid
-  if (description) {
-    return description.code;
-  }
-  return null;
-}
-
-function checkLeader(record1, record2, checkPreference = true) {
-  // type of record:
-  if (getTypeOfRecord(record1) !== getTypeOfRecord(record2)) {
-    return false;
-  }
-  // bibliographical level:
-  if ( getBibliographicalLevel(record1) !== getBibliographicalLevel(record2) ) { return false; }
-  // encoding level
-  // NB! We check the encoding level even with checkPreference===false, since it checks for legal values
-  const encodingLevelPreference = compareEncodingLevel(getEncodingLevel(record1), getEncodingLevel(record2));
-  if ( checkPreference ) { return encodingLevelPreference; }
-  return ( encodingLevelPreference === false ? false : true );
 }
 
 const validValuesForSubfield = {
@@ -330,27 +290,7 @@ function check773(record1, record2, checkPreference = true) {
     nvdebug("noConflicts() in...")
     return opposingFields.every(otherField => noConflictBetweenTwoFields(field, otherField));
   }
-
-  /*
-  const valuesW1 = fields1.map(field => getSubfieldValues(field, 'w').map(value => normalize773w(value)));
-  const valuesW2 = fields2.map(field => getSubfieldValues(field, 'w').map(value => normalize773w(value)));
-  const valuesG1 = fields1.map(field => getSubfieldValues(field, 'g');
-  const valuesG2 = fields2.map(field => getSubfieldValues(field, 'g');
-  const valuesQ1 = fields1.map(field => getSubfieldValues(field, 'q');
-  const valuesQ2 = fields2.map(field => getSubfieldValues(field, 'q');
-  nvdebug(JSON.stringify(valuesW1));
-  nvdebug(JSON.stringify(valuesW2));
-  if ( noConflict() ) {
-    return true;
-  }
-  return false;
-  function noConflict() {
-    foreach
-  }*/
-
 }
-
-
 
 function checkSID(record1, record2, checkPreference = true) {
   const fields1 = record1.get('SID');
@@ -386,6 +326,7 @@ function checkSID(record1, record2, checkPreference = true) {
 const comparisonTasks = [
   { 'description': 'existence test', 'function': checkExistence },
   { 'description': 'leader test', 'function': checkLeader },
+  // TODO: add test for 008/06
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
