@@ -82,28 +82,28 @@ export function get338bCarrierType(record) {
   return {carrierTypes};
 }
 
+export function normalize773w(value) {
+  // NB! melindaPrefix is referred to in compareFunctions/fields.js!
+  // We should configure this somewhere on a lower level.
+  const melindaPrefix = '(FI-MELINDA)';
+  if ( /^FCC[0-9]{9}$/u.test(value) ) {
+      return `${melindaPrefix}${value.substring(3)}`;
+  }
+  if ( /^(FIN01)[0-9]{9}$/u.test(value) ) {
+    return `${melindaPrefix}${value.substring(7)}`;
+  }
+  if ( /^(FI-MELINDA)[0-9]{9}$/u.test(value) ) {
+    return `${melindaPrefix}${value.substring(12)}`;
+  }
+
+  return value;
+}
+
 export function get773(record) {
   const F773s = hasFields('773', record).map(f773 => f773ToJSON(f773));
   debug('Field 773s: %o', F773s);
 
   return F773s;
-
-  function normalize773w(value) {
-    // NB! melindaPrefix is referred to in compareFunctions/fields.js!
-    // We should configure this somewhere on a lower level.
-    const melindaPrefix = '(FI-MELINDA)';
-    if ( /^FCC[0-9]{9}$/u.test(value) ) {
-        return `${melindaPrefix}${value.substring(3)}`;
-    }
-    if ( /^(FIN01)[0-9]{9}$/u.test(value) ) {
-      return `${melindaPrefix}${value.substring(7)}`;
-    }
-    if ( /^(FI-MELINDA)[0-9]{9}$/u.test(value) ) {
-      return `${melindaPrefix}${value.substring(12)}`;
-    }
-
-    return value;
-  }
 
   function f773ToJSON(f773) {
     // NB! It is legal to have multiple $w subfields in a field!
