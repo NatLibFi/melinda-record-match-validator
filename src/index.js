@@ -164,8 +164,36 @@ function check040b(record1, record2, checkPreference = true) {
     if ( values[0] === 'fin' ) { return 4; }
     if ( values[0] === 'swe' ) { return 3; } // Tack och förlåt
     if ( values[0] === 'mul' ) { return 2; } // Comes definite
-    // Now now. Should we assume that no 040$b is better than, say, 040$b eng?
+    // Now now. Should we assume that no 040$b is better than, say, 040$b eng? We do assume so...
     return -1;
+  }
+
+  return true; // This test does not fail
+}
+
+function check040e(record1, record2, checkPreference = true) {
+  const score1 = recordScore040FieldDescriptionConvention(record1);
+  const score2 = recordScore040FieldDescriptionConvention(record2);
+  nvdebug(`040$e scores: ${score1} vs ${score2}`);
+  if (score1 > score2) {
+    return 'A';
+  }
+  if (score1 < score2) {
+    return 'B';
+  }
+
+  function recordScore040FieldDescriptionConvention(record) {
+    const fields = record.get('040');
+    if ( fields.length !== 1 ) { return 0; }
+    return score040SubfieldEValues(getSubfieldValues(fields[0], 'e'));
+  }
+
+  function score040SubfieldEValues(values) {
+    if (values.length !== 1) { return 0; }
+    if (values.includes('rda')) { return 1;}
+    // Now now... Should we assume that no 040$e is better than, say, 040$e FFS?
+    // We take no sides, return same score for both, and hope that some other rule makes a good decision for us.
+    return 0;
   }
 
   return true; // This test does not fail
@@ -276,9 +304,12 @@ function check773(record1, record2, checkPreference = true) {
 
     function hasConflict(value, opposingValues) {
       return opposingValues.every(value2 => {
+        // Identical IDs eg. "(FOO)BAR" in both records cause no issue:
         if (value === value2) {
           return false;
         }
+        // However "(FOO)LORUM" and "(FOO)IPSUM" signal troubles.
+        // (Theoretically LORUM might refer to a deleted record that has been replaced by/merged to IPSUM.)
         if (sameControlNumberIdentifier(value, value2)) {
           return true;
         }
@@ -365,14 +396,15 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   { 'description': 'field 042: authentication code (priority only)', 'function': check042 },
   // TODO: add test for 008/06
   // TODO: add test for 245
-  // TODO: add test for 040$be: prefer rda, prefer Finnish
+
   
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
  
   { 'description': '773 $wgq test', 'function': check773 },
-  { 'description': '040$b (language of cataloging) (priority only)', 'function': check040b }
+  { 'description': '040$b (language of cataloging) (priority only)', 'function': check040b },
+  { 'description': '040$e (description conventions) (priority only)', 'function': check040e }
   // TODO: add test for 040$be: prefer rda, prefer Finnish
 ];
 
