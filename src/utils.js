@@ -1,4 +1,4 @@
-function fieldToString(f) {
+export function fieldToString(f) {
     if ('subfields' in f) {
       return `${f.tag} ${f.ind1}${f.ind2} ‡${formatSubfields(f)}`;
     }
