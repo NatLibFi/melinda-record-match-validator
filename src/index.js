@@ -401,19 +401,23 @@ function checkSID(record1, record2, checkPreference = true) {
 
   function isMergableSID(sidField, otherSidFields) {
     const subfieldB = getSubfieldValue(sidField, 'b');
-    if (!subfieldB) { return false; }
-    if ( otherSidFields.some(sidField2 => {
-      const subfieldB2 = getSubfieldValue(sidField2, 'b');
-      if (!subfieldB2) { return false; }
-      if (subfieldB === subfieldB2) {
+    if (!subfieldB) { return false; } // Data corruption
+  
+    if ( otherSidFields.some(sidField2 => unmergableSidPair(subfieldB, sidField2)) ) {
+      return false;
+    }
+
+    return true; // default to success
+
+    function unmergableSidPair(value, opposingField) {
+      const opposingValue = getSubfieldValue(opposingField, 'b');
+      if (!opposingValue) { return true; } // shit data here prevents merge
+      if (value === opposingValue) {
         // However, this should be ok, if SID$c subfields are equal as well, shouldn't it!?!
         return true;
       }
       return false;
-    })) {
-      return false;
     }
-    return true;
   }
 }
 
