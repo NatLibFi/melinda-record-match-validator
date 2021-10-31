@@ -36,19 +36,8 @@ import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
 import debug from 'debug';
 import {checkLeader} from './leader';
+import {fieldToString} from './utils'
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
-
-
-
-function fieldToString(f) {
-  if ('subfields' in f) {
-    return `${f.tag} ${f.ind1}${f.ind2} ‡${formatSubfields(f)}`;
-  }
-  return `${f.tag}    ${f.value}`;
-  function formatSubfields(field) {
-    return field.subfields.map(sf => `${sf.code}${sf.value || ''}`).join('‡');
-  }
-}
 
 
 function nvdebug(message) {
@@ -112,13 +101,6 @@ function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
   //nvdebug(`fieldHasValidNonRepeatableSubfield() returns true`);
   return true;
 }
-function isComponentPart(record) {
-  if (['a', 'b', 'd'].includes(record.getBibliographicalLevel)) {
-    return true;
-  }
-  // Should having a 773 (or 973) field imply that record is a component part?
-  return false;
-}
 
 function isValid33X(field) {
   if (!['336', '337', '338'].includes(field.tag)){
@@ -158,6 +140,30 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   //nvdebug("SSAE1: '"+subfieldValues1.join("' - '")+"'");
   //nvdebug("SSAE2: '"+subfieldValues2.join("' - '")+"'");
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
+}
+
+function check042(record1, record2, checkPreference = true) {
+  // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
+  const score1 = recordScore042Field(record1);
+  const score2 = recordScore042Field(record2);
+  nvdebug(`042 scores: ${score1} vs ${score2}`);
+  if (score1 > score2) {
+    return 'A';
+  }
+  if (score1 < score2) {
+    return 'B';
+  }
+  return true; // This test does not fail
+
+  function recordScore042Field(record) {
+    const fields = record.get('042');
+    if ( fields.length !== 1 ) { return 0; }
+    return score042SubfieldAValues(getSubfieldValues(fields[0], 'a'));
+  }
+
+  function score042SubfieldAValues(values) {
+    return ( values.includes('finb') ? 1 : 0 ) + ( values.includes('finbd') ? 1 : 0 );
+  }
 }
 
 function check33X(record1, record2, tag, checkPreference = true) {
@@ -323,15 +329,21 @@ function checkSID(record1, record2, checkPreference = true) {
   }
 }
 
-const comparisonTasks = [
-  { 'description': 'existence test', 'function': checkExistence },
-  { 'description': 'leader test', 'function': checkLeader },
+const comparisonTasks = [ // NB! There/should are in priority order!
+  { 'description': 'existence (validation only)', 'function': checkExistence },
+  { 'description': 'leader (validation and priority)', 'function': checkLeader }, // Prioritize LDR/17 (encoding level)
+  { 'description': 'field 042: authentication code (priority only)', 'function': check042 },
   // TODO: add test for 008/06
+  // TODO: add test for 042
+  // TODO: add test for 245
+  // TODO: add test for 040$be: prefer rda, prefer Finnish
+  
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
   { 'description': 'SID test', 'function': checkSID},
   { 'description': '773 $wgq test', 'function': check773 }
+  // TODO: add test for 040$be: prefer rda, prefer Finnish
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
@@ -381,7 +393,7 @@ export default (recordA, recordB, checkPreference = true) => {
 
     return {action: 'merge', prio: { "name": result.reason, "value" : result.result }};
   }
-
+  // We never here...
   if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
     throw new Error('Record missing!');
   }
