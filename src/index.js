@@ -358,11 +358,39 @@ function check773(record1, record2, checkPreference = true) {
   }
 }
 
+function checkLOW(record1, record2, checkPreference = true) {
+  const fields1 = record1.get('LOW');
+  const fields2 = record2.get('LOW');
+  const score1 = lowFieldsToScore(fields1);
+  const score2 = lowFieldsToScore(fields2);
+  nvdebug(`LOW scores: ${score1} vs ${score2}`);
+  if (score1 > score2) {
+    return 'A';
+  }
+  if (score1 < score2) {
+    return 'B';
+  }
+  return true;
+
+  function lowFieldsToScore(fields) {
+    return Math.max.apply(Math, fields.map(field => lowFieldToScore(field)));
+  }
+
+  function lowFieldToScore(field) {
+    const value = getSubfieldValue(field, 'a');
+    if ( !value ) { return 0; }
+    if ( value === 'FIKKA' ) { return 10; }
+    return 0;
+  }
+}
+  // array.some(...) returns false on
+
 function checkSID(record1, record2, checkPreference = true) {
   const fields1 = record1.get('SID');
   const fields2 = record2.get('SID');
   // array.some(...) returns false on empty arrays... Handle them first:
   if ( fields1.length === 0 || fields2.length === 0) {
+    // NB! JO has preference rules as well. I don't think they are meaningful...
     return true;
   }
   // SID's $b contains owner info
@@ -378,7 +406,7 @@ function checkSID(record1, record2, checkPreference = true) {
       const subfieldB2 = getSubfieldValue(sidField2, 'b');
       if (!subfieldB2) { return false; }
       if (subfieldB === subfieldB2) {
-        // However, it might be ok, if SID$c subfields are equal as well!?!
+        // However, this should be ok, if SID$c subfields are equal as well, shouldn't it!?!
         return true;
       }
       return false;
@@ -392,7 +420,8 @@ function checkSID(record1, record2, checkPreference = true) {
 const comparisonTasks = [ // NB! There/should are in priority order!
   { 'description': 'existence (validation only)', 'function': checkExistence },
   { 'description': 'leader (validation and priority)', 'function': checkLeader }, // Prioritize LDR/17 (encoding level)
-  { 'description': 'SID test (validation only)', 'function': checkSID},
+  { 'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
+  { 'description': 'LOW test (priority only)', 'function': checkLOW},
   { 'description': 'field 042: authentication code (priority only)', 'function': check042 },
   // TODO: add test for 008/06
   // TODO: add test for 245
