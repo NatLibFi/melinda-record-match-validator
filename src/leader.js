@@ -51,6 +51,14 @@ function getTypeOfRecord(record) {
     }
     return null;
   }
+
+  export function isComponentPart(record) {
+    if (['a', 'b', 'd'].includes(record.getBibliographicalLevel)) {
+      return true;
+    }
+    // Should having a 773 (or 973) field imply that record is a component part?
+    return false;
+  }
   
   export function checkLeader(record1, record2, checkPreference = true) {
     // type of record:
