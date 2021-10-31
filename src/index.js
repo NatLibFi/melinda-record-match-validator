@@ -332,16 +332,16 @@ function checkSID(record1, record2, checkPreference = true) {
 const comparisonTasks = [ // NB! There/should are in priority order!
   { 'description': 'existence (validation only)', 'function': checkExistence },
   { 'description': 'leader (validation and priority)', 'function': checkLeader }, // Prioritize LDR/17 (encoding level)
+  { 'description': 'SID test (validation only)', 'function': checkSID},
   { 'description': 'field 042: authentication code (priority only)', 'function': check042 },
   // TODO: add test for 008/06
-  // TODO: add test for 042
   // TODO: add test for 245
   // TODO: add test for 040$be: prefer rda, prefer Finnish
   
   { 'description': 'field 336 (content type) test', 'function': check336 },
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
-  { 'description': 'SID test', 'function': checkSID},
+ 
   { 'description': '773 $wgq test', 'function': check773 }
   // TODO: add test for 040$be: prefer rda, prefer Finnish
 ];
