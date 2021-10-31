@@ -1,0 +1,7 @@
+{
+    "action": "merge",
+    "prio": {
+        "name": "A won LOW test (priority only)",
+        "value": "A"
+    }
+}
