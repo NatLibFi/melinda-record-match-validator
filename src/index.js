@@ -36,7 +36,7 @@ import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
 import debug from 'debug';
 import {checkLeader} from './leader';
-import {fieldToString} from './utils'
+import {fieldToString, sameControlNumberIdentifier} from './utils'
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
 
@@ -142,6 +142,35 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
 
+function check040b(record1, record2, checkPreference = true) {
+  const score1 = recordScore040FieldLanguage(record1);
+  const score2 = recordScore040FieldLanguage(record2);
+  nvdebug(`040$b scores: ${score1} vs ${score2}`);
+  if (score1 > score2) {
+    return 'A';
+  }
+  if (score1 < score2) {
+    return 'B';
+  }
+
+  function recordScore040FieldLanguage(record) {
+    const fields = record.get('040');
+    if ( fields.length !== 1 ) { return 0; }
+    return score040SubfieldBValues(getSubfieldValues(fields[0], 'b'));
+  }
+
+  function score040SubfieldBValues(values) {
+    if (values.length !== 1) { return 0; }
+    if ( values[0] === 'fin' ) { return 4; }
+    if ( values[0] === 'swe' ) { return 3; } // Tack och förlåt
+    if ( values[0] === 'mul' ) { return 2; } // Comes definite
+    // Now now. Should we assume that no 040$b is better than, say, 040$b eng?
+    return -1;
+  }
+
+  return true; // This test does not fail
+}
+
 function check042(record1, record2, checkPreference = true) {
   // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
   const score1 = recordScore042Field(record1);
@@ -228,35 +257,35 @@ function check773(record1, record2, checkPreference = true) {
     .filter(value => /^\(FI-MELINDA\)[0-9]{9}$/u.test(value));
   }
 
-  function stripControlNumberPart(id) {
-    // return "(FOO)" from "(FOO)BAR"
-    if ( /^\([^\)]+\)[0-9]+$/u.test(id) ) {
-      return id.substr(0, id.indexOf(')')+1);
-    }
-    return null; // Not exactly sure what failure should return...
-  }
-
-
-  function noConflictBetweenTwoIds(id1, id2) {
-    if ( id1 === id2 ) { return true; } // eg. "(FOO)BAR" === "(FOO)BAR"
-    if ( stripControlNumberPart(id1) === stripControlNumberPart(id2) ) {
-      nvdebug(`ID check failed '${id1}' vs '${id2}`);
-      return false;
-    } // "(FOO)LORUM" vs "(FOO)IPSUM"
-    return true; // IDs come from different databases
-  }
-
   function noConflictBetweenWSubfields(fieldA, fieldB) {
     // Check that two fields agree.
     // 1. No conflicting $w subfields
     const wValuesA = getRelevantSubfieldWValues(fieldA);
-    if ( wValuesA.length === 0 ) { return true; }
+    if (wValuesA.length === 0) {
+      return true;
+    }
     const wValuesB = getRelevantSubfieldWValues(fieldB);
-    if ( wValuesB.length === 0 ) { return true; }
-    if (!wValuesA.every(valueA => wValuesB.every(valueB => noConflictBetweenTwoIds(valueA, valueB))) || !wValuesB.every(valueB => wValuesA.every(valueA => noConflictBetweenTwoIds(valueA, valueB)))){
+    if (wValuesB.length === 0) {
+      return true;
+    }
+    // 2. has conflict
+    if (wValuesA.some(valueA => hasConflict(valueA, wValuesB)) || wValuesB.some(valueB => hasConflict(valueB, wValuesA))) {
       return false;
     }
     return true;
+
+    function hasConflict(value, opposingValues) {
+      return opposingValues.every(value2 => {
+        if (value === value2) {
+          return false;
+        }
+        if (sameControlNumberIdentifier(value, value2)) {
+          return true;
+        }
+        return false;
+      });
+    }
+
   }
 
   function noConflictBetweenSubfields(fieldA, fieldB, subfieldCode) {
@@ -342,7 +371,8 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   { 'description': 'field 337 (media type) test', 'function': check337 },
   { 'description': 'field 338 (carrier type) test', 'function': check338 },
  
-  { 'description': '773 $wgq test', 'function': check773 }
+  { 'description': '773 $wgq test', 'function': check773 },
+  { 'description': '040$b (language of cataloging) (priority only)', 'function': check040b }
   // TODO: add test for 040$be: prefer rda, prefer Finnish
 ];
 
