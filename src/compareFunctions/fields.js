@@ -65,14 +65,14 @@ export function compare773(recordValuesA, recordValuesB) {
   const melindaIdRegexp = /^\(FI-MELINDA\)[0-9]{9}$/u;
 
   const f773sA = recordValuesA['773']
-    .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
+    .filter(field => melindaIdRegexp.test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
       'recordControlNumber': field.recordControlNumber,
       'relatedParts': field.relatedParts
     }));
   const f773sB = recordValuesB['773']
-    .filter(field => (melindaIdRegexp).test(field.recordControlNumber))
+    .filter(field => melindaIdRegexp.test(field.recordControlNumber))
     .map(field => ({
       'enumerationAndFirstPage': field.enumerationAndFirstPage,
       'recordControlNumber': field.recordControlNumber,
@@ -115,7 +115,7 @@ export function compare773(recordValuesA, recordValuesB) {
       const recordControlNumber = fieldA.recordControlNumber === fieldB.recordControlNumber;
       // $g and $q are optional:
       const relatedParts = fieldA.relatedParts === fieldB.relatedParts || !fieldA.relatedParts || !fieldB.relatedParts;
-      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage || !fieldA.enumerationAndFirstPage || !fieldB.enumerationAndFirstPage; 
+      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage || !fieldA.enumerationAndFirstPage || !fieldB.enumerationAndFirstPage;
       return enumerationAndFirstPage && recordControlNumber && relatedParts;
     }));
   }

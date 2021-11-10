@@ -66,7 +66,7 @@ export function compareValueContent(valueA, valueB, prefix = '') {
   const valueBContainsAAvg = compareStrings(valueB, valueA);
 
   if (valueAContainsBAvg === 1 && valueBContainsAAvg === 1) {
-    debug("Normalized values of A and B are same: %o", valueAContainsBAvg);
+    debug('Normalized values of A and B are same: %o', valueAContainsBAvg);
     return true;
   }
 
