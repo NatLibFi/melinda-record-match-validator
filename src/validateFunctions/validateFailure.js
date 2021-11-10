@@ -43,7 +43,7 @@ export function validateFailure(comparedRecordValues) {
   if (!comparedRecordValues['773']) {
     // Fixed a bug here. At least no 773 combo did not work.
     // NB! Check whether 773 combos work.
-    const message = 'Host item entries (773) mismatch'
+    const message = 'Host item entries (773) mismatch';
     debug(message);
     return {failure: true, reason: message, field: '773'};
   }
