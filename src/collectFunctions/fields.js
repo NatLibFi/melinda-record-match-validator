@@ -86,13 +86,13 @@ export function normalize773w(value) {
   // NB! melindaPrefix is referred to in compareFunctions/fields.js!
   // We should configure this somewhere on a lower level.
   const melindaPrefix = '(FI-MELINDA)';
-  if ( /^FCC[0-9]{9}$/u.test(value) ) {
-      return `${melindaPrefix}${value.substring(3)}`;
+  if ((/^FCC[0-9]{9}$/u).test(value)) {
+    return `${melindaPrefix}${value.substring(3)}`;
   }
-  if ( /^(FIN01)[0-9]{9}$/u.test(value) ) {
+  if ((/^\(FIN01\)[0-9]{9}$/u).test(value)) {
     return `${melindaPrefix}${value.substring(7)}`;
   }
-  if ( /^(FI-MELINDA)[0-9]{9}$/u.test(value) ) {
+  if ((/^\(FI-MELINDA\)[0-9]{9}$/u).test(value)) {
     return `${melindaPrefix}${value.substring(12)}`;
   }
 

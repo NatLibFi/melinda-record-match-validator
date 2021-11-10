@@ -42,6 +42,8 @@ export function getSubfieldValue(field, subfieldCode) {
 }
 
 export function getSubfieldValues(field, subfieldCode) {
-  if (!field.subfields) { return []; } // sanity check
+  if (!field.subfields) {
+    return [];
+  } // sanity check
   return field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 }

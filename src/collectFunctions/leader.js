@@ -31,54 +31,54 @@ import createDebugLogger from 'debug';
 // Descriptions of type of record, bibliographical level and encoding level are from  https://www.loc.gov/marc/bibliographic/bdleader.html
 
 const typeOfRecordHash = {
-  'a' : 'Language material',
-  'c' : 'Notated music',
-  'd' : 'Manuscript notated music',
-  'e' : 'Cartographic material',
-  'f' : 'Manuscript cartographic material',
-  'g' : 'Projected medium',
-  'i' : 'Nonmusical sound recording',
-  'j' : 'Musical sound recording',
-  'k' : 'Two-dimensional nonprojectable graphic',
-  'm' : 'Computer file',
-  'o' : 'Kit',
-  'p' : 'Mixed materials',
-  'r' : 'Three-dimensional artifact or naturally occurring object',
-  't' : 'Manuscript language material'
+  'a': 'Language material',
+  'c': 'Notated music',
+  'd': 'Manuscript notated music',
+  'e': 'Cartographic material',
+  'f': 'Manuscript cartographic material',
+  'g': 'Projected medium',
+  'i': 'Nonmusical sound recording',
+  'j': 'Musical sound recording',
+  'k': 'Two-dimensional nonprojectable graphic',
+  'm': 'Computer file',
+  'o': 'Kit',
+  'p': 'Mixed materials',
+  'r': 'Three-dimensional artifact or naturally occurring object',
+  't': 'Manuscript language material'
 };
 
 const bibliographicalLevelHash = {
-  'a' : 'Monographic component part',
-  'b' : 'Serial component part',
-  'c' : 'Collection',
-  'd' : 'Subunit',
-  'i' : 'Integrating resource',
-  'm' : 'Monograph/Item',
-  's' : 'Serial'
+  'a': 'Monographic component part',
+  'b': 'Serial component part',
+  'c': 'Collection',
+  'd': 'Subunit',
+  'i': 'Integrating resource',
+  'm': 'Monograph/Item',
+  's': 'Serial'
 };
 
 const encodingLevelHash = {
-  ' ' : 'Full level',
-  '1' : 'Full level, material not examined',
-  '2' : 'Less-than-full level, material not examined',
-  '3' : 'Abbreviated level',
-  '4' : 'Core level',
-  '5' : 'Partial (preliminary) level',
-  '7' : 'Minimal level',
-  '8' : 'Prepublication level',
-  'u' : 'Unknown',
-  'z' : 'Not applicable' 
+  ' ': 'Full level',
+  '1': 'Full level, material not examined',
+  '2': 'Less-than-full level, material not examined',
+  '3': 'Abbreviated level',
+  '4': 'Core level',
+  '5': 'Partial (preliminary) level',
+  '7': 'Minimal level',
+  '8': 'Prepublication level',
+  'u': 'Unknown',
+  'z': 'Not applicable'
 };
 
 export function mapTypeOfRecord(typeOfRecord) {
-  if ( typeOfRecord in typeOfRecordHash ) {
-    return {level: typeOfRecordHash[typeOfRecord], code: typeOfRecord}
+  if (typeOfRecord in typeOfRecordHash) {
+    return {level: typeOfRecordHash[typeOfRecord], code: typeOfRecord};
   }
   throw new Error(`Invalid record type ${typeOfRecord}`);
 }
 
 export function mapBibliographicalLevel(bibliographicalLevel) {
-  if ( bibliographicalLevel in bibliographicalLevelHash ) {
+  if (bibliographicalLevel in bibliographicalLevelHash) {
     return {level: bibliographicalLevelHash[bibliographicalLevel], code: bibliographicalLevel};
   }
 
@@ -86,7 +86,7 @@ export function mapBibliographicalLevel(bibliographicalLevel) {
 }
 
 export function mapEncodingLevel(encodingLevel) {
-  if ( encodingLevel in encodingLevelHash) {
+  if (encodingLevel in encodingLevelHash) {
     return {level: encodingLevelHash[encodingLevel], code: encodingLevel};
   }
   throw new Error('Invalid record completion level');
