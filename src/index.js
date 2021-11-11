@@ -37,8 +37,7 @@ import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUti
 //import debug from 'debug';
 import {checkLeader} from './leader';
 import {fieldHasSubfield, fieldToString, sameControlNumberIdentifier} from './utils';
-//import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/src/reducers/punctuation';
-import {fieldStripPunctuation as stripPunctuation} from './punctuation';
+import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -279,7 +278,7 @@ function check245(record1, record2, checkPreference = true) {
   }
   
   // NB! punctuation removal code has not been perfectly tested yet, and it does not cover all fields yet.
-  // So test and test...
+  // So test and fix and test and fix...
 
   const clone1 = stripPunctuation(clone(fields1[0])); //stripPunctuation(clone(fields1[0]));
   const clone2 = stripPunctuation(clone(fields2[0]));
@@ -447,18 +446,24 @@ function checkLOW(record1, record2, checkPreference = true) {
   return true;
 
   function lowFieldsToScore(fields) {
-    return Math.max.apply(Math, fields.map(field => lowFieldToScore(field)));
+    // min=0, max=100
+    if (fields.length === 0) {
+      return 0; // Having no LOW fields is pretty suspicious
+    }
+    return Math.max.apply(Math, fields.map(field => scoreField(field)));
   }
 
-  function lowFieldToScore(field) {
+  function scoreField(field) {
     const value = getSubfieldValue(field, 'a');
-    if (!value) {
+    if (!value) { // Corrupted field
       return 0;
     }
     if (value === 'FIKKA') {
-      return 10;
+      return 100;
     }
-    return 0;
+    // If we'd want to, we could add some kind of priority based on organizations.
+    // However, we wouldn't be making friends there: If X > Y, then Y might hurt his feelings.
+    return 50;
   }
 }
 // array.some(...) returns false on
@@ -486,7 +491,7 @@ function checkSID(record1, record2, checkPreference = true) {
     }
 
     const counterpartFields = otherSidFields.filter(otherField => fieldHasSubfield(otherField, 'b', subfieldBValue));
-    if (counterpartFields.length === 0) {
+    if (counterpartFields.length === 0) { // The other record has not relevant SIDs, which is fine.
       return true;
     }
     if (counterpartFields.length > 1) { // This is mainly a sanity check
@@ -499,7 +504,7 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and priority)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
   {'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
-  {'description': 'LOW test (priority only)', 'function': checkLOW}, // NB! JO used LOW for priority as well
+  {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Proprity order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (priority only)', 'function': check042},
   // TODO: add test for 008/06
   {'description': 'field 245 (title)', 'function': check245},
