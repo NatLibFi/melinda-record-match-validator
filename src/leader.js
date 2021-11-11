@@ -26,51 +26,55 @@
 *
 */
 import {mapTypeOfRecord, mapBibliographicalLevel, mapEncodingLevel} from './collectFunctions/leader';
-import {compareRecordCompletionLevel as compareEncodingLevel}  from './compareFunctions/leader';
+import {compareRecordCompletionLevel as compareEncodingLevel} from './compareFunctions/leader';
 
 function getTypeOfRecord(record) {
-    const description = mapTypeOfRecord(record.leader[6]); // Will trigger error, if value is invalid
-    if (description) {
-      return description.code;
-    }
-    return null;
+  const description = mapTypeOfRecord(record.leader[6]); // Will trigger error, if value is invalid
+  if (description) {
+    return description.code;
   }
-  
-  function getBibliographicalLevel(record) {
-    const description = mapBibliographicalLevel(record.leader[7]); // Will trigger error, if value is invalid
-    if (description) {
-      return description.code;
-    }
-    return null;
-  }
-  
-  function getEncodingLevel(record) {
-    const description = mapEncodingLevel(record.leader[17]); // Will trigger error, if value is invalid
-    if (description) {
-      return description.code;
-    }
-    return null;
-  }
+  return null;
+}
 
-  export function isComponentPart(record) {
-    if (['a', 'b', 'd'].includes(record.getBibliographicalLevel)) {
-      return true;
-    }
-    // Should having a 773 (or 973) field imply that record is a component part?
+function getBibliographicalLevel(record) {
+  const description = mapBibliographicalLevel(record.leader[7]); // Will trigger error, if value is invalid
+  if (description) {
+    return description.code;
+  }
+  return null;
+}
+
+function getEncodingLevel(record) {
+  const description = mapEncodingLevel(record.leader[17]); // Will trigger error, if value is invalid
+  if (description) {
+    return description.code;
+  }
+  return null;
+}
+
+export function isComponentPart(record) {
+  if (['a', 'b', 'd'].includes(record.getBibliographicalLevel)) {
+    return true;
+  }
+  // Should having a 773 (or 973) field imply that record is a component part?
+  return false;
+}
+
+export function checkLeader(record1, record2, checkPreference = true) {
+  // type of record:
+  if (getTypeOfRecord(record1) !== getTypeOfRecord(record2)) {
     return false;
   }
-  
-  export function checkLeader(record1, record2, checkPreference = true) {
-    // type of record:
-    if (getTypeOfRecord(record1) !== getTypeOfRecord(record2)) {
-      return false;
-    }
-    // bibliographical level:
-    if ( getBibliographicalLevel(record1) !== getBibliographicalLevel(record2) ) { return false; }
-    // encoding level
-    // NB! We check the encoding level even with checkPreference===false, since it checks for legal values
-    const encodingLevelPreference = compareEncodingLevel(getEncodingLevel(record1), getEncodingLevel(record2));
-    if ( checkPreference ) { return encodingLevelPreference; }
-    return ( encodingLevelPreference === false ? false : true );
+  // bibliographical level:
+  if (getBibliographicalLevel(record1) !== getBibliographicalLevel(record2)) {
+    return false;
   }
-  
+  // encoding level
+  // NB! We check the encoding level even with checkPreference===false, since it checks for legal values
+  const encodingLevelPreference = compareEncodingLevel(getEncodingLevel(record1), getEncodingLevel(record2));
+  if (checkPreference) {
+    return encodingLevelPreference;
+  }
+  return encodingLevelPreference !== false;
+  // NB! Should we handle LDR/05 (record status) value p - Increase in encoding level from prepublication?
+}
