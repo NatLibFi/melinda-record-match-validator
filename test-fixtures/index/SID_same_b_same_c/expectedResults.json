@@ -1,5 +1,7 @@
 {
-    "action": false,
-    "message": "SID test (validation only) failed",
-    "prio": false
+    "action": "merge",
+    "prio": {
+        "name": "both records passed all tests, but no winner was found",
+        "value": true
+    }
 }
