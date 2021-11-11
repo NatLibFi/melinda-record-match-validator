@@ -26,3 +26,19 @@ export function fieldToString(f) {
     return field.subfields.map(sf => `${sf.code}${sf.value || ''}`).join('‡');
   }
 }
+
+export function isControlSubfieldCode(subfieldCode) {
+  if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'w'].includes(subfieldCode)) {
+    return true;
+  }
+  return false;
+}
+
+export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
+  if (subfieldValue === null) {
+    return field.subfields.some(sf => sf.code === subfieldCode);
+  }
+  return field.subfields.some(sf => sf.code === subfieldCode && subfieldValue === sf.value);
+}
+
+
