@@ -3,7 +3,7 @@ function stripControlNumberPart(id) {
   if ((/^\([^)]+\)[0-9]+$/u).test(id)) {
     return id.substr(0, id.indexOf(')') + 1);
   }
-  return null; // Not exactly sure what failure should return...
+  return null; // Not exactly sure what failure should return... empty string or null I guess...
 }
 
 export function sameControlNumberIdentifier(id1, id2) { // Same parenthesis part
@@ -41,4 +41,14 @@ export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
   return field.subfields.some(sf => sf.code === subfieldCode && subfieldValue === sf.value);
 }
 
+export function getPublisherFields(record) {
+  return record.fields.filter(field => isPublisherField(field));
+
+  function isPublisherField(field) {
+    if (field.tag === '260') {
+      return true;
+    }
+    return (field.tag === '264' && field.ind2 === '1');
+  }
+}
 
