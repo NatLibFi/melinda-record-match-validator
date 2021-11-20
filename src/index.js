@@ -484,6 +484,29 @@ function checkPublisher(record1, record2) {
   }
 }
 
+function check005(record1, record2) {
+  const fields1 = record1.get('005');
+  const fields2 = record2.get('005');
+  if (fields1.length !== 1 || fields2.length !== 1) { // corrupted shite
+    return false;
+  }
+  // Theoretically the record with newer timestamp is the better one.
+  // However, we have n+1 load-fixes etc reasons why this is not reliable.
+  const val1 = getDate(fields1[0]);
+  const val2 = getDate(fields2[0]);
+  if (val1 > val2) {
+    return 'A';
+  }
+  if (val2 > val1) {
+    return 'B';
+  }
+  return true;
+
+  function getDate(field) {
+    return parseInt(field.value.substr(0, 4), 10); // YYYY is approximate enough
+  }
+}
+
 function checkLOW(record1, record2, checkPreference = true) {
   const fields1 = record1.get('LOW');
   const fields2 = record2.get('LOW');
@@ -559,7 +582,7 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   {'description': 'publisher (264>260) (priority only)', 'function': checkPublisher},
   {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Proprity order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (priority only)', 'function': check042},
-  // TODO: add test for 008/06
+  // TODO: add test for 008/06?
   {'description': 'field 245 (title)', 'function': check245},
   {'description': 'field 336 (content type) test', 'function': check336},
   {'description': 'field 337 (media type) test', 'function': check337},
@@ -568,7 +591,8 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   {'description': '773 $wgq test', 'function': check773},
   {'description': '040$b (language of cataloging) (priority only)', 'function': check040b},
   {'description': '040$e (description conventions) (priority only)', 'function': check040e},
-  {'description': 'SID test (validation only)', 'function': checkSID} // NB! JO used SID for priority as well
+  {'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
+  {'description': '005 timestamp test (validation and priority)', 'function': check005}
   // TODO: add test for 005: if one of the records is considerably older than the other one, use the newer one.
   // However, since automatic fixes modify 005, new 005 does not imply too much...
 ];
