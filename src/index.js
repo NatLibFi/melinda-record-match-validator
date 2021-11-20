@@ -36,9 +36,10 @@ import {clone, isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
 //import debug from 'debug';
 import {checkLeader} from './leader';
-import {fieldHasSubfield, fieldToString, sameControlNumberIdentifier} from './utils';
+import {fieldHasSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier} from './utils';
 import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
-
+import {cloneAndNormalizeField} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
+import { subfieldsAreIdentical } from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
 
@@ -164,8 +165,7 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   // Called by 33X$b (field having exactly one instance of $b is checked elsewhere)
   const subfieldValues1 = fields1.map(field => getSubfieldValue(field, subfieldCode));
   const subfieldValues2 = fields2.map(field => getSubfieldValue(field, subfieldCode));
-  //nvdebug("SSAE1: '"+subfieldValues1.join("' - '")+"'");
-  //nvdebug("SSAE2: '"+subfieldValues2.join("' - '")+"'");
+  // NB: This checks the order as well!
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
 
@@ -268,6 +268,9 @@ function check042(record1, record2, checkPreference = true) {
   }
 }
 
+
+
+
 function check245(record1, record2, checkPreference = true) {
   // Get both 245 fields and remove punctuation for easier comparisons:
 
@@ -280,14 +283,36 @@ function check245(record1, record2, checkPreference = true) {
   // NB! punctuation removal code has not been perfectly tested yet, and it does not cover all fields yet.
   // So test and fix and test and fix...
 
-  const clone1 = stripPunctuation(clone(fields1[0])); //stripPunctuation(clone(fields1[0]));
-  const clone2 = stripPunctuation(clone(fields2[0]));
+  const clone1 = cloneAndNormalizeField(fields1[0]);
+  const clone2 = cloneAndNormalizeField(fields2[0]);
   //return true;
   nvdebug(fieldToString(clone1));
   nvdebug(fieldToString(clone2));
-  // a b c
+  if (!check245a(clone1, clone2) || !check245b(clone1, clone2) ||
+      !subfieldSetsAreEqual([clone1], [clone2], 'n') || !subfieldSetsAreEqual([clone1], [clone2], 'p')) {
+    return false;
+  } 
+  // TODO: c?, n+
 
   return true;
+
+  function check245a(field1, field2) {
+    const a1 = fieldGetNonRepeatableValue(field1, 'a');
+    const a2 = fieldGetNonRepeatableValue(field2, 'a');
+    if ( a1 === null || a2 === null || a1 !== a2 ) {
+      return false;
+    }
+    return true;
+  }
+
+  function check245b(field1, field2) {
+    const b1 = fieldGetNonRepeatableValue(field1, 'b');
+    const b2 = fieldGetNonRepeatableValue(field2, 'b');
+    if ( b1 === null || b2 === null ) {
+      return true; // subtitle is considered optional, and it's omission won't prevent proceeding 
+    }
+    return b1 === b2;
+  }
 }
 
 function check33X(record1, record2, tag, checkPreference = true) {
@@ -431,6 +456,34 @@ function check773(record1, record2, checkPreference = true) {
   }
 }
 
+function checkPublisher(record1, record2) {
+  const fields1 = getPublisherFields(record1);
+  const fields2 = getPublisherFields(record2);
+  const score1 = publisherScore(fields1);
+  const score2 = publisherScore(fields2);
+  // Should we use more generic score1 > score2? Does not having a 260/264 field imply badness?
+  // Currently
+  if (score1 === 2 && score2 === 1) {  
+    return 'A';
+  }
+  if (score2 === 2 && score1 === 1) {
+    return 'B';
+  }
+  return true;
+
+  function publisherScore(fields) {
+    // 264 (with ind2=1) is contains the publisher as per RDA.
+    if (fields.some(field => field.tag === '264')) {
+      return 2;
+    }
+    // 260 is the traditional field. (RDA is better than traditional)
+    if (fields.some(field => field.tag === '260')) {
+      return 1;
+    }
+    return 0;
+  }
+}
+
 function checkLOW(record1, record2, checkPreference = true) {
   const fields1 = record1.get('LOW');
   const fields2 = record2.get('LOW');
@@ -503,7 +556,7 @@ function checkSID(record1, record2, checkPreference = true) {
 const comparisonTasks = [ // NB! There/should are in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and priority)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
-  {'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
+  {'description': 'publisher (264>260) (priority only)', 'function': checkPublisher},
   {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Proprity order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (priority only)', 'function': check042},
   // TODO: add test for 008/06
@@ -514,7 +567,8 @@ const comparisonTasks = [ // NB! There/should are in priority order!
 
   {'description': '773 $wgq test', 'function': check773},
   {'description': '040$b (language of cataloging) (priority only)', 'function': check040b},
-  {'description': '040$e (description conventions) (priority only)', 'function': check040e}
+  {'description': '040$e (description conventions) (priority only)', 'function': check040e},
+  {'description': 'SID test (validation only)', 'function': checkSID} // NB! JO used SID for priority as well
   // TODO: add test for 005: if one of the records is considerably older than the other one, use the newer one.
   // However, since automatic fixes modify 005, new 005 does not imply too much...
 ];
