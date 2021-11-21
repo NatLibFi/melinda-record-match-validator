@@ -463,10 +463,10 @@ function checkPublisher(record1, record2) {
   const score2 = publisherScore(fields2);
   // Should we use more generic score1 > score2? Does not having a 260/264 field imply badness?
   // Currently
-  if (score1 === 2 && score2 === 1) {  
+  if (score1 > score2) {
     return 'A';
   }
-  if (score2 === 2 && score1 === 1) {
+  if (score2 > score1) {
     return 'B';
   }
   return true;
@@ -478,7 +478,7 @@ function checkPublisher(record1, record2) {
     }
     // 260 is the traditional field. (RDA is better than traditional)
     if (fields.some(field => field.tag === '260')) {
-      return 1;
+      return 0; // we had 1 here earlier on
     }
     return 0;
   }
