@@ -172,7 +172,7 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
 function check040b(record1, record2, checkPreference = true) {
   const score1 = recordScore040FieldLanguage(record1);
   const score2 = recordScore040FieldLanguage(record2);
-  nvdebug(`040$b scores: ${score1} vs ${score2}`);
+  //nvdebug(`040$b scores: ${score1} vs ${score2}`);
   if (score1 > score2) {
     return 'A';
   }
@@ -211,7 +211,7 @@ function check040b(record1, record2, checkPreference = true) {
 function check040e(record1, record2, checkPreference = true) {
   const score1 = recordScore040FieldDescriptionConvention(record1);
   const score2 = recordScore040FieldDescriptionConvention(record2);
-  nvdebug(`040$e scores: ${score1} vs ${score2}`);
+  //nvdebug(`040$e scores: ${score1} vs ${score2}`);
   if (score1 > score2) {
     return 'A';
   }
@@ -360,16 +360,22 @@ function check338(record1, record2, checkPreference = true) {
 }
 
 function check773(record1, record2, checkPreference = true) {
+  // Currently we don't merge records if Viola-specific 973 fields are present.
+  const blockerFields1 = record1.get('973');
+  const blockerFields2 = record2.get('973');
+  if (blockerFields1.length > 0 || blockerFields2.length > 0) {
+    return false;
+  }
+
   // Viola's multihosts are sometimes stored in non-standard 973 field.
-  const fields1 = record1.get('[79]73');
-  const fields2 = record2.get('[79]73');
+  const fields1 = record1.get('773');
+  const fields2 = record2.get('773');
   if (fields1.length === 0 || fields2.lenght === 0) {
     // I don't think 773 field should determine record preference
     return true;
   }
   // 773$w is so rare, that we don't need to cache these, do we?
-  // I think noConflicts is transitive...
-  return fields1.every(field => noConflicts(field, fields2));
+  return fields1.every(field => noConflicts(field, fields2)) && fields2.every(field => noConflicts(field, fields1));
 
   function getRelevantSubfieldWValues(field) {
     return getSubfieldValues(field, 'w')
@@ -638,7 +644,7 @@ export default (recordA, recordB, checkPreference = true) => {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
   if (1) {
     // New version: Make checks only to the point of first failure...
-    console.log('ENTER THE PROGRAM');
+    // console.log('ENTER THE PROGRAM');
 
     const result = makeComparisons(recordA, recordB, checkPreference);
     console.log(`Comparison result: ${result.result}, reason: ${result.reason}`);
