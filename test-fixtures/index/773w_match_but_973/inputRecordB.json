@@ -1,0 +1,443 @@
+{
+  "leader": "01092cas a22003494i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "001275158"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20201104004608.0"
+    },
+    {
+      "tag": "008",
+      "value": "010101c19879999nr |||p| ||||||||||0eng|c"
+    },
+    {
+      "tag": "773",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "FCC000000666"
+        },
+        {
+          "code": "w",
+          "value": "123456789"
+        },
+        {
+          "code": "t",
+          "value": "Levy"
+        }
+      ]
+    },
+    {
+      "tag": "773",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "(MUU)000123456"
+        },
+        {
+          "code": "t",
+          "value": "Levy"
+        }
+      ]
+    },
+    {
+      "tag": "973",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "(MUU)000123456"
+        },
+        {
+          "code": "t",
+          "value": "Levy"
+        }
+      ]
+    },
+    {
+      "tag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "(FI-MELINDA)001275159"
+        }
+      ]
+    },
+    {
+      "tag": "041",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "eng"
+        }
+      ]
+    },
+    {
+      "tag": "080",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "616.314"
+        }
+      ]
+    },
+    {
+      "tag": "210",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Afr Dent J."
+        }
+      ]
+    },
+    {
+      "tag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "African dental journal /"
+        },
+        {
+          "code": "c",
+          "value": "Federation of African Dental Associations, FADA."
+        }
+      ]
+    },
+    {
+      "tag": "246",
+      "ind1": "1",
+      "ind2": "1",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Journal dentaire Africain."
+        }
+      ]
+    },
+    {
+      "tag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Lagos,"
+        },
+        {
+          "code": "c",
+          "value": "1987-"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "teksti"
+        },
+        {
+          "code": "b",
+          "value": "txt"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "käytettävissä ilman laitetta"
+        },
+        {
+          "code": "b",
+          "value": "n"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "nide"
+        },
+        {
+          "code": "b",
+          "value": "nc"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "650",
+      "ind1": " ",
+      "ind2": "2",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Dentistry"
+        },
+        {
+          "code": "x",
+          "value": "periodicals"
+        }
+      ]
+    },
+    {
+      "tag": "650",
+      "ind1": " ",
+      "ind2": "2",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Dentistry"
+        }
+      ]
+    },
+    {
+      "tag": "653",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "kausijulkaisut"
+        },
+        {
+          "code": "a",
+          "value": "hammaslääketiede"
+        }
+      ]
+    },
+    {
+      "tag": "655",
+      "ind1": " ",
+      "ind2": "2",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Periodicals"
+        }
+      ]
+    },
+    {
+      "tag": "740",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Afr Dent J."
+        }
+      ]
+    },
+    {
+      "tag": "960",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "ARTO"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-ISBD"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20120402"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0819"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-HELKA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20140520"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0018"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-HELKA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20140609"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "2320"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "REM-HELKA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20150702"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "2234"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-RDA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20160319"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0822"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-FIX"
+        },
+        {
+          "code": "b",
+          "value": "30"
+        },
+        {
+          "code": "c",
+          "value": "20201104"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0046"
+        }
+      ]
+    }
+  ]
+}
