@@ -48,7 +48,7 @@ export function getPublisherFields(record) {
     if (field.tag === '260') {
       return true;
     }
-    return (field.tag === '264' && field.ind2 === '1');
+    return field.tag === '264' && field.ind2 === '1';
   }
 }
 

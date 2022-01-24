@@ -53,7 +53,7 @@ function getEncodingLevel(record) {
 }
 
 export function isComponentPart(record) {
-  if (['a', 'b', 'd'].includes(record.getBibliographicalLevel)) {
+  if (['a', 'b', 'd'].includes(getBibliographicalLevel(record))) {
     return true;
   }
   // Should having a 773 (or 973) field imply that record is a component part?

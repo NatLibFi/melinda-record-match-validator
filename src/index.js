@@ -27,28 +27,28 @@
 */
 
 import createDebugLogger from 'debug';
+import {isDeletedRecord} from '@natlibfi/melinda-commons';
+
+import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
+import {normalize773w} from './collectFunctions/fields';
 import {collectRecordValues} from './collectRecordValues';
 import {compareRecordValues} from './compareRecordValues';
 import {validateCompareResults} from './validateRecordCompareResults';
-import {normalize773w} from './collectFunctions/fields';
-
-import {clone, isDeletedRecord} from '@natlibfi/melinda-commons';
-import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
-//import debug from 'debug';
-import {checkLeader} from './leader';
+import {isComponentPart, checkLeader} from './leader';
 import {fieldHasSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier} from './utils';
-import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
-import {cloneAndNormalizeField} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
-import { subfieldsAreIdentical } from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
+import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
+//import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
+//import {subfieldsAreIdentical} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
+
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
 function nvdebug(message) {
   debug(message);
-  console.info(message);
+  console.info(message); // eslint-disable-line no-console
 }
 
-function checkExistence(record1, record2, checkPreference = true) {
+function checkExistence(record1, record2) {
   if (record1 === undefined || record2 === undefined) {
     return false;
   }
@@ -63,59 +63,7 @@ const validValuesForSubfield = {
   '336‡2': ['rdacontent'],
   '337‡b': ['c', 'e', 'g', 'h', 'n', 'p', 's', 'v', 'x', 'z'],
   '337‡2': ['rdamedia'],
-  '338‡b': [
-    'ca',
-    'cb',
-    'cd',
-    'ce',
-    'cf',
-    'ch',
-    'ck',
-    'cr',
-    'cz',
-    'eh',
-    'es',
-    'ez',
-    'gc',
-    'gd',
-    'gf',
-    'gs',
-    'gt',
-    'ha',
-    'hb',
-    'hc',
-    'hd',
-    'he',
-    'hf',
-    'hg',
-    'hh',
-    'hj',
-    'hz',
-    'mc',
-    'mf',
-    'mo',
-    'mr',
-    'mz',
-    'na',
-    'nb',
-    'nc',
-    'nn',
-    'no',
-    'nr',
-    'nz',
-    'pp',
-    'pz',
-    'sd',
-    'ss',
-    'st',
-    'sz',
-    'vc',
-    'vd',
-    'vf',
-    'vr',
-    'vz',
-    'zu'
-  ],
+  '338‡b': ['ca', 'cb', 'cd', 'ce', 'cf', 'ch', 'ck', 'cr', 'cz', 'eh', 'es', 'ez', 'gc', 'gd', 'gf', 'gs', 'gt', 'ha', 'hb', 'hc', 'hd', 'he', 'hf', 'hg', 'hh', 'hj', 'hz', 'mc', 'mf', 'mo', 'mr', 'mz', 'na', 'nb', 'nc', 'nn', 'no', 'nr', 'nz', 'pp', 'pz', 'sd', 'ss', 'st', 'sz', 'vc', 'vd', 'vf', 'vr', 'vz', 'zu'],
   '338‡2': ['rdacarrier']
 };
 
@@ -169,7 +117,7 @@ function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
 
-function check040b(record1, record2, checkPreference = true) {
+function check040b(record1, record2) {
   const score1 = recordScore040FieldLanguage(record1);
   const score2 = recordScore040FieldLanguage(record2);
   //nvdebug(`040$b scores: ${score1} vs ${score2}`);
@@ -208,7 +156,7 @@ function check040b(record1, record2, checkPreference = true) {
   return true; // This test does not fail
 }
 
-function check040e(record1, record2, checkPreference = true) {
+function check040e(record1, record2) {
   const score1 = recordScore040FieldDescriptionConvention(record1);
   const score2 = recordScore040FieldDescriptionConvention(record2);
   //nvdebug(`040$e scores: ${score1} vs ${score2}`);
@@ -242,7 +190,7 @@ function check040e(record1, record2, checkPreference = true) {
   return true; // This test does not fail
 }
 
-function check042(record1, record2, checkPreference = true) {
+function check042(record1, record2) {
   // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
   const score1 = recordScore042Field(record1);
   const score2 = recordScore042Field(record2);
@@ -268,10 +216,7 @@ function check042(record1, record2, checkPreference = true) {
   }
 }
 
-
-
-
-function check245(record1, record2, checkPreference = true) {
+function check245(record1, record2) {
   // Get both 245 fields and remove punctuation for easier comparisons:
 
   const fields1 = record1.get('245');
@@ -279,7 +224,7 @@ function check245(record1, record2, checkPreference = true) {
   if (fields1.length !== 1 || fields2.length !== 1) {
     return false;
   }
-  
+
   // NB! punctuation removal code has not been perfectly tested yet, and it does not cover all fields yet.
   // So test and fix and test and fix...
 
@@ -289,9 +234,9 @@ function check245(record1, record2, checkPreference = true) {
   nvdebug(fieldToString(clone1));
   nvdebug(fieldToString(clone2));
   if (!check245a(clone1, clone2) || !check245b(clone1, clone2) ||
-      !subfieldSetsAreEqual([clone1], [clone2], 'n') || !subfieldSetsAreEqual([clone1], [clone2], 'p')) {
+    !subfieldSetsAreEqual([clone1], [clone2], 'n') || !subfieldSetsAreEqual([clone1], [clone2], 'p')) {
     return false;
-  } 
+  }
   // TODO: c?, n+
 
   return true;
@@ -299,7 +244,7 @@ function check245(record1, record2, checkPreference = true) {
   function check245a(field1, field2) {
     const a1 = fieldGetNonRepeatableValue(field1, 'a');
     const a2 = fieldGetNonRepeatableValue(field2, 'a');
-    if ( a1 === null || a2 === null || a1 !== a2 ) {
+    if (a1 === null || a2 === null || a1 !== a2) {
       return false;
     }
     return true;
@@ -308,14 +253,14 @@ function check245(record1, record2, checkPreference = true) {
   function check245b(field1, field2) {
     const b1 = fieldGetNonRepeatableValue(field1, 'b');
     const b2 = fieldGetNonRepeatableValue(field2, 'b');
-    if ( b1 === null || b2 === null ) {
-      return true; // subtitle is considered optional, and it's omission won't prevent proceeding 
+    if (b1 === null || b2 === null) {
+      return true; // subtitle is considered optional, and it's omission won't prevent proceeding
     }
     return b1 === b2;
   }
 }
 
-function check33X(record1, record2, tag, checkPreference = true) {
+function check33X(record1, record2, tag) {
   // Returns just true (=match) or false (=mismatch).
   // Compare $b subfields only (language-specific $a contains same info but). How about $3 and $6?
   // (During merge we might prefer language X $a fields but that does not concern us here.)
@@ -359,7 +304,7 @@ function check338(record1, record2, checkPreference = true) {
   return check33X(record1, record2, '338', checkPreference);
 }
 
-function check773(record1, record2, checkPreference = true) {
+function check773(record1, record2) {
   // Currently we don't merge records if Viola-specific 973 fields are present.
   const blockerFields1 = record1.get('973');
   const blockerFields2 = record2.get('973');
@@ -513,11 +458,9 @@ function check005(record1, record2) {
   }
 }
 
-function checkLOW(record1, record2, checkPreference = true) {
-  const fields1 = record1.get('LOW');
-  const fields2 = record2.get('LOW');
-  const score1 = lowFieldsToScore(fields1);
-  const score2 = lowFieldsToScore(fields2);
+function checkLOW(record1, record2) {
+  const score1 = lowFieldsToScore(record1.get('LOW'));
+  const score2 = lowFieldsToScore(record2.get('LOW'));
   nvdebug(`LOW scores: ${score1} vs ${score2}`);
   if (score1 > score2) {
     return 'A';
@@ -530,14 +473,17 @@ function checkLOW(record1, record2, checkPreference = true) {
   function lowFieldsToScore(fields) {
     // min=0, max=100
     if (fields.length === 0) {
-      return 0; // Having no LOW fields is pretty suspicious
+      // Having no LOW fields is pretty suspicious
+      return 0;
     }
-    return Math.max.apply(Math, fields.map(field => scoreField(field)));
+
+    return Math.max(...fields.map(field => scoreField(field)));
   }
 
   function scoreField(field) {
     const value = getSubfieldValue(field, 'a');
-    if (!value) { // Corrupted field
+    // Corrupted field
+    if (!value) {
       return 0;
     }
     if (value === 'FIKKA') {
@@ -550,7 +496,7 @@ function checkLOW(record1, record2, checkPreference = true) {
 }
 // array.some(...) returns false on
 
-function checkSID(record1, record2, checkPreference = true) {
+function checkSID(record1, record2) {
   const fields1 = record1.get('SID');
   const fields2 = record2.get('SID');
   // array.some(...) returns false on empty arrays... Handle them first:
@@ -579,7 +525,8 @@ function checkSID(record1, record2, checkPreference = true) {
     if (counterpartFields.length > 1) { // This is mainly a sanity check
       return false;
     }
-    return subfieldCValue === getSubfieldValue(counterpartFields[0], 'c');  }
+    return subfieldCValue === getSubfieldValue(counterpartFields[0], 'c');
+  }
 }
 
 const comparisonTasks = [ // NB! There/should are in priority order!
@@ -647,7 +594,7 @@ export default (recordA, recordB, checkPreference = true) => {
     // console.log('ENTER THE PROGRAM');
 
     const result = makeComparisons(recordA, recordB, checkPreference);
-    console.log(`Comparison result: ${result.result}, reason: ${result.reason}`);
+    console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
     if (result.result === false) {
       return {action: false, prio: false, message: result.reason};
     }

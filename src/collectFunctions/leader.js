@@ -95,9 +95,9 @@ export function mapEncodingLevel(encodingLevel) {
 export function getRecordInfo(record) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:leader');
 
-  const recordTypeRaw = record.leader[6];
-  const recordBibLevelRaw = record.leader[7];
-  const recordCompletionLevel = record.leader[17];
+  const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
+  const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
+  const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
 
   debug('Record type raw: %o', recordTypeRaw);
   debug('Record bib level raw: %o', recordBibLevelRaw);
