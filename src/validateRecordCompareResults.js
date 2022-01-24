@@ -44,10 +44,10 @@ export function validateCompareResults(comparedRecordValues) {
   */
 
   // Actions:
-  // 'update' = full override
-  // 'merge' = run merge, use profile x and prio A or B
-  // 'create' = create new record
-  // false = send back conflict
+  // 'update' = full override (olemassa oleva on ennakko tieto -> uusi on täydennetty)
+  // 'merge' = run merge, use profile x and prio A or B (kaksi saman tasoista)
+  // 'create' = create new record (ei voida yhdistää)
+  // false = send back conflict (joku ongelma)
 
   // Prio:
   // 'True'

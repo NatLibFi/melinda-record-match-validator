@@ -292,16 +292,16 @@ function check33X(record1, record2, tag) {
   return subfieldSetsAreEqual(validFields1, validFields2, 'b');
 }
 
-function check336(record1, record2, checkPreference = true) {
-  return check33X(record1, record2, '336', checkPreference);
+function check336(record1, record2) {
+  return check33X(record1, record2, '336');
 }
 
-function check337(record1, record2, checkPreference = true) {
-  return check33X(record1, record2, '337', checkPreference);
+function check337(record1, record2) {
+  return check33X(record1, record2, '337');
 }
 
-function check338(record1, record2, checkPreference = true) {
-  return check33X(record1, record2, '338', checkPreference);
+function check338(record1, record2) {
+  return check33X(record1, record2, '338');
 }
 
 function check773(record1, record2) {
@@ -408,10 +408,8 @@ function check773(record1, record2) {
 }
 
 function checkPublisher(record1, record2) {
-  const fields1 = getPublisherFields(record1);
-  const fields2 = getPublisherFields(record2);
-  const score1 = publisherScore(fields1);
-  const score2 = publisherScore(fields2);
+  const score1 = publisherScore(getPublisherFields(record1));
+  const score2 = publisherScore(getPublisherFields(record2));
   // Should we use more generic score1 > score2? Does not having a 260/264 field imply badness?
   // Currently
   if (score1 > score2) {
@@ -589,6 +587,7 @@ export default (recordA, recordB, checkPreference = true) => {
   // checkPreference should be multivalue:
   // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
+
   if (1) {
     // New version: Make checks only to the point of first failure...
     // console.log('ENTER THE PROGRAM');
@@ -601,11 +600,11 @@ export default (recordA, recordB, checkPreference = true) => {
 
     return {action: 'merge', prio: {'name': result.reason, 'value': result.result}};
   }
+
   // We never here...
   if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
     throw new Error('Record missing!');
   }
-
   const recordValuesA = collectRecordValues(recordA);
   debug('Record values A: %o', recordValuesA);
   const recordValuesB = collectRecordValues(recordB);
