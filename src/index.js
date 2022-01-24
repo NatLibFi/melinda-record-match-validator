@@ -36,7 +36,7 @@ import {normalize773w} from './collectFunctions/fields';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
 import {isComponentPart, checkLeader} from './leader';
-import {fieldHasSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier} from './utils';
+import {fieldGetNonRepeatableValue, fieldHasSubfield, fieldHasValidNonRepeatableSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
@@ -60,46 +60,6 @@ function checkExistence(record1, record2) {
   return true;
 }
 
-const validValuesForSubfield = {
-  '336‡b': ['prm', 'tdi', 'tdm', 'ntm', 'spw', 'sti', 'txt', 'snd'],
-  '336‡2': ['rdacontent'],
-  '337‡b': ['c', 'e', 'g', 'h', 'n', 'p', 's', 'v', 'x', 'z'],
-  '337‡2': ['rdamedia'],
-  '338‡b': ['ca', 'cb', 'cd', 'ce', 'cf', 'ch', 'ck', 'cr', 'cz', 'eh', 'es', 'ez', 'gc', 'gd', 'gf', 'gs', 'gt', 'ha', 'hb', 'hc', 'hd', 'he', 'hf', 'hg', 'hh', 'hj', 'hz', 'mc', 'mf', 'mo', 'mr', 'mz', 'na', 'nb', 'nc', 'nn', 'no', 'nr', 'nz', 'pp', 'pz', 'sd', 'ss', 'st', 'sz', 'vc', 'vd', 'vf', 'vr', 'vz', 'zu'],
-  '338‡2': ['rdacarrier']
-};
-
-
-function fieldGetNonRepeatableValue(field, subfieldCode) {
-  //nvdebug(` fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') in...`);
-  const subfieldValues = getSubfieldValues(field, subfieldCode);
-  if (subfieldValues.length !== 1) { // require exactly one instance exists
-    nvdebug(`  ${field.tag}‡${subfieldCode}: ${subfieldValues.length} subfields found`);
-    return null;
-  }
-  //nvdebug(JSON.stringify(subfields[0]));
-  const key = `${field.tag}‡${subfieldCode}`;
-  if (key in validValuesForSubfield) {
-    if (!validValuesForSubfield[key].includes(subfieldValues[0])) {
-      nvdebug(`  fieldGetNonRepeatableValue() return null ('${subfieldValues[0]}' not found in '${validValuesForSubfield[key].join('/')}')`);
-      return null;
-    }
-  }
-  //nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
-  return subfieldValues[0];
-}
-
-
-function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
-  const uniqueValue = fieldGetNonRepeatableValue(field, subfieldCode);
-  if (uniqueValue === null) {
-    nvdebug(`fieldHasValidNonRepeatableSubfield() returns false`);
-    return false;
-  }
-  //nvdebug(`fieldHasValidNonRepeatableSubfield() returns true`);
-  return true;
-}
-
 function isValid33X(field) {
   if (!['336', '337', '338'].includes(field.tag)) {
     return false;
@@ -111,13 +71,6 @@ function isValid33X(field) {
   return true;
 }
 
-function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
-  // Called at least by 245$n/$p, 33X$b (field having exactly one instance of $b is checked elsewhere)
-  const subfieldValues1 = fields1.map(field => getSubfieldValue(field, subfieldCode));
-  const subfieldValues2 = fields2.map(field => getSubfieldValue(field, subfieldCode));
-  // NB: This checks the order as well!
-  return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
-}
 
 function check042(record1, record2) {
   // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
