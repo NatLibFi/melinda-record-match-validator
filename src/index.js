@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2020-2021 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020-2022 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -29,13 +29,15 @@
 import createDebugLogger from 'debug';
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 
+import {check040b, check040e} from './field040';
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
 import {normalize773w} from './collectFunctions/fields';
-import {collectRecordValues} from './collectRecordValues';
-import {compareRecordValues} from './compareRecordValues';
-import {validateCompareResults} from './validateRecordCompareResults';
+//import {collectRecordValues} from './collectRecordValues';
+//import {compareRecordValues} from './compareRecordValues';
+//import {validateCompareResults} from './validateRecordCompareResults';
 import {isComponentPart, checkLeader} from './leader';
 import {fieldHasSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier} from './utils';
+
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
 //import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
@@ -110,84 +112,11 @@ function isValid33X(field) {
 }
 
 function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
-  // Called by 33X$b (field having exactly one instance of $b is checked elsewhere)
+  // Called at least by 245$n/$p, 33X$b (field having exactly one instance of $b is checked elsewhere)
   const subfieldValues1 = fields1.map(field => getSubfieldValue(field, subfieldCode));
   const subfieldValues2 = fields2.map(field => getSubfieldValue(field, subfieldCode));
   // NB: This checks the order as well!
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
-}
-
-function check040b(record1, record2) {
-  const score1 = recordScore040FieldLanguage(record1);
-  const score2 = recordScore040FieldLanguage(record2);
-  //nvdebug(`040$b scores: ${score1} vs ${score2}`);
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score1 < score2) {
-    return 'B';
-  }
-
-  function recordScore040FieldLanguage(record) {
-    const fields = record.get('040');
-    if (fields.length !== 1) {
-      return 0;
-    }
-    return score040SubfieldBValues(getSubfieldValues(fields[0], 'b'));
-  }
-
-  function score040SubfieldBValues(values) {
-    if (values.length !== 1) {
-      return 0;
-    }
-    if (values[0] === 'fin') {
-      return 4;
-    }
-    if (values[0] === 'swe') {
-      return 3;
-    } // Tack och förlåt
-    if (values[0] === 'mul') {
-      return 2;
-    } // Comes definite
-    // Now now. Should we assume that no 040$b is better than, say, 040$b eng? We do assume so...
-    return -1;
-  }
-
-  return true; // This test does not fail
-}
-
-function check040e(record1, record2) {
-  const score1 = recordScore040FieldDescriptionConvention(record1);
-  const score2 = recordScore040FieldDescriptionConvention(record2);
-  //nvdebug(`040$e scores: ${score1} vs ${score2}`);
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score1 < score2) {
-    return 'B';
-  }
-
-  function recordScore040FieldDescriptionConvention(record) {
-    const fields = record.get('040');
-    if (fields.length !== 1) {
-      return 0;
-    }
-    return score040SubfieldEValues(getSubfieldValues(fields[0], 'e'));
-  }
-
-  function score040SubfieldEValues(values) {
-    if (values.length !== 1) {
-      return 0;
-    }
-    if (values.includes('rda')) {
-      return 1;
-    }
-    // Now now... Should we assume that no 040$e is better than, say, 040$e FFS?
-    // We take no sides, return same score for both, and hope that some other rule makes a good decision for us.
-    return 0;
-  }
-
-  return true; // This test does not fail
 }
 
 function check042(record1, record2) {
@@ -237,7 +166,7 @@ function check245(record1, record2) {
     !subfieldSetsAreEqual([clone1], [clone2], 'n') || !subfieldSetsAreEqual([clone1], [clone2], 'p')) {
     return false;
   }
-  // TODO: c?, n+
+  // NB! How about: /c?/ and /n+/ ? Should we handle them?
 
   return true;
 
@@ -440,9 +369,9 @@ function check005(record1, record2) {
     return false;
   }
   // Theoretically the record with newer timestamp is the better one.
-  // However, we have n+1 load-fixes etc reasons why this is not reliable.
-  const val1 = getDate(fields1[0]);
-  const val2 = getDate(fields2[0]);
+  // However, we have n+1 load-fixes etc reasons why this is not reliable, so year is good enough for me.
+  const val1 = getYear(fields1[0]);
+  const val2 = getYear(fields2[0]);
   if (val1 > val2) {
     return 'A';
   }
@@ -451,7 +380,7 @@ function check005(record1, record2) {
   }
   return true;
 
-  function getDate(field) {
+  function getYear(field) {
     return parseInt(field.value.substr(0, 4), 10); // YYYY is approximate enough
   }
 }
@@ -527,13 +456,13 @@ function checkSID(record1, record2) {
   }
 }
 
-const comparisonTasks = [ // NB! There/should are in priority order!
+const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and priority)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
   {'description': 'publisher (264>260) (priority only)', 'function': checkPublisher},
   {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Proprity order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (priority only)', 'function': check042},
-  // TODO: add test for 008/06?
+  // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
   {'description': 'field 245 (title)', 'function': check245},
   {'description': 'field 336 (content type) test', 'function': check336},
   {'description': 'field 337 (media type) test', 'function': check337},
@@ -544,8 +473,6 @@ const comparisonTasks = [ // NB! There/should are in priority order!
   {'description': '040$e (description conventions) (priority only)', 'function': check040e},
   {'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
   {'description': '005 timestamp test (validation and priority)', 'function': check005}
-  // TODO: add test for 005: if one of the records is considerably older than the other one, use the newer one.
-  // However, since automatic fixes modify 005, new 005 does not imply too much...
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
@@ -586,22 +513,22 @@ function makeComparisons(record1, record2, checkPreference = true) {
 export default (recordA, recordB, checkPreference = true) => {
   // checkPreference should be multivalue:
   // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
-  const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
+  //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
-  if (1) {
-    // New version: Make checks only to the point of first failure...
-    // console.log('ENTER THE PROGRAM');
+  //if (1) {
+  // New version: Make checks only to the point of first failure...
+  // console.log('ENTER THE PROGRAM');
 
-    const result = makeComparisons(recordA, recordB, checkPreference);
-    console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
-    if (result.result === false) {
-      return {action: false, prio: false, message: result.reason};
-    }
-
-    return {action: 'merge', prio: {'name': result.reason, 'value': result.result}};
+  const result = makeComparisons(recordA, recordB, checkPreference);
+  console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
+  if (result.result === false) {
+    return {action: false, prio: false, message: result.reason};
   }
 
-  // We never here...
+  return {action: 'merge', prio: {'name': result.reason, 'value': result.result}};
+  //}
+/*
+  // We never get here...
   if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
     throw new Error('Record missing!');
   }
@@ -616,5 +543,5 @@ export default (recordA, recordB, checkPreference = true) => {
   debug('Compared record values: %o', comparedRecordValues);
 
   return validateCompareResults(comparedRecordValues);
-
+*/
 };
