@@ -33,12 +33,12 @@ import {checkLOW, checkSID} from './alephFields';
 import {check040b, check040e} from './field040';
 import {checkPublisher} from './field26X';
 import {getSubfieldValues} from './collectFunctions/collectUtils';
-import {normalize773w} from './collectFunctions/fields';
 //import {collectRecordValues} from './collectRecordValues';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
+import {check773} from './field773';
 import {checkLeader} from './leader';
-import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, isComponentPart, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
+import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, isComponentPart, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
@@ -188,109 +188,6 @@ function check338(record1, record2) {
   return check33X(record1, record2, '338');
 }
 
-function check773(record1, record2) {
-  // Currently we don't merge records if Viola-specific 973 fields are present.
-  const blockerFields1 = record1.get('973');
-  const blockerFields2 = record2.get('973');
-  if (blockerFields1.length > 0 || blockerFields2.length > 0) {
-    return false;
-  }
-
-  // Viola's multihosts are sometimes stored in non-standard 973 field.
-  const fields1 = record1.get('773');
-  const fields2 = record2.get('773');
-  if (fields1.length === 0 || fields2.lenght === 0) {
-    // I don't think 773 field should determine record preference
-    return true;
-  }
-  // 773$w is so rare, that we don't need to cache these, do we?
-  return fields1.every(field => noConflicts(field, fields2)) && fields2.every(field => noConflicts(field, fields1));
-
-  function getRelevantSubfieldWValues(field) {
-    return getSubfieldValues(field, 'w')
-      .map(value => normalize773w(value))
-      .filter(value => (/^\(FI-MELINDA\)[0-9]{9}$/u).test(value));
-  }
-
-  function noConflictBetweenWSubfields(fieldA, fieldB) {
-    // Check that two fields agree.
-    // 1. No conflicting $w subfields
-    const wValuesA = getRelevantSubfieldWValues(fieldA);
-    if (wValuesA.length === 0) {
-      return true;
-    }
-    const wValuesB = getRelevantSubfieldWValues(fieldB);
-    if (wValuesB.length === 0) {
-      return true;
-    }
-    // 2. has conflict
-    if (wValuesA.some(valueA => hasConflict(valueA, wValuesB)) || wValuesB.some(valueB => hasConflict(valueB, wValuesA))) {
-      return false;
-    }
-    return true;
-
-    function hasConflict(value, opposingValues) {
-      return opposingValues.every(value2 => {
-        // Identical IDs eg. "(FOO)BAR" in both records cause no issue:
-        if (value === value2) {
-          return false;
-        }
-        // However "(FOO)LORUM" and "(FOO)IPSUM" signal troubles.
-        // (Theoretically LORUM might refer to a deleted record that has been replaced by/merged to IPSUM.)
-        if (sameControlNumberIdentifier(value, value2)) {
-          return true;
-        }
-        return false;
-      });
-    }
-
-  }
-
-  function noConflictBetweenSubfields(fieldA, fieldB, subfieldCode) {
-    const g1 = getSubfieldValues(fieldA, subfieldCode);
-    if (g1.length === 0) {
-      return true;
-    }
-    const g2 = getSubfieldValues(fieldB, subfieldCode);
-    if (g2.length === 0) {
-      return true;
-    }
-    if (g1.length !== g2.length) {
-      return false;
-    }
-    return g1.every(value => g2.includes(value)) && g2.every(value => g1.includes(value));
-  }
-
-
-  function noConflictBetweenTwoFields(fieldA, fieldB) {
-    // Check that two fields agree.
-    // 1. No conflicting $w subfields
-    if (!noConflictBetweenWSubfields(fieldA, fieldB)) {
-      nvdebug('773$w check failed');
-      return false;
-    }
-    // 2. No conflicting $g subfields
-    if (!noConflictBetweenSubfields(fieldA, fieldB, 'g')) {
-      nvdebug('773$g check failed');
-      return false;
-    }
-    // 3. No conflicting $q
-    if (!noConflictBetweenSubfields(fieldA, fieldB, 'q')) {
-      nvdebug('773$q check failed');
-      return false;
-    }
-    nvdebug(`773OK: '${fieldToString(fieldA)}' vs '${fieldToString(fieldB)}'`);
-    return true;
-
-  }
-
-  function noConflicts(field, opposingFields) {
-    // Check that no opposing field causes trouble:
-    nvdebug('noConflicts() in...');
-    return opposingFields.every(otherField => noConflictBetweenTwoFields(field, otherField));
-  }
-}
-
 
 function check005(record1, record2) {
   const fields1 = record1.get('005');
@@ -320,7 +217,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and priority)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
   {'description': 'publisher (264>260) (priority only)', 'function': checkPublisher},
-  {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Proprity order: FIKKA > ANY > NONE
+  {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (priority only)', 'function': check042},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
   {'description': 'field 245 (title)', 'function': check245},
