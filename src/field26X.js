@@ -31,7 +31,7 @@ export function checkPublisher(record1, record2) {
     // Originally we had 264 < 260 < no publisher. However, we don't want to prefer a definitely non-RDA record,
     // thus this is currently ignored.
     if (fields.some(field => field.tag === '260')) {
-      return 1;
+      return 0;
     }
     return 0;
   }
