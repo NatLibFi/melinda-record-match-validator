@@ -50,7 +50,7 @@ const typeOfRecordHash = {
   't': 'Manuscript language material'
 };
 
-const bibliographicalLevelHash = { // LDR/07
+const bibliographicLevelHash = { // LDR/07
   'a': 'Monographic component part',
   'b': 'Serial component part',
   'c': 'Collection',
@@ -80,9 +80,9 @@ export function mapTypeOfRecord(typeOfRecord) {
   throw new Error(`Invalid record type ${typeOfRecord}`);
 }
 
-export function mapBibliographicalLevel(bibliographicalLevel) {
-  if (bibliographicalLevel in bibliographicalLevelHash) {
-    return {level: bibliographicalLevelHash[bibliographicalLevel], code: bibliographicalLevel};
+export function mapBibliographicalLevel(bibliographicLevel) {
+  if (bibliographicLevel in bibliographicLevelHash) {
+    return {level: bibliographicLevelHash[bibliographicLevel], code: bibliographicLevel};
   }
 
   throw new Error('Invalid record bib level');
@@ -191,7 +191,7 @@ export function compareLeader(recordValuesA, recordValuesB) {
 
   const result = {
     typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord, f000B.typeOfRecord),
-    bibliographicalLevel: compareBibliographicalLevel(f000A.bibliographicalLevel, f000B.bibliographicalLevel),
+    bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel)
   };
   nvdebug('NV WP9');// eslint-disable-line no-console
@@ -227,7 +227,7 @@ export function checkLeader(record1, record2, checkPreference = true) {
 
 /* // An old comment with updates keys:
 '000': {
-    'bibliographicalLevel': true,
+    'bibliographicLevel': true,
     'encodingLevel': 'A', // A has better value
     'recordState': true, // What is this? Probably something that got dropped later on...
     'typeOfRecord': true

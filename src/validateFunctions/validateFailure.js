@@ -16,7 +16,7 @@ export function validateFailure(comparedRecordValues) {
     return {failure: true, reason: msg, field: '000'};
   }
 
-  if (!comparedRecordValues['000'].bibliographicalLevel) {
+  if (!comparedRecordValues['000'].bibliographicLevel) {
     const msg = 'LDR/07 bibliographical level mismatch';
     debug(msg);
     return {failure: true, reason: msg, field: '000'};

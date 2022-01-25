@@ -15,7 +15,7 @@ export function validateCompareResults(comparedRecordValues) {
     },
     '000': {
       typeOfRecord: All-match = true and defaults = false
-      bibliographicalLevel: All-match = true and defaults = false
+      bibliographicLevel: All-match = true and defaults = false
       encodingLevel: All-match = true, ranked by array [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'] = A or B and defaults = false
     },
     '001': {
