@@ -19,6 +19,9 @@ export function getFirstField(tag, record) {
   return fields[0];
 }
 
+export function getDefaultMissValue() {
+  return 'undefined';
+}
 // Check 773 multiple sub code w & g
 // Check 245 multiple sub code n & p
 // Check 042 multiple sub code a
@@ -27,7 +30,7 @@ export function getSubfield(field, subfieldCode) {
   const [value] = field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 
   if (value === undefined) {
-    return 'undefined';
+    return getDefaultMissValue();
   }
 
   return value;
@@ -42,8 +45,8 @@ export function getSubfieldValue(field, subfieldCode) {
 }
 
 export function getSubfieldValues(field, subfieldCode) {
-  if (!field.subfields) {
+  if (!field.subfields) { // sanityCheck
     return [];
-  } // sanity check
+  }
   return field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 }
