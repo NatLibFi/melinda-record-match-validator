@@ -30,7 +30,7 @@ import {compareSID, compareCAT, compareLOW} from './compareFunctions/alephIntern
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './compareFunctions/controlFields';
 import {compare042, compare773, compare336ContentType, compare337MediaType, compare338CarrierType, compare245} from './compareFunctions/fields';
-import {compareRecordInfo} from './compareFunctions/leader';
+import {compareLeader} from './leader';
 
 export function compareRecordValues(recordValuesA, recordValuesB) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues');
@@ -39,7 +39,7 @@ export function compareRecordValues(recordValuesA, recordValuesB) {
 
   return {
     'commonIdentifiers': compareCommonIdentifiers(recordValuesA, recordValuesB),
-    '000': compareRecordInfo(recordValuesA, recordValuesB),
+    '000': compareLeader(recordValuesA, recordValuesB),
     '001': compare001(recordValuesA, recordValuesB),
     '005': compare005(recordValuesA, recordValuesB), // A is more recently updated
     '042': compare042(recordValuesA, recordValuesB), // A nor B has any fikka or viola
