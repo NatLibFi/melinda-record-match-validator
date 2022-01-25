@@ -10,14 +10,16 @@ export function validateFailure(comparedRecordValues) {
     return {failure: true, reason: 'One or both are deleted', field: 'Deleted'};
   }
 
-  if (!comparedRecordValues['000'].recordType) {
-    debug('Leader record type mismatch');
-    return {failure: true, reason: 'Leader record type mismatch', field: '000'};
+  if (!comparedRecordValues['000'].typeOfRecord) {
+    const msg = 'LDR/06 type of record mismatch';
+    debug(msg);
+    return {failure: true, reason: msg, field: '000'};
   }
 
-  if (!comparedRecordValues['000'].recordBibLevel) {
-    debug('Leader record bib level mismatch');
-    return {failure: true, reason: 'Leader record bib level mismatch', field: '000'};
+  if (!comparedRecordValues['000'].bibliographicalLevel) {
+    const msg = 'LDR/07 bibliographical level mismatch';
+    debug(msg);
+    return {failure: true, reason: msg, field: '000'};
   }
 
   if (!comparedRecordValues['336']) {
