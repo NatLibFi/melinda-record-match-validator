@@ -93,3 +93,11 @@ export function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   // NB: This checks the order as well!
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
+
+export function isComponentPart(record) {
+  if (['a', 'b', 'd'].includes(record.leader[7])) { // LDR/07 is the bibliographical level
+    return true;
+  }
+  // Should having a 773 (or 973) field imply that record is a component part?
+  return false;
+}
