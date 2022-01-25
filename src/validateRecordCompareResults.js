@@ -14,9 +14,9 @@ export function validateCompareResults(comparedRecordValues) {
       title: All-match or 50%+ words match in lower case after normalization = true and defaults = false
     },
     '000': {
-      recordType: All-match = true and defaults = false
-      recordBibLevel: All-match = true and defaults = false
-      recordCompletionLevel: All-match = true, ranked by array [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'] = A or B and defaults = false
+      typeOfRecord: All-match = true and defaults = false
+      bibliographicalLevel: All-match = true and defaults = false
+      encodingLevel: All-match = true, ranked by array [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'] = A or B and defaults = false
     },
     '001': {
       "isMelindaId": All-true = true, one-is-true = A or B and defaults = false
