@@ -27,7 +27,7 @@
 */
 
 import createDebugLogger from 'debug';
-import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './collectUtils';
+import {hasFields, getSubfield} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:fields');
 
@@ -82,53 +82,4 @@ export function get338bCarrierType(record) {
   return {carrierTypes};
 }
 
-function getMelindaDefaultPrefix() {
-  return '(FI-MELINDA)';
-}
 
-export function normalize773w(value) {
-  // NB! melindaPrefix is referred to in compareFunctions/fields.js!
-  // We should configure this somewhere on a lower level.
-  const melindaPrefix = getMelindaDefaultPrefix();
-  if ((/^FCC[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(3)}`;
-  }
-  if ((/^\(FIN01\)[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(7)}`;
-  }
-  if ((/^\(FI-MELINDA\)[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(12)}`;
-  }
-
-  return value;
-}
-
-export function get773(record) {
-  const F773s = hasFields('773', record, f773ToJSON);
-  debug('Field 773s: %o', F773s);
-
-  return F773s;
-
-  function f773ToJSON(f773) {
-    // NB! It is legal to have multiple $w subfields in a field!
-    // Eg. We oft see both Arto and Melinda ID in the same record.
-    // Thus this is a bad idea (even though we have been moving Melinda id first in mass fixes).
-    const recordControlNumber = getRecordControlNumber(f773);
-    const relatedParts = getSubfield(f773, 'g');
-    const enumerationAndFirstPage = getSubfield(f773, 'q');
-
-    return {recordControlNumber, relatedParts, enumerationAndFirstPage};
-  }
-
-  function getRecordControlNumber(field) {
-    // Get normalized subfields:
-    const wSubfields = getSubfieldValues(field, 'w')
-      .map(value => normalize773w(value))
-      .filter(value => value.startsWith(getMelindaDefaultPrefix()));
-    if (wSubfields.length > 0) {
-      return wSubfields;
-    }
-    return getDefaultMissValue();
-  }
-
-}
