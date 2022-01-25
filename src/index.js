@@ -29,14 +29,16 @@
 import createDebugLogger from 'debug';
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 
+import {checkLOW, checkSID} from './alephFields';
 import {check040b, check040e} from './field040';
-import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
+import {checkPublisher} from './field26X';
+import {getSubfieldValues} from './collectFunctions/collectUtils';
 import {normalize773w} from './collectFunctions/fields';
 //import {collectRecordValues} from './collectRecordValues';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
 import {isComponentPart, checkLeader} from './leader';
-import {fieldGetNonRepeatableValue, fieldHasSubfield, fieldHasValidNonRepeatableSubfield, fieldToString, getPublisherFields, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
+import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
@@ -289,31 +291,6 @@ function check773(record1, record2) {
   }
 }
 
-function checkPublisher(record1, record2) {
-  const score1 = publisherScore(getPublisherFields(record1));
-  const score2 = publisherScore(getPublisherFields(record2));
-  // Should we use more generic score1 > score2? Does not having a 260/264 field imply badness?
-  // Currently
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score2 > score1) {
-    return 'B';
-  }
-  return true;
-
-  function publisherScore(fields) {
-    // 264 (with ind2=1) is contains the publisher as per RDA.
-    if (fields.some(field => field.tag === '264')) {
-      return 2;
-    }
-    // 260 is the traditional field. (RDA is better than traditional)
-    if (fields.some(field => field.tag === '260')) {
-      return 0; // we had 1 here earlier on
-    }
-    return 0;
-  }
-}
 
 function check005(record1, record2) {
   const fields1 = record1.get('005');
@@ -338,76 +315,6 @@ function check005(record1, record2) {
   }
 }
 
-function checkLOW(record1, record2) {
-  const score1 = lowFieldsToScore(record1.get('LOW'));
-  const score2 = lowFieldsToScore(record2.get('LOW'));
-  nvdebug(`LOW scores: ${score1} vs ${score2}`);
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score1 < score2) {
-    return 'B';
-  }
-  return true;
-
-  function lowFieldsToScore(fields) {
-    // min=0, max=100
-    if (fields.length === 0) {
-      // Having no LOW fields is pretty suspicious
-      return 0;
-    }
-
-    return Math.max(...fields.map(field => scoreField(field)));
-  }
-
-  function scoreField(field) {
-    const value = getSubfieldValue(field, 'a');
-    // Corrupted field
-    if (!value) {
-      return 0;
-    }
-    if (value === 'FIKKA') {
-      return 100;
-    }
-    // If we'd want to, we could add some kind of priority based on organizations.
-    // However, we wouldn't be making friends there: If X > Y, then Y might hurt his feelings.
-    return 50;
-  }
-}
-// array.some(...) returns false on
-
-function checkSID(record1, record2) {
-  const fields1 = record1.get('SID');
-  const fields2 = record2.get('SID');
-  // array.some(...) returns false on empty arrays... Handle them first:
-  if (fields1.length === 0 || fields2.length === 0) {
-    // NB! JO has preference rules as well. I don't think they are meaningful...
-    return true;
-  }
-
-  // SID's $b subfield contains information about the owning organization.
-  if (!fields1.some(field => isMergableSID(field, fields2)) || !fields2.some(field => isMergableSID(field, fields1))) {
-    return false;
-  }
-  return true;
-
-  function isMergableSID(sidField, otherSidFields) {
-    const subfieldBValue = getSubfieldValue(sidField, 'b');
-    const subfieldCValue = getSubfieldValue(sidField, 'c');
-    if (!subfieldBValue || !subfieldCValue) { // Data corruption
-      return false;
-    }
-
-    const counterpartFields = otherSidFields.filter(otherField => fieldHasSubfield(otherField, 'b', subfieldBValue));
-    if (counterpartFields.length === 0) { // The other record has not relevant SIDs, which is fine.
-      return true;
-    }
-    if (counterpartFields.length > 1) { // This is mainly a sanity check
-      return false;
-    }
-    return subfieldCValue === getSubfieldValue(counterpartFields[0], 'c');
-  }
-}
 
 const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},

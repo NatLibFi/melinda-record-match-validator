@@ -57,17 +57,6 @@ export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
   return field.subfields.some(sf => sf.code === subfieldCode && subfieldValue === sf.value);
 }
 
-export function getPublisherFields(record) {
-  return record.fields.filter(field => isPublisherField(field));
-
-  function isPublisherField(field) {
-    if (field.tag === '260') {
-      return true;
-    }
-    return field.tag === '264' && field.ind2 === '1';
-  }
-}
-
 export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
   const uniqueValue = fieldGetNonRepeatableValue(field, subfieldCode);
   if (uniqueValue === null) {
