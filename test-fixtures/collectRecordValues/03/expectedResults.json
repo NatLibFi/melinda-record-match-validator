@@ -27,15 +27,15 @@
     }
   ],
   "000": {
-    "recordBibLevel": {
+    "bibliographicalLevel": {
       "code": "a",
       "level": "Monographic component part"
     },
-    "recordCompletionLevel": {
+    "encodingLevel": {
       "code": "4",
       "level": "Core level"
     },
-    "recordType": {
+    "typeOfRecord": {
       "code": "j",
       "level": "Musical sound recording"
     }

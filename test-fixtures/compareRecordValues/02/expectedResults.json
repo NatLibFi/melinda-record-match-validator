@@ -5,9 +5,9 @@
     "title": false
   },
   "000": {
-    "recordBibLevel": false,
-    "recordCompletionLevel": true,
-    "recordType": false
+    "bibliographicalLevel": false,
+    "encodingLevel": true,
+    "typeOfRecord": false
   },
   "001": {
     "isMelindaId": true,

@@ -21,15 +21,15 @@
   },
   "773": [],
   "000": {
-      "recordBibLevel": {
+      "bibliographicalLevel": {
           "code": "s",
           "level": "Serial"
       },
-      "recordCompletionLevel": {
+      "encodingLevel": {
           "code": "4",
           "level": "Core level"
       },
-      "recordType": {
+      "typeOfRecord": {
           "code": "a",
           "level": "Language material"
       }
