@@ -37,8 +37,8 @@ import {normalize773w} from './collectFunctions/fields';
 //import {collectRecordValues} from './collectRecordValues';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
-import {isComponentPart, checkLeader} from './leader';
-import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
+import {checkLeader} from './leader';
+import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, isComponentPart, sameControlNumberIdentifier, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
