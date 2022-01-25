@@ -150,21 +150,21 @@ function rateValues(valueA, valueB, rateArray) {
   return false;
 }
 
-export function compareTypeOfRecord(a, b) {
+function compareTypeOfRecord(a, b) {
   debug('Record A type: %o', a);
   debug('Record B type: %o', b);
-
+  nvdebug(`type of record: '${a}' vs '${b}'`);
   return rateValues(a, b);
 }
 
-export function compareBibliographicalLevel(a, b) {
+function compareBibliographicalLevel(a, b) {
   debug('Record A bib level: %o', a);
   debug('Record B bib level: %o', b);
 
   return rateValues(a, b);
 }
 
-export function compareEncodingLevel(a, b) {
+function compareEncodingLevel(a, b) {
   debug('Record A completion level: %o', a);
   debug('Record B completion level: %o', b);
 
@@ -190,9 +190,9 @@ export function compareLeader(recordValuesA, recordValuesB) {
   const f000B = recordValuesB['000'];
 
   const result = {
-    typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord.code, f000B.typeOfRecord.code),
-    bibliographicalLevel: compareBibliographicalLevel(f000A.bibliographicalLevel.code, f000B.bibliographicalLevel.code),
-    encodingLevel: compareEncodingLevel(f000A.encodingLevel.code, f000B.encodingLevel.code)
+    typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord, f000B.typeOfRecord),
+    bibliographicalLevel: compareBibliographicalLevel(f000A.bibliographicalLevel, f000B.bibliographicalLevel),
+    encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel)
   };
   nvdebug('NV WP9');// eslint-disable-line no-console
   nvdebug(JSON.stringify(result)); // eslint-disable-line no-console
