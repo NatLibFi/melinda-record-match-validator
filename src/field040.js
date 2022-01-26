@@ -53,14 +53,20 @@ export function check040b(record1, record2) {
     if (values[0] === 'fin') {
       return 4;
     }
+    // Sorry my Finlandswedish colleagues: I've 'fin' preference over 'swe' due to number of users.
     if (values[0] === 'swe') {
       return 3;
-    } // Tack och förlåt
+    } // Copy-cataloguing record, that has not yet been fully nativized to 'fin' or 'swe'
     if (values[0] === 'mul') {
       return 2;
-    } // Comes definite
-    // Now now. Should we assume that no 040$b is better than, say, 040$b eng? We do assume so...
-    return -1;
+    }
+    // Typically a copy-catalogued record, that has not been properly changed to 'mul'.
+    // However, NL has done english-records for Nordenskiöld collection, so we'll prefer 'eng' over other languages.
+    if (values[0] === 'eng') {
+      return 1;
+    }
+    // Now now. Should we assume that no 040$b is better than, say, 040$b foo? Currently we don't think so.
+    return 0;
   }
 
   return true; // This test does not fail
@@ -86,9 +92,12 @@ export function check040e(record1, record2) {
   }
 
   function score040SubfieldEValues(values) {
+
+    /* // If multiple $e's a problem? Once I thought so, but not anymore. However, keep this comment here for discussion.
     if (values.length !== 1) {
       return 0;
     }
+    */
     if (values.includes('rda')) {
       return 1;
     }
