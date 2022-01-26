@@ -22,12 +22,12 @@
   "773": [
     {
       "enumerationAndFirstPage": "undefined",
-      "recordControlNumber": "(FI-MELINDA)015633157",
+      "recordControlNumbers": ["(FI-MELINDA)015633157"],
       "relatedParts": "Raita 9"
     },
     {
       "enumerationAndFirstPage": "undefined",
-      "recordControlNumber": "(FI-MELINDA)015633197",
+      "recordControlNumbers": ["(FI-MELINDA)015633197"],
       "relatedParts": "Raita 5"
     }
   ],
