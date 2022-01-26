@@ -27,35 +27,9 @@
 */
 import createDebugLogger from 'debug';
 import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './collectFunctions/collectUtils';
-import {fieldToString, sameControlNumberIdentifier} from './utils';
+import {fieldToString, isValidMelindaId, normalizeMelindaId, nvdebug, /* sameControlNumberIdentifier,*/ stripControlNumberPart} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field773');
-
-function nvdebug(message) {
-  debug(message);
-  console.info(message); // eslint-disable-line no-console
-}
-
-function getMelindaDefaultPrefix() {
-  return '(FI-MELINDA)';
-}
-
-function normalize773w(value) {
-  // NB! melindaPrefix is referred to in compareFunctions/fields.js!
-  // We should configure this somewhere on a lower level.
-  const melindaPrefix = getMelindaDefaultPrefix();
-  if ((/^FCC[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(3)}`;
-  }
-  if ((/^\(FIN01\)[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(7)}`;
-  }
-  if ((/^\(FI-MELINDA\)[0-9]{9}$/u).test(value)) {
-    return `${melindaPrefix}${value.substring(12)}`;
-  }
-
-  return value;
-}
 
 export function get773(record) {
   const F773s = hasFields('773', record, f773ToJSON);
@@ -77,8 +51,8 @@ export function get773(record) {
   function getRecordControlNumber(field) {
     // Get normalized subfields:
     const wSubfields = getSubfieldValues(field, 'w')
-      .map(value => normalize773w(value))
-      .filter(value => value.startsWith(getMelindaDefaultPrefix()));
+      .map(value => normalizeMelindaId(value)) // normalize, though filter would succeed anyway
+      .filter(value => isValidMelindaId(value));
     if (wSubfields.length > 0) {
       return wSubfields;
     }
@@ -106,11 +80,12 @@ export function check773(record1, record2) {
   return fields1.every(field => noConflicts(field, fields2)) && fields2.every(field => noConflicts(field, fields1));
 
   function getRelevantSubfieldWValues(field) {
-    return getSubfieldValues(field, 'w')
-      .map(value => normalize773w(value))
-    // Split value to two parts: id (nine last digits) and prefix (= "everything but id"),
-    // then check that our prefix == melinda's prefix, and that id looks like a melinda ID:
-      .filter(value => value.slice(0, -9) === getMelindaDefaultPrefix() && (/^[0-9]{9}$/u).test(value.slice(-9)));
+    // currently return only Melinda IDs. Other fields might be of interest as well...
+    const vals = getSubfieldValues(field, 'w').map(val => normalizeMelindaId(val)).filter(val => isValidMelindaId(val));
+    vals.forEach(element => nvdebug(`VALS: ${element}`));
+
+
+    return vals;
   }
 
   function noConflictBetweenWSubfields(fieldA, fieldB) {
@@ -124,24 +99,31 @@ export function check773(record1, record2) {
     if (wValuesB.length === 0) {
       return true;
     }
+    nvdebug('LOOK FOR CONFLICT');
     // 2. has conflict
     if (wValuesA.some(valueA => hasConflict(valueA, wValuesB)) || wValuesB.some(valueB => hasConflict(valueB, wValuesA))) {
+      nvdebug('FOUND CONFLICT');
       return false;
     }
+    nvdebug('NO CONFLICT');
     return true;
 
     function hasConflict(value, opposingValues) {
+      const prefix = stripControlNumberPart(value);
+      if (!prefix) {
+        return false;
+      }
       return opposingValues.every(value2 => {
         // Identical IDs eg. "(FOO)BAR" in both records cause no issue:
         if (value === value2) {
           return false;
         }
-        // However "(FOO)LORUM" and "(FOO)IPSUM" signal troubles.
-        // (Theoretically LORUM might refer to a deleted record that has been replaced by/merged to IPSUM.)
-        if (sameControlNumberIdentifier(value, value2)) {
-          return true;
+        const prefix2 = stripControlNumberPart(value2);
+        if (!prefix2 || prefix !== prefix2) {
+          return false;
         }
-        return false;
+        // prefix === prefix2: getting here means that id's mismatch
+        return true;
       });
     }
 
@@ -167,33 +149,33 @@ export function check773(record1, record2) {
     // Check that two fields agree.
     // 1. No conflicting $w subfields
     if (!noConflictBetweenWSubfields(fieldA, fieldB)) {
-      nvdebug('773$w check failed');
+      nvdebug('773$w check failed', debug);
       return false;
     }
     // 2. No conflicting $g subfields
     if (!noConflictBetweenSubfields(fieldA, fieldB, 'g')) {
-      nvdebug('773$g check failed');
+      nvdebug('773$g check failed', debug);
       return false;
     }
     // 3. No conflicting $q
     if (!noConflictBetweenSubfields(fieldA, fieldB, 'q')) {
-      nvdebug('773$q check failed');
+      nvdebug('773$q check failed', debug);
       return false;
     }
-    nvdebug(`773OK: '${fieldToString(fieldA)}' vs '${fieldToString(fieldB)}'`);
+    nvdebug(`773OK: '${fieldToString(fieldA)}' vs '${fieldToString(fieldB)}'`, debug);
     return true;
 
   }
 
   function noConflicts(field, opposingFields) {
     // Check that no opposing field causes trouble:
-    nvdebug('noConflicts() in...');
+    nvdebug('noConflicts() in...', debug);
     return opposingFields.every(otherField => noConflictBetweenTwoFields(field, otherField));
   }
 }
 
 export function compare773(recordValuesA, recordValuesB) {
-  // NB! Melinda's record control number prefix has been normalized to (FI-MELINDA)
+  // NB! Melinda's record control number prefix has been normalized to (FI-MELINDA) (Oops, I've forgotten where that happened...)
   const melindaIdRegexp = /^\(FI-MELINDA\)[0-9]{9}$/u;
 
   const f773sA = recordValuesA['773']
