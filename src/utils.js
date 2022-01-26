@@ -1,5 +1,13 @@
 import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
 
+export function nvdebug(message, debug = undefined) {
+  console.info(message); // eslint-disable-line no-console
+  if (debug) {
+    debug(message);
+    return;
+  }
+}
+
 const validValuesForSubfield = {
   '336‡b': ['prm', 'tdi', 'tdm', 'ntm', 'spw', 'sti', 'txt', 'snd'],
   '336‡2': ['rdacontent'],
@@ -9,26 +17,25 @@ const validValuesForSubfield = {
   '338‡2': ['rdacarrier']
 };
 
-function stripControlNumberPart(id) {
+
+export function stripControlNumberPart(id) {
   // return "(FOO)" from "(FOO)BAR"
   if ((/^\([^)]+\)[0-9]+$/u).test(id)) {
     return id.substr(0, id.indexOf(')') + 1);
   }
+  if ((/^FCC[0-9]+$/u).test(id)) {
+    return id.substr(0, id.indexOf(3));
+  }
   return null; // Not exactly sure what failure should return... empty string or null I guess...
 }
 
-function nvdebug(message) {
-  //  debug(message);
-  console.info(message); // eslint-disable-line no-console
-}
-
 export function sameControlNumberIdentifier(id1, id2) { // Same parenthesis part
-  if (id1 === id2) {
+  if (id1 === id2) { // eg. "(FOO)BAR" === "(FOO)BAR"
     return true;
-  } // eg. "(FOO)BAR" === "(FOO)BAR"
-  if (stripControlNumberPart(id1) === stripControlNumberPart(id2)) {
-    return true;
-  } // "(FOO)LORUM" vs "(FOO)IPSUM"
+  }
+  if (stripControlNumberPart(id1) === stripControlNumberPart(id2)) { // "(FOO)LORUM" vs "(FOO)IPSUM"
+    return false;
+  }
   return false; // IDs come from different databases
 }
 
@@ -101,3 +108,47 @@ export function isComponentPart(record) {
   // Should having a 773 (or 973) field imply that record is a component part?
   return false;
 }
+
+export function getMelindaDefaultPrefix() {
+  return '(FI-MELINDA)';
+}
+
+export function normalizeMelindaId(value) {
+  // NB! melindaPrefix is referred to in compareFunctions/fields.js!
+  // We should configure this somewhere on a lower level.
+  const melindaPrefix = getMelindaDefaultPrefix();
+  if ((/^FCC[0-9]{9}$/u).test(value)) {
+    return `${melindaPrefix}${value.substring(3)}`;
+  }
+  if ((/^\(FIN01\)[0-9]{9}$/u).test(value)) {
+    return `${melindaPrefix}${value.substring(7)}`;
+  }
+  if ((/^\(FI-MELINDA\)[0-9]{9}$/u).test(value)) {
+    return `${melindaPrefix}${value.substring(12)}`;
+  }
+
+  return value;
+}
+
+export function isValidMelindaId(value = '') {
+  const normalizedValue = normalizeMelindaId(value);
+  if (!(/.0[0-9]{8}$/u).test(normalizedValue)) {
+    nvdebug(`${value} is not a (valid) Melinda ID`);
+    return false;
+  }
+  const prefix = normalizedValue.slice(0, -9);
+  if (prefix !== getMelindaDefaultPrefix()) {
+    nvdebug(`Melinda prefix mismatch '${prefix}' vs '${getMelindaDefaultPrefix()}'`);
+    return false;
+  }
+  return true;
+}
+
+export function getMelindaId(value = '') {
+  if (isValidMelindaId(value)) {
+    return value.slice(-9);
+  }
+  return undefined;
+}
+
+
