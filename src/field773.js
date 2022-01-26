@@ -27,210 +27,111 @@
 */
 import createDebugLogger from 'debug';
 import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './collectFunctions/collectUtils';
-import {fieldToString, isValidMelindaId, normalizeMelindaId, nvdebug, /* sameControlNumberIdentifier,*/ stripControlNumberPart} from './utils';
+import {hasIdMismatch, normalizeMelindaId, nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field773');
 
-export function get773(record) {
-  const F773s = hasFields('773', record, f773ToJSON);
-  debug('Field 773s: %o', F773s);
+function getX73(record, paramTag) {
+  // Tag should be 773 or 973. Add sanity check?
+  const F773s = hasFields(paramTag, record, f773ToJSON);
+  debug('Field %ss: %o', paramTag, F773s);
 
   return F773s;
 
   function f773ToJSON(f773) {
+    // NB! Test multiple 773 fields as well!
+
+    const tag = paramTag;
     // NB! It is legal to have multiple $w subfields in a field!
     // Eg. We oft see both Arto and Melinda ID in the same record.
-    // Thus this is a bad idea (even though we have been moving Melinda id first in mass fixes).
-    const recordControlNumber = getRecordControlNumber(f773);
+    const recordControlNumbers = getRecordControlNumbers(f773);
+    // $g and $q are non-repeatable:
     const relatedParts = getSubfield(f773, 'g');
     const enumerationAndFirstPage = getSubfield(f773, 'q');
 
-    return {recordControlNumber, relatedParts, enumerationAndFirstPage};
+    return {tag, recordControlNumbers, relatedParts, enumerationAndFirstPage};
   }
 
-  function getRecordControlNumber(field) {
+  function getRecordControlNumbers(field) {
     // Get normalized subfields:
     const wSubfields = getSubfieldValues(field, 'w')
       .map(value => normalizeMelindaId(value)) // normalize, though filter would succeed anyway
-      .filter(value => isValidMelindaId(value));
+      .filter(value => !(/^[0-9]+$/u).test(value)); // Filter digit-only values away
     if (wSubfields.length > 0) {
       return wSubfields;
     }
     return getDefaultMissValue();
   }
+}
 
+export function get773(record) { // collect
+  const f773 = getX73(record, '773');
+  const f973 = getX73(record, '973');
+  return [...f773, ...f973];
 }
 
 export function check773(record1, record2) {
-  // Currently we don't merge records if Viola-specific 973 fields are present.
-  const blockerFields1 = record1.get('973');
-  const blockerFields2 = record2.get('973');
-  if (blockerFields1.length > 0 || blockerFields2.length > 0) {
+  const data1 = get773(record1);
+  const data2 = get773(record2);
+  return compare773values(data1, data2);
+}
+
+function compare773values(f773sA, f773sB) {
+
+  debug('Collected f773s: %o vs %o', f773sA, f773sB);
+  nvdebug('compare773values() in...');
+  nvdebug(JSON.stringify(f773sA), debug);
+  nvdebug(JSON.stringify(f773sB), debug);
+
+  // Fail if one of the records has multiple 773/973 fields:
+  // (Multiple 773 fields means that it's a Viola record, or that some weeding is need first.)
+  if (f773sA.length > 1 || f773sB.length > 1) {
+    return false;
+  }
+  // Fail if one of the fields is 973
+  if (f773sA.some(val => val.tag === '973') || f773sB.some(val => val.tag === '973')) {
     return false;
   }
 
-  // Viola's multihosts are sometimes stored in non-standard 973 field.
-  const fields1 = record1.get('773');
-  const fields2 = record2.get('773');
-  if (fields1.length === 0 || fields2.lenght === 0) {
-    // I don't think 773 field should determine record preference
-    return true;
-  }
-  // 773$w is so rare, that we don't need to cache these, do we?
-  return fields1.every(field => noConflicts(field, fields2)) && fields2.every(field => noConflicts(field, fields1));
-
-  function getRelevantSubfieldWValues(field) {
-    // currently return only Melinda IDs. Other fields might be of interest as well...
-    const vals = getSubfieldValues(field, 'w').map(val => normalizeMelindaId(val)).filter(val => isValidMelindaId(val));
-    vals.forEach(element => nvdebug(`VALS: ${element}`));
-
-
-    return vals;
-  }
-
-  function noConflictBetweenWSubfields(fieldA, fieldB) {
-    // Check that two fields agree.
-    // 1. No conflicting $w subfields
-    const wValuesA = getRelevantSubfieldWValues(fieldA);
-    if (wValuesA.length === 0) {
-      return true;
-    }
-    const wValuesB = getRelevantSubfieldWValues(fieldB);
-    if (wValuesB.length === 0) {
-      return true;
-    }
-    nvdebug('LOOK FOR CONFLICT');
-    // 2. has conflict
-    if (wValuesA.some(valueA => hasConflict(valueA, wValuesB)) || wValuesB.some(valueB => hasConflict(valueB, wValuesA))) {
-      nvdebug('FOUND CONFLICT');
-      return false;
-    }
-    nvdebug('NO CONFLICT');
-    return true;
-
-    function hasConflict(value, opposingValues) {
-      const prefix = stripControlNumberPart(value);
-      if (!prefix) {
-        return false;
-      }
-      return opposingValues.every(value2 => {
-        // Identical IDs eg. "(FOO)BAR" in both records cause no issue:
-        if (value === value2) {
-          return false;
-        }
-        const prefix2 = stripControlNumberPart(value2);
-        if (!prefix2 || prefix !== prefix2) {
-          return false;
-        }
-        // prefix === prefix2: getting here means that id's mismatch
-        return true;
-      });
-    }
-
-  }
-
-  function noConflictBetweenSubfields(fieldA, fieldB, subfieldCode) {
-    const g1 = getSubfieldValues(fieldA, subfieldCode);
-    if (g1.length === 0) {
-      return true;
-    }
-    const g2 = getSubfieldValues(fieldB, subfieldCode);
-    if (g2.length === 0) {
-      return true;
-    }
-    if (g1.length !== g2.length) {
-      return false;
-    }
-    return g1.every(value => g2.includes(value)) && g2.every(value => g1.includes(value));
-  }
-
-
-  function noConflictBetweenTwoFields(fieldA, fieldB) {
-    // Check that two fields agree.
-    // 1. No conflicting $w subfields
-    if (!noConflictBetweenWSubfields(fieldA, fieldB)) {
-      nvdebug('773$w check failed', debug);
-      return false;
-    }
-    // 2. No conflicting $g subfields
-    if (!noConflictBetweenSubfields(fieldA, fieldB, 'g')) {
-      nvdebug('773$g check failed', debug);
-      return false;
-    }
-    // 3. No conflicting $q
-    if (!noConflictBetweenSubfields(fieldA, fieldB, 'q')) {
-      nvdebug('773$q check failed', debug);
-      return false;
-    }
-    nvdebug(`773OK: '${fieldToString(fieldA)}' vs '${fieldToString(fieldB)}'`, debug);
-    return true;
-
-  }
-
-  function noConflicts(field, opposingFields) {
-    // Check that no opposing field causes trouble:
-    nvdebug('noConflicts() in...', debug);
-    return opposingFields.every(otherField => noConflictBetweenTwoFields(field, otherField));
-  }
-}
-
-export function compare773(recordValuesA, recordValuesB) {
-  // NB! Melinda's record control number prefix has been normalized to (FI-MELINDA) (Oops, I've forgotten where that happened...)
-  const melindaIdRegexp = /^\(FI-MELINDA\)[0-9]{9}$/u;
-
-  const f773sA = recordValuesA['773']
-    .filter(field => melindaIdRegexp.test(field.recordControlNumber))
-    .map(field => ({
-      'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber,
-      'relatedParts': field.relatedParts
-    }));
-  const f773sB = recordValuesB['773']
-    .filter(field => melindaIdRegexp.test(field.recordControlNumber))
-    .map(field => ({
-      'enumerationAndFirstPage': field.enumerationAndFirstPage,
-      'recordControlNumber': field.recordControlNumber,
-      'relatedParts': field.relatedParts
-    }));
-  debug('Collected f773s: %o vs %o', f773sA, f773sB);
-
-  // filter sames out!
-  const collectedUniqsA = collectUnique773s(f773sA, f773sB);
-  const collectedUniqsB = collectUnique773s(f773sB, f773sA);
-  debug('Collected f773s: %o vs %o', collectedUniqsA, collectedUniqsB);
-
-  if (collectedUniqsA.length === 0 && collectedUniqsB.length === 0) {
-    debug('All 773 fields are equal. Returning true');
-    return true;
-  }
-
-  if (collectedUniqsA.length > 0 && f773sB.length === 0) {
-    debug('A has unique 773s and B empty');
+  if (f773sA.length > 0 && f773sB.length === 0) {
     return 'A';
   }
 
-  if (collectedUniqsB.length > 0 && f773sA.length === 0) {
-    debug('B has unique 773s and A empty');
+  if (f773sB.length > 0 && f773sA.length === 0) {
     return 'B';
   }
 
-  // Hard failure if there are 773 $w subfields that have a Melinda-ID, but none of them match between records
-  if (collectedUniqsA.length === f773sA.length) {
-    debug('Both have unique 773 fields but non matching');
-
-    return false;
+  if (f773sA.length === 0 && f773sB.length === 0) {
+    return true;
   }
 
-  return false;
+  const undefinedHack = getDefaultMissValue(); // String 'undefined'
 
-  function collectUnique773s(fieldArrayA, fieldArrayB) {
-    return fieldArrayA.filter(fieldA => !fieldArrayB.some(fieldB => {
-      // $w subfields must agree:
-      const recordControlNumber = fieldA.recordControlNumber === fieldB.recordControlNumber;
-      // $g and $q are optional:
-      const relatedParts = fieldA.relatedParts === fieldB.relatedParts || !fieldA.relatedParts || !fieldB.relatedParts;
-      const enumerationAndFirstPage = fieldA.enumerationAndFirstPage === fieldB.enumerationAndFirstPage || !fieldA.enumerationAndFirstPage || !fieldB.enumerationAndFirstPage;
-      return enumerationAndFirstPage && recordControlNumber && relatedParts;
-    }));
+  return innerCompare(f773sA[0], f773sB[0]);
+
+  function noMultivals(val1, val2) {
+    nvdebug(`compare '${val1}' vs '${val2}' (default: '${undefinedHack}')`, debug);
+    return val1 === val2 || !val1 || !val2 || val1 === undefinedHack || val2 === undefinedHack;
   }
+
+  function acceptControlNumbers(nums1, nums2) {
+    return !(nums1.some(val => hasIdMismatch(val, nums2)) || nums2.some(val2 => hasIdMismatch(val2, nums1)));
+  }
+
+  function innerCompare(data1, data2) {
+    const recordControlNumbers = acceptControlNumbers(data1.recordControlNumbers, data2.recordControlNumbers);
+    nvdebug(`RCN ${recordControlNumbers}`, debug);
+    // $g and $q are optional:
+    const relatedParts = noMultivals(data1.relatedParts, data2.relatedParts);
+    const enumerationAndFirstPage = noMultivals(data1.enumerationAndFirstPage, data2.enumerationAndFirstPage);
+    nvdebug(`RCN ${recordControlNumbers}\tRP ${relatedParts ? 'true' : 'false'}\tEAFP ${enumerationAndFirstPage ? 'true' : 'false'}`, debug);
+    nvdebug(`SOME RESULT: ${enumerationAndFirstPage && recordControlNumbers && relatedParts ? 'true' : 'false'}`);
+    return enumerationAndFirstPage && recordControlNumbers && relatedParts;
+  }
+}
+
+export function compare773(recordValuesA = [], recordValuesB = []) {
+  const f773sA = recordValuesA['773'];
+  const f773sB = recordValuesB['773'];
+  return compare773values(f773sA, f773sB);
 }
