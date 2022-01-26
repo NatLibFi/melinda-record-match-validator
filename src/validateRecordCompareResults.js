@@ -34,8 +34,9 @@ export function validateCompareResults(comparedRecordValues) {
     '338': All-match = true, One-all-from-other = A or B and defaults = false
     '773': {
       enumerationAndFirstPage: All-match = true, One-all-from-other = A or B, One-has-values-other-empty = A or B and defaults = false,
-      recordControlNumber: All-match = true, One-all-from-other = A or B, One-has-values-other-empty = A or B and defaults = false,
+      recordControlNumbers: All-match = true, One-all-from-other = A or B, One-has-values-other-empty = A or B and defaults = false,
       relatedParts: All-match = true, One-all-from-other = A or B, One-has-values-other-empty = A or B and defaults = false
+      tag: '773' or '973'
     },
     SID: All-match = true, One-all-from-other = A or B, One-has-values-other-empty = A or B and defaults = false,
     CAT: Latest-match = true, other-contains-latest-inotherCats = A or B, both-contain-same-old-cat = A or B and defaults = false
