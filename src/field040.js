@@ -37,6 +37,7 @@ export function check040b(record1, record2) {
   if (score1 < score2) {
     return 'B';
   }
+  return true; // This test does not fail
 
   function recordScore040FieldLanguage(record) {
     const fields = record.get('040');
@@ -68,8 +69,6 @@ export function check040b(record1, record2) {
     // Now now. Should we assume that no 040$b is better than, say, 040$b foo? Currently we don't think so.
     return 0;
   }
-
-  return true; // This test does not fail
 }
 
 export function check040e(record1, record2) {
