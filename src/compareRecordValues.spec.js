@@ -43,9 +43,11 @@ generateTests({
 
 function callback({getFixture, enabled}) {
   if (!enabled) {
+    // Enabled is set on metadata.json
     console.log('TEST DISABLED!'); // eslint-disable-line no-console
     return;
   }
+  console.log('TEST ENABLED!'); // eslint-disable-line no-console
   const recordValuesA = getFixture('inputRecordValuesA.json');
   const recordValuesB = getFixture('inputRecordValuesB.json');
   const expectedResults = getFixture('expectedResults.json');
