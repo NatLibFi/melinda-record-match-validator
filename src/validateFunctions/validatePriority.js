@@ -14,7 +14,7 @@ export function validatePriority(comparedRecordValues) {
     {name: 'LOW', value: isValidValue(comparedRecordValues.LOW, wantedValues)},
     {name: 'SID', value: isValidValue(comparedRecordValues.SID, wantedValues)},
     {name: 'CAT', value: isValidValue(comparedRecordValues.CAT, wantedValues)},
-    {name: 'recordControlNumber', value: isValidValue(comparedRecordValues['773'].recordControlNumber, wantedValues)},
+    {name: 'recordControlNumbers', value: isValidValue(comparedRecordValues['773'].recordControlNumbers, wantedValues)},
     {name: 'contentTypes', value: isValidValue(comparedRecordValues['336'], wantedValues)},
     {name: 'mediaTypes', value: isValidValue(comparedRecordValues['337'], wantedValues)},
     {name: 'carrierTypes', value: isValidValue(comparedRecordValues['338'], wantedValues)},
