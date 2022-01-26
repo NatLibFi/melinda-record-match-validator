@@ -25,7 +25,7 @@
     "338": true,
     "773": {
         "enumerationAndFirstPage": true,
-        "recordControlNumber": true,
+        "recordControlNumbers": true,
         "relatedParts": true
     },
     "CAT": false,
