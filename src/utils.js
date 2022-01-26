@@ -151,4 +151,26 @@ export function getMelindaId(value = '') {
   return undefined;
 }
 
+function getIdPrefix(id) {
+  const i = id.indexOf(')');
+  if (i === -1) {
+    return '';
+  }
+  return id.substring(0, i + 1);
+}
+
+export function hasIdMismatch(otherId, idSet) {
+  const otherPrefix = getIdPrefix(otherId);
+  return idSet.some(id => {
+    if (id === otherId) {
+      return false;
+    }
+    const prefix = getIdPrefix(otherId);
+    if (prefix === otherPrefix) {
+      return true;
+    }
+    return false;
+  });
+}
+
 
