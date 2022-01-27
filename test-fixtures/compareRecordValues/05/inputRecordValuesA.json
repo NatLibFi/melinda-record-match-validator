@@ -5,17 +5,17 @@
     "title": "Kårkalendern /"
   },
   "336": {
-    "contentTypes": [
+    "types": [
       "txt"
     ]
   },
   "337": {
-    "mediaTypes": [
+    "types": [
       "n"
     ]
   },
   "338": {
-    "carrierTypes": [
+    "types": [
       "nc"
     ]
   },
