@@ -31,6 +31,7 @@
 import createDebugLogger from 'debug';
 import {fieldHasValidNonRepeatableSubfield, isComponentPart, nvdebug, subfieldSetsAreEqual} from './utils';
 import {hasFields, getSubfield} from './collectFunctions/collectUtils';
+import {compareArrayContent} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field33X');
 
@@ -96,6 +97,7 @@ export function check338(record1, record2) {
   (Tietokonekäyttöinen teksti ja fyysinen teksti)
 */
 
+
 export function get336bContentType(record) {
   const contentTypes = hasFields('336', record, getSubfield, 'b');
   debug('Field 336 content types: %o', contentTypes);
@@ -117,3 +119,33 @@ export function get338bCarrierType(record) {
   return {carrierTypes};
 }
 
+
+/*
+336, 337, 338 $b:t
+  automaatiolla pitää miettiä jotain parempaa logiikkaa - mut tekstiaineistoissa jos toinen tietue on 337 $b c ja toinen on 337 $b n niin yhdistämistä ei saa tehdä.
+  (Tietokonekäyttöinen teksti ja fyysinen teksti)
+*/
+
+export function compare336ContentType(recordValuesA, recordValuesB) {
+  const f336A = recordValuesA['336'];
+  const f336B = recordValuesB['336'];
+  debug('%o vs %o', f336A, f336B);
+
+  return compareArrayContent(f336A.contentType, f336B.contentType);
+}
+
+export function compare337MediaType(recordValuesA, recordValuesB) {
+  const f337A = recordValuesA['337'];
+  const f337B = recordValuesB['337'];
+  debug('%o vs %o', f337A, f337B);
+
+  return compareArrayContent(f337A.mediaType, f337B.mediaType);
+}
+
+export function compare338CarrierType(recordValuesA, recordValuesB) {
+  const f338A = recordValuesA['338'];
+  const f338B = recordValuesB['338'];
+  debug('%o vs %o', f338A, f338B);
+
+  return compareArrayContent(f338A.carrierType, f338B.carrierType);
+}
