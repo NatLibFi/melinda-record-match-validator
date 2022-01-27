@@ -30,7 +30,8 @@ import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@na
 import {getRecordInfo} from './leader';
 import {get001, get005} from './collectFunctions/controlFields';
 import {getCAT, getLOW, getSID} from './collectFunctions/alephInternalFields';
-import {get042, get245, get336bContentType, get337bMediaType, get338bCarrierType} from './collectFunctions/fields';
+import {get042, get245} from './collectFunctions/fields';
+import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X';
 import {get773} from './field773';
 
 export function collectRecordValues(record) {
