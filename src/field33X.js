@@ -29,12 +29,13 @@
 // Handle fields 336, 337 and 338.
 
 import createDebugLogger from 'debug';
-import {fieldHasValidNonRepeatableSubfield, isComponentPart, nvdebug, subfieldSetsAreEqual} from './utils';
+//import {fieldHasValidNonRepeatableSubfield /*isComponentPart, nvdebug, subfieldSetsAreEqual*/} from './utils';
 import {hasFields, getSubfield} from './collectFunctions/collectUtils';
 import {compareArrayContent} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field33X');
 
+/*
 function isValid33X(field) {
   if (!['336', '337', '338'].includes(field.tag)) {
     return false;
@@ -45,8 +46,16 @@ function isValid33X(field) {
   // We might have some control subfield checks here?!?
   return true;
 }
+*/
 
 function check33X(record1, record2, tag) {
+  const data1 = get33Xb(record1, tag);
+  const data2 = get33Xb(record2, tag);
+  return compareArrayContent(data1.types, data2.types);
+  //return compare336ContentType(data1, data2);
+}
+
+/*
   // Returns just true (=match) or false (=mismatch).
   // Compare $b subfields only (language-specific $a contains same info but). How about $3 and $6?
   // (During merge we might prefer language X $a fields but that does not concern us here.)
@@ -77,6 +86,7 @@ function check33X(record1, record2, tag) {
   // Compare 33X$b contents:
   return subfieldSetsAreEqual(validFields1, validFields2, 'b');
 }
+*/
 
 export function check336(record1, record2) {
   return check33X(record1, record2, '336');
@@ -97,26 +107,23 @@ export function check338(record1, record2) {
   (Tietokonekäyttöinen teksti ja fyysinen teksti)
 */
 
+function get33Xb(record, tag) {
+  const types = hasFields(tag, record, getSubfield, 'b');
+  debug('Field %s content types: %o', tag, types);
+
+  return {types};
+}
 
 export function get336bContentType(record) {
-  const contentTypes = hasFields('336', record, getSubfield, 'b');
-  debug('Field 336 content types: %o', contentTypes);
-
-  return {contentTypes};
+  return get33Xb(record, '336');
 }
 
 export function get337bMediaType(record) {
-  const mediaTypes = hasFields('337', record, getSubfield, 'b');
-  debug('Field 337 media types: %o', mediaTypes);
-
-  return {mediaTypes};
+  return get33Xb(record, '337');
 }
 
 export function get338bCarrierType(record) {
-  const carrierTypes = hasFields('338', record, getSubfield, 'b');
-  debug('Field 338 carrier types: %o', carrierTypes);
-
-  return {carrierTypes};
+  return get33Xb(record, '338');
 }
 
 
@@ -125,6 +132,7 @@ export function get338bCarrierType(record) {
   automaatiolla pitää miettiä jotain parempaa logiikkaa - mut tekstiaineistoissa jos toinen tietue on 337 $b c ja toinen on 337 $b n niin yhdistämistä ei saa tehdä.
   (Tietokonekäyttöinen teksti ja fyysinen teksti)
 */
+
 
 export function compare336ContentType(recordValuesA, recordValuesB) {
   const f336A = recordValuesA['336'];
