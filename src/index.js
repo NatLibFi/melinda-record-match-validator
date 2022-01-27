@@ -36,9 +36,10 @@ import {getSubfieldValues} from './collectFunctions/collectUtils';
 //import {collectRecordValues} from './collectRecordValues';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
+import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
-import {fieldGetNonRepeatableValue, fieldHasValidNonRepeatableSubfield, fieldToString, isComponentPart, subfieldSetsAreEqual} from './utils';
+import {fieldGetNonRepeatableValue, fieldToString, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
@@ -59,17 +60,6 @@ function checkExistence(record1, record2) {
   if (isDeletedRecord(record1) || isDeletedRecord(record2)) {
     return false;
   }
-  return true;
-}
-
-function isValid33X(field) {
-  if (!['336', '337', '338'].includes(field.tag)) {
-    return false;
-  }
-  if (!['a', 'b', '2'].every(subfieldCode => fieldHasValidNonRepeatableSubfield(field, subfieldCode))) {
-    return false;
-  }
-  // We might have some control subfield checks here?!?
   return true;
 }
 
@@ -144,50 +134,6 @@ function check245(record1, record2) {
   }
 }
 
-function check33X(record1, record2, tag) {
-  // Returns just true (=match) or false (=mismatch).
-  // Compare $b subfields only (language-specific $a contains same info but). How about $3 and $6?
-  // (During merge we might prefer language X $a fields but that does not concern us here.)
-  const fields1 = record1.get(tag);
-  const fields2 = record2.get(tag);
-
-  if (fields1.length !== fields2.length) {
-    nvdebug(`check33X: ${tag}: FAIL: size mismatch`);
-    return false;
-  }
-  if (fields1.length === 0) {
-    if (tag !== '338') { // 336 and 337 must always be present
-      nvdebug(`check33X: Comparison result: ${tag} is empty`);
-      return false;
-    }
-    // 338 is optional only for comps
-    if (!isComponentPart(record1)) {
-      return false;
-    }
-    return true;
-  }
-  // Remove crappy fields:
-  const validFields1 = fields1.filter(field => isValid33X(field));
-  const validFields2 = fields2.filter(field => isValid33X(field));
-  if (validFields1.length !== fields1.length) { // Data was lost: abort
-    return false;
-  }
-  // Compare 33X$b contents:
-  return subfieldSetsAreEqual(validFields1, validFields2, 'b');
-}
-
-function check336(record1, record2) {
-  return check33X(record1, record2, '336');
-}
-
-function check337(record1, record2) {
-  return check33X(record1, record2, '337');
-}
-
-function check338(record1, record2) {
-  return check33X(record1, record2, '338');
-}
-
 
 function check005(record1, record2) {
   const fields1 = record1.get('005');
@@ -224,7 +170,6 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'field 336 (content type) test', 'function': check336},
   {'description': 'field 337 (media type) test', 'function': check337},
   {'description': 'field 338 (carrier type) test', 'function': check338},
-
   {'description': '773 $wgq test', 'function': check773},
   {'description': '040$b (language of cataloging) (priority only)', 'function': check040b},
   {'description': '040$e (description conventions) (priority only)', 'function': check040e},
