@@ -55,31 +55,3 @@ export function get245(record) {
 
 // Later 300 subfields 3, a, e (needs alot parsing)
 
-/*
-336, 337, 338 $b:t
-  automaatiolla pitää miettiä jotain parempaa logiikkaa - mut tekstiaineistoissa jos toinen tietue on 337 $b c ja toinen on 337 $b n niin yhdistämistä ei saa tehdä.
-  (Tietokonekäyttöinen teksti ja fyysinen teksti)
-*/
-
-export function get336bContentType(record) {
-  const contentTypes = hasFields('336', record, getSubfield, 'b');
-  debug('Field 336 content types: %o', contentTypes);
-
-  return {contentTypes};
-}
-
-export function get337bMediaType(record) {
-  const mediaTypes = hasFields('337', record, getSubfield, 'b');
-  debug('Field 337 media types: %o', mediaTypes);
-
-  return {mediaTypes};
-}
-
-export function get338bCarrierType(record) {
-  const carrierTypes = hasFields('338', record, getSubfield, 'b');
-  debug('Field 338 carrier types: %o', carrierTypes);
-
-  return {carrierTypes};
-}
-
-
