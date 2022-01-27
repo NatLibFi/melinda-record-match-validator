@@ -42,6 +42,7 @@ import {checkLeader} from './leader';
 import {fieldGetNonRepeatableValue, fieldToString, subfieldSetsAreEqual} from './utils';
 
 import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
+import {get005} from './collectFunctions/controlFields';
 
 //import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
 //import {subfieldsAreIdentical} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
@@ -136,15 +137,13 @@ function check245(record1, record2) {
 
 
 function check005(record1, record2) {
-  const fields1 = record1.get('005');
-  const fields2 = record2.get('005');
-  if (fields1.length !== 1 || fields2.length !== 1) { // corrupted shite
-    return false;
-  }
+  const data1 = get005(record1);
+  const data2 = get005(record2);
+
   // Theoretically the record with newer timestamp is the better one.
   // However, we have n+1 load-fixes etc reasons why this is not reliable, so year is good enough for me.
-  const val1 = getYear(fields1[0]);
-  const val2 = getYear(fields2[0]);
+  const val1 = getYear(data1);
+  const val2 = getYear(data2);
   if (val1 > val2) {
     return 'A';
   }
@@ -153,8 +152,8 @@ function check005(record1, record2) {
   }
   return true;
 
-  function getYear(field) {
-    return parseInt(field.value.substr(0, 4), 10); // YYYY is approximate enough
+  function getYear(value) {
+    return parseInt(value.substr(0, 4), 10); // YYYY is approximate enough
   }
 }
 
