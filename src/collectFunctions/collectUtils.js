@@ -1,3 +1,8 @@
+//import createDebugLogger from 'debug';
+//import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
+//import {nvdebug} from '../utils';
+//const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:collectFields');
+
 export function hasFields(tag, record, useFunction, useFunctionParameters) {
   const fields = record.get(tag);
   if (fields === []) {
@@ -5,10 +10,25 @@ export function hasFields(tag, record, useFunction, useFunctionParameters) {
   }
 
   if (useFunction !== undefined) {
+    //const result = fields.map(field => useFunction(field, useFunctionParameters));
+
     return fields.map(field => useFunction(field, useFunctionParameters));
   }
 
   return fields;
+}
+
+export function hasField(tag, record, useFunction, useFunctionParameters) {
+  const fields = record.get(tag);
+  if (fields.length === 0) {
+    return [];
+  }
+
+  if (useFunction !== undefined) {
+    return useFunction(fields[0], useFunctionParameters);
+  }
+
+  return [fields[0]];
 }
 
 export function getFirstField(tag, record) {
@@ -34,6 +54,10 @@ export function getSubfield(field, subfieldCode) {
   }
 
   return value;
+}
+
+export function getSubfields(field, subfieldCode) {
+  return field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 }
 
 export function getSubfieldValue(field, subfieldCode) {
