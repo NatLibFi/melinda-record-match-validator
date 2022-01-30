@@ -123,6 +123,7 @@ export function get337bMediaType(record) {
 }
 
 export function get338bCarrierType(record) {
+  // A component part should not have a 338 field. However, I don't think we need this sanity check...
   return get33Xb(record, '338');
 }
 
