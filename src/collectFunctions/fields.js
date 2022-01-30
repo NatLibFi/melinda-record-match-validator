@@ -26,13 +26,15 @@
 *
 */
 
+//import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 import createDebugLogger from 'debug';
-import {hasFields, getSubfield} from './collectUtils';
+//import {nvdebug} from '../utils';
+import {hasField, hasFields, getSubfield, getSubfields} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:fields');
 
 export function get042(record) {
-  return hasFields('042', record, getSubfield, 'a');
+  return hasField('042', record, getSubfields, 'a');
 }
 
 // 245 n & p
@@ -53,5 +55,4 @@ export function get245(record) {
   }
 }
 
-// Later 300 subfields 3, a, e (needs alot parsing)
-
+// Later on: handle 300 subfields 3, a, e? (needs alot parsing)
