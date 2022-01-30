@@ -70,6 +70,14 @@
         {
           "code": "a",
           "value": "finb"
+        },
+        {
+          "code": "a",
+          "value": "foo"
+        },
+        {
+          "code": "a",
+          "value": "finbd"
         }
       ]
     },
