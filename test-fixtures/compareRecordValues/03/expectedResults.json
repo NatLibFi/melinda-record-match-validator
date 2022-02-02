@@ -5,7 +5,7 @@
     "title": true
   },
   "000": {
-    "bibliographicLevel": true,
+    "bibliographicLevel": false,
     "encodingLevel": true,
     "typeOfRecord": true
   },
