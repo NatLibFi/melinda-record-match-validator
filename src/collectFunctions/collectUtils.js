@@ -5,9 +5,6 @@
 
 export function hasFields(tag, record, useFunction, useFunctionParameters) {
   const fields = record.get(tag);
-  if (fields === []) {
-    return [];
-  }
 
   if (useFunction !== undefined) {
     //const result = fields.map(field => useFunction(field, useFunctionParameters));
