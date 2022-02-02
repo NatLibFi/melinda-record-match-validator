@@ -27,6 +27,7 @@
 */
 
 import createDebugLogger from 'debug';
+import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
 
@@ -95,11 +96,6 @@ function mapEncodingLevel(encodingLevel) {
   throw new Error('Invalid record completion level');
 }
 
-function nvdebug(msg) {
-  console.log(msg); // eslint-disable-line no-console
-  debug(msg);
-}
-
 export function getRecordInfo(record) {
 
   const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
@@ -116,8 +112,8 @@ export function getRecordInfo(record) {
     bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw),
     encodingLevel: mapEncodingLevel(recordCompletionLevel)
   };
-  //nvdebug('NV WP1');
-  //nvdebug(JSON.stringify(result));
+  //nvdebug('NV WP1', debug);
+  //nvdebug(JSON.stringify(result), debug);
   return result;
 }
 
@@ -153,7 +149,7 @@ function rateValues(valueA, valueB, rateArray) {
 function compareTypeOfRecord(a, b) {
   debug('Record A type: %o', a);
   debug('Record B type: %o', b);
-  nvdebug(`type of record: '${a}' vs '${b}'`);
+  nvdebug(`type of record: '${a}' vs '${b}', debug`);
   return rateValues(a, b);
 }
 
@@ -194,8 +190,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
     bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel)
   };
-  nvdebug('NV WP9');// eslint-disable-line no-console
-  nvdebug(JSON.stringify(result)); // eslint-disable-line no-console
+  nvdebug('NV WP9', debug);// eslint-disable-line no-console
+  nvdebug(JSON.stringify(result), debug); // eslint-disable-line no-console
   return result;
 }
 
