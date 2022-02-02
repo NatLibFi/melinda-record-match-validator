@@ -31,14 +31,6 @@ export function hasField(tag, record, useFunction, useFunctionParameters) {
   return [fields[0]];
 }
 
-export function getFirstField(tag, record) {
-  const fields = record.get(tag);
-  if (fields.length === 0) {
-    return null;
-  }
-  return fields[0];
-}
-
 export function getDefaultMissValue() {
   return 'undefined';
 }
