@@ -23,11 +23,7 @@
   "336": true,
   "337": true,
   "338": true,
-  "773": {
-    "enumerationAndFirstPage": true,
-    "recordControlNumbers": true,
-    "relatedParts": true
-  },
+  "773": true,
   "CAT": true,
   "LOW": true,
   "SID": "A"
