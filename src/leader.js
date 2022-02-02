@@ -73,14 +73,14 @@ const encodingLevelHash = {
   'z': 'Not applicable'
 };
 
-export function mapTypeOfRecord(typeOfRecord) {
+function mapTypeOfRecord(typeOfRecord) {
   if (typeOfRecord in typeOfRecordHash) {
     return {level: typeOfRecordHash[typeOfRecord], code: typeOfRecord};
   }
   throw new Error(`Invalid record type ${typeOfRecord}`);
 }
 
-export function mapBibliographicalLevel(bibliographicLevel) {
+function mapBibliographicalLevel(bibliographicLevel) {
   if (bibliographicLevel in bibliographicLevelHash) {
     return {level: bibliographicLevelHash[bibliographicLevel], code: bibliographicLevel};
   }
@@ -88,7 +88,7 @@ export function mapBibliographicalLevel(bibliographicLevel) {
   throw new Error('Invalid record bib level');
 }
 
-export function mapEncodingLevel(encodingLevel) {
+function mapEncodingLevel(encodingLevel) {
   if (encodingLevel in encodingLevelHash) {
     return {level: encodingLevelHash[encodingLevel], code: encodingLevel};
   }
@@ -116,8 +116,8 @@ export function getRecordInfo(record) {
     bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw),
     encodingLevel: mapEncodingLevel(recordCompletionLevel)
   };
-  nvdebug('NV WP1');
-  nvdebug(JSON.stringify(result));
+  //nvdebug('NV WP1');
+  //nvdebug(JSON.stringify(result));
   return result;
 }
 
