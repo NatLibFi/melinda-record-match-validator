@@ -25,7 +25,14 @@
 * for the JavaScript code in this file.
 *
 */
-import {getSubfieldValues} from './collectFunctions/collectUtils';
+import {getSubfieldValue, getSubfieldValues, hasField} from './collectFunctions/collectUtils';
+
+//// Scores for various values in 040$b Language Cataloging
+// Sorry, my Finlandswedish colleagues and friends: I've given Finnis top priority.
+// 'fin', 'swe', and 'mul' so 'mul' comes third. It's typically seen in copycatalogued records,
+// that have not (yet) been fully translated. These werethe original three.
+// However, NL has done English-only records for Nordenskiöld collection, so we'll prefer 'eng' over other languages.
+const scoreFor040b = {'fin': 4, 'swe': 3, 'mul': 2, 'eng': 1};
 
 export function check040b(record1, record2) {
   const score1 = recordScore040FieldLanguage(record1);
@@ -40,34 +47,11 @@ export function check040b(record1, record2) {
   return true; // This test does not fail
 
   function recordScore040FieldLanguage(record) {
-    const fields = record.get('040');
-    if (fields.length !== 1) {
+    const b = hasField('040', record, getSubfieldValue, 'b');
+    if (b === null || !(b in scoreFor040b)) {
       return 0;
     }
-    return score040SubfieldBValues(getSubfieldValues(fields[0], 'b'));
-  }
-
-  function score040SubfieldBValues(values) {
-    if (values.length !== 1) {
-      return 0;
-    }
-    if (values[0] === 'fin') {
-      return 4;
-    }
-    // Sorry my Finlandswedish colleagues: I've 'fin' preference over 'swe' due to number of users.
-    if (values[0] === 'swe') {
-      return 3;
-    } // Copy-cataloguing record, that has not yet been fully nativized to 'fin' or 'swe'
-    if (values[0] === 'mul') {
-      return 2;
-    }
-    // Typically a copy-catalogued record, that has not been properly changed to 'mul'.
-    // However, NL has done english-records for Nordenskiöld collection, so we'll prefer 'eng' over other languages.
-    if (values[0] === 'eng') {
-      return 1;
-    }
-    // Now now. Should we assume that no 040$b is better than, say, 040$b foo? Currently we don't think so.
-    return 0;
+    return scoreFor040b[b];
   }
 }
 
@@ -81,29 +65,19 @@ export function check040e(record1, record2) {
   if (score1 < score2) {
     return 'B';
   }
+  return true; // This test does not fail
 
   function recordScore040FieldDescriptionConvention(record) {
-    const fields = record.get('040');
-    if (fields.length !== 1) {
+    const e = hasField('040', record, getSubfieldValues, 'e');
+    if (e.length !== 1) {
       return 0;
     }
-    return score040SubfieldEValues(getSubfieldValues(fields[0], 'e'));
-  }
-
-  function score040SubfieldEValues(values) {
-
-    /* // If multiple $e's a problem? Once I thought so, but not anymore. However, keep this comment here for discussion.
-    if (values.length !== 1) {
-      return 0;
-    }
-    */
-    if (values.includes('rda')) {
+    // Is multiple $e's a problem? Once I thought so, but not anymore. However, keep this comment here for discussion.
+    if (e.includes('rda')) {
       return 1;
     }
     // Now now... Should we assume that no 040$e is better than, say, 040$e FFS?
-    // We take no sides, return same score for both, and hope that some other rule makes a good decision for us.
+    // Currently we take no sides, return same score for both, and hope that some other rule makes a good decision for us.
     return 0;
   }
-
-  return true; // This test does not fail
 }
