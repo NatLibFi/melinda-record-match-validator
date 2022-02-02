@@ -18,28 +18,6 @@ const validValuesForSubfield = {
 };
 
 
-export function stripControlNumberPart(id) {
-  // return "(FOO)" from "(FOO)BAR"
-  if ((/^\([^)]+\)[0-9]+$/u).test(id)) {
-    return id.substr(0, id.indexOf(')') + 1);
-  }
-  if ((/^FCC[0-9]+$/u).test(id)) {
-    return id.substr(0, id.indexOf(3));
-  }
-  return null; // Not exactly sure what failure should return... empty string or null I guess...
-}
-
-export function sameControlNumberIdentifier(id1, id2) { // Same parenthesis part
-  if (id1 === id2) { // eg. "(FOO)BAR" === "(FOO)BAR"
-    return true;
-  }
-  if (stripControlNumberPart(id1) === stripControlNumberPart(id2)) { // "(FOO)LORUM" vs "(FOO)IPSUM"
-    return false;
-  }
-  return false; // IDs come from different databases
-}
-
-
 export function fieldToString(f) {
   if ('subfields' in f) {
     return `${f.tag} ${f.ind1}${f.ind2} ‡${formatSubfields(f)}`;
