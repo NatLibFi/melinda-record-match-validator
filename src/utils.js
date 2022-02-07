@@ -28,12 +28,14 @@ export function fieldToString(f) {
   }
 }
 
+/*
 export function isControlSubfieldCode(subfieldCode) {
   if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'w'].includes(subfieldCode)) {
     return true;
   }
   return false;
 }
+*/
 
 export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
   if (subfieldValue === null) {
@@ -79,6 +81,7 @@ export function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
 
+/*
 export function isComponentPart(record) {
   if (['a', 'b', 'd'].includes(record.leader[7])) { // LDR/07 is the bibliographical level
     return true;
@@ -86,8 +89,9 @@ export function isComponentPart(record) {
   // Should having a 773 (or 973) field imply that record is a component part?
   return false;
 }
+*/
 
-export function getMelindaDefaultPrefix() {
+function getMelindaDefaultPrefix() {
   return '(FI-MELINDA)';
 }
 
