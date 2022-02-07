@@ -7,7 +7,7 @@
   "000": {
     "bibliographicLevel": true,
     "encodingLevel": true,
-    "typeOfRecord": true
+    "typeOfRecord": false
   },
   "001": {
     "isMelindaId": "B",
