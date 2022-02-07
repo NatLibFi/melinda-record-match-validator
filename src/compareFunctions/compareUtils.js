@@ -9,17 +9,29 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
     return true;
   }
 
-  const arrayBContainsFromA = arrayA.filter(value => arrayB.includes(value));
-  const arrayAContainsFromB = arrayB.filter(value => arrayA.includes(value));
+  // Original version got the same units. That approach had issues, as
+  // 1) the result was identical in both sets (as they were union)
+  // 2) it produced unexpected results with { types: [ 's', 'n' ] } vs { types: [ 'n', 's' ] } as
+  //    stringify() doesn't produce identical results for the above two.
+  const onlyA = arrayA.filter(value => !arrayB.includes(value));
+  const onlyB = arrayB.filter(value => !arrayA.includes(value));
 
-  if (arrayB.length > 0 && JSON.stringify(arrayAContainsFromB) === JSON.stringify(arrayB)) {
-    debug('Array A contains all values from B');
-    return 'A';
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  if (onlyA.length === 0 && onlyB.length === 0) {
+    return true;
   }
 
-  if (arrayA.length > 0 && JSON.stringify(arrayBContainsFromA) === JSON.stringify(arrayA)) {
-    debug('Array B contains all values from A');
-    return 'B';
+  if (onlyA.length + onlyB.length > 0) {
+    const union = arrayA.filter(value => arrayB.includes(value));
+    if (arrayB.length > 0 && JSON.stringify(union) === JSON.stringify(arrayB)) {
+      debug('Array A contains all values from B');
+      return 'A';
+    }
+    if (arrayA.length > 0 && JSON.stringify(union) === JSON.stringify(arrayA)) {
+      debug('Array B contains all values from A');
+      return 'B';
+    }
   }
 
   if (ifOtherEmpty) {
@@ -36,7 +48,6 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
     debug('Arrays A or B contain different values');
     return false;
   }
-
 
   debug('Arrays A or B do not contain all values from each other');
   return false;
