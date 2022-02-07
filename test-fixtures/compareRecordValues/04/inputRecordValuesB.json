@@ -5,19 +5,22 @@
       "title": "Studia Romanica Upsaliensia /"
   },
   "336": {
-      "types": [
-          "txt"
-      ]
+    "types": [
+      "txt",
+      "spw"
+    ]
   },
   "337": {
-      "types": [
-          "n"
-      ]
+    "types": [
+      "s",
+      "n"
+    ]
   },
   "338": {
-      "types": [
-          "nc"
-      ]
+    "types": [
+      "nc",
+      "sd"
+    ]
   },
   "773": [],
   "000": {
