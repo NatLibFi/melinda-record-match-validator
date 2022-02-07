@@ -3,6 +3,7 @@ import createDebugLogger from 'debug';
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils');
 
 export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
+  debug('"%o" vs "%o"', arrayA, arrayB);
   if (JSON.stringify(arrayA) === JSON.stringify(arrayB)) {
     debug('Array A and B are same');
     return true;
@@ -32,12 +33,12 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
       return 'B';
     }
 
-    debug('Array A or B both contains different values');
+    debug('Arrays A or B contain different values');
     return false;
   }
 
 
-  debug('Array A or B does not contain all values from other');
+  debug('Arrays A or B do not contain all values from each other');
   return false;
 }
 
