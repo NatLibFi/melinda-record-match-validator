@@ -37,17 +37,17 @@ export function isControlSubfieldCode(subfieldCode) {
   return false;
 }
 */
-
+/*
 export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
   if (subfieldValue === null) {
     return field.subfields.some(sf => sf.code === subfieldCode);
   }
   return field.subfields.some(sf => sf.code === subfieldCode && subfieldValue === sf.value);
 }
-
+*/
 /*
 export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
-  const uniqueValue = fieldGetNonRepeatableValue(field, subfieldCode);
+  const unique Value = fieldGetNonRepeatableValue(field, subfieldCode);
   if (uniqueValue === null) {
     nvdebug(`fieldHasValidNonRepeatableSubfield() returns false`);
     return false;
@@ -56,6 +56,7 @@ export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
   return true;
 }
 */
+
 
 export function fieldGetNonRepeatableValue(field, subfieldCode) {
   //nvdebug(` fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') in...`);
@@ -66,15 +67,14 @@ export function fieldGetNonRepeatableValue(field, subfieldCode) {
   }
 
   // Disable sanity checks, as these are not used by relevant fields currently:
-  /*
-  const key = `${field.tag}‡${subfieldCode}`;
-  if (key in validValuesForSubfield) {
-    if (!validValuesForSubfield[key].includes(subfieldValues[0])) {
-      nvdebug(`  fieldGetNonRepeatableValue() return null ('${subfieldValues[0]}' not found in '${validValuesForSubfield[key].join('/')}')`);
-      return null;
-    }
-  }
-  */
+
+  //const key = `${field.tag}‡${subfieldCode}`;
+  //if (key in validValuesForSubfield) {
+  //  if (!validValuesForSubfield[key].includes(subfieldValues[0])) {
+  //    nvdebug(`  fieldGetNonRepeatableValue() return null ('${subfieldValues[0]}' not found in '${validValuesForSubfield[key].join('/')}')`);
+  //    return null;
+  //  }
+  //}
 
 
   //nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
