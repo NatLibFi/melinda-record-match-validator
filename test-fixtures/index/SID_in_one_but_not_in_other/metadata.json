@@ -1,4 +1,4 @@
 {
-    "description": "SID field(s) in one record, but not in other",
+    "description": "B has SID field, and A does not: B wins",
     "enabled": true
 }
