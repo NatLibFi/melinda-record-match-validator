@@ -163,19 +163,7 @@ function compareBibliographicalLevel(a, b) {
 function compareEncodingLevel(a, b) {
   debug('Record A completion level: %o', a);
   debug('Record B completion level: %o', b);
-
-  /*
-  # - Full level
-  1 - Full level, material not examined
-  2 - Less-than-full level, material not examined
-  3 - Abbreviated level
-  4 - Core level
-  5 - Partial (preliminary) level
-  7 - Minimal level
-  8 - Prepublication level
-  u - Unknown
-  z - Not applicable
-  */
+  // Best first, se encodingLevelHash above.
   const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
 
   return rateValues(a, b, rateArray);
@@ -199,6 +187,8 @@ export function checkLeader(record1, record2, checkPreference = true) {
   const recordInfo1 = getRecordInfo(record1);
   const recordInfo2 = getRecordInfo(record2);
 
+  console.log(`checkLeade()`); // eslint-disable-line no-console
+
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
     console.log(`LDR: type of record failed!`); // eslint-disable-line no-console
     return false;
@@ -209,7 +199,7 @@ export function checkLeader(record1, record2, checkPreference = true) {
     return false;
   }
 
-  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel.code, recordInfo2.encodingLevel.code);
+  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel);
   if (encodingLevelPreference === false) {
     debug(`LDR: encoding level failed!`);
     return false;
