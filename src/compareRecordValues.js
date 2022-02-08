@@ -25,8 +25,10 @@
 * for the JavaScript code in this file.
 *
 */
+
 import createDebugLogger from 'debug';
-import {compareSID, compareCAT, compareLOW} from './compareFunctions/alephInternalFields';
+import {compareCAT, compareLOW} from './compareFunctions/alephInternalFields';
+import {compareSID} from './alephFields';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './compareFunctions/controlFields';
 import {compare042, compare245} from './compareFunctions/fields';
