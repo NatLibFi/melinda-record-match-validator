@@ -120,6 +120,7 @@ export function normalizeMelindaId(value) {
   return value;
 }
 
+/*
 export function isValidMelindaId(value = '') {
   const normalizedValue = normalizeMelindaId(value);
   if (!(/.0[0-9]{8}$/u).test(normalizedValue)) {
@@ -133,13 +134,16 @@ export function isValidMelindaId(value = '') {
   }
   return true;
 }
+*/
 
+/*
 export function getMelindaId(value = '') {
   if (isValidMelindaId(value)) {
     return value.slice(-9);
   }
   return undefined;
 }
+*/
 
 function getIdPrefix(id) {
   const i = id.indexOf(')');
@@ -152,14 +156,17 @@ function getIdPrefix(id) {
 export function hasIdMismatch(otherId, idSet) {
   const otherPrefix = getIdPrefix(otherId);
   return idSet.some(id => {
-    if (id === otherId) {
+    if (id === otherId) { // Identical values: no mismatch
+      //nvdebug(`SAME VALUE CAUSES APPROVAL: ${id}`);
       return false;
     }
-    const prefix = getIdPrefix(otherId);
+    const prefix = getIdPrefix(id); // Identical prefix: has mismatch
     if (prefix === otherPrefix) {
+      //nvdebug(`SAME PREFIX CAUSES MISMATCH: ${prefix} WITH '${id}' vs '${otherId}'`);
       return true;
     }
-    return false;
+    //nvdebug(`UNRELATED CAUSES APPROVAL: '${id}' vs '${otherId}'`);
+    return false; // No mismatch
   });
 }
 
