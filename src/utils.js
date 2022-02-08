@@ -8,6 +8,7 @@ export function nvdebug(message, debug = undefined) {
   }
 }
 
+/*
 const validValuesForSubfield = {
   '336‡b': ['prm', 'tdi', 'tdm', 'ntm', 'spw', 'sti', 'txt', 'snd'],
   '336‡2': ['rdacontent'],
@@ -16,7 +17,7 @@ const validValuesForSubfield = {
   '338‡b': ['ca', 'cb', 'cd', 'ce', 'cf', 'ch', 'ck', 'cr', 'cz', 'eh', 'es', 'ez', 'gc', 'gd', 'gf', 'gs', 'gt', 'ha', 'hb', 'hc', 'hd', 'he', 'hf', 'hg', 'hh', 'hj', 'hz', 'mc', 'mf', 'mo', 'mr', 'mz', 'na', 'nb', 'nc', 'nn', 'no', 'nr', 'nz', 'pp', 'pz', 'sd', 'ss', 'st', 'sz', 'vc', 'vd', 'vf', 'vr', 'vz', 'zu'],
   '338‡2': ['rdacarrier']
 };
-
+*/
 
 export function fieldToString(f) {
   if ('subfields' in f) {
@@ -44,6 +45,7 @@ export function fieldHasSubfield(field, subfieldCode, subfieldValue = null) {
   return field.subfields.some(sf => sf.code === subfieldCode && subfieldValue === sf.value);
 }
 
+/*
 export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
   const uniqueValue = fieldGetNonRepeatableValue(field, subfieldCode);
   if (uniqueValue === null) {
@@ -53,6 +55,7 @@ export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
   //nvdebug(`fieldHasValidNonRepeatableSubfield() returns true`);
   return true;
 }
+*/
 
 export function fieldGetNonRepeatableValue(field, subfieldCode) {
   //nvdebug(` fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') in...`);
@@ -61,7 +64,9 @@ export function fieldGetNonRepeatableValue(field, subfieldCode) {
     nvdebug(`  ${field.tag}‡${subfieldCode}: ${subfieldValues.length} subfields found`);
     return null;
   }
-  //nvdebug(JSON.stringify(subfields[0]));
+
+  // Disable sanity checks, as these are not used by relevant fields currently:
+  /*
   const key = `${field.tag}‡${subfieldCode}`;
   if (key in validValuesForSubfield) {
     if (!validValuesForSubfield[key].includes(subfieldValues[0])) {
@@ -69,6 +74,9 @@ export function fieldGetNonRepeatableValue(field, subfieldCode) {
       return null;
     }
   }
+  */
+
+
   //nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
   return subfieldValues[0];
 }
