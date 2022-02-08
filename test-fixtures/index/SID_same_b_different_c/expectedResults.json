@@ -1,5 +1,5 @@
 {
     "action": false,
-    "message": "SID test (validation only) failed",
+    "message": "SID test (validation and priority) failed",
     "prio": false
 }
