@@ -170,7 +170,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': '773 $wgq test', 'function': check773},
   {'description': '040$b (language of cataloging) (priority only)', 'function': check040b},
   {'description': '040$e (description conventions) (priority only)', 'function': check040e},
-  {'description': 'SID test (validation only)', 'function': checkSID}, // NB! JO used SID for priority as well
+  {'description': 'SID test (validation and priority)', 'function': checkSID},
   {'description': '005 timestamp test (validation and priority)', 'function': check005}
 ];
 
