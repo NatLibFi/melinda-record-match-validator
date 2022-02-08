@@ -1,7 +1,7 @@
 {
     "action": "merge",
     "prio": {
-        "name": "both records passed all tests, but no winner was found",
-        "value": true
+        "name": "B won SID test (validation and priority)",
+        "value": "B"
     }
 }
