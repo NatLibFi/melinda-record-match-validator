@@ -36,16 +36,3 @@ export function getLOW(record) {
   return LOWs;
 }
 
-export function getSID(record) {
-  const SIDs = hasFields('SID', record).map(field => sidToJson(field));
-  debug('SIDs: %o', SIDs);
-
-  return SIDs;
-
-  function sidToJson(sid) {
-    const [database] = sid.subfields.filter(sub => sub.code === 'b').map(sub => sub.value);
-    const [id] = sid.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
-
-    return {id, database};
-  }
-}
