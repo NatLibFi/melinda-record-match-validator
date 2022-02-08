@@ -1,0 +1,7 @@
+{
+    "action": "merge",
+    "prio": {
+        "name": "A won leader (validation and priority)",
+        "value": "A"        
+    }
+}
