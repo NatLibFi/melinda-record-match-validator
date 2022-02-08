@@ -113,34 +113,6 @@ export function checkSID(record1, record2) {
   const fields2 = getSID(record2);
   return compareSIDValues(fields1, fields2);
 
-  /*
-  // array.some(...) returns false on empty arrays... Handle them first:
-  if (fields1.length === 0 || fields2.length === 0) {
-    // NB! JO has preference rules as well. I don't think they are meaningful...
-    return true;
-  }
-
-  // SID's $b subfield contains information about the owning organization.
-  if (!fields1.some(field => isMergableSID(field, fields2)) || !fields2.some(field => isMergableSID(field, fields1))) {
-    return false;
-  }
-  return true;
-
-  function isMergableSID(sidField, otherSidFields) {
-    const subfieldBValue = getSubfieldValue(sidField, 'b');
-    const subfieldCValue = getSubfieldValue(sidField, 'c');
-
-
-    const counterpartFields = otherSidFields.filter(otherField => fieldHasSubfield(otherField, 'b', subfieldBValue));
-    if (counterpartFields.length === 0) { // The other record has not relevant SIDs, which is fine.
-      return true;
-    }
-    if (counterpartFields.length > 1) { // This is mainly a sanity check
-      return false;
-    }
-    return subfieldCValue === getSubfieldValue(counterpartFields[0], 'c');
-  }
-  */
 }
 
 export function checkLOW(record1, record2) {
