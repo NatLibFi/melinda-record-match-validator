@@ -1,6 +1,4 @@
 {
-    "action": false,
-    "message": "leader (validation and priority)",
-    "prio": false
-
+    "description": "LDR/07 mismatch",
+    "enabled": true
 }
