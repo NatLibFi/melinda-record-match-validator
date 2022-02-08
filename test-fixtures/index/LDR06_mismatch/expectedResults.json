@@ -1,7 +1,5 @@
 {
-    "action": "merge",
-    "prio": {
-        "name": "B won 040$b (language of cataloging) (priority only)",
-        "value": "B"
-    }
+    "action": false,
+    "message": "leader (validation and priority) failed",
+    "prio": false
 }
