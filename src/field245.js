@@ -48,10 +48,11 @@ export function get245(record) {
 
   function f245ToJSON(field) {
     const title = getSubfield(field, 'a');
+    const remainderOfTitle = getSubfield(field, 'b');
     const numberOfPartInSectionOfAWork = getSubfield(field, 'n');
     const nameOfPartInSectionOfAWork = getSubfield(field, 'p');
 
-    return {title, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
+    return {title, remainderOfTitle, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
   }
 }
 
