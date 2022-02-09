@@ -1,6 +1,6 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
-import {hasFields, getSubfield} from './collectUtils';
+import {hasFields/*, getSubfield*/} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:alephInternalFields');
 
@@ -28,6 +28,5 @@ export function getCAT(record) {
     return {cataloger, time};
   }
 }
-
 
 
