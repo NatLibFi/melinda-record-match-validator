@@ -129,7 +129,7 @@ function rateValues(valueA, valueB, rateArray) {
     const ratingOfB = rateArray.indexOf(valueB.code) + 1;
 
     if (ratingOfA === 0 || ratingOfB === 0) {
-      debug('Value not found from array');
+      //debug('Value not found from array');
       return false;
     }
 
@@ -204,10 +204,15 @@ export function checkLeader(record1, record2, checkPreference = true) {
     debug(`LDR: encoding level failed!`);
     return false;
   }
+
+  return checkPreference ? encodingLevelPreference : true;
+
+  /*
   if (checkPreference) {
     return encodingLevelPreference;
   }
   return true;
+  */
   // NB! Should we handle LDR/05 (record status) value p - Increase in encoding level from prepublication?
 }
 
