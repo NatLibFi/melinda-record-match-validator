@@ -27,8 +27,8 @@
 */
 
 import createDebugLogger from 'debug';
-import {getSubfieldValue, hasFields} from './collectFunctions/collectUtils';
-import {nvdebug} from './utils';
+import {hasFields} from './collectFunctions/collectUtils';
+//import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:alephFunctions');
 
@@ -113,43 +113,6 @@ export function checkSID(record1, record2) {
   const fields2 = getSID(record2);
   return compareSIDValues(fields1, fields2);
 
-}
-
-export function checkLOW(record1, record2) {
-  const score1 = lowFieldsToScore(record1.get('LOW'));
-  const score2 = lowFieldsToScore(record2.get('LOW'));
-  nvdebug(`LOW scores: ${score1} vs ${score2}`);
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score1 < score2) {
-    return 'B';
-  }
-  return true;
-
-  function lowFieldsToScore(fields) {
-    // min=0, max=100
-    if (fields.length === 0) {
-      // Having no LOW fields is pretty suspicious
-      return 0;
-    }
-
-    return Math.max(...fields.map(field => scoreField(field)));
-  }
-
-  function scoreField(field) {
-    const value = getSubfieldValue(field, 'a');
-    // Corrupted field
-    if (!value) {
-      return 0;
-    }
-    if (value === 'FIKKA') {
-      return 100;
-    }
-    // If we'd want to, we could add some kind of priority based on organizations.
-    // However, we wouldn't be making friends there: If X > Y, then Y might hurt his feelings.
-    return 50;
-  }
 }
 
 
