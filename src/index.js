@@ -29,7 +29,7 @@
 import createDebugLogger from 'debug';
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 
-import {checkSID} from './alephFields';
+import {checkSID} from './fieldSID';
 import {checkLOW} from './fieldLOW';
 import {check040b, check040e} from './field040';
 import {checkPublisher} from './field26X';

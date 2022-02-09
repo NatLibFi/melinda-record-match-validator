@@ -29,7 +29,7 @@
 import createDebugLogger from 'debug';
 import {compareCAT} from './compareFunctions/alephInternalFields';
 import {compareLOW} from './fieldLOW';
-import {compareSID} from './alephFields';
+import {compareSID} from './fieldSID';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './compareFunctions/controlFields';
 import {compare042, compare245} from './compareFunctions/fields';
