@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2020-2021 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020-2022 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -29,13 +29,9 @@
 //import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
-import {hasField, hasFields, getSubfield, getSubfields} from './collectUtils';
+import {hasFields, getSubfield} from './collectUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:fields');
-
-export function get042(record) {
-  return hasField('042', record, getSubfields, 'a');
-}
 
 // 245 n & p
 // tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen

@@ -1,16 +1,8 @@
 
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent} from './compareUtils';
+import {compareValueContent} from './compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareFields');
-
-export function compare042(recordValuesA, recordValuesB) {
-  const f042A = recordValuesA['042'];
-  const f042B = recordValuesB['042'];
-  debug('%o vs %o', f042A, f042B);
-
-  return compareArrayContent(f042A, f042B, true);
-}
 
 // 245 n & p
 // tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
@@ -29,6 +21,5 @@ export function compare245(recordValuesA, recordValuesB) {
 }
 
 // 300 laajuus
-
 
 

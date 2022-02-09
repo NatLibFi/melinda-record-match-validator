@@ -37,7 +37,7 @@ import {checkPublisher} from './field26X';
 //import {collectRecordValues} from './collectRecordValues';
 //import {compareRecordValues} from './compareRecordValues';
 //import {validateCompareResults} from './validateRecordCompareResults';
-import {get042} from './collectFunctions/fields';
+import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
@@ -66,29 +66,6 @@ function checkExistence(record1, record2) {
   return true;
 }
 
-
-function check042(record1, record2) {
-  const data1 = get042(record1);
-  const data2 = get042(record2);
-
-  // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
-  const score1 = score042Field(data1);
-  const score2 = score042Field(data2);
-  nvdebug(`042 scores: ${score1} vs ${score2}`);
-  if (score1 > score2) {
-    return 'A';
-  }
-  if (score1 < score2) {
-    return 'B';
-  }
-  return true; // This test does not fail
-
-  function score042Field(authenticationCodes) {
-    nvdebug('FFS', debug);
-    nvdebug(authenticationCodes.join(', '), debug);
-    return (authenticationCodes.includes('finb') ? 1 : 0) + (authenticationCodes.includes('finbd') ? 1 : 0);
-  }
-}
 
 function check245(record1, record2) {
   // Get both 245 fields and remove punctuation for easier comparisons:

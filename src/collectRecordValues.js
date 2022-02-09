@@ -32,7 +32,8 @@ import {get001, get005} from './collectFunctions/controlFields';
 import {getCAT} from './fieldCAT';
 import {getLOW} from './fieldLOW';
 import {getSID} from './fieldSID';
-import {get042, get245} from './collectFunctions/fields';
+import {get042} from './field042';
+import {get245} from './collectFunctions/fields';
 import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X';
 import {get773} from './field773';
 
