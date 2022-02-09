@@ -73,7 +73,7 @@ function compareSIDValues(SIDsA, SIDsB) {
         return 'A';
       }
       debug('Both SIDS are empty');
-      return 'A';
+      return true;
     }
 
     if (SIDsA.length === 0) {
