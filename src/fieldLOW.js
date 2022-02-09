@@ -8,10 +8,10 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:fieldL
 export function getLOW(record) {
   const LOWs = hasFields('LOW', record, getSubfield, 'a');
   debug('LOWs: %o', LOWs);
-
   return LOWs;
 }
 
+// Priority array for various LOW tags. Default value for an existing LOW is 50, and for no LOW 0.
 const LOW2Points = {
   'FIKKA': 100,
   'FENNICA': 90,
@@ -19,14 +19,9 @@ const LOW2Points = {
   'undefined': 0 // not sure whether this default can happen here
 };
 
-export function compareLOW(recordValuesA, recordValuesB) {
-  const LOWsA = recordValuesA.LOW;
-  const LOWsB = recordValuesB.LOW;
-  return compareLOWValues(LOWsA, LOWsB);
-}
 
 function compareLOWValues(LOWsA, LOWsB) {
-  debug('A: %o vs B: %o', LOWsA, LOWsB);
+  debug('compareLOW: A: %o vs B: %o', LOWsA, LOWsB);
 
   // return compareArrayContent(LOWsA, LOWsB, true); // NV: size does not matter
 
@@ -46,6 +41,8 @@ function compareLOWValues(LOWsA, LOWsB) {
     if (lows === undefined || lows.length === 0) { // Having no LOW fields is pretty suspicious
       return 0;
     }
+    //const low2Score = lows.map(low => scoreField(low));
+    //debug(' mapped to %o', low2Score);
 
     return Math.max(...lows.map(low => scoreField(low)));
   }
@@ -64,6 +61,12 @@ function compareLOWValues(LOWsA, LOWsB) {
     // However, we wouldn't be making friends there: If X > Y, then Y might hurt his feelings.
     return 50;
   }
+}
+
+export function compareLOW(recordValuesA, recordValuesB) {
+  const LOWsA = recordValuesA.LOW;
+  const LOWsB = recordValuesB.LOW;
+  return compareLOWValues(LOWsA, LOWsB);
 }
 
 export function checkLOW(record1, record2) {
