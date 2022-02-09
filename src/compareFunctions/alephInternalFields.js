@@ -1,5 +1,4 @@
 import createDebugLogger from 'debug';
-import {compareArrayContent} from './compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:alephInternalFields');
 
@@ -83,14 +82,6 @@ export function compareCAT(recordValuesA, recordValuesB) {
       return catToCompare.cataloger === cat.cataloger && catToCompare.time === cat.time;
     });
   }
-}
-
-export function compareLOW(recordValuesA, recordValuesB) {
-  const LOWsA = recordValuesA.LOW;
-  const LOWsB = recordValuesB.LOW;
-  debug('A: %o vs B: %o', LOWsA, LOWsB);
-
-  return compareArrayContent(LOWsA, LOWsB, true);
 }
 
 

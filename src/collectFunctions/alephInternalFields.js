@@ -29,10 +29,5 @@ export function getCAT(record) {
   }
 }
 
-export function getLOW(record) {
-  const LOWs = hasFields('LOW', record, getSubfield, 'a');
-  debug('LOWs: %o', LOWs);
 
-  return LOWs;
-}
 
