@@ -33,7 +33,7 @@ import {compareSID} from './fieldSID';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './compareFunctions/controlFields';
 import {compare042} from './field042';
-import {compare245} from './compareFunctions/fields';
+import {compare245} from './field245';
 import {compare773} from './field773';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X';
 import createDebugLogger from 'debug';

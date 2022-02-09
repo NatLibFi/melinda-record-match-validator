@@ -33,7 +33,7 @@ import {getCAT} from './fieldCAT';
 import {getLOW} from './fieldLOW';
 import {getSID} from './fieldSID';
 import {get042} from './field042';
-import {get245} from './collectFunctions/fields';
+import {get245} from './field245';
 import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X';
 import {get773} from './field773';
 
