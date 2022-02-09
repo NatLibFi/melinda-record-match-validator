@@ -120,7 +120,7 @@ function compare773values(f773sA, f773sB) {
 
   function innerCompare(data1, data2) {
     const recordControlNumbers = acceptControlNumbers(data1.recordControlNumbers, data2.recordControlNumbers);
-    nvdebug(`RCN ${recordControlNumbers}`, debug);
+    nvdebug(`RECORD CONTROL NUMBERS ${recordControlNumbers}`, debug);
     // $g and $q are optional:
     const relatedParts = noMultivals(data1.relatedParts, data2.relatedParts);
     const enumerationAndFirstPage = noMultivals(data1.enumerationAndFirstPage, data2.enumerationAndFirstPage);
