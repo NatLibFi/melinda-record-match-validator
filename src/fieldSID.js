@@ -62,11 +62,6 @@ function compareSIDValues(SIDsA, SIDsB) {
   return compareSIDContent();
 
   function compareSIDContent() {
-    if (JSON.stringify(SIDsA) === JSON.stringify(SIDsB)) {
-      debug('SIDs A and B are same');
-      return true;
-    }
-
     if (SIDsB.length === 0) {
       if (SIDsA.length > 0) {
         debug('SIDs A contains values and B is empty');
@@ -89,7 +84,10 @@ function compareSIDValues(SIDsA, SIDsB) {
 
     const onlyA = SIDsA.filter(SIDA => SIDsB.every(SIDB => SIDA.database !== SIDB.database));
     const onlyB = SIDsB.filter(SIDB => SIDsA.every(SIDA => SIDA.database !== SIDB.database));
-
+    if (onlyA.length === 0 && onlyB.length === 0) {
+      debug('SIDs A and B are same');
+      return true;
+    }
     // It's union: same result both ways... And anyway we are interested in the different values, not the same ones.
     //const SIDsBContainsFromA = SIDsA.filter(SIDA => SIDsB.some(SIDB => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
     //const SIDsAContainsFromB = SIDsB.filter(SIDB => SIDsA.some(SIDA => SIDA.database === SIDB.database && SIDA.id === SIDB.id));
@@ -104,7 +102,7 @@ function compareSIDValues(SIDsA, SIDsB) {
       return 'B';
     }
 
-    return true;
+    return true; // default to true
   }
 }
 
