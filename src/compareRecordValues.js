@@ -26,16 +26,16 @@
 *
 */
 
-import createDebugLogger from 'debug';
-import {compareCAT} from './compareFunctions/alephInternalFields';
+import {compareLeader} from './leader';
+import {compareCAT} from './fieldCAT';
 import {compareLOW} from './fieldLOW';
 import {compareSID} from './fieldSID';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './compareFunctions/controlFields';
 import {compare042, compare245} from './compareFunctions/fields';
-import {compareLeader} from './leader';
 import {compare773} from './field773';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X';
+import createDebugLogger from 'debug';
 
 export function compareRecordValues(recordValuesA, recordValuesB) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues');

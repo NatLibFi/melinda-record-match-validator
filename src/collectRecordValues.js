@@ -29,7 +29,7 @@
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getRecordInfo} from './leader';
 import {get001, get005} from './collectFunctions/controlFields';
-import {getCAT} from './collectFunctions/alephInternalFields';
+import {getCAT} from './fieldCAT';
 import {getLOW} from './fieldLOW';
 import {getSID} from './fieldSID';
 import {get042, get245} from './collectFunctions/fields';
