@@ -1,4 +1,4 @@
-import {getSubfieldValue, getSubfieldValues} from './collectFunctions/collectUtils';
+//import {getSubfieldValue/*, getSubfieldValues*/} from './collectFunctions/collectUtils';
 
 export function nvdebug(message, debug = undefined) {
   console.info(message); // eslint-disable-line no-console
@@ -19,6 +19,7 @@ const validValuesForSubfield = {
 };
 */
 
+/*
 export function fieldToString(f) {
   if ('subfields' in f) {
     return `${f.tag} ${f.ind1}${f.ind2} ‡${formatSubfields(f)}`;
@@ -28,7 +29,7 @@ export function fieldToString(f) {
     return field.subfields.map(sf => `${sf.code}${sf.value || ''}`).join('‡');
   }
 }
-
+*/
 /*
 export function isControlSubfieldCode(subfieldCode) {
   if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'w'].includes(subfieldCode)) {
@@ -57,7 +58,7 @@ export function fieldHasValidNonRepeatableSubfield(field, subfieldCode) {
 }
 */
 
-
+/*
 export function fieldGetNonRepeatableValue(field, subfieldCode) {
   //nvdebug(` fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') in...`);
   const subfieldValues = getSubfieldValues(field, subfieldCode);
@@ -80,7 +81,9 @@ export function fieldGetNonRepeatableValue(field, subfieldCode) {
   //nvdebug(`  fieldGetNonRepeatableValue('${fieldToString(field)}', '${subfieldCode}') returns '${subfieldValues[0]}'`);
   return subfieldValues[0];
 }
+*/
 
+/*
 export function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   // Called at least by 245$n/$p, 33X$b (field having exactly one instance of $b is checked elsewhere)
   const subfieldValues1 = fields1.map(field => getSubfieldValue(field, subfieldCode));
@@ -88,6 +91,7 @@ export function subfieldSetsAreEqual(fields1, fields2, subfieldCode) {
   // NB: This checks the order as well!
   return subfieldValues1.every((value, index) => value === subfieldValues2[index]);
 }
+*/
 
 /*
 export function isComponentPart(record) {
