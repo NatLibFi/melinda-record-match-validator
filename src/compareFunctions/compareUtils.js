@@ -2,41 +2,18 @@ import createDebugLogger from 'debug';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils');
 
-export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
+export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
   debug('"%o" vs "%o"', arrayA, arrayB);
-  if (JSON.stringify(arrayA) === JSON.stringify(arrayB)) {
-    debug('Array A and B are same');
-    return true;
-  }
+  // true: sets are equal
+  // A: B is a subset of A
+  // B: A is a sibset of B
+  // false: contents mismatch
 
-  // Original version got the same units. That approach had issues, as
-  // 1) the result was identical in both sets (as they were union)
-  // 2) it produced unexpected results with { types: [ 's', 'n' ] } vs { types: [ 'n', 's' ] } as
-  //    stringify() doesn't produce identical results for the above two.
-  const onlyA = arrayA.filter(value => !arrayB.includes(value));
-  const onlyB = arrayB.filter(value => !arrayA.includes(value));
-
-  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
-  // Anyway, close enough, and not sure which to prefer, thus return true:
-  if (onlyA.length === 0 && onlyB.length === 0) {
-    return true;
-  }
-
-  if (onlyA.length + onlyB.length > 0) {
-    const union = arrayA.filter(value => arrayB.includes(value));
-    if (arrayB.length > 0 && JSON.stringify(union) === JSON.stringify(arrayB)) {
-      debug('Array A contains all values from B');
-      return 'A';
-    }
-    if (arrayA.length > 0 && JSON.stringify(union) === JSON.stringify(arrayA)) {
-      debug('Array B contains all values from A');
-      return 'B';
-    }
-  }
-
-  if (ifOtherEmpty) {
+  // NV: I don't think we really need ifOtherEmpty at all.
+  // It was used with tags 042 and LOW.
+  /*
+  if (ifOtherEmpty && (arrayA.length===0||arrayB.length===0)) {
     if (arrayA.length > 0 && arrayB.length === 0) {
-      debug('Array A contains values and B is empty');
       return 'A';
     }
 
@@ -45,14 +22,45 @@ export function compareArrayContent(arrayA, arrayB, ifOtherEmpty = false) {
       return 'B';
     }
 
-    debug('Arrays A or B contain different values');
-    return false;
+    debug('Arrays A and B are both empty');
+    return true;
   }
+*/
+
+  // Original version got the same units. That approach had issues, as
+  // 1) the result was identical in both sets (as they were union)
+  // 2) it produced unexpected results with { types: [ 's', 'n' ] } vs { types: [ 'n', 's' ] } as
+  //    stringify() doesn't produce identical results for the above two.
+
+  // Now: Filter out identical content:
+  const onlyA = arrayA.filter(value => !arrayB.includes(value));
+  const onlyB = arrayB.filter(value => !arrayA.includes(value));
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  if (onlyA.length === 0) {
+    return onlyB.length === 0 ? true : 'B';
+  }
+  if (onlyB.length === 0) {
+    return 'A';
+  }
+
+  /*
+  const union = arrayA.filter(value => arrayB.includes(value));
+  if (arrayB.length > 0 && JSON.stringify(union) === JSON.stringify(arrayB)) {
+    debug('Array A contains all values from B');
+    return 'A';
+  }
+  if (arrayA.length > 0 && JSON.stringify(union) === JSON.stringify(arrayA)) {
+    debug('Array B contains all values from A');
+    return 'B';
+  }
+  */
 
   debug('Arrays A or B do not contain all values from each other');
   return false;
 }
 
+const threshold = 0.5;
 export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
     debug(`${prefix}Value A and B are "undefined"`);
@@ -82,19 +90,19 @@ export function compareValueContent(valueA, valueB, prefix = '') {
     return true;
   }
 
-  if (valueAContainsBAvg > valueBContainsAAvg && valueAContainsBAvg > 0.5) {
+  if (valueAContainsBAvg > valueBContainsAAvg && valueAContainsBAvg > threshold) {
     debug('Value A contains %o of B', valueAContainsBAvg);
     return 'A';
   }
 
-  if (valueBContainsAAvg > valueAContainsBAvg && valueBContainsAAvg > 0.5) {
+  if (valueBContainsAAvg > valueAContainsBAvg && valueBContainsAAvg > threshold) {
     debug('Value B contains %o of A', valueBContainsAAvg);
     return 'B';
   }
 
   debug('Value A contains %o of B', valueAContainsBAvg);
   debug('Value B contains %o of A', valueBContainsAAvg);
-  debug(`${prefix}Minimium of 0.5 did not happen setting: false`);
+  debug(`${prefix}Minimium of ${threshold} did not happen setting: false`);
 
   return false;
 
