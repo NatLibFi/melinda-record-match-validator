@@ -28,7 +28,7 @@
 
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
 import {getRecordInfo} from './leader';
-import {get001, get005} from './collectFunctions/controlFields';
+import {get001, get005} from './controlFields';
 import {getCAT} from './fieldCAT';
 import {getLOW} from './fieldLOW';
 import {getSID} from './fieldSID';

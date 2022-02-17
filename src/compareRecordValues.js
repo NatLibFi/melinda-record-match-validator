@@ -31,7 +31,7 @@ import {compareCAT} from './fieldCAT';
 import {compareLOW} from './fieldLOW';
 import {compareSID} from './fieldSID';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
-import {compare001, compare005} from './compareFunctions/controlFields';
+import {compare001, compare005} from './controlFields';
 import {compare042} from './field042';
 import {compare245} from './field245';
 import {compare773} from './field773';

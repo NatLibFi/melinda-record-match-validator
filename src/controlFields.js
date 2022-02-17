@@ -1,13 +1,12 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
-import createDebugLogger from 'debug';
-import moment from 'moment';
-import {compareValueContent} from './compareUtils';
+import {compareValueContent} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
 
 
 // Collect:
+
 export function get001(record) {
 
   const [f001Value] = record.get('001').map(field => field.value);

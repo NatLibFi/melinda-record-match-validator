@@ -43,10 +43,7 @@ import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
-import {get005} from './collectFunctions/controlFields';
-
-//import {fieldStripPunctuation as stripPunctuation} from '../node_modules/@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/punctuation';
-//import {subfieldsAreIdentical} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
+import {get005} from './controlFields';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
