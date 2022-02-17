@@ -60,7 +60,7 @@ export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
   return false;
 }
 
-const threshold = 0.5;
+const threshold = 0.6;
 export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
     debug(`${prefix}Value A and B are "undefined"`);
