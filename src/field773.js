@@ -93,15 +93,20 @@ function compare773values(f773sA, f773sB) {
     return false;
   }
 
+  /*
   if (f773sA.length > 0 && f773sB.length === 0) {
-    return 'A';
+    return true; // return 'A';
   }
 
   if (f773sB.length > 0 && f773sA.length === 0) {
-    return 'B';
+    return true; // return 'B';
   }
 
   if (f773sA.length === 0 && f773sB.length === 0) {
+    return true;
+  }
+  */
+  if (f773sA.length === 0 || f773sB.length === 0) {
     return true;
   }
 
