@@ -83,6 +83,32 @@
           "value": "0018"
         }
       ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-HELKA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20150520"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0018"
+        }
+      ]
     }
   ]
 }

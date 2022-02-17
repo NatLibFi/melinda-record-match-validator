@@ -1,7 +1,7 @@
 {
     "action": "merge",
     "preference": {
-        "name": "both records passed all tests, but no winner was found",
-        "value": true
+        "name": "A won CAT test (preference only)",
+        "value": "A"
     }
 }
