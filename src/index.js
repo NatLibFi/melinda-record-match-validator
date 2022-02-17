@@ -43,7 +43,7 @@ import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
-import {get005, check008} from './controlFields';
+import {check005, check008} from './controlFields';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -61,28 +61,6 @@ function checkExistence(record1, record2) {
   }
   return true;
 }
-
-function check005(record1, record2) {
-  const data1 = get005(record1);
-  const data2 = get005(record2);
-
-  // Theoretically the record with newer timestamp is the better one.
-  // However, we have n+1 load-fixes etc reasons why this is not reliable, so year is good enough for me.
-  const val1 = getYear(data1);
-  const val2 = getYear(data2);
-  if (val1 > val2) {
-    return 'A';
-  }
-  if (val2 > val1) {
-    return 'B';
-  }
-  return true;
-
-  function getYear(value) {
-    return parseInt(value.substr(0, 4), 10); // YYYY is approximate enough
-  }
-}
-
 
 const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},

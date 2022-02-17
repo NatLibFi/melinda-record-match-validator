@@ -100,6 +100,28 @@ function innerCompare008(f008A, f008B) {
 }
 
 // check (collect&compare):
+
+export function check005(record1, record2) {
+  const data1 = get005(record1);
+  const data2 = get005(record2);
+
+  // Theoretically the record with newer timestamp is the better one.
+  // However, we have n+1 load-fixes etc reasons why this is not reliable, so year is good enough for me.
+  const val1 = getYear(data1);
+  const val2 = getYear(data2);
+  if (val1 > val2) {
+    return 'A';
+  }
+  if (val2 > val1) {
+    return 'B';
+  }
+  return true;
+
+  function getYear(value) {
+    return parseInt(value.substr(0, 4), 10); // YYYY is approximate enough
+  }
+}
+
 export function check008(record1, record2) {
   const data1 = get008(record1);
   const data2 = get008(record2);
