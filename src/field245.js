@@ -31,9 +31,9 @@ import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
 import {hasFields, getSubfield} from './collectFunctions/collectUtils';
 import {compareValueContent} from './compareFunctions/compareUtils';
-import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
+//import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
 
-import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
+//import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
 
@@ -48,7 +48,7 @@ export function get245(record) {
 
   function f245ToJSON(field) {
     const title = getSubfield(field, 'a');
-    const remainderOfTitle = getSubfield(field, 'b');
+    const remainderOfTitle = getSubfield(field, 'b'); // Do we want this?
     const numberOfPartInSectionOfAWork = getSubfield(field, 'n');
     const nameOfPartInSectionOfAWork = getSubfield(field, 'p');
 
@@ -56,6 +56,13 @@ export function get245(record) {
   }
 }
 
+function compare245data(f245A, f245B) {
+  return {
+    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 name: '),
+    'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 number: '),
+    'title': compareValueContent(f245A.title, f245B.title, '245 title: ')
+  };
+}
 
 // 245 n & p
 // tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
@@ -64,17 +71,23 @@ export function compare245(recordValuesA, recordValuesB) {
   const f245A = recordValuesA['245'];
   const f245B = recordValuesB['245'];
   debug('%o vs %o', f245A, f245B);
-
-  return {
-    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 name: '),
-    'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 number: '),
-    'title': compareValueContent(f245A.title, f245B.title, '245 title: ')
-  };
+  return compare245data(f245A, f245B);
 }
 
 export function check245(record1, record2) {
-  // Get both 245 fields and remove punctuation for easier comparisons:
+  const data1 = get245(record1);
+  const data2 = get245(record2);
 
+  const result = compare245data(data1, data2);
+  if (result.title === false || result.numberOfPartInSectionOfAWork === false || result.nameOfPartInSectionOfAWork === false) {
+    return false;
+  }
+  // Room for 'A' and 'B'?
+  return true;
+
+
+  // Get both 245 fields and remove punctuation for easier comparisons:
+/*
   const fields1 = record1.get('245');
   const fields2 = record2.get('245');
   if (fields1.length !== 1 || fields2.length !== 1) {
@@ -114,4 +127,5 @@ export function check245(record1, record2) {
     }
     return b1 === b2;
   }
+*/
 }
