@@ -16,6 +16,7 @@ const LOW2Points = {
   'FIKKA': 100,
   'FENNICA': 90,
   'VIOLA': 90,
+  // 'HELKA': 80, // We could add more libraries here. Eg. HELKA is usually good.
   'undefined': 0 // not sure whether this default can happen here
 };
 
