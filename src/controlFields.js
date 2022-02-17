@@ -96,7 +96,79 @@ export function compare008(recordValuesA, recordValuesB) {
 }
 
 function innerCompare008(f008A, f008B) {
-  return f008A === f008B;
+  const goodA = valid008(f008A);
+  const goodB = valid008(f008B);
+  if (!goodA) {
+    if (!goodB) {
+      return f008A === f008B; // If it is same shit, I'll let it pass
+    }
+    return 'B';
+  }
+  if (!goodB) {
+    return 'A';
+  }
+
+  return mp06(f008A, f008B);
+
+  function mp06(a, b) {
+    const mp06A = a.charAt(6);
+    const mp06B = b.charAt(6);
+    if (mp06A === mp06B) {
+      return true;
+    }
+    // One is a reprint and the other one is not. Abort!
+    if (mp06A === 'r' || mp06B === 'r') {
+      return false;
+    }
+    // d < c or u < |
+    const continuingResource = compareContinuingResources(mp06A, mp06B);
+    if (continuingResource !== false) {
+      return continuingResource;
+    }
+    // 'b' (before Christ) is always wrong in our domain
+    if (mp06A === 'b') {
+      return 'B';
+    }
+    if (mp06B === 'b') {
+      return 'A';
+    }
+    // After handling 'b', '|' is the ultimate loser:
+    if (mp06A === '|') {
+      return 'B';
+    }
+    if (mp06B === '|') {
+      return 'A';
+    }
+    // Other rules?
+    return true;
+  }
+
+  function isUnknownOrContinuingResource(mp06) {
+    return ['|', 'c', 'd', 'u'].includes(mp06);
+  }
+
+  function compareContinuingResources(mp06A, mp06B) {
+    // There should not be pairs here
+    if (!isUnknownOrContinuingResource(mp06A) || !isUnknownOrContinuingResource(mp06B)) {
+      return false;
+    }
+    // d < c or u < |
+    if (mp06A === 'd' || mp06B === '|') {
+      return 'A';
+    }
+    if (mp06B === 'd' || mp06A === '|') {
+      return 'B';
+    }
+    // One is 'c' and the other one is 'u'. I'm not sure is one better than the other...
+    return true;
+  }
+
+  function valid008(f008) {
+    if (!f008 || f008.length !== 40) {
+      return false;
+    }
+    return true;
+  }
 }
 
 // check (collect&compare):
