@@ -1,7 +1,7 @@
 {
     "action": "merge",
-    "prio": {
-        "name": "A won LOW test (validation and priority)",
+    "preference": {
+        "name": "A won LOW test (validation and preference)",
         "value": "A"
     }
 }

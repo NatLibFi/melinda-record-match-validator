@@ -1,5 +1,5 @@
 {
     "action": false,
-    "message": "leader (validation and priority) failed",
-    "prio": false
+    "message": "leader (validation and preference) failed",
+    "preference": false
 }

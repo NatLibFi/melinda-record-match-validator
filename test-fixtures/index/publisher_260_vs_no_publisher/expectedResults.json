@@ -1,6 +1,6 @@
 {
     "action": "merge",
-    "prio": {
+    "preference": {
         "name": "both records passed all tests, but no winner was found",
         "value": true
     }

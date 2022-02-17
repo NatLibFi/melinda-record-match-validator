@@ -1,7 +1,7 @@
 {
     "action": "merge",
-    "prio": {
-        "name": "A won publisher (264>260) (priority only)",
+    "preference": {
+        "name": "A won publisher (264>260) (preference only)",
         "value": "A"
     }
 }

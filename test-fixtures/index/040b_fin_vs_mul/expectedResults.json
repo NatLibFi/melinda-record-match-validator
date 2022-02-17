@@ -1,7 +1,7 @@
 {
     "action": "merge",
-    "prio": {
-        "name": "B won 040$b (language of cataloging) (priority only)",
+    "preference": {
+        "name": "B won 040$b (language of cataloging) (preference only)",
         "value": "B"
     }
 }
