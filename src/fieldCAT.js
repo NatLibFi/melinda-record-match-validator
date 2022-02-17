@@ -30,9 +30,15 @@ export function getCAT(record) {
   }
 }
 
+
 export function compareCAT(recordValuesA, recordValuesB) {
   const CATsA = recordValuesA.CAT;
   const CATsB = recordValuesB.CAT;
+
+  return innerCompareCat(CATsA, CATsB);
+}
+
+function innerCompareCat(CATsA, CATsB) {
   debug('A: %o vs B: %o', CATsA, CATsB);
 
   const hasSameLatestCAT = CATsA.latest.cataloger === CATsB.latest.cataloger && CATsA.latest.time === CATsB.latest.time;
@@ -71,17 +77,18 @@ export function compareCAT(recordValuesA, recordValuesB) {
     }
 
     // Both have X amount of uniq updates after common
-    return false;
+    return false; // shouldn't this be validation only?
   }
 
-  return false;
+  return false; // shouldn't this be validation only?
 
   function analyzeCATs(CATsCompareTo, CATsToCompare) {
+    // Look for identical CATs:
     const isAheadOfOther = compareIfArrayContainsCat(CATsToCompare.latest, CATsCompareTo.otherCats);
     debug('Is ahead of the other: %o', isAheadOfOther);
 
     const commonOtherCats = CATsCompareTo.otherCats.filter(cat => compareIfArrayContainsCat(cat, CATsToCompare.otherCats));
-    debug('Containt common CATs: %o', commonOtherCats);
+    debug('Contains common CATs: %o', commonOtherCats);
 
     const updatesAfterCommonCAT = CATsCompareTo.otherCats.indexOf(commonOtherCats[0]);
     debug('Contains %o CATs after common CAT', updatesAfterCommonCAT);
@@ -110,5 +117,12 @@ export function compareCAT(recordValuesA, recordValuesB) {
       return catToCompare.cataloger === cat.cataloger && catToCompare.time === cat.time;
     });
   }
+}
+
+export function checkCAT(record1, record2) {
+  const data1 = getCAT(record1);
+  const data2 = getCAT(record2);
+
+  return innerCompareCat(data1, data2);
 }
 
