@@ -88,20 +88,20 @@ function check005(record1, record2) {
 
 const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
-  {'description': 'leader (validation and priority)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
-  {'description': 'publisher (264>260) (priority only)', 'function': checkPublisher},
-  {'description': 'LOW test (validation and priority)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
-  {'description': 'field 042: authentication code (priority only)', 'function': check042},
+  {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
+  {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher},
+  {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
+  {'description': 'field 042: authentication code (preference only)', 'function': check042},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
   {'description': 'field 245 (title)', 'function': check245},
-  {'description': 'field 336 (content type) test', 'function': check336},
-  {'description': 'field 337 (media type) test', 'function': check337},
-  {'description': 'field 338 (carrier type) test', 'function': check338},
-  {'description': '773 $wgq test', 'function': check773},
-  {'description': '040$b (language of cataloging) (priority only)', 'function': check040b},
-  {'description': '040$e (description conventions) (priority only)', 'function': check040e},
-  {'description': 'SID test (validation and priority)', 'function': checkSID},
-  {'description': '005 timestamp test (validation and priority)', 'function': check005}
+  {'description': 'field 336 (content type) test (validation and preference)', 'function': check336},
+  {'description': 'field 337 (media type) test (validation and preference)', 'function': check337},
+  {'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338},
+  {'description': '773 $wgq test (validation only)', 'function': check773},
+  {'description': '040$b (language of cataloging) (preference only)', 'function': check040b},
+  {'description': '040$e (description conventions) (preference only)', 'function': check040e},
+  {'description': 'SID test (validation and preference)', 'function': checkSID},
+  {'description': '005 timestamp test (validation and preference)', 'function': check005}
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
@@ -151,10 +151,10 @@ export default (recordA, recordB, checkPreference = true) => {
   const result = makeComparisons(recordA, recordB, checkPreference);
   console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
   if (result.result === false) {
-    return {action: false, prio: false, message: result.reason};
+    return {action: false, preference: false, message: result.reason};
   }
 
-  return {action: 'merge', prio: {'name': result.reason, 'value': result.result}};
+  return {action: 'merge', preference: {'name': result.reason, 'value': result.result}};
   //}
 /*
   // We never get here...
