@@ -43,7 +43,7 @@ import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
-import {get005} from './controlFields';
+import {get005, check008} from './controlFields';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -87,6 +87,7 @@ function check005(record1, record2) {
 const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
+  {'description': '008 test (validation and preference)', 'function': check008},
   {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher},
   {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (preference only)', 'function': check042},

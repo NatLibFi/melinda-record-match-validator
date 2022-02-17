@@ -28,6 +28,11 @@ export function get005(record) {
   return time;
 }
 
+export function get008(record) {
+  const [f008Value] = record.get('008').map(field => field.value);
+
+  return f008Value;
+}
 // Compare
 
 export function compare001(recordValuesA, recordValuesB) {
@@ -84,3 +89,19 @@ export function compare005(recordValuesA, recordValuesB) {
   }
 }
 
+export function compare008(recordValuesA, recordValuesB) {
+  const f008A = recordValuesA['008'];
+  const f008B = recordValuesB['008'];
+  return innerCompare008(f008A, f008B);
+}
+
+function innerCompare008(f008A, f008B) {
+  return f008A === f008B;
+}
+
+// check (collect&compare):
+export function check008(record1, record2) {
+  const data1 = get008(record1);
+  const data2 = get008(record2);
+  return innerCompare008(data1, data2);
+}
