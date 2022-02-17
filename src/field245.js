@@ -47,12 +47,17 @@ export function get245(record) {
   return f245;
 
   function f245ToJSON(field) {
-    const title = getSubfield(field, 'a');
-    const remainderOfTitle = getSubfield(field, 'b'); // Do we want this?
-    const numberOfPartInSectionOfAWork = getSubfield(field, 'n');
-    const nameOfPartInSectionOfAWork = getSubfield(field, 'p');
+    const title = stripPunc(getSubfield(field, 'a'));
+    const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
+    const numberOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'n'));
+    const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
 
     return {title, remainderOfTitle, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
+  }
+
+  function stripPunc(value) {
+    return value.replace(/(?: [=;:/]|[.,])$/u, '');
+
   }
 }
 
