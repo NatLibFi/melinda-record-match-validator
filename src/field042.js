@@ -26,7 +26,6 @@
 *
 */
 
-//import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 import createDebugLogger from 'debug';
 import {nvdebug} from './utils';
 import {hasField, getSubfields} from './collectFunctions/collectUtils';
