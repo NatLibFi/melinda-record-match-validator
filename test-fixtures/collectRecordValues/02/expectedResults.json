@@ -44,20 +44,20 @@
   "CAT": {
     "latest": {
       "cataloger": "LOAD-ID",
-      "time": "2019-08-29T22:22:00+03:00"
+      "time": "2019-08-29T22:22:00"
     },
     "otherCats": [
       {
         "cataloger": "CONV-RDA",
-        "time": "2016-03-19T08:31:00+02:00"
+        "time": "2016-03-19T08:31:00"
       },
       {
         "cataloger": "LOAD-HELKA",
-        "time": "2014-08-20T00:24:00+03:00"
+        "time": "2014-08-20T00:24:00"
       },
       {
         "cataloger": "CONV-ISBD",
-        "time": "2012-04-02T08:26:00+03:00"
+        "time": "2012-04-02T08:26:00"
       }
     ]
   },

@@ -44,12 +44,12 @@
     "CAT": {
         "latest": {
             "cataloger": "CONV-RDA",
-            "time": "2016-03-19T08:39:00+02:00"
+            "time": "2016-03-19T08:39:00"
         },
         "otherCats": [
             {
                 "cataloger": "CONV-ISBD",
-                "time": "2012-04-02T09:08:00+03:00"
+                "time": "2012-04-02T09:08:00"
             }
         ]
     },

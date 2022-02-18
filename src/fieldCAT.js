@@ -24,7 +24,7 @@ export function getCAT(record) {
     const cataloger = catalogerSubfield === undefined ? 'undefined' : catalogerSubfield;
     const catDate = cat.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
     const catClock = cat.subfields.filter(sub => sub.code === 'h').map(sub => sub.value);
-    const time = moment(catDate + catClock, ['YYYYMMDDHHmm'], true).format();
+    const time = moment(catDate + catClock, ['YYYYMMDDHHmm'], true).format('YYYY-MM-DDTHH:mm:ss');
 
     return {cataloger, time};
   }

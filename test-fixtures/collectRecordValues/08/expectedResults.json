@@ -44,24 +44,24 @@
   "CAT": {
     "latest": {
       "cataloger": "LOAD-ELAID",
-      "time": "2021-01-17T16:32:00+02:00"
+      "time": "2021-01-17T16:32:00"
     },
     "otherCats": [
       {
         "cataloger": "LOAD-ELAID",
-        "time": "2021-01-16T19:27:00+02:00"
+        "time": "2021-01-16T19:27:00"
       },
       {
         "cataloger": "LOAD-YSO",
-        "time": "2019-07-08T18:34:00+03:00"
+        "time": "2019-07-08T18:34:00"
       },
       {
         "cataloger": "CONV-RDA",
-        "time": "2016-03-19T08:14:00+02:00"
+        "time": "2016-03-19T08:14:00"
       },
       {
         "cataloger": "CONV-ISBD",
-        "time": "2012-04-01T20:44:00+03:00"
+        "time": "2012-04-01T20:44:00"
       }
     ]
   },
