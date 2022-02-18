@@ -1,7 +1,7 @@
 //import {getSubfieldValue/*, getSubfieldValues*/} from './collectFunctions/collectUtils';
 
 export function nvdebug(message, debug = undefined) {
-  console.info(message); // eslint-disable-line no-console
+  //console.info(message); // eslint-disable-line no-console
   if (debug) {
     debug(message);
     return;

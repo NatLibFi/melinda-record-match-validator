@@ -187,15 +187,15 @@ export function checkLeader(record1, record2, checkPreference = true) {
   const recordInfo1 = getRecordInfo(record1);
   const recordInfo2 = getRecordInfo(record2);
 
-  console.log(`checkLeade()`); // eslint-disable-line no-console
+  debug(`checkLeade()`); // eslint-disable-line no-console
 
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
-    console.log(`LDR: type of record failed!`); // eslint-disable-line no-console
+    debug(`LDR: type of record failed!`); // eslint-disable-line no-console
     return false;
   }
 
   if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
-    console.log(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
+    debug(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
     return false;
   }
 

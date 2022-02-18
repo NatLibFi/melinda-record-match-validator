@@ -22,7 +22,7 @@ export function get001(record) {
 export function get005(record) {
   const [f005Value] = record.get('005').map(field => field.value);
 
-  const time = moment(f005Value, ['YYYYMMDDHHmmss.S'], true).format();
+  const time = moment(f005Value, ['YYYYMMDDHHmmss.S'], true).format('YYYY-MM-DDTHH:mm:ss');
   debug('Last modification time: %o', time);
 
   return time;
