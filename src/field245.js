@@ -26,14 +26,11 @@
 *
 */
 
-//import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
 import {hasFields, getSubfield} from './collectFunctions/collectUtils';
 import {compareValueContent} from './compareFunctions/compareUtils';
 //import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
-
-//import {cloneAndNormalizeField} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/normalize';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
 

@@ -1,5 +1,4 @@
 //import createDebugLogger from 'debug';
-//import {fieldToString} from '@natlibfi/melinda-marc-record-merge-reducers/dist/reducers/utils';
 //import {nvdebug} from '../utils';
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:collectFields');
 

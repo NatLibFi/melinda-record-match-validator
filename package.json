@@ -38,7 +38,6 @@
   "dependencies": {
     "@natlibfi/marc-record": "^7.0.0",
     "@natlibfi/melinda-commons": "^12.0.2",
-    "@natlibfi/melinda-marc-record-merge-reducers": "git+https://github.com/NatLibFi/melinda-marc-record-merge-reducers-js.git#in-progress",
     "debug": "^4.3.3",
     "moment": "^2.29.1"
   },
