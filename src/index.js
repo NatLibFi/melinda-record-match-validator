@@ -49,7 +49,7 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index'
 
 function nvdebug(message) {
   debug(message);
-  console.info(message); // eslint-disable-line no-console
+  //console.info(message); // eslint-disable-line no-console
 }
 
 function checkExistence(record1, record2) {
