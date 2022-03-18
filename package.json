@@ -1,6 +1,6 @@
 {
   "name": "melinda-record-match-validator",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Validates if 2 records matched by melinda-record-matching can be merged and sets merge priority",
   "main": "dist/index.js",
   "repository": {
