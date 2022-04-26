@@ -11,7 +11,7 @@ export function getCAT(record) {
   const [latest, ...otherCats] = CATs.reverse(); // eslint-disable-line functional/immutable-data
 
   if (latest === undefined) {
-    return {latest: {cataloger: 'undefined', time: 'undefined'}, otherCats: []};
+    return {latest: {cataloger: 'undefined', time: 'undefined'}, otherCats: [], noCats: true};
   }
 
   debug('Latest CAT: %o', latest);
@@ -30,7 +30,6 @@ export function getCAT(record) {
   }
 }
 
-
 export function compareCAT(recordValuesA, recordValuesB) {
   const CATsA = recordValuesA.CAT;
   const CATsB = recordValuesB.CAT;
@@ -38,9 +37,17 @@ export function compareCAT(recordValuesA, recordValuesB) {
   return innerCompareCat(CATsA, CATsB);
 }
 
+// eslint-disable-next-line complexity, max-statements
 function innerCompareCat(CATsA, CATsB) {
-  debug('A: %o vs B: %o', CATsA, CATsB);
 
+  debug('Comparing CATs: A: %o vs B: %o', CATsA, CATsB);
+
+  // No need for analysing CATs if neither of records has CATs
+  if (CATsA.noCats && CATsB.noCats) {
+    return true;
+  }
+
+  // The latest CAT is same -> merging ok, no preference
   const hasSameLatestCAT = CATsA.latest.cataloger === CATsB.latest.cataloger && CATsA.latest.time === CATsB.latest.time;
   debug('Has same latest CAT: %o', hasSameLatestCAT);
 
@@ -48,39 +55,52 @@ function innerCompareCat(CATsA, CATsB) {
     return true;
   }
 
+  debug(`-- Comparing AtoB`);
   const resultA = analyzeCATs(CATsA, CATsB);
+  debug(`-- Comparing BtoA`);
   const resultB = analyzeCATs(CATsB, CATsA);
 
+  // Preference for record that has extra CATs after common CAT history
   if (resultA.isAheadOfOther && !resultB.isAheadOfOther) {
     return 'A';
   }
-
   if (!resultA.isAheadOfOther && resultB.isAheadOfOther) {
     return 'B';
   }
 
+  // If other record has no CATs, preference for record that has non-automatic CATs
+  if (CATsA.noCats && resultB.nonCompCats.length > 0) {
+    return 'B';
+  }
+  if (CATsB.noCats && resultA.nonCompCats.length > 0) {
+    return 'A';
+  }
+
+  // There is a common CAT somewhere in history
   if (resultA.commonOtherCats.length > 0) {
+
+    // Preference for record that has extra CATs after common CAT
     if (resultB.updatesAfterCommonCAT.length === 0 && resultA.updatesAfterCommonCAT.length > 0) {
       return 'A';
     }
-
     if (resultA.updatesAfterCommonCAT.length === 0 && resultB.updatesAfterCommonCAT.length > 0) {
       return 'B';
     }
 
+    // Preference for record that has non-automatic CATs
     if (resultA.nonCompCats.length > 0 && resultB.nonCompCats.length === 0) {
       return 'A';
     }
-
     if (resultB.nonCompCats.length > 0 && resultA.nonCompCats.length === 0) {
       return 'B';
     }
 
     // Both have X amount of uniq updates after common
-    return false; // shouldn't this be validation only?
+    return true; // CAT-comparison is for preference only
   }
 
-  return false; // shouldn't this be validation only?
+  return true; // CAT-comparison is for preference only
+
 
   function analyzeCATs(CATsCompareTo, CATsToCompare) {
     // Look for identical CATs:
@@ -105,7 +125,7 @@ function innerCompareCat(CATsA, CATsB) {
   }
 
   function catsContainNonImpOrLoad(latest, otherCats) {
-    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !(/^LOAD-\w*|^IMP-\w*|^CONV-\w*|^REM-\w*/u).test(cat.cataloger));
+    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !(/^LOAD-\w*|^IMP-\w*|^CONV-\w*|^REM-\w*|^undefined$/u).test(cat.cataloger));
   }
 
   function compareIfArrayContainsCat(catToCompare, catArray) {
