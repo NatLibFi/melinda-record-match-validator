@@ -27,7 +27,7 @@
 */
 
 import {expect} from 'chai';
-import {MarcRecord} from '@natlibfi/marc-record';
+//import {MarcRecord} from '@natlibfi/marc-record';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import validateRecordMatch from './index';
@@ -48,9 +48,9 @@ function callback({getFixture, enabled}) {
     return;
   }
 
-  const recordA = new MarcRecord(getFixture('inputRecordA.json'), {subfieldValues: false});
-  const recordB = new MarcRecord(getFixture('inputRecordB.json'), {subfieldValues: false});
+  const recordAObj = getFixture('inputRecordA.json');
+  const recordBObj = getFixture('inputRecordB.json');
   const expectedResults = getFixture('expectedResults.json');
-  const compareResults = validateRecordMatch(recordA, recordB);
+  const compareResults = validateRecordMatch(recordAObj, recordBObj);
   expect(compareResults).to.eql(expectedResults);
 }

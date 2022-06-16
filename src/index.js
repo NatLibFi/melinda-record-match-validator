@@ -28,6 +28,7 @@
 
 import createDebugLogger from 'debug';
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
+import {MarcRecord} from '@natlibfi/marc-record';
 
 import {checkSID} from './fieldSID';
 import {checkLOW} from './fieldLOW';
@@ -117,7 +118,12 @@ function makeComparisons(record1, record2, checkPreference = true) {
 }
 
 // {Record, source, yms}
-export default (recordA, recordB, checkPreference = true) => {
+export default (recordAObject, recordBObject, checkPreference = true) => {
+
+  // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
+  const recordA = new MarcRecord(recordAObject, {subfieldValues: false});
+  const recordB = new MarcRecord(recordBObject, {subfieldValues: false});
+
   // checkPreference should be multivalue:
   // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
   //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
