@@ -40,6 +40,10 @@
       "code": "8",
       "level": "Prepublication"
     },
+    "prepublicationLevel": {
+      "level": "TARKISTETTU ENNAKKOTIETO",
+      "code": "2"
+    },
     "typeOfRecord": {
       "code": "a",
       "level": "Language material"
