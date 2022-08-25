@@ -1,0 +1,4 @@
+{
+    "description": "Same as test 2, but now with two prepublications (expected encodingLevel changes)",
+    "enabled": true
+}
