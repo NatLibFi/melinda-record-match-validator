@@ -110,11 +110,46 @@ export function getRecordInfo(record) {
   const result = {
     typeOfRecord: mapTypeOfRecord(recordTypeRaw),
     bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw),
-    encodingLevel: mapEncodingLevel(recordCompletionLevel)
+    encodingLevel: mapEncodingLevel(recordCompletionLevel),
+    prepublicationLevel: getPrepublicationLevel(record, recordCompletionLevel)
   };
-  //nvdebug('NV WP1', debug);
-  //nvdebug(JSON.stringify(result), debug);
+
+  /*
+  if (recordCompletionLevel === '8') {
+    return addPrepublicationLevel(result, record);
+  }
+  */
+
+
   return result;
+
+  /*
+  function addPrepublicationLevel(result, record) {
+    const level = getPrepublicationLevel(record);
+    result.prepublicationLevel = level; // eslint-disable-line functional/immutable-data
+    return result;
+  }
+  */
+
+  function getPrepublicationLevel(record, encodingLevel = '8') {
+    if (encodingLevel !== '8') {
+      return {'code': '0', 'level': 'Not a prepublication'};
+    }
+    const fields = record.get(/^(?:500|594)$/u);
+    if (fields) {
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
+        return {'code': '1', 'level': 'Koneellisesti tuotettu tietue'};
+      }
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO')))) {
+        if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO')))) {
+          return {'code': '2', 'level': 'TARKISTETTU ENNAKKOTIETO'};
+        }
+        return {'code': '3', 'level': 'ENNAKKOTIETO'};
+      }
+      return {'code': '3', 'level': 'No prepublication type found'};
+    }
+  }
+
 }
 
 function rateValues(valueA, valueB, rateArray) {
@@ -124,14 +159,23 @@ function rateValues(valueA, valueB, rateArray) {
     return true;
   }
 
-  if (rateArray) { // Preference array, [0] is the best.
+  if (rateArray) { // Preference array, [0] is the best (=1).
     const ratingOfA = rateArray.indexOf(valueA.code) + 1;
     const ratingOfB = rateArray.indexOf(valueB.code) + 1;
 
-    if (ratingOfA === 0 || ratingOfB === 0) {
+    if (ratingOfA === 0) {
+      if (ratingOfB !== 0) {
+        debug('A\'s value not found in array. Return B');
+        return 'B';
+      }
       //debug('Value not found from array');
       return false;
     }
+    if (ratingOfB === 0) {
+      debug('B\'s value not found in array. Return A');
+      return 'A';
+    }
+
 
     if (ratingOfA < ratingOfB) {
       debug('A better: returning A');
@@ -149,7 +193,7 @@ function rateValues(valueA, valueB, rateArray) {
 function compareTypeOfRecord(a, b) {
   debug('Record A type: %o', a);
   debug('Record B type: %o', b);
-  nvdebug(`type of record: '${a}' vs '${b}', debug`);
+  //nvdebug(`type of record: '${a}' vs '${b}', debug`);
   return rateValues(a, b);
 }
 
@@ -160,10 +204,16 @@ function compareBibliographicalLevel(a, b) {
   return rateValues(a, b);
 }
 
-function compareEncodingLevel(a, b) {
+function compareEncodingLevel(a, b, prePubA, prePubB) {
   debug('Record A completion level: %o', a);
   debug('Record B completion level: %o', b);
-  // Best first, se encodingLevelHash above.
+  nvdebug(prePubA ? `Record A prepub level: ${JSON.stringify(prePubA)}` : 'N/A');
+  nvdebug(prePubB ? `Record B prepub level: ${JSON.stringify(prePubB)}` : 'N/A');
+
+  if (prePubA && prePubB && a.code === '8' && b.code === '8') { // Handle exception first: all prepublications are not equal!
+    return rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
+  }
+  // Best first, see encodingLevelHash above.
   const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
 
   return rateValues(a, b, rateArray);
@@ -176,10 +226,10 @@ export function compareLeader(recordValuesA, recordValuesB) {
   const result = {
     typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord, f000B.typeOfRecord),
     bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
-    encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel)
+    encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
   };
-  nvdebug('NV WP9', debug);// eslint-disable-line no-console
-  nvdebug(JSON.stringify(result), debug); // eslint-disable-line no-console
+  //nvdebug('NV WP9', debug);// eslint-disable-line no-console
+  //nvdebug(JSON.stringify(result), debug); // eslint-disable-line no-console
   return result;
 }
 
@@ -187,7 +237,7 @@ export function checkLeader(record1, record2, checkPreference = true) {
   const recordInfo1 = getRecordInfo(record1);
   const recordInfo2 = getRecordInfo(record2);
 
-  debug(`checkLeade()`); // eslint-disable-line no-console
+  debug(`checkLeader()`); // eslint-disable-line no-console
 
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
     debug(`LDR: type of record failed!`); // eslint-disable-line no-console
@@ -199,11 +249,12 @@ export function checkLeader(record1, record2, checkPreference = true) {
     return false;
   }
 
-  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel);
+  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel);
   if (encodingLevelPreference === false) {
     debug(`LDR: encoding level failed!`);
     return false;
   }
+
 
   return checkPreference ? encodingLevelPreference : true;
 
