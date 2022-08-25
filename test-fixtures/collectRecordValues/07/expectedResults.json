@@ -30,6 +30,10 @@
             "code": "4",
             "level": "Core level"
         },
+        "prepublicationLevel": {
+            "code": "0",
+            "level": "Not a prepublication"
+        },
         "typeOfRecord": {
             "code": "a",
             "level": "Language material"

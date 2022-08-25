@@ -30,6 +30,10 @@
             "code": " ",
             "level": "Full level"
         },
+        "prepublicationLevel": {
+            "code": "0",
+            "level": "Not a prepublication"
+        },
         "typeOfRecord": {
             "code": "a",
             "level": "Language material"

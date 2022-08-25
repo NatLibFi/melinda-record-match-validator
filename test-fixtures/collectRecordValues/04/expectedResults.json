@@ -30,6 +30,10 @@
       "code": "8",
       "level": "Prepublication level"
     },
+    "prepublicationLevel": {
+      "level": "ENNAKKOTIETO",
+      "code": "3"
+    },
     "typeOfRecord": {
       "code": "a",
       "level": "Language material"

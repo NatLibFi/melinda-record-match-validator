@@ -30,6 +30,10 @@
             "code": "3",
             "level": "Abbreviated level"
         },
+        "prepublicationLevel": {
+            "code": "0",
+            "level": "Not a prepublication"
+        },
         "typeOfRecord": {
             "code": "a",
             "level": "Language material"
