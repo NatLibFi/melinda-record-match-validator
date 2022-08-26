@@ -133,23 +133,28 @@ export function getRecordInfo(record) {
 
   function getPrepublicationLevel(record, encodingLevel = '8') {
     if (encodingLevel !== '8') {
-      return {'code': '0', 'level': 'Not a prepublication'};
+      return {code: '0', level: 'Not a prepublication'};
     }
+
     const fields = record.get(/^(?:500|594)$/u);
     if (fields) {
       if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
-        return {'code': '1', 'level': 'Koneellisesti tuotettu tietue'};
+        return {code: '1', level: 'Koneellisesti tuotettu tietue'};
       }
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO')))) {
-        if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO')))) {
-          return {'code': '2', 'level': 'TARKISTETTU ENNAKKOTIETO'};
-        }
-        return {'code': '3', 'level': 'ENNAKKOTIETO'};
-      }
-      return {'code': '3', 'level': 'No prepublication type found'};
-    }
-  }
 
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO')))) {
+        return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
+      }
+
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO')))) {
+        return {code: '3', level: 'ENNAKKOTIETO'};
+      }
+
+      return {code: '3', level: 'No prepublication type found'};
+    }
+
+    return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'}
+  }
 }
 
 function rateValues(valueA, valueB, rateArray) {
