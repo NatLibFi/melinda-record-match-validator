@@ -153,7 +153,7 @@ export function getRecordInfo(record) {
       return {code: '3', level: 'No prepublication type found'};
     }
 
-    return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'}
+    return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
   }
 }
 
