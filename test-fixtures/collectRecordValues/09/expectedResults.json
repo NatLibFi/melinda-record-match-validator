@@ -44,6 +44,16 @@
         "value": "000680737"
     },
     "005": "2019-07-11T23:22:05",
+    "008": {
+        "catalogingSource": {
+          "code": " ",
+          "level": "National bibliographical agency"
+        },
+        "publicationStatus": {
+          "code": "d",
+          "level": "Continuing resource ceased publication"
+        }
+      },
     "042": [
         "finb"
     ],

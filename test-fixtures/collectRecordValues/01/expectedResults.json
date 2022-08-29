@@ -44,6 +44,16 @@
     "value": "001590014"
   },
   "005": "2019-07-03T16:39:44",
+  "008": {
+    "catalogingSource": {
+      "code": "|",
+      "level": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
   "042": [],
   "CAT": {
     "latest": {

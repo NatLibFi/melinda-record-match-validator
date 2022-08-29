@@ -44,6 +44,16 @@
     "value": "016658170"
   },
   "005": "2020-11-12T09:54:09",
+  "008": {
+    "catalogingSource": {
+      "code": "|",
+      "level": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
   "042": [
     "finb",
     "foo",

@@ -52,6 +52,16 @@
     "value": "015906014"
   },
   "005": "2020-08-06T15:20:53",
+  "008": {
+    "catalogingSource": {
+      "code": " ",
+      "level": "National bibliographical agency"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
   "042": [
     "finbd"
   ],

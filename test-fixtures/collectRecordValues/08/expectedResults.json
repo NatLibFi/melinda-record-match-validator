@@ -44,6 +44,16 @@
     "value": "000141102"
   },
   "005": "2019-07-08T18:34:07",
+  "008": {
+    "catalogingSource": {
+      "code": "|",
+      "level": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "c",
+      "level": "Continuing resource currently published"
+    }
+  },
   "042": [],
   "CAT": {
     "latest": {

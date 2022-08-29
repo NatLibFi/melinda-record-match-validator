@@ -44,6 +44,16 @@
     "value": "001275159"
   },
   "005": "2020-11-04T00:46:08",
+  "008": {
+    "catalogingSource": {
+      "code": "c",
+      "level": "Cooperative cataloging program"
+    },
+    "publicationStatus": {
+      "code": "c",
+      "level": "Continuing resource currently published"
+    }
+  },
   "042": [],
   "CAT": {
     "latest": {

@@ -44,6 +44,16 @@
         "value": "004633754"
     },
     "005": "2002-03-21T15:48:55",
+    "008": {
+        "catalogingSource": {
+          "code": "|",
+          "level": "No attempt to code"
+        },
+        "publicationStatus": {
+          "code": "c",
+          "level": "Continuing resource currently published"
+        }
+    },
     "042": [],
     "CAT": {
         "latest": {

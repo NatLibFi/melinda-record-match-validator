@@ -44,6 +44,16 @@
     "value": "001500014"
   },
   "005": "2014-08-20T00:24:31",
+  "008": {
+    "catalogingSource": {
+      "code": "|",
+      "level": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
   "042": [],
   "CAT": {
     "latest": {
