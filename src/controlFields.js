@@ -1,6 +1,7 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
 import {compareValueContent} from './compareFunctions/compareUtils';
+import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
 
@@ -28,10 +29,60 @@ export function get005(record) {
   return time;
 }
 
+const publicationStatusHash = {
+  'b': 'No dates given; B.C. date involved',
+  'c': 'Continuing resource currently published',
+  'd': 'Continuing resource ceased publication',
+  'e': 'Detailed date',
+  'i': 'Inclusive dates of collection',
+  'k': 'Range of year of bulk of collection',
+  'm': 'Multiple dates',
+  'n': 'Dates unknown',
+  'p': 'Date of distribution/release/issue and production/recording session when different',
+  'q': 'Questionable date',
+  'r': 'Reprint/reissue date and original date',
+  's': 'Single known/probable date',
+  't': 'Publication date and copyright date',
+  'u': 'Continuing resource status unknown',
+  '|': 'No attempt to code'
+};
+
+const catalogingSourceHash = {
+  ' ': 'National bibliographical agency',
+  'c': 'Cooperative cataloging program',
+  'd': 'Other',
+  'u': 'Unknown',
+  '|': 'No attempt to code'
+};
+
 export function get008(record) {
   const [f008Value] = record.get('008').map(field => field.value);
 
-  return f008Value;
+  const publicationStatus = f008Value ? f008Value[6] : '|'; // eslint-disable-line prefer-destructuring
+  const catalogingSource = f008Value ? f008Value[39] : '|'; // eslint-disable-line prefer-destructuring
+  nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}`);
+  //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
+  //debug('Record type raw: %o', recordTypeRaw);
+  //debug('Record bib level raw: %o', recordBibLevelRaw);
+  //debug('Record completion level raw: %o', recordCompletionLevel);
+
+  const result = {
+    catalogingSource: mapCatalogingSource(catalogingSource),
+    publicationStatus: mapPublicationStatus(publicationStatus)
+
+  };
+  return result;
+
+  function mapPublicationStatus(publicationStatus) {
+    const tmp = publicationStatus in publicationStatusHash ? publicationStatus : '|';
+    return {level: publicationStatusHash[tmp], code: tmp};
+  }
+
+  function mapCatalogingSource(catalogingSource) {
+    const tmp = catalogingSource in catalogingSourceHash ? catalogingSource : '|';
+    return {level: catalogingSourceHash[tmp], code: tmp};
+  }
+
 }
 // Compare
 
@@ -89,30 +140,21 @@ export function compare005(recordValuesA, recordValuesB) {
   }
 }
 
+/*
 export function compare008(recordValuesA, recordValuesB) {
   const f008A = recordValuesA['008'];
   const f008B = recordValuesB['008'];
   return innerCompare008(f008A, f008B);
 }
+*/
 
 function innerCompare008(f008A, f008B) {
-  const goodA = valid008(f008A);
-  const goodB = valid008(f008B);
-  if (!goodA) {
-    if (!goodB) {
-      return f008A === f008B; // If it is same shit, I'll let it pass
-    }
-    return 'B';
-  }
-  if (!goodB) {
-    return 'A';
-  }
+  nvdebug(`A 008: ${JSON.stringify(f008A)}`);
+  nvdebug(`B 008: ${JSON.stringify(f008B)}`);
 
-  return mp06(f008A, f008B);
+  return mp06(f008A.publicationStatus.code, f008B.publicationStatus.code);
 
-  function mp06(a, b) {
-    const mp06A = a.charAt(6);
-    const mp06B = b.charAt(6);
+  function mp06(mp06A, mp06B) {
     if (mp06A === mp06B) {
       return true;
     }
@@ -120,7 +162,7 @@ function innerCompare008(f008A, f008B) {
     if (mp06A === 'r' || mp06B === 'r') {
       return false;
     }
-    // d < c or u < |
+    // d < (c or u) < |
     const continuingResource = compareContinuingResources(mp06A, mp06B);
     if (continuingResource !== false) {
       return continuingResource;
@@ -163,12 +205,6 @@ function innerCompare008(f008A, f008B) {
     return true;
   }
 
-  function valid008(f008) {
-    if (!f008 || f008.length !== 40) {
-      return false;
-    }
-    return true;
-  }
 }
 
 // check (collect&compare):
@@ -195,6 +231,7 @@ export function check005(record1, record2) {
 }
 
 export function check008(record1, record2) {
+  nvdebug(`CHECK 008`);
   const data1 = get008(record1);
   const data2 = get008(record2);
   return innerCompare008(data1, data2);
