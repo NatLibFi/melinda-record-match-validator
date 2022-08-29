@@ -1,5 +1,5 @@
 {
     "description": "Coverage improvements",
-    "comment": "Source has illegal value",
+    "comment": "Prepublication level differs, corrupt type of record in A, corrupt bib level in B",
     "enabled": true
 }
