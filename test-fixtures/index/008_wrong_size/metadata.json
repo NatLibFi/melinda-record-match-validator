@@ -1,4 +1,4 @@
 {
-    "description": "008/06: one has 'r' and the other one does not: Fail",
+    "description": "008/39: the too-short record does not have this -> loses?",
     "enabled": true
 }
