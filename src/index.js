@@ -121,7 +121,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
 // eslint-disable-next-line max-params
 export default ({recordAObject, recordBObject, checkPreference = true, record1External = {}, record2External = {}}) => {
-  debug(recordAObject);
+  //debug(recordAObject);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
   const record1 = new MarcRecord(recordAObject, {subfieldValues: false});

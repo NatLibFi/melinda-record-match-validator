@@ -212,21 +212,21 @@ function compareBibliographicalLevel(a, b) {
 }
 
 // eslint-disable-next-line max-params
-function compareEncodingLevel(a, b, prePubA, prePubB, recordTypeA, recordTypeB) {
+function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourceB) {
   debug('Record A completion level: %o', a);
   debug('Record B completion level: %o', b);
   nvdebug(prePubA ? `Record A prepub level: ${JSON.stringify(prePubA)}` : 'N/A', debug);
   nvdebug(prePubB ? `Record B prepub level: ${JSON.stringify(prePubB)}` : 'N/A', debug);
-  nvdebug(recordTypeA ? `Record A external type: ${JSON.stringify(recordTypeA)}` : 'N/A', debug);
-  nvdebug(recordTypeB ? `Record B external type: ${JSON.stringify(recordTypeB)}` : 'N/A', debug);
+  nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debug);
+  nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debug);
 
   if (prePubA && prePubB && a.code === '8' && b.code === '8') { // Handle exception first: all prepublications are not equal!
 
     const prePubValue = rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
 
     if (prePubValue === true) {
-      const valueA = {code: recordTypeA};
-      const valueB = {code: recordTypeB};
+      const valueA = {code: recordSourceA};
+      const valueB = {code: recordSourceB};
       const rateArray = ['incomingRecord', 'databaseRecord', undefined];
       return rateValues(valueA, valueB, rateArray);
     }
@@ -257,8 +257,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
 export function checkLeader({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
   const recordInfo1 = getRecordInfo(record1);
   const recordInfo2 = getRecordInfo(record2);
-  const recordType1 = record1External.recordType || undefined;
-  const recordType2 = record2External.recordType || undefined;
+  const recordSource1 = record1External.recordSource || undefined;
+  const recordSource2 = record2External.recordSource || undefined;
 
 
   debug(`checkLeader()`); // eslint-disable-line no-console
@@ -273,7 +273,7 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
     return false;
   }
 
-  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordType1, recordType2);
+  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordSource1, recordSource2);
   if (encodingLevelPreference === false) {
     debug(`LDR: encoding level failed!`);
     return false;
