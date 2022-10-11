@@ -1,0 +1,6 @@
+{
+    "description": "LDR/17 non prepublication smatch, extType should not matter",
+    "enabled": true,
+    "record1External": {"recordType": "databaseRecord"},
+    "record2External": {"recordType": "incomingRecord"}
+}

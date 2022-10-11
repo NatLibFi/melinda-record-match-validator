@@ -76,7 +76,7 @@ export function compare245(recordValuesA, recordValuesB) {
   return compare245data(f245A, f245B);
 }
 
-export function check245(record1, record2) {
+export function check245({record1, record2}) {
   const data1 = get245(record1);
   const data2 = get245(record2);
 

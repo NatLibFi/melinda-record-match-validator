@@ -1,0 +1,7 @@
+{
+    "action": "merge",
+    "preference": {
+        "name": "B won leader (validation and preference)",
+        "value": "B"
+    }
+}

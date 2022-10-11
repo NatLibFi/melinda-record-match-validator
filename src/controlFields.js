@@ -209,7 +209,7 @@ function innerCompare008(f008A, f008B) {
 
 // check (collect&compare):
 
-export function check005(record1, record2) {
+export function check005({record1, record2}) {
   const data1 = get005(record1);
   const data2 = get005(record2);
 
@@ -230,7 +230,7 @@ export function check005(record1, record2) {
   }
 }
 
-export function check008(record1, record2) {
+export function check008({record1, record2}) {
   nvdebug(`CHECK 008`);
   const data1 = get008(record1);
   const data2 = get008(record2);

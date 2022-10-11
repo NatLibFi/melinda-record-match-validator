@@ -106,7 +106,7 @@ function compareSIDValues(SIDsA, SIDsB) {
   }
 }
 
-export function checkSID(record1, record2) {
+export function checkSID({record1, record2}) {
   const fields1 = getSID(record1);
   const fields2 = getSID(record2);
   return compareSIDValues(fields1, fields2);

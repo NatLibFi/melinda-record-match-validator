@@ -53,7 +53,7 @@ function nvdebug(message) {
   //console.info(message); // eslint-disable-line no-console
 }
 
-function checkExistence(record1, record2) {
+function checkExistence({record1, record2}) {
   if (record1 === undefined || record2 === undefined) {
     return false;
   }
@@ -84,22 +84,22 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
-function runComparisonTasks(nth, record1, record2, checkPreference = true) {
-  const currResult = comparisonTasks[nth].function(record1, record2, checkPreference);
+function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
+  const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after a failure! No further tests are performed. Recursion means optimization :D
   if (nth === comparisonTasks.length - 1 || currResult === false) {
     return [currResult];
   }
-  return [currResult].concat(runComparisonTasks(nth + 1, record1, record2, checkPreference));
+  return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External}));
 }
 
-function makeComparisons(record1, record2, checkPreference = true) {
+function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
   // Start with sanity check(s):
   if (comparisonTasks.length === 0) {
     return true;
   }
   // Get results (up to the point of first failure):
-  const results = runComparisonTasks(0, record1, record2, checkPreference);
+  const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External});
   // If any test fails, return false.
   if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
     nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`);
@@ -118,11 +118,14 @@ function makeComparisons(record1, record2, checkPreference = true) {
 }
 
 // {Record, source, yms}
-export default (recordAObject, recordBObject, checkPreference = true) => {
+// record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
+// eslint-disable-next-line max-params
+export default ({recordAObject, recordBObject, checkPreference = true, record1External = {}, record2External = {}}) => {
+  debug(recordAObject);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
-  const recordA = new MarcRecord(recordAObject, {subfieldValues: false});
-  const recordB = new MarcRecord(recordBObject, {subfieldValues: false});
+  const record1 = new MarcRecord(recordAObject, {subfieldValues: false});
+  const record2 = new MarcRecord(recordBObject, {subfieldValues: false});
 
   // checkPreference should be multivalue:
   // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
@@ -132,7 +135,7 @@ export default (recordAObject, recordBObject, checkPreference = true) => {
   // New version: Make checks only to the point of first failure...
   // console.log('ENTER THE PROGRAM');
 
-  const result = makeComparisons(recordA, recordB, checkPreference);
+  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External});
   console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
   if (result.result === false) {
     return {action: false, preference: false, message: result.reason};

@@ -70,7 +70,7 @@ export function get773(record) { // collect
   return [...f773, ...f973];
 }
 
-export function check773(record1, record2) {
+export function check773({record1, record2}) {
   const data1 = get773(record1);
   const data2 = get773(record2);
   return compare773values(data1, data2);

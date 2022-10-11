@@ -1,0 +1,6 @@
+{
+    "description": "LDR/17: prepublication, external recordTypes, A: ic, B: db)",
+    "enabled": true,
+    "record1External": {"recordType": "incomingRecord"},
+    "record2External": {"recordType": "databaseRecord"}
+}
