@@ -52,10 +52,10 @@ function callback({getFixture, enabled, record1External, record2External}) {
     return;
   }
 
-  const recordAObject = getFixture('inputRecordA.json');
-  const recordBObject = getFixture('inputRecordB.json');
+  const record1Object = getFixture('inputRecordA.json') || getFixture('inputRecord1.json');
+  const record2Object = getFixture('inputRecordB.json') || getFixture('inputRecord2.json');
   const expectedResults = getFixture('expectedResults.json');
   //debug(recordAObject);
-  const compareResults = validateRecordMatch({recordAObject, recordBObject, record1External, record2External});
+  const compareResults = validateRecordMatch({record1Object, record2Object, record1External, record2External});
   expect(compareResults).to.eql(expectedResults);
 }
