@@ -61,6 +61,7 @@ const bibliographicLevelHash = { // LDR/07
   's': 'Serial'
 };
 
+// Note: if we have '2' for 'Koneellisesti tuotettu tietue' it should have lower prefence than here
 const encodingLevelHash = {
   ' ': 'Full level',
   '1': 'Full level, material not examined',
@@ -218,6 +219,7 @@ function compareEncodingLevel(a, b, prePubA, prePubB) {
   if (prePubA && prePubB && a.code === '8' && b.code === '8') { // Handle exception first: all prepublications are not equal!
     return rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
   }
+  // Note: For record import stuff we'll propably have 'Koneellisesti tuotettu tietue' encoding level as '2' - this needs to be reorganized!
   // Best first, see encodingLevelHash above.
   const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
 
