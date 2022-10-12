@@ -70,7 +70,7 @@ export function compareLOW(recordValuesA, recordValuesB) {
   return compareLOWValues(LOWsA, LOWsB);
 }
 
-export function checkLOW(record1, record2) {
+export function checkLOW({record1, record2}) {
   const low1 = getLOW(record1);
   const low2 = getLOW(record2);
   return compareLOWValues(low1, low2);

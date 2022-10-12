@@ -28,9 +28,12 @@
 
 import {expect} from 'chai';
 //import {MarcRecord} from '@natlibfi/marc-record';
+import createDebugLogger from 'debug';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import validateRecordMatch from './index';
+
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index:test');
 
 generateTests({
   callback,
@@ -42,15 +45,17 @@ generateTests({
   }
 });
 
-function callback({getFixture, enabled}) {
+
+function callback({getFixture, enabled, record1External, record2External}) {
   if (!enabled) {
-    console.log('TEST DISABLED!'); // eslint-disable-line no-console
+    debug('TEST DISABLED!');
     return;
   }
 
-  const recordAObj = getFixture('inputRecordA.json');
-  const recordBObj = getFixture('inputRecordB.json');
+  const record1Object = getFixture('inputRecordA.json') || getFixture('inputRecord1.json');
+  const record2Object = getFixture('inputRecordB.json') || getFixture('inputRecord2.json');
   const expectedResults = getFixture('expectedResults.json');
-  const compareResults = validateRecordMatch(recordAObj, recordBObj);
+  //debug(recordAObject);
+  const compareResults = validateRecordMatch({record1Object, record2Object, record1External, record2External});
   expect(compareResults).to.eql(expectedResults);
 }

@@ -139,7 +139,7 @@ function innerCompareCat(CATsA, CATsB) {
   }
 }
 
-export function checkCAT(record1, record2) {
+export function checkCAT({record1, record2}) {
   const data1 = getCAT(record1);
   const data2 = getCAT(record2);
 

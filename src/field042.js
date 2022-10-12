@@ -68,7 +68,7 @@ export function compare042(recordValuesA, recordValuesB) {
   //return compareArrayContent(f042A, f042B, true);
 }
 
-export function check042(record1, record2) {
+export function check042({record1, record2}) {
   const data1 = get042(record1);
   const data2 = get042(record2);
   return compare042Data(data1, data2);

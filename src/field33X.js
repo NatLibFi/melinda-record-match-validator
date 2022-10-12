@@ -94,15 +94,15 @@ function check33X(record1, record2, tag) {
   //return compare336ContentType(data1, data2);
 }
 
-export function check336(record1, record2) { //
+export function check336({record1, record2}) { //
   return check33X(record1, record2, '336');
 }
 
-export function check337(record1, record2) {
+export function check337({record1, record2}) {
   return check33X(record1, record2, '337');
 }
 
-export function check338(record1, record2) {
+export function check338({record1, record2}) {
   return check33X(record1, record2, '338');
 }
 

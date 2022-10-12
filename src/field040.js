@@ -34,7 +34,7 @@ import {getSubfieldValue, getSubfieldValues, hasField} from './collectFunctions/
 // However, NL has done English-only records for Nordenskiöld collection, so we'll prefer 'eng' over other languages.
 const scoreFor040b = {'fin': 4, 'swe': 3, 'mul': 2, 'eng': 1};
 
-export function check040b(record1, record2) {
+export function check040b({record1, record2}) {
   const score1 = recordScore040FieldLanguage(record1);
   const score2 = recordScore040FieldLanguage(record2);
   //nvdebug(`040$b scores: ${score1} vs ${score2}`);
@@ -55,7 +55,7 @@ export function check040b(record1, record2) {
   }
 }
 
-export function check040e(record1, record2) {
+export function check040e({record1, record2}) {
   const score1 = recordScore040FieldDescriptionConvention(record1);
   const score2 = recordScore040FieldDescriptionConvention(record2);
   //nvdebug(`040$e scores: ${score1} vs ${score2}`);

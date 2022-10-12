@@ -9,7 +9,7 @@ export function getPublisherFields(record) {
   }
 }
 
-export function checkPublisher(record1, record2) {
+export function checkPublisher({record1, record2}) {
   const score1 = publisherScore(getPublisherFields(record1));
   const score2 = publisherScore(getPublisherFields(record2));
   // Should we use more generic score1 > score2? Does not having a 260/264 field imply badness?
