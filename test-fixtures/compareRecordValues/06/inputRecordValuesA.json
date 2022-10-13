@@ -1,0 +1,80 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "African dental journal /"
+  },
+  "336": {
+    "types": [
+      "txt"
+    ]
+  },
+  "337": {
+    "types": [
+      "n"
+    ]
+  },
+  "338": {
+    "types": [
+      "nc"
+    ]
+  },
+  "773": [],
+  "000": {
+    "bibliographicLevel": {
+      "code": "s",
+      "level": "Serial"
+    },
+    "encodingLevel": {
+      "code": "4",
+      "level": "Core level"
+    },
+    "typeOfRecord": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "001275159"
+  },
+  "005": "2020-11-04T00:46:08+02:00",
+  "042": [],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-FIX",
+      "time": "2020-11-04T00:46:00+02:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "CONV-RDA",
+        "time": "2016-03-19T08:22:00+02:00"
+      },
+      {
+        "cataloger": "REM-HELKA",
+        "time": "2015-07-02T22:34:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-HELKA",
+        "time": "2014-06-09T23:20:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-HELKA",
+        "time": "2014-05-20T00:18:00+03:00"
+      },
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-02T08:19:00+03:00"
+      }
+    ]
+  },
+  "LOW": [],
+  "SID": [],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "0794-7348"
+    ],
+    "title": "African dental journal"
+  }
+}

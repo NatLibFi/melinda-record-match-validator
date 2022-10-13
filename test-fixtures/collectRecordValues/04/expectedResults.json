@@ -1,0 +1,80 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "remainderOfTitle": "undefined",
+    "title": "Kuinka äkäpussi kesytetään"
+  },
+  "336": {
+    "types": [
+      "txt"
+    ]
+  },
+  "337": {
+    "types": [
+      "c"
+    ]
+  },
+  "338": {
+    "types": [
+      "cr"
+    ]
+  },
+  "773": [],
+  "000": {
+    "bibliographicLevel": {
+      "code": "m",
+      "level": "Monograph/Item"
+    },
+    "encodingLevel": {
+      "code": "8",
+      "level": "Prepublication level"
+    },
+    "prepublicationLevel": {
+      "level": "ENNAKKOTIETO",
+      "code": "3"
+    },
+    "typeOfRecord": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "016658170"
+  },
+  "005": "2020-11-12T09:54:09",
+  "008": {
+    "catalogingSource": {
+      "code": "|",
+      "level": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
+  "042": [
+    "finb",
+    "foo",
+    "finbd"
+  ],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-KVP",
+      "time": "2020-11-19T12:39:00"
+    },
+    "otherCats": []
+  },
+  "LOW": [
+    "FIKKA"
+  ],
+  "SID": [],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "978-951-0-42533-6"
+    ],
+    "title": "Kuinka äkäpussi kesytetään"
+  }
+}

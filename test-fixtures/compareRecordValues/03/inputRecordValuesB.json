@@ -1,0 +1,79 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "De periodisering der geschiedenis /"
+  },
+  "336": {
+    "types": [
+      "txt"
+    ]
+  },
+  "337": {
+    "types": [
+      "n"
+    ]
+  },
+  "338": {
+    "types": [
+      "nc"
+    ]
+  },
+  "773": [],
+  "000": {
+    "bibliographicLevel": {
+      "code": "m",
+      "level": "Monograph/Item"
+    },
+    "encodingLevel": {
+      "code": "?",
+      "level": "CORRUPT"
+    },
+    "typeOfRecord": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "001500014"
+  },
+  "005": "2014-08-20T00:24:31+03:00",
+  "042": [],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-ID",
+      "time": "2019-08-29T22:22:00+03:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "CONV-RDA",
+        "time": "2016-03-19T08:31:00+02:00"
+      },
+      {
+        "cataloger": "LOAD-HELKA",
+        "time": "2014-08-20T00:24:00+03:00"
+      },
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-02T08:26:00+03:00"
+      }
+    ]
+  },
+  "LOW": [
+    "HELKA",
+    "VAARI",
+    "FIKKA"
+  ],
+  "SID": [
+    {
+      "database": "helka",
+      "id": "652264"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [],
+    "title": "De periodisering der geschiedenis"
+  }
+}

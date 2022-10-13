@@ -1,0 +1,146 @@
+{
+    "245": {
+        "nameOfPartInSectionOfAWork": "undefined",
+        "numberOfPartInSectionOfAWork": "undefined",
+        "remainderOfTitle": "undefined",
+        "title": "Kårkalendern"
+    },
+    "336": {
+        "types": [
+            "txt"
+        ]
+    },
+    "337": {
+        "types": [
+            "n"
+        ]
+    },
+    "338": {
+        "types": [
+            "nc"
+        ]
+    },
+    "773": [],
+    "000": {
+        "bibliographicLevel": {
+            "code": "s",
+            "level": "Serial"
+        },
+        "encodingLevel": {
+            "code": " ",
+            "level": "Full level"
+        },
+        "prepublicationLevel": {
+            "code": "0",
+            "level": "Not a prepublication"
+        },
+        "typeOfRecord": {
+            "code": "a",
+            "level": "Language material"
+        }
+    },
+    "001": {
+        "isMelindaId": true,
+        "value": "000680737"
+    },
+    "005": "2019-07-11T23:22:05",
+    "008": {
+        "catalogingSource": {
+          "code": " ",
+          "level": "National bibliographical agency"
+        },
+        "publicationStatus": {
+          "code": "d",
+          "level": "Continuing resource ceased publication"
+        }
+      },
+    "042": [
+        "finb"
+    ],
+    "CAT": {
+        "latest": {
+            "cataloger": "LOAD-ELAID",
+            "time": "2020-11-20T07:36:00"
+        },
+        "otherCats": [
+            {
+                "cataloger": "LOAD-ID",
+                "time": "2019-07-12T18:51:00"
+            },
+            {
+                "cataloger": "LOAD-YSO",
+                "time": "2019-07-11T23:22:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2018-01-18T20:17:00"
+            },
+            {
+                "cataloger": "LOAD-ALINK",
+                "time": "2017-09-02T18:30:00"
+            },
+            {
+                "cataloger": "CONV-RDA",
+                "time": "2016-03-19T08:39:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2015-12-25T04:05:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2014-12-27T14:16:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2014-01-30T05:00:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2014-01-21T23:50:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2014-01-18T17:57:00"
+            },
+            {
+                "cataloger": "LOAD-FIX",
+                "time": "2014-01-17T02:48:00"
+            },
+            {
+                "cataloger": "O4025",
+                "time": "2013-03-21T08:58:00"
+            },
+            {
+                "cataloger": "CONV-ISBD",
+                "time": "2012-04-02T05:57:00"
+            },
+            {
+                "cataloger": "LOAD-FENNI",
+                "time": "2011-05-11T23:10:00"
+            },
+            {
+                "cataloger": "O4025",
+                "time": "2010-10-12T11:50:00"
+            }
+        ]
+    },
+    "LOW": [
+        "OULA",
+        "FENNI",
+        "FIKKA"
+    ],
+    "SID": [
+        {
+            "database": "fenni",
+            "id": "181562"
+        }
+    ],
+    "commonIdentifiers": {
+        "deleted": false,
+        "standardIdentifiers": [
+            "0786-6917"
+        ],
+        "title": "Kårkalendern"
+    }
+}

@@ -1,0 +1,321 @@
+{
+  "leader": "00000cam a22002298i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "016658170"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20201112095409.0"
+    },
+    {
+      "tag": "008",
+      "value": "200507s2020 fi o fin"
+    },
+    {
+      "tag": "020",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "978-951-0-42533-6"
+        },
+        {
+          "code": "q",
+          "value": "EPUB"
+        }
+      ]
+    },
+    {
+      "tag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "FI-KV"
+        },
+        {
+          "code": "b",
+          "value": "fin"
+        },
+        {
+          "code": "e",
+          "value": "rda"
+        }
+      ]
+    },
+    {
+      "tag": "041",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "fin"
+        }
+      ]
+    },
+    {
+      "tag": "042",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "finb"
+        },
+        {
+          "code": "a",
+          "value": "foo"
+        },
+        {
+          "code": "a",
+          "value": "finbd"
+        }
+      ]
+    },
+    {
+      "tag": "084",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "83.2"
+        },
+        {
+          "code": "2",
+          "value": "ykl"
+        }
+      ]
+    },
+    {
+      "tag": "100",
+      "ind1": "1",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Shakespeare, William,"
+        },
+        {
+          "code": "e",
+          "value": "kirjoittaja."
+        },
+        {
+          "code": "g",
+          "value": "ENNAKKOTIETO"
+        }
+      ]
+    },
+    {
+      "tag": "240",
+      "ind1": " ",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "The Taming of the Shrew"
+        }
+      ]
+    },
+    {
+      "tag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Kuinka äkäpussi kesytetään."
+        }
+      ]
+    },
+    {
+      "tag": "264",
+      "ind1": " ",
+      "ind2": "1",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Helsinki :"
+        },
+        {
+          "code": "b",
+          "value": "WSOY,"
+        },
+        {
+          "code": "c",
+          "value": "2020."
+        }
+      ]
+    },
+    {
+      "tag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "1 verkkoaineisto"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "teksti"
+        },
+        {
+          "code": "b",
+          "value": "txt"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "tietokonekäyttöinen"
+        },
+        {
+          "code": "b",
+          "value": "c"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "verkkoaineisto"
+        },
+        {
+          "code": "b",
+          "value": "cr"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "490",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Shakespeare"
+        }
+      ]
+    },
+    {
+      "tag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "ENNAKKOTIETO / KIRJAVÄLITYS."
+        }
+      ]
+    },
+    {
+      "tag": "594",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "ENNAKKOTIETO / KIRJAVÄLITYS"
+        },
+        {
+          "code": "5",
+          "value": "FENNI"
+        }
+      ]
+    },
+    {
+      "tag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Tamminen, Leena,"
+        },
+        {
+          "code": "e",
+          "value": "kääntäjä."
+        },
+        {
+          "code": "g",
+          "value": "ENNAKKOTIETO"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-KVP"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20201119"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "1239"
+        }
+      ]
+    },
+    {
+      "tag": "LOW",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "FIKKA"
+        }
+      ]
+    }
+  ]
+}

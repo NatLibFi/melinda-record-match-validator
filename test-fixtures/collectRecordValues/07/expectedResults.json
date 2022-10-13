@@ -1,0 +1,116 @@
+{
+    "245": {
+        "nameOfPartInSectionOfAWork": "undefined",
+        "numberOfPartInSectionOfAWork": "undefined",
+        "remainderOfTitle": "undefined",
+        "title": "Studia Romanica Upsaliensia"
+    },
+    "336": {
+        "types": [
+            "txt"
+        ]
+    },
+    "337": {
+        "types": [
+            "n"
+        ]
+    },
+    "338": {
+        "types": [
+            "nc"
+        ]
+    },
+    "773": [],
+    "000": {
+        "bibliographicLevel": {
+            "code": "s",
+            "level": "Serial"
+        },
+        "encodingLevel": {
+            "code": "4",
+            "level": "Core level"
+        },
+        "prepublicationLevel": {
+            "code": "0",
+            "level": "Not a prepublication"
+        },
+        "typeOfRecord": {
+            "code": "a",
+            "level": "Language material"
+        }
+    },
+    "001": {
+        "isMelindaId": true,
+        "value": "003631149"
+    },
+    "005": "2019-07-04T06:19:26",
+    "008": {
+        "catalogingSource": {
+          "code": "|",
+          "level": "No attempt to code"
+        },
+        "publicationStatus": {
+            "code": "c",
+            "level": "Continuing resource currently published"
+        }
+      },
+    "042": [],
+    "CAT": {
+        "latest": {
+            "cataloger": "LOAD-ID",
+            "time": "2019-08-30T00:37:00"
+        },
+        "otherCats": [
+            {
+                "cataloger": "LOAD-YSO",
+                "time": "2019-07-05T17:10:00"
+            },
+            {
+                "cataloger": "LOAD-YSO",
+                "time": "2019-07-04T06:19:00"
+            },
+            {
+                "cataloger": "CONV-RDA",
+                "time": "2016-03-19T08:36:00"
+            },
+            {
+                "cataloger": "Y4004",
+                "time": "2015-10-01T12:25:00"
+            },
+            {
+                "cataloger": "LOAD-HELKA",
+                "time": "2014-08-09T02:15:00"
+            },
+            {
+                "cataloger": "LOAD-HELKA",
+                "time": "2014-05-08T22:57:00"
+            },
+            {
+                "cataloger": "CONV-ISBD",
+                "time": "2012-04-02T08:37:00"
+            }
+        ]
+    },
+    "LOW": [
+        "ALMA",
+        "HELKA",
+        "FIKKA"
+    ],
+    "SID": [
+        {
+            "database": "alma",
+            "id": "115399"
+        },
+        {
+            "database": "helka",
+            "id": "317503"
+        }
+    ],
+    "commonIdentifiers": {
+        "deleted": false,
+        "standardIdentifiers": [
+            "0562-3022"
+        ],
+        "title": "Studia Romanica Upsaliensia"
+    }
+}

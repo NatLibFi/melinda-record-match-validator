@@ -1,0 +1,114 @@
+{
+  "leader": "01092cas a22003494i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "001275158"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20201104004608.0"
+    },
+    {
+      "tag": "008",
+      "value": "010101c19879999nr |||p| ||||||||||0eng|c"
+    },
+    {
+      "tag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "African dental journal /"
+        },
+        {
+          "code": "c",
+          "value": "Federation of African Dental Associations, FADA."
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-ISBD"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20120402"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0819"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "LOAD-HELKA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20140520"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0018"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "NVOLK"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20150520"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0018"
+        }
+      ]
+    }
+  ]
+}

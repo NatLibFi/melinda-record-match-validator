@@ -1,0 +1,30 @@
+{
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": "A",
+    "title": false
+  },
+  "000": {
+    "bibliographicLevel": false,
+    "encodingLevel": "A",
+    "typeOfRecord": false
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": false
+  },
+  "005": "B",
+  "042": "B",
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": false
+  },
+  "336": false,
+  "337": false,
+  "338": "A",
+  "773": false,
+  "CAT": true,
+  "LOW": "B",
+  "SID": true
+}

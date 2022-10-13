@@ -1,0 +1,315 @@
+{
+  "leader": "00734nas a22002414i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "004543730"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20010626203607.0"
+    },
+    {
+      "tag": "007",
+      "value": "tu"
+    },
+    {
+      "tag": "008",
+      "value": "990324c19879999nr |||p| ||||||||||0mul||"
+    },
+    {
+      "tag": "022",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "0794-7348"
+        }
+      ]
+    },
+    {
+      "tag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "(FI-MELINDA)004543730"
+        }
+      ]
+    },
+    {
+      "tag": "041",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "mul"
+        }
+      ]
+    },
+    {
+      "tag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "African dental journal :"
+        },
+        {
+          "code": "b",
+          "value": "official publication of the Federation of African Dental Association, FADA."
+        }
+      ]
+    },
+    {
+      "tag": "246",
+      "ind1": "1",
+      "ind2": "1",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Journal dentaire africain."
+        }
+      ]
+    },
+    {
+      "tag": "260",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Lagos,"
+        },
+        {
+          "code": "c",
+          "value": "1987-"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "Nide"
+        },
+        {
+          "code": "a",
+          "value": "teksti"
+        },
+        {
+          "code": "b",
+          "value": "txt"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "CD-äänilevy"
+        },
+        {
+          "code": "a",
+          "value": "puhe"
+        },
+        {
+          "code": "b",
+          "value": "spw"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "Äänilevy"
+        },
+        {
+          "code": "a",
+          "value": "audio"
+        },
+        {
+          "code": "b",
+          "value": "s"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "Nide"
+        },
+        {
+          "code": "a",
+          "value": "käytettävissä ilman laitetta"
+        },
+        {
+          "code": "b",
+          "value": "n"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "Nide"
+        },
+        {
+          "code": "a",
+          "value": "nide"
+        },
+        {
+          "code": "b",
+          "value": "nc"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "3",
+          "value": "CD-äänilevy"
+        },
+        {
+          "code": "a",
+          "value": "äänilevy"
+        },
+        {
+          "code": "b",
+          "value": "sd"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "SID",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "c",
+          "value": "715992"
+        },
+        {
+          "code": "b",
+          "value": "vaari"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-ISBD"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20120402"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0905"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-RDA"
+        },
+        {
+          "code": "b"
+        },
+        {
+          "code": "c",
+          "value": "20160319"
+        },
+        {
+          "code": "l",
+          "value": "FIN01"
+        },
+        {
+          "code": "h",
+          "value": "0835"
+        }
+      ]
+    },
+    {
+      "tag": "LOW",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "VAARI"
+        }
+      ]
+    }
+  ]
+}

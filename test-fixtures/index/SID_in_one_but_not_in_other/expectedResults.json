@@ -1,0 +1,7 @@
+{
+    "action": "merge",
+    "preference": {
+        "name": "B won SID test (validation and preference)",
+        "value": "B"
+    }
+}

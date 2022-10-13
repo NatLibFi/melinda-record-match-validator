@@ -1,0 +1,88 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "Lippulaulu."
+  },
+  "336": {
+    "types": [
+      "prm"
+    ]
+  },
+  "337": {
+    "types": [
+      "s"
+    ]
+  },
+  "338": {
+    "types": []
+  },
+  "773": [
+    {
+      "enumerationAndFirstPage": "undefined",
+      "recordControlNumbers": ["(FI-MELINDA)015633197"],
+      "relatedParts": "Raita 7"
+    }
+  ],
+  "000": {
+    "bibliographicLevel": {
+      "code": "a",
+      "level": "Monographic component part"
+    },
+    "encodingLevel": {
+      "code": "8",
+      "level": "Prepublication"
+    },
+    "prepublicationLevel": {
+      "level": "ENNAKKOTIETO",
+      "code": "3"
+    },
+    "typeOfRecord": {
+      "code": "j",
+      "level": "Musical sound recording"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "015906014"
+  },
+  "005": "2020-08-06T15:20:53+03:00",
+  "042": [
+    "finbd"
+  ],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-FIX",
+      "time": "2020-08-06T15:20:00+03:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "LOAD-ID",
+        "time": "2019-08-31T01:14:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-ID",
+        "time": "2019-07-13T00:07:00+03:00"
+      },
+      {
+        "cataloger": "LOAD-VIOLA",
+        "time": "2019-06-06T09:50:00+03:00"
+      }
+    ]
+  },
+  "LOW": [
+    "VIOLA",
+    "FIKKA"
+  ],
+  "SID": [
+    {
+      "database": "viola",
+      "id": "881913"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [],
+    "title": "Lippulaulu"
+  }
+}

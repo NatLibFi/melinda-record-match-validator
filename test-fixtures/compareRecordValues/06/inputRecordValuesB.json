@@ -1,0 +1,71 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "title": "African dental journal :"
+  },
+  "336": {
+    "types": [
+      "spw"
+    ]
+  },
+  "337": {
+    "types": [
+      "s"
+    ]
+  },
+  "338": {
+    "types": [
+      "sd"
+    ]
+  },
+  "773": [],
+  "000": {
+    "bibliographicLevel": {
+      "code": "s",
+      "level": "Serial"
+    },
+    "encodingLevel": {
+      "code": "4",
+      "level": "Core level"
+    },
+    "typeOfRecord": {
+      "code": "a",
+      "level": "Language material"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "004543730"
+  },
+  "005": "2001-06-26T20:36:07+03:00",
+  "042": [],
+  "CAT": {
+    "latest": {
+      "cataloger": "CONV-RDA",
+      "time": "2016-03-19T08:35:00+02:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-02T09:05:00+03:00"
+      }
+    ]
+  },
+  "LOW": [
+    "VAARI"
+  ],
+  "SID": [
+    {
+      "database": "vaari",
+      "id": "715992"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [
+      "0794-7348"
+    ],
+    "title": "African dental journal"
+  }
+}
