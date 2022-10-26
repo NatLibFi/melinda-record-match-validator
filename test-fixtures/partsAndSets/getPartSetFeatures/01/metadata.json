@@ -1,0 +1,5 @@
+{
+    "description": "Return type:unknown if record has no partSetFeatures",
+    "expectedResults": {"type": "unknown"},
+    "skip": false
+}

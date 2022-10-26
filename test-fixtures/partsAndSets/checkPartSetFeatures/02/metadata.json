@@ -1,0 +1,7 @@
+{
+    "description": "Return false if both records have opposing (part/set) partSetFeature.type",
+    "recordValuesA": {"type": "part"},
+    "recordValuesB": {"type": "set"},
+    "expectedResults": false,
+    "skip": false
+}

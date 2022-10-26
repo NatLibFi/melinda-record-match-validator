@@ -1,0 +1,7 @@
+{
+    "description": "Return true if one record A has partSetFeature.type: unknown and record B has a defined partSetFeature.type",
+    "recordValuesA": {"type": "unknown"},
+    "recordValuesB": {"type": "set"},
+    "expectedResults": true,
+    "skip": false
+}

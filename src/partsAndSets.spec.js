@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2022 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -29,20 +29,20 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
+import {getPartSetFeatures, checkPartSetFeatures} from './partsAndSets';
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent} from './compareUtils';
 
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils:test');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets:test');
 const debugData = debug.extend('data');
 
-testValue();
-testArray();
+testGet();
+testCheck();
 
-function testValue() {
+function testGet() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareValue'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'getPartSetFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -50,32 +50,28 @@ function testValue() {
     }
   });
 
-  function callback({valueA, valueB, prefix = '', expectedResult}) {
-    debugData(`Comparing values A: ${valueA} and B ${valueB} (prefix: ${prefix})`);
-    const resultValue = compareValueContent(valueA, valueB, prefix);
-    debugData(`Result: ${resultValue}`);
-    debugData(`ExpectedResult: ${expectedResult}`);
-
-
-    expect(resultValue).to.eql(expectedResult);
+  function callback({getFixture, expectedResults}) {
+    const record = getFixture('record.json');
+    debugData(record);
+    const partSetFeatures = getPartSetFeatures(record);
+    expect(partSetFeatures).to.eql(expectedResults);
   }
 }
 
-function testArray() {
+function testCheck() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArray'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'checkPartSetFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
-      reader: READERS.JSON
+      reader: READERS.JSON1
     }
   });
 
-  function callback({arrayA, arrayB, expectedResult}) {
-
-    const result = compareArrayContent(arrayA, arrayB);
-
-    expect(result).to.eql(expectedResult);
+  function callback({recordValuesA, recordValuesB, expectedResults}) {
+    const checkResults = checkPartSetFeatures({partSetFeatures1: recordValuesA, partSetFeatures2: recordValuesB});
+    debug(`Result: ${checkResults}`);
+    expect(checkResults).to.eql(expectedResults);
   }
 }

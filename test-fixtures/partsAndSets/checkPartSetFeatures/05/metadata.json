@@ -1,0 +1,7 @@
+{
+    "description": "Return true if both records have same partSetFeature.type",
+    "recordValuesA": {"type": "part"},
+    "recordValuesB": {"type": "part"},
+    "expectedResults": true,
+    "skip": false
+}
