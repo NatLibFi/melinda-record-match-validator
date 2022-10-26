@@ -61,6 +61,7 @@ export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
 }
 
 const threshold = 0.6;
+// eslint-disable-next-line max-statements
 export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
     debug(`${prefix}Value A and B are "undefined"`);
@@ -121,7 +122,10 @@ export function compareValueContent(valueA, valueB, prefix = '') {
   }
 
   function normalizeStrings(stringValue) {
-    return stringValue
+    // decompose/precompose diacritics here
+    const compNormalizedStringValue = String(stringValue).normalize('NFD');
+
+    return compNormalizedStringValue
       .replace(/[^\w\s\p{Alphabetic}]/gu, '')
       .trim();
   }

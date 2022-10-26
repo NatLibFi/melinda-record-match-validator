@@ -1,0 +1,7 @@
+{
+    "description": "Return true when string values match",
+    "valueA": "FOO",
+    "valueB": "FOO",
+    "expectedResult": true,
+    "skip": false
+}

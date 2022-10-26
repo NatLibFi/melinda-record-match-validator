@@ -1,0 +1,7 @@
+{
+    "description": "Return true when string values differ just by their unicode decomp/precomp style",
+    "valueA": "Acción 2 Harjoituskirja.",
+    "valueB": "Acción 2 Harjoituskirja.",
+    "expectedResult": true,
+    "skip": false
+}
