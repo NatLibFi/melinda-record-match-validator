@@ -1,0 +1,7 @@
+{
+    "description": "Return false when string values do not match",
+    "valueA": "FOO",
+    "valueB": "BAR",
+    "expectedResult": false,
+    "skip": false
+}
