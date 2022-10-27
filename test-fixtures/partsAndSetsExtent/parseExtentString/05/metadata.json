@@ -1,0 +1,9 @@
+{
+    "description": "Handle + as ending punctuation",
+    "string": "1 CD + ",
+    "expectedResults": [
+        {"amount": "1", "unit": "CD"}
+    ],
+    "skip": false,
+    "only": false
+}

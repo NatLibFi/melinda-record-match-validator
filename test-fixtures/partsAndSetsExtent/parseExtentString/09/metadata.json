@@ -1,0 +1,12 @@
+{
+    "description": "FIX: Handle three level extent - currently creates parallel extents",
+    "string": "1 verkkoaineisto (1 tiedosto (3 h 2 min))",
+    "expectedResults": [
+        {"amount": "1", "unit": "verkkoaineisto"},
+        {"amount": "1", "unit": "tiedosto"},
+        {"amount": "3", "unit": "h"},
+        {"amount": "2", "unit": "min"}
+    ],
+    "skip": false,
+    "only": false
+}

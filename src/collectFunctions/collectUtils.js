@@ -62,3 +62,8 @@ export function getSubfieldValues(field, subfieldCode) {
   }
   return field.subfields.filter(sub => sub.code === subfieldCode).map(sub => sub.value);
 }
+
+export function stripPunc(value) {
+  return value.replace(/(?: [=;:/]|[.,])$/u, '');
+
+}

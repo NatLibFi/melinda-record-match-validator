@@ -1,0 +1,6 @@
+{
+    "description": "Split single extent clase to amount and unit",
+    "string": "2 vol. ",
+    "expectedResults": [{"amount": "2", "unit": "vol"}],
+    "skip": false
+}

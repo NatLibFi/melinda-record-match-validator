@@ -1,0 +1,12 @@
+{
+    "description": "FIX: Handle two level extent with several first level units (currently creates parallel extents)",
+    "string": "3 verkkoaineistoa (9 s, 3 s, 9 s) + ",
+    "expectedResults": [
+        {"amount": "3", "unit": "verkkoaineistoa"},
+        {"amount": "9", "unit": "s"},
+        {"amount": "3", "unit": "s"},
+        {"amount": "9", "unit": "s"}
+    ],
+    "skip": false,
+    "only": false
+}

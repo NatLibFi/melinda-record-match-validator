@@ -1,0 +1,7 @@
+{
+    "description": "Handle number as part of the unit-string",
+    "string": "2 MP3",
+    "expectedResults": [{"amount": "2", "unit": "MP3"}],
+    "skip": false,
+    "only": false
+}

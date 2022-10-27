@@ -1,0 +1,9 @@
+    {
+        "description": "IMPLEMENT LATER: Split extent clause correctly - handle []-brackets",
+        "string": "[9] s. :",
+        "expectedResults": [
+            {"amount": "9", "unit": "s"}
+        ],
+        "skip": true,
+        "only": false
+    }

@@ -29,21 +29,20 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getPartSetFeatures, checkPartSetFeatures} from './partsAndSets';
-import {MarcRecord} from '@natlibfi/marc-record';
-import createDebugLogger from 'debug';
+import {parseExtentString, getExtentType} from './partsAndSetsExtent';
+//import createDebugLogger from 'debug';
 
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets:test');
-const debugData = debug.extend('data');
+//const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets:test');
+//const debugData = debug.extend('data');
 
-testGet();
-testCheck();
+testParseExtentString();
+testGetExtentType();
 
-function testGet() {
+function testParseExtentString() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'getPartSetFeatures'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'parseExtentString'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -51,29 +50,30 @@ function testGet() {
     }
   });
 
-  function callback({getFixture, expectedResults}) {
-    const record = new MarcRecord(getFixture('record.json'), {subfieldValues: false});
-    debugData(record);
-    const partSetFeatures = getPartSetFeatures(record);
-    debugData(partSetFeatures);
-    expect(partSetFeatures.type).to.eql(expectedResults.type);
+  function callback({string, expectedResults}) {
+
+    const result = parseExtentString(string);
+    expect(result).to.eql(expectedResults);
   }
 }
 
-function testCheck() {
+
+function testGetExtentType() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'checkPartSetFeatures'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'getExtentType'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
-      reader: READERS.JSON1
+      reader: READERS.JSON
     }
   });
 
-  function callback({recordValuesA, recordValuesB, expectedResults}) {
-    const checkResults = checkPartSetFeatures({partSetFeatures1: recordValuesA, partSetFeatures2: recordValuesB});
-    debug(`Result: ${checkResults}`);
-    expect(checkResults).to.eql(expectedResults);
+  function callback({array, expectedResults}) {
+
+    const result = getExtentType(array);
+    expect(result).to.eql(expectedResults);
   }
 }
+
+

@@ -1,0 +1,7 @@
+{
+    "description": "FIX: Handle hyphen as part of the unit",
+    "string": "2 C-kasettia. ",
+    "expectedResults": [{"amount": "2", "unit": "C-kasettia"}],
+    "skip": false,
+    "only": false
+}

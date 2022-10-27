@@ -28,7 +28,7 @@
 
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
-import {hasFields, getSubfield} from './collectFunctions/collectUtils';
+import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils';
 import {compareValueContent} from './compareFunctions/compareUtils';
 //import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
 
@@ -50,11 +50,6 @@ export function get245(record) {
     const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
 
     return {title, remainderOfTitle, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
-  }
-
-  function stripPunc(value) {
-    return value.replace(/(?: [=;:/]|[.,])$/u, '');
-
   }
 }
 

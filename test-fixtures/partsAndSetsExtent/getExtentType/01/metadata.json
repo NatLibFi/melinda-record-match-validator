@@ -1,0 +1,12 @@
+{
+    "description": "Get type set from several extents",
+    "array": [
+        {"amount": "36", "unit": "sivua"},
+        {"amount": "3", "unit": "nidettä"},
+        {"amount": "13", "unit": "numeroimatonta"},
+        {"amount": "29", "unit": "lehteä"}
+    ],
+    "expectedResults": "set",
+    "skip": false,
+    "only": false
+}
