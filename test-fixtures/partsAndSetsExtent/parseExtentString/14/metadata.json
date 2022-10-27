@@ -1,5 +1,5 @@
 {
-    "description": "IMPLEMENT LATER: Normalize duration to one extent",
+    "description": "IMPLEMENT LATER: Normalize duration to a single unit",
     "string": "(2 h 16 min)",
     "expectedResults": [{"amount": "136", "unit": "min"}],
     "skip": true,
