@@ -3,5 +3,5 @@
     "string": "xv s",
     "expectedResults": [{"amount": "15", "unit": "s"}],
     "skip": true,
-    "only": true
+    "only": false
 }

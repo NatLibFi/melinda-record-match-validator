@@ -1,5 +1,5 @@
 {
-    "description": "Get type set from several extents",
+    "description": "Get type 'set' from several extents",
     "array": [
         {"amount": "36", "unit": "sivua"},
         {"amount": "3", "unit": "nidettä"},

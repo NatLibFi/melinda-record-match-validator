@@ -81,7 +81,8 @@ export function getExtentsForPartsAndSets(record) {
 export function getExtentType(extentArray) {
   debug(`Getting extentType from extentArray`);
   debugData(extentArray);
-  if (extentArray.some(extent => extent.amount > 1 && extent.unit.match(/vol|volumes|nidettä/iu))) {
+  const setTypeUnitsRegex = /vol|volumes|nidettä|osaa|band/iu;
+  if (extentArray.some(extent => extent.amount > 1 && extent.unit.match(setTypeUnitsRegex))) {
     return 'set';
   }
   return 'unknown';

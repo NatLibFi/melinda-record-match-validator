@@ -1,5 +1,5 @@
 {
-    "description": "Get type unknown for empty array",
+    "description": "Get type 'unknown' for empty array",
     "array": [],
     "expectedResults": "unknown",
     "skip": false,

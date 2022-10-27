@@ -1,0 +1,7 @@
+{
+    "description": "Get type 'unknown' if there's no set-type unit",
+    "array": [{"amount": "9", "unit": "pages"}],
+    "expectedResults": "unknown",
+    "skip": false,
+    "only": false
+}

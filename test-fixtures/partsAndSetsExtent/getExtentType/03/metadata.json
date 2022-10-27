@@ -1,5 +1,5 @@
 {
-    "description": "Get type 'part'' if amount is 1 even for a set-type unit",
+    "description": "Get type 'unknown' if amount is 1 even for a set-type unit",
     "array": [{"amount": "1", "unit": "vol"}],
     "expectedResults": "unknown",
     "skip": false,

@@ -1,5 +1,5 @@
 {
-    "description": "FIX: Split clause correctly - match unit-string correctly",
+    "description": "Split extent clause correctly when unit-string contains diacritics and/or hyphens correctly",
     "string": "1 CD-äänilevy (9 min 9 s)",
     "expectedResults": [
         {"amount": "1", "unit": "CD-äänilevy"},

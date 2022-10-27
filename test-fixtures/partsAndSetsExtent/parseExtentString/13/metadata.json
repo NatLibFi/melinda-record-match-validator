@@ -1,5 +1,5 @@
 {
-    "description": "IMPLEMENT LATER: Handle the same extent in two units - currently creates parallel extents",
+    "description": "FIX: Handle the same extent in two units - currently creates parallel extents",
     "string": "1 verkkoaineisto (9 KB, 9 sivua)",
     "expectedResults": [
         {"amount": "1", "unit": "verkkoaineisto"},
