@@ -1,0 +1,9 @@
+{
+    "description": "IMPLEMENT LATER: Handle Vol. 2-6 type extent (unit before amount, range as amount)",
+    "string": "Vol. 2-6 ; ",
+    "expectedResults": [
+        {"amount": "5", "unit": "Vol"}
+    ],
+    "skip": true,
+    "only": false
+}

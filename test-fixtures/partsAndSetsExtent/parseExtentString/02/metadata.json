@@ -1,0 +1,11 @@
+{
+    "description": "Split extent clause correctly when unit-string contains diacritics and/or hyphens correctly",
+    "string": "1 CD-äänilevy (9 min 9 s)",
+    "expectedResults": [
+        {"amount": "1", "unit": "CD-äänilevy"},
+        {"amount": "9", "unit": "min"},
+        {"amount": "9", "unit": "s"}
+    ],
+    "skip": true,
+    "only": false
+}

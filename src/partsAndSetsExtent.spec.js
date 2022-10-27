@@ -4,7 +4,7 @@
 *
 * Melinda record match validator modules for Javascript
 *
-* Copyright (C) 2022 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2020 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-record-match-validator
 *
@@ -29,20 +29,20 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent} from './compareUtils';
+import {parseExtentString, getExtentType} from './partsAndSetsExtent';
+//import createDebugLogger from 'debug';
 
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils:test');
-const debugData = debug.extend('data');
+//const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets:test');
+//const debugData = debug.extend('data');
 
-testValue();
-testArray();
+testParseExtentString();
+testGetExtentType();
 
-function testValue() {
+function testParseExtentString() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareValue'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'parseExtentString'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -50,21 +50,18 @@ function testValue() {
     }
   });
 
-  function callback({valueA, valueB, prefix = '', expectedResult}) {
-    debugData(`Comparing values A: ${valueA} and B ${valueB} (prefix: ${prefix})`);
-    const resultValue = compareValueContent(valueA, valueB, prefix);
-    debugData(`Result: ${resultValue}`);
-    debugData(`ExpectedResult: ${expectedResult}`);
+  function callback({string, expectedResults}) {
 
-
-    expect(resultValue).to.eql(expectedResult);
+    const result = parseExtentString(string);
+    expect(result).to.eql(expectedResults);
   }
 }
 
-function testArray() {
+
+function testGetExtentType() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArray'],
+    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'getExtentType'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -72,10 +69,11 @@ function testArray() {
     }
   });
 
-  function callback({arrayA, arrayB, expectedResult}) {
+  function callback({array, expectedResults}) {
 
-    const result = compareArrayContent(arrayA, arrayB);
-
-    expect(result).to.eql(expectedResult);
+    const result = getExtentType(array);
+    expect(result).to.eql(expectedResults);
   }
 }
+
+

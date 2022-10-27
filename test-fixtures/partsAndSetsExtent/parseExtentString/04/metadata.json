@@ -1,0 +1,10 @@
+{
+    "description": "FIX: Split two-level clause - currently split to two parallel clauses",
+    "string": "1 verkkoaineisto (9 sivua) ",
+    "expectedResults": [
+        {"amount": "1", "unit": "verkkoaineisto"},
+        {"amount": "9", "unit": "sivua"}
+    ],
+    "skip": false,
+    "only": false
+}

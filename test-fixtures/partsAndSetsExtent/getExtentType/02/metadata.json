@@ -1,0 +1,7 @@
+{
+    "description": "Get type 'set' from single extent",
+    "array": [{"amount": "2", "unit": "vol"}],
+    "expectedResults": "set",
+    "skip": false,
+    "only": false
+}

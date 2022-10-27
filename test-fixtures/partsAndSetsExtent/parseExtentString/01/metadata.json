@@ -1,0 +1,6 @@
+{
+    "description": "Split single extent clause to amount and unit",
+    "string": "2 vol. ",
+    "expectedResults": [{"amount": "2", "unit": "vol"}],
+    "skip": false
+}

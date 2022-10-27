@@ -1,0 +1,7 @@
+{
+    "description": "IMPLEMENT LATER: Handle comma-separated extents with same unit: amount is sum of amounts",
+    "string": "9, 12 s",
+    "expectedResults": [{"amount": "21", "unit": "s"}],
+    "skip": true,
+    "only": false
+}

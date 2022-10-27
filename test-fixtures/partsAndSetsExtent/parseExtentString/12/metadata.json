@@ -1,0 +1,7 @@
+{
+    "description": "Handle diacritics as part of the unit",
+    "string": "2 nidettä. ",
+    "expectedResults": [{"amount": "2", "unit": "nidettä"}],
+    "skip": false,
+    "only": false
+}

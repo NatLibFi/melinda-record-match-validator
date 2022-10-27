@@ -1,0 +1,5 @@
+{
+    "description": "Return type:set if record has partSetFeatures of type set",
+    "expectedResults": {"type": "set"},
+    "skip": false
+}

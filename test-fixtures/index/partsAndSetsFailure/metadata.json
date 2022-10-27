@@ -1,0 +1,6 @@
+{
+    "description": "Fail validation when partAndSets validation fails",
+    "enabled": true,
+    "skip": false,
+    "only": false
+}

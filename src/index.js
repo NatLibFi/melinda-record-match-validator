@@ -45,6 +45,7 @@ import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {checkLeader} from './leader';
 import {check005, check008} from './controlFields';
+import {compareRecordsPartSetFeatures} from './partsAndSets';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -80,7 +81,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': '040$b (language of cataloging) (preference only)', 'function': check040b},
   {'description': '040$e (description conventions) (preference only)', 'function': check040e},
   {'description': 'SID test (validation and preference)', 'function': checkSID},
-  {'description': '005 timestamp test (validation and preference)', 'function': check005}
+  {'description': '005 timestamp test (validation and preference)', 'function': check005},
+  {'description': 'Parts vs checks test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
@@ -136,7 +138,7 @@ export default ({record1Object, record2Object, checkPreference = true, record1Ex
   // console.log('ENTER THE PROGRAM');
 
   const result = makeComparisons({record1, record2, checkPreference, record1External, record2External});
-  console.log(`Comparison result: ${result.result}, reason: ${result.reason}`); // eslint-disable-line no-console
+  debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
   if (result.result === false) {
     return {action: false, preference: false, message: result.reason};
   }

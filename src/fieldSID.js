@@ -61,6 +61,7 @@ function compareSIDValues(SIDsA, SIDsB) {
 
   return compareSIDContent();
 
+  // eslint-disable-next-line max-statements
   function compareSIDContent() {
     if (SIDsB.length === 0) {
       if (SIDsA.length > 0) {
