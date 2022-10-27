@@ -32,8 +32,19 @@ import {getExtentsForPartsAndSets} from './partsAndSetsExtent';
 
 import createDebugLogger from 'debug';
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets:test');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets');
 const debugData = debug.extend('data');
+
+// This validator checks (or tries to check) that a record that describes a part of a set and a record
+// that describes the whole set won't be considered a valid match
+
+// We could also have functionalities for checking that records describing different parts of a set would
+// not be consisered a valid match
+
+// Use cases:
+//   * multi-part monographs described as parts or as whole sets
+//   * possible also different sets of mixed materials
+
 
 // Extract partSetFeatures from a record
 export function getPartSetFeatures(record) {
@@ -87,6 +98,7 @@ export function getPartSetFeatures(record) {
 }
 
 export function getTitleForPartsAndSets(record) {
+  // Both $n (number of part) and $p (name of part) are repeatable subfields - do we get all of the instances?
   const title = get245(record);
   const type = getTitleType(title);
 
@@ -94,12 +106,33 @@ export function getTitleForPartsAndSets(record) {
 }
 
 export function getTitleType(title) {
-  // If there is subfield $p or $n in the title field, we can assume that the record describes a part
-  const type = title.nameOfPartInSectionOfAWork !== 'undefined' || title.numberOfPartInSectionOfAWork !== 'undefined' ? 'part' : 'unknown';
+  debugData(title);
+
+  const {nameOfPartInSectionOfAWork, numberOfPartInSectionOfAWork} = title;
+
+  if (nameOfPartInSectionOfAWork === 'undefined' && numberOfPartInSectionOfAWork === 'undefined') {
+    return 'unknown';
+  }
+
+  // If we have subfield $n and its has not `1-2` type of content we can assume part
+  if (numberOfPartInSectionOfAWork && numberOfPartInSectionOfAWork !== 'undefined') {
+    debug(`We have number: ${numberOfPartInSectionOfAWork}`);
+    if (numberOfPartInSectionOfAWork.match(/\d+-\d+/u)) {
+      debug(`But number is of several parts: ${numberOfPartInSectionOfAWork}`);
+      return 'unknown';
+    }
+    return 'part';
+  }
+
+  // If we have a subgield $p we can assume part
+  if (nameOfPartInSectionOfAWork && nameOfPartInSectionOfAWork !== 'undefined') {
+    debug(`We have name: ${nameOfPartInSectionOfAWork}`);
+    return 'part';
+  }
 
   // we could also make guesses about numbers / roman numerals in the actual title subfields $a and $b
 
-  return type;
+  return 'unknown';
 }
 
 

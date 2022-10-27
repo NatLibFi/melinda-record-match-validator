@@ -29,7 +29,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getPartSetFeatures, checkPartSetFeatures} from './partsAndSets';
+import {getPartSetFeatures, checkPartSetFeatures, getTitleType} from './partsAndSets';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 
@@ -39,6 +39,7 @@ const debugData = debug.extend('data');
 
 testGet();
 testCheck();
+testTitle();
 
 function testGet() {
   generateTests({
@@ -75,5 +76,28 @@ function testCheck() {
     const checkResults = checkPartSetFeatures({partSetFeatures1: recordValuesA, partSetFeatures2: recordValuesB});
     debug(`Result: ${checkResults}`);
     expect(checkResults).to.eql(expectedResults);
+  }
+}
+
+function testTitle() {
+  testGetTitleType();
+
+  function testGetTitleType() {
+    generateTests({
+      callback,
+      path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'partsAndSetsTitle'],
+      useMetadataFile: true,
+      recurse: false,
+      fixura: {
+        reader: READERS.JSON1
+      }
+    });
+
+    function callback({title, expectedResults}) {
+      debug(`Testing: ${JSON.stringify(title)}`);
+      const type = getTitleType(title);
+      debug(`Result: ${type}`);
+      expect(type).to.eql(expectedResults);
+    }
   }
 }
