@@ -46,6 +46,7 @@ import {check773} from './field773';
 import {checkLeader} from './leader';
 import {check005, check008} from './controlFields';
 import {compareRecordsPartSetFeatures} from './partsAndSets';
+import {performAudioSanityCheck} from './sanityCheckAudio';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -68,7 +69,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
   {'description': '008 test (validation and preference)', 'function': check008},
-  {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher},
+  {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher}, // Bit high on the preference list, isn't it?
   {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (preference only)', 'function': check042},
   {'description': 'CAT test (preference only)', 'function': checkCAT},
@@ -82,6 +83,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': '040$e (description conventions) (preference only)', 'function': check040e},
   {'description': 'SID test (validation and preference)', 'function': checkSID},
   {'description': '005 timestamp test (validation and preference)', 'function': check005},
+  {'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck},
   {'description': 'Parts vs checks test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 
