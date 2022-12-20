@@ -47,6 +47,7 @@ import {checkLeader} from './leader';
 import {check005, check008} from './controlFields';
 import {compareRecordsPartSetFeatures} from './partsAndSets';
 import {performAudioSanityCheck} from './sanityCheckAudio';
+import {performDaisySanityCheck} from './sanityCheckDaisy';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -84,6 +85,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'SID test (validation and preference)', 'function': checkSID},
   {'description': '005 timestamp test (validation and preference)', 'function': check005},
   {'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck},
+  {'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck},
   {'description': 'Parts vs checks test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 

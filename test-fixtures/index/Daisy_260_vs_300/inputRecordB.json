@@ -1,0 +1,36 @@
+{
+  "leader": "01092cas a22003494i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "001275158"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20201104004608.0"
+    },
+    {
+      "tag": "008",
+      "value": "010101c19879999nr |||p| ||||||||||0eng|c"
+    },
+    {
+      "tag": "245",
+      "ind1": "0",
+      "ind2": "0",
+      "subfields": [
+        { "code": "a", "value": "African dental journal :" },
+        { "code": "b", "value": "Daisy-äänikirja vain lukemisesteisille /" },
+        { "code": "c", "value": "Federation of African Dental Associations, FADA." }
+      ]
+    },
+    { "tag": "300", "ind1": " ", "ind2": " ",
+      "subfields": [
+        { "code": "a", "value": "1 CD-ljudskiva, 2 CD-levyä (Daisy)"}
+      ]
+    }
+  ]
+}
