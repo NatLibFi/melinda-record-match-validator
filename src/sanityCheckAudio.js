@@ -59,12 +59,40 @@ function physicalDescriptionContainsLpAanilevy(fields300) {
   }
 }
 
-function getPhysicalDescription(record) {
+function isCdAanilevy(record) {
+  const fields007 = record.get(/^007$/u);
+  if (fields007.some(field => field.value.match(/^sd.f..g...m/u))) {
+    return true;
+  }
+
   const fields = record.get(/^300$/u);
+  if (physicalDescriptionContainsCdAanilevy(fields)) {
+    return true;
+  }
+
+  return false;
+}
+
+function isLpAanilevy(record) {
+  const fields007 = record.get(/^007$/u);
+  if (fields007.some(field => field.value.match(/^sd.[cd]..e...p/u))) {
+    return true;
+  }
+
+  const fields300 = record.get(/^300$/u);
+  if (physicalDescriptionContainsLpAanilevy(fields300)) {
+    return true;
+  }
+
+  return false;
+}
+
+function getPhysicalDescription(record) {
+  //const fields = record.get(/^300$/u);
 
   const result = {
-    containsCdAanilevy: physicalDescriptionContainsCdAanilevy(fields),
-    containsLpAanilevy: physicalDescriptionContainsLpAanilevy(fields)
+    containsCdAanilevy: isCdAanilevy(record),
+    containsLpAanilevy: isLpAanilevy(record)
   };
 
   return result;
