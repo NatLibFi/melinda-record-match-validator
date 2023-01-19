@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/NatLibFi/melinda-record-match-validator#readme",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "publishConfig": {
     "access": "public"
@@ -72,9 +72,7 @@
       [
         "@babel/preset-env",
         {
-          "targets": {
-            "node": "14"
-          }
+          "targets":  "maintained node versions"
         }
       ]
     ],
