@@ -125,7 +125,8 @@ function innerCompareCat(CATsA, CATsB) {
   }
 
   function catsContainNonImpOrLoad(latest, otherCats) {
-    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !(/^LOAD-\w*|^IMP-\w*|^IMP_\w*|^CONV-\w*|^REM-\w*|^FENNI-KV$|^undefined$/u).test(cat.cataloger));
+    const nonImpOrLoadRegex = /^LOAD-\w*|^LOAD_\w*|^IMP-\w*|^IMP_\w*|^CONV-\w*|^REM-\w*|^FENNI-KV$|^undefined$/u;
+    return [latest, ...otherCats].filter(cat => cat.cataloger !== undefined && !nonImpOrLoadRegex.test(cat.cataloger));
   }
 
   function compareIfArrayContainsCat(catToCompare, catArray) {

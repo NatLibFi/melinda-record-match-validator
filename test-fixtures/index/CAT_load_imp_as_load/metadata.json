@@ -1,0 +1,6 @@
+{
+    "description": "Ignore load/import/conversion CATs in CAT-comparison including CATs starting with 'LOAD_' ",
+    "enabled": true,
+    "skip": false,
+    "only": false
+}
