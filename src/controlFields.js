@@ -152,20 +152,17 @@ function innerCompare008(f008A, f008B) {
   nvdebug(`A 008: ${JSON.stringify(f008A)}`);
   nvdebug(`B 008: ${JSON.stringify(f008B)}`);
 
-  return mp06(f008A.publicationStatus.code, f008B.publicationStatus.code);
+  const mp06Result = mp06Comparison(f008A.publicationStatus.code, f008B.publicationStatus.code);
 
-  function mp06(mp06A, mp06B) {
+  if (mp06Result !== true) {
+    return mp06Result;
+  }
+
+  return true;
+
+  function mp06Comparison(mp06A, mp06B) {
     if (mp06A === mp06B) {
       return true;
-    }
-    // One is a reprint and the other one is not. Abort!
-    if (mp06A === 'r' || mp06B === 'r') {
-      return false;
-    }
-    // d < (c or u) < |
-    const continuingResource = compareContinuingResources(mp06A, mp06B);
-    if (continuingResource !== false) {
-      return continuingResource;
     }
     // 'b' (before Christ) is always wrong in our domain
     if (mp06A === 'b') {
@@ -181,6 +178,33 @@ function innerCompare008(f008A, f008B) {
     if (mp06B === '|') {
       return 'A';
     }
+
+
+    // d < (c or u) < |
+    const continuingResource = compareContinuingResources(mp06A, mp06B);
+    if (continuingResource !== false) {
+      return continuingResource;
+    }
+
+    // One is a reprint and the other one is not. Abort!
+    /*
+    if (mp06A === 'r' || mp06B === 'r') {
+      return false;
+    }
+    */
+
+    const scoreA = scoreSinglePart(mp06A);
+    const scoreB = scoreSinglePart(mp06B);
+
+    if (scoreA > -1 && scoreB > -1) {
+      if (scoreA > scoreB) {
+        return 'A';
+      }
+      if (scoreA < scoreB) {
+        return 'B';
+      }
+    }
+
     // Other rules?
     return true;
   }
@@ -207,6 +231,21 @@ function innerCompare008(f008A, f008B) {
 
 }
 
+function scoreSinglePart(mp06) {
+  if (mp06 === 'e' || mp06 === 'r' || mp06 === 't') { // single date
+    return 4;
+  }
+  if (mp06 === 'p' || mp06 === 's') { // single date
+    return 3;
+  }
+  if (mp06 === 'q') { // questionable date
+    return 2;
+  }
+  if (mp06 === 'n') { // unknown date
+    return 1;
+  }
+  return -1;
+}
 // check (collect&compare):
 
 export function check005({record1, record2}) {
