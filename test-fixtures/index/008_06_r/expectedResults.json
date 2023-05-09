@@ -1,5 +1,7 @@
 {
-    "action": false,
-    "message": "008 test (validation and preference) failed",
-    "preference": false
+    "action": "merge",
+    "preference": {
+        "name": "B won 008 test (preference only)",
+        "value": "B"
+    }
 }
