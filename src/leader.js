@@ -236,7 +236,7 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
   // Note: For record import stuff we'll propably have 'Koneellisesti tuotettu tietue' encoding level as '2' - this needs to be reorganized!
   // Best first, see encodingLevelHash above.
   // const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
-  const rateArray = [' ', '1', '3', '4', '5', '2', '7', 'u', 'z', '8']; // MET-145
+  const rateArray = [' ', '1', '4', '5', '2', '7', '3', 'u', 'z', '8']; // MET-145
 
   return rateValues(a, b, rateArray);
 }
