@@ -63,6 +63,9 @@ export function getPartSetFeatures(record) {
   //    * if record has only one ISBN with qualifier 'set' it's a record for a set
   //    * if record has two ISBNs with qualifiers 'Part 2' and 'set' it's a record for a part
 
+  // * StandardIdentifier amounts
+  //     * if record has several ISBNs it might be a set (discard cases where ISBNs are ISBN10 and ISBN13)
+
   // * Notefields 500/515
   //    * if record has field 500/515 with note 'ISBN for complete set', it's probably a record for a part - 020 has ISBN for the part
 
@@ -83,6 +86,12 @@ export function getPartSetFeatures(record) {
     if (allTypes.some((type) => type === 'part') && !allTypes.some((type) => type === 'set')) {
       return 'part';
     }
+
+    // If we have a set-type feature can assume the record is of type 'set'
+    if (allTypes.some((type) => type === 'set')) {
+      return 'set';
+    }
+
 
     // If we have both part-type features and set-type features, or no part-set-features assume we don't know the type
     return 'unknown';
@@ -115,6 +124,7 @@ export function getTitleType(title) {
   }
 
   // If we have subfield $n and its has not `1-2` type of content we can assume part
+  // Note: we can have a case where we have a set of subparts that contain a part ...
   if (numberOfPartInSectionOfAWork && numberOfPartInSectionOfAWork !== 'undefined') {
     debug(`We have number: ${numberOfPartInSectionOfAWork}`);
     if (numberOfPartInSectionOfAWork.match(/\d+-\d+/u)) {
@@ -147,7 +157,8 @@ export function compareRecordsPartSetFeatures({record1, record2}) {
 
 // Check two sets of partSetFeatures
 export function checkPartSetFeatures({partSetFeatures1, partSetFeatures2}) {
-
+  debugData(JSON.stringify(partSetFeatures1));
+  debugData(JSON.stringify(partSetFeatures2));
   if (partSetFeatures1.type === partSetFeatures2.type) {
     return true;
   }

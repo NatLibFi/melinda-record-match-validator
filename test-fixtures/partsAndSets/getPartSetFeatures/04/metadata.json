@@ -1,0 +1,6 @@
+{
+    "description": "Return type:set if record has partSetFeatures of both type set and type part (set of two books in part 1)",
+    "expectedResults": {"type": "set"},
+    "skip": false,
+    "only": false
+}
