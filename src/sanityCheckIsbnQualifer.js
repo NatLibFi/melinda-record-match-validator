@@ -26,6 +26,7 @@
 *
 */
 
+import ISBN from 'isbn3';
 //import createDebugLogger from 'debug';
 //import {nvdebug} from './utils';
 
@@ -50,11 +51,31 @@ function mapQualifier(value) {
 
 }
 
-function fieldsShareIsbn(field1, field2) {
-  const subfields1 = field1.subfields.filter(sf => sf.code === 'a');
-  const subfields2 = field2.subfields.filter(sf => sf.code === 'a');
+function normalizeIsbn(value) {
+  const normalizedValue = value.replace(/x/u, 'X').replace(/-/ug, '');
+  if (normalizedValue.length !== 10 && normalizedValue.length !== 13) {
+    return value; // Not an ISBN. Return the original value.
+  }
 
-  return subfields1.some(sf1 => subfields2.some(sf2 => sf1.value === sf2.value));
+  const auditResult = ISBN.audit(normalizedValue);
+  if (!auditResult.validIsbn) {
+    return value;
+  }
+
+  const parsedIsbn = ISBN.parse(normalizedValue);
+  //nvdebug(`NORM ${value} TO ${parsedIsbn.isIsbn10}`);
+  return parsedIsbn.isbn10;
+}
+
+function fieldsShareIsbn(field1, field2) {
+  const isbns1 = field1.subfields.filter(sf => sf.code === 'a').map(sf => normalizeIsbn(sf.value));
+  const isbns2 = field2.subfields.filter(sf => sf.code === 'a').map(sf => normalizeIsbn(sf.value));
+
+  //nvdebug(`1: ${isbns1.join(' -- ')}`);
+  //nvdebug(`2: ${isbns2.join(' -- ')}`);
+
+
+  return isbns1.some(v1 => isbns2.some(v2 => v1 === v2));
 
 }
 
