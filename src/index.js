@@ -49,6 +49,7 @@ import {compareRecordsPartSetFeatures} from './partsAndSets';
 import {performAudioSanityCheck} from './sanityCheckAudio';
 import {performDaisySanityCheck} from './sanityCheckDaisy';
 import {performDvdSanityCheck} from './sanityCheckDvd';
+import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 
@@ -88,6 +89,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck},
   {'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck},
   {'description': 'DVD vs Blu-Ray sanity check (validation only)', 'function': performDvdSanityCheck},
+  {'description': 'ISBN qualifier sanity check (validation only)', 'function': performIsbnQualifierCheck},
   {'description': 'Parts vs checks test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 

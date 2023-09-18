@@ -70,7 +70,7 @@ function fieldHaveConflictingQualifiers(field1, field2) {
 }
 
 function hasConflinctingQualifier(field, otherFields) {
-  const relevantOtherFields = otherFields.filter(f => fieldsShareIsbn(f, otherFields));
+  const relevantOtherFields = otherFields.filter(field2 => fieldsShareIsbn(field, field2));
   if (relevantOtherFields.length === 0) {
     return false; // No shared ISBNs -> no conflict
   }
@@ -86,7 +86,7 @@ function isRelevantField(field) {
 }
 
 
-export function performIsbnQualifiercheck({record1, record2}) {
+export function performIsbnQualifierCheck({record1, record2}) {
   const fields1 = record1.fields.filter(f => isRelevantField(f));
   const fields2 = record2.fields.filter(f => isRelevantField(f));
   if (fields1.length === 0 || fields2.length === 0) {
