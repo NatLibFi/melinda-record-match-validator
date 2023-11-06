@@ -1,0 +1,4 @@
+{
+    "description": "identical 020$a isbns, $q's with missing values or values that look different but mean same",
+    "enabled": true
+}
