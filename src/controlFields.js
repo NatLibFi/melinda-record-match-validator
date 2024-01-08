@@ -55,12 +55,108 @@ const catalogingSourceHash = {
   '|': 'No attempt to code'
 };
 
+const formOfItemHash = {
+  ' ': 'None of the following, expect for CF unknown or not specified',
+  'a': 'Microfilm',
+  'b': 'Microfiche',
+  'c': 'Microopaque',
+  'd': 'Large print',
+  'f': 'Braille',
+  'o': 'Online',
+  'p': 'Direct electronic',
+  'r': 'Regular print reproduction',
+  's': 'Electronic',
+  '|': 'No attempt to code'
+};
+
+
+function getTypeOfRecord(record) {
+  return record.leader[6];
+}
+
+
+function getBibliograpicLevel(record) {
+  return record.leader[7];
+}
+
+function bibliographicLevelIsBis(record) {
+  return ['b', 'i', 's'].includes(getBibliograpicLevel(record));
+}
+
+function containsField006FormOfMaterialS(record) {
+  const fields006 = record.get('006');
+  return fields006.some(field => field.value[0] === 's');
+}
+
+export function isBK(record) {
+  return ['a', 't'].includes(getTypeOfRecord(record)) && !bibliographicLevelIsBis(record);
+}
+
+
+export function isCF(record) {
+  if (getTypeOfRecord(record) !== 'm') {
+    return false;
+  }
+  if (!bibliographicLevelIsBis(record)) {
+    return true;
+  }
+
+  return containsField006FormOfMaterialS(record);
+}
+
+export function isCR(record) {
+  return ['a', 't'].includes(getTypeOfRecord(record)) && bibliographicLevelIsBis(record);
+}
+
+export function isMP(record) {
+  if (!['e', 'f'].includes(getTypeOfRecord(record))) {
+    return false;
+  }
+  if (!bibliographicLevelIsBis(record)) {
+    return true;
+  }
+  return containsField006FormOfMaterialS(record);
+}
+
+export function isMU(record) {
+  if (!['c', 'd', 'i', 'j'].includes(getTypeOfRecord(record))) {
+    return false;
+  }
+  if (!bibliographicLevelIsBis(record)) {
+    return true;
+  }
+  return containsField006FormOfMaterialS(record);
+}
+
+export function isMX(record) {
+  if (getTypeOfRecord(record) !== 'p') {
+    return false;
+  }
+  if (!bibliographicLevelIsBis(record)) {
+    return true;
+  }
+  return containsField006FormOfMaterialS(record);
+}
+
+export function isVM(record) {
+  if (!['g', 'k', 'o', 'r'].includes(getTypeOfRecord(record))) {
+    return false;
+  }
+
+  if (!bibliographicLevelIsBis(record)) {
+    return true;
+  }
+  return containsField006FormOfMaterialS(record);
+}
+
+
 export function get008(record) {
   const [f008Value] = record.get('008').map(field => field.value);
 
   const publicationStatus = f008Value ? f008Value[6] : '|'; // eslint-disable-line prefer-destructuring
   const catalogingSource = f008Value ? f008Value[39] : '|'; // eslint-disable-line prefer-destructuring
-  nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}`);
+  const formOfItem = getFormOfItem();
+  //nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}, ${formOfItem}`);
   //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
   //debug('Record type raw: %o', recordTypeRaw);
   //debug('Record bib level raw: %o', recordBibLevelRaw);
@@ -68,10 +164,20 @@ export function get008(record) {
 
   const result = {
     catalogingSource: mapCatalogingSource(catalogingSource),
-    publicationStatus: mapPublicationStatus(publicationStatus)
-
+    publicationStatus: mapPublicationStatus(publicationStatus),
+    formOfItem: mapFormOfItem(formOfItem)
   };
   return result;
+
+  function getFormOfItem() {
+    if (!f008Value) {
+      return '|';
+    }
+    if (isMP(record) || isVM(record)) {
+      return f008Value[29];
+    }
+    return f008Value[23];
+  }
 
   function mapPublicationStatus(publicationStatus) {
     const tmp = publicationStatus in publicationStatusHash ? publicationStatus : '|';
@@ -81,6 +187,12 @@ export function get008(record) {
   function mapCatalogingSource(catalogingSource) {
     const tmp = catalogingSource in catalogingSourceHash ? catalogingSource : '|';
     return {level: catalogingSourceHash[tmp], code: tmp};
+  }
+
+  function mapFormOfItem(formOfItemCode) {
+    const tmp = formOfItemCode in formOfItemHash ? formOfItemCode : '|';
+    nvdebug(`FOO ${tmp}`);
+    return {form: formOfItemHash[tmp], code: tmp};
   }
 
 }
