@@ -49,6 +49,10 @@
       "code": "|",
       "level": "No attempt to code"
     },
+    "formOfItem": {
+      "code": "r",
+      "form": "Regular print reproduction"
+    },
     "publicationStatus": {
       "code": "s",
       "level": "Single known/probable date"
