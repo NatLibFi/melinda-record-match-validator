@@ -29,7 +29,7 @@
 // Handle fields 336, 337 and 338.
 
 import createDebugLogger from 'debug';
-import {/*fieldHasValidNonRepeatableSubfield, */ nvdebug/*, subfieldSetsAreEqual*/} from './utils';
+//import {/*fieldHasValidNonRepeatableSubfield, */ nvdebug/*, subfieldSetsAreEqual*/} from './utils';
 import {hasFields, getSubfield} from './collectFunctions/collectUtils';
 import {compareArrayContent} from './compareFunctions/compareUtils';
 
@@ -40,7 +40,7 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field3
 function get33Xb(record, tag) {
   const types = hasFields(tag, record, getSubfield, 'b');
   debug('Field %s types: %o', tag, types);
-  nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debug);
+  //nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debug);
   return {types};
 }
 
