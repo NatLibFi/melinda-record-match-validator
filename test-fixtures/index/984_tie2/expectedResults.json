@@ -1,0 +1,7 @@
+{
+  "action": "merge",
+  "preference": {
+    "name": "A won CAT test (preference only)",
+    "value": "A"
+  }
+}
