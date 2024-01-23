@@ -57,6 +57,10 @@
       "code": " ",
       "level": "National bibliographical agency"
     },
+    "formOfItem": {
+      "code": "|",
+      "form": "No attempt to code"
+    },
     "publicationStatus": {
       "code": "s",
       "level": "Single known/probable date"
