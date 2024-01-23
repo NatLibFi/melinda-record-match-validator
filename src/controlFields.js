@@ -196,7 +196,6 @@ function innerCompare008(f008A, f008B) {
   return true;
 
   function isPairableFormOfItem(formOfItemA, formOfItemB) {
-    console.info(`ipfoi: '${formOfItemA}' vs '${formOfItemB}'`); // eslint-disable-line no-console
     // Prevent online and (local) direct electronic resources from merging:
     // (There are other conflincting values as well, but this is the case I se most likely to cause merges that should not happen.)
     if (formOfItemA === 'o' && formOfItemB === 'q') {
