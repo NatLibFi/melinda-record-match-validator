@@ -63,7 +63,7 @@ const formOfItemHash = {
   'd': 'Large print',
   'f': 'Braille',
   'o': 'Online',
-  'p': 'Direct electronic',
+  'q': 'Direct electronic',
   'r': 'Regular print reproduction',
   's': 'Electronic',
   '|': 'No attempt to code'
@@ -183,6 +183,10 @@ function innerCompare008(f008A, f008B) {
   nvdebug(`A 008: ${JSON.stringify(f008A)}`);
   nvdebug(`B 008: ${JSON.stringify(f008B)}`);
 
+  if (!isPairableFormOfItem(f008A.formOfItem.code, f008B.formOfItem.code)) {
+    return false;
+  }
+
   const mp06Result = mp06Comparison(f008A.publicationStatus.code, f008B.publicationStatus.code);
 
   if (mp06Result !== true) {
@@ -190,6 +194,19 @@ function innerCompare008(f008A, f008B) {
   }
 
   return true;
+
+  function isPairableFormOfItem(formOfItemA, formOfItemB) {
+    console.info(`ipfoi: '${formOfItemA}' vs '${formOfItemB}'`); // eslint-disable-line no-console
+    // Prevent online and (local) direct electronic resources from merging:
+    // (There are other conflincting values as well, but this is the case I se most likely to cause merges that should not happen.)
+    if (formOfItemA === 'o' && formOfItemB === 'q') {
+      return false;
+    }
+    if (formOfItemA === 'q' && formOfItemB === 'o') {
+      return false;
+    }
+    return true;
+  }
 
   function mp06Comparison(mp06A, mp06B) {
     if (mp06A === mp06B) {
@@ -301,7 +318,7 @@ export function check005({record1, record2}) {
 }
 
 export function check008({record1, record2}) {
-  nvdebug(`CHECK 008`);
+  //nvdebug(`CHECK 008`);
   const data1 = get008(record1);
   const data2 = get008(record2);
   return innerCompare008(data1, data2);
