@@ -1,7 +1,7 @@
 {
     "action": "merge",
     "preference": {
-        "name": "B won 008 test (preference only)",
+        "name": "B won 008 test (validation and preference)",
         "value": "B"
     }
 }
