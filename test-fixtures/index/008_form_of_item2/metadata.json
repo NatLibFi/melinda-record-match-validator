@@ -1,0 +1,5 @@
+{
+    "description": "Form of item (008/29 for visual material) test: fail since 'q' vs 'o'",
+    "enabled": true,
+    "only": false
+}
