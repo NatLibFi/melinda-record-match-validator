@@ -43,6 +43,7 @@ import {checkPublisher} from './field26X';
 import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
+import {check984} from './field984';
 import {checkLeader} from './leader';
 import {check005, check008} from './controlFields';
 import {compareRecordsPartSetFeatures} from './partsAndSets';
@@ -96,7 +97,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
-  // NB! Aborts after a failure! No further tests are performed. Recursion means optimization :D
+  // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
   if (nth === comparisonTasks.length - 1 || currResult === false) {
     return [currResult];
   }
@@ -104,7 +105,7 @@ function runComparisonTasks({nth, record1, record2, checkPreference = true, reco
 }
 
 function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
-  // Start with sanity check(s):
+  // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
     return true;
   }
@@ -117,7 +118,13 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   }
 
   if (!checkPreference) {
+    // This will also skip separate field 984 check
     return {result: true, reason: 'all tests passed'};
+  }
+
+  const field984Override = check984({record1, record2});
+  if (field984Override === 'A' || field984Override === 'B') {
+    return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
   }
 
   const decisionPoint = results.findIndex(val => val !== true && val !== false);
