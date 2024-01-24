@@ -1,631 +1,171 @@
 {
   "leader": "01803cas a22004934i 4500",
-  "fields": [
-    {
-      "tag": "001",
-      "value": "003631149"
-    },
-    {
-      "tag": "003",
-      "value": "FI-MELINDA"
-    },
-    {
-      "tag": "005",
-      "value": "20190704061926.0"
-    },
-    {
-      "tag": "007",
-      "value": "tu"
-    },
-    {
-      "tag": "008",
-      "value": "810608c19619999sw |||m| ||||||||||0mul||"
-    },
-    {
-      "tag": "022",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "0562-3022"
-        }
-      ]
-    },
-    {
-      "tag": "035",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "(FI-MELINDA)003631149"
-        }
-      ]
-    },
-    {
-      "tag": "041",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "mul"
-        }
-      ]
-    },
-    {
-      "tag": "080",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "8"
-        }
-      ]
-    },
-    {
-      "tag": "080",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "804.5"
-        }
-      ]
-    },
-    {
-      "tag": "245",
-      "ind1": "0",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Studia Romanica Upsaliensia /"
-        },
-        {
-          "code": "c",
-          "value": "Uppsala universitet."
-        }
-      ]
-    },
-    {
-      "tag": "260",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Uppsala,"
-        },
-        {
-          "code": "c",
-          "value": "1961-"
-        }
-      ]
-    },
-    {
-      "tag": "336",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "teksti"
-        },
-        {
-          "code": "b",
-          "value": "txt"
-        },
-        {
-          "code": "2",
-          "value": "rdacontent"
-        }
-      ]
-    },
-    {
-      "tag": "337",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "käytettävissä ilman laitetta"
-        },
-        {
-          "code": "b",
-          "value": "n"
-        },
-        {
-          "code": "2",
-          "value": "rdamedia"
-        }
-      ]
-    },
-    {
-      "tag": "338",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "nide"
-        },
-        {
-          "code": "b",
-          "value": "nc"
-        },
-        {
-          "code": "2",
-          "value": "rdacarrier"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "kausijulkaisut"
-        },
-        {
-          "code": "2",
-          "value": "yso/fin"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p1188"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "kielitiede"
-        },
-        {
-          "code": "2",
-          "value": "yso/fin"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p1631"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "sarjajulkaisut"
-        },
-        {
-          "code": "2",
-          "value": "yso/fin"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p20498"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "romaaniset kielet"
-        },
-        {
-          "code": "2",
-          "value": "yso/fin"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p2888"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "periodika"
-        },
-        {
-          "code": "2",
-          "value": "yso/swe"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p1188"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "språkvetenskap"
-        },
-        {
-          "code": "2",
-          "value": "yso/swe"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p1631"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "seriella publikationer"
-        },
-        {
-          "code": "2",
-          "value": "yso/swe"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p20498"
-        }
-      ]
-    },
-    {
-      "tag": "650",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "romanska språk"
-        },
-        {
-          "code": "2",
-          "value": "yso/swe"
-        },
-        {
-          "code": "0",
-          "value": "http://www.yso.fi/onto/yso/p2888"
-        }
-      ]
-    },
-    {
-      "tag": "710",
-      "ind1": "2",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Uppsala universitet."
-        }
-      ]
-    },
-    {
-      "tag": "760",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "t",
-          "value": "Acta Universitatis Upsaliensis"
-        }
-      ]
-    },
-    {
-      "tag": "760",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "t",
-          "value": "Acta Universitatis Upsaliensis"
-        },
-        {
-          "code": "x",
-          "value": "0346-5462"
-        }
-      ]
-    },
-    {
-      "tag": "SID",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "c",
-          "value": "115399"
-        },
-        {
-          "code": "b",
-          "value": "alma"
-        }
-      ]
-    },
-    {
-      "tag": "SID",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "c",
-          "value": "317503"
-        },
-        {
-          "code": "b",
-          "value": "helka"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "CONV-ISBD"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20120402"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0837"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-HELKA"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140508"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "2257"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-HELKA"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140809"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0215"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Y4004"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20151001"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1225"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "CONV-RDA"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20160319"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0836"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-YSO"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20190704"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0619"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-YSO"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20190705"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1710"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-ID"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20190830"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0037"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "ALMA"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "HELKA"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "FIKKA"
-        }
-      ]
-    }
+  "fields" : [
+    { "tag": "001", "value": "003631149" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20190704061926.0" },
+    { "tag": "007", "value": "tu" },
+    { "tag": "008", "value": "810608c19619999sw |||m| ||||||||||0mul||" },
+    { "tag": "022", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "0562-3022" }
+    ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "(FI-MELINDA)003631149" }
+    ]},
+    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "mul" }
+    ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "8" }
+    ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "804.5" }
+    ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [
+        { "code": "a", "value": "Studia Romanica Upsaliensia /" },
+        { "code": "c", "value": "Uppsala universitet." }
+    ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Uppsala," },
+        { "code": "c", "value": "1961-" }
+    ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "teksti" },
+        { "code": "b", "value": "txt" },
+        { "code": "2", "value": "rdacontent" }
+    ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "käytettävissä ilman laitetta" },
+        { "code": "b", "value": "n" },
+        { "code": "2", "value": "rdamedia" }
+    ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "nide" },
+        { "code": "b", "value": "nc" },
+        { "code": "2", "value": "rdacarrier" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "kausijulkaisut" },
+        { "code": "2", "value": "yso/fin" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p1188" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "kielitiede" },
+        { "code": "2", "value": "yso/fin" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p1631" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "sarjajulkaisut" },
+        { "code": "2", "value": "yso/fin" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p20498" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "romaaniset kielet" },
+        { "code": "2", "value": "yso/fin" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2888" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "periodika" },
+        { "code": "2", "value": "yso/swe" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p1188" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "språkvetenskap" },
+        { "code": "2", "value": "yso/swe" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p1631" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "seriella publikationer" },
+        { "code": "2", "value": "yso/swe" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p20498" }
+    ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "romanska språk" },
+        { "code": "2", "value": "yso/swe" },
+        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2888" }
+    ]},
+    { "tag": "710", "ind1": "2", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Uppsala universitet." }
+    ]},
+    { "tag": "760", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "t", "value": "Acta Universitatis Upsaliensis" }
+    ]},
+    { "tag": "760", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "t", "value": "Acta Universitatis Upsaliensis" },
+        { "code": "x", "value": "0346-5462" }
+    ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "115399" },
+        { "code": "b", "value": "alma" }
+    ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "317503" },
+        { "code": "b", "value": "helka" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-ISBD" },
+        { "code": "b" },
+        { "code": "c", "value": "20120402" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0837" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-HELKA" },
+        { "code": "b" },
+        { "code": "c", "value": "20140508" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2257" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-HELKA" },
+        { "code": "b" },
+        { "code": "c", "value": "20140809" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0215" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Y4004" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20151001" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1225" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-RDA" },
+        { "code": "b" },
+        { "code": "c", "value": "20160319" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0836" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-YSO" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190704" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0619" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-YSO" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190705" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1710" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-ID" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190830" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0037" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "ALMA" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "HELKA" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "FIKKA" }
+    ]}
   ]
 }

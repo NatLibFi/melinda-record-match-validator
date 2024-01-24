@@ -1,331 +1,92 @@
 {
-    "leader": "00918cam a22003017i 4500",
-    "fields": [
-      {
-        "tag": "001",
-        "value": "001500014"
-      },
-      {
-        "tag": "003",
-        "value": "FI-MELINDA"
-      },
-      {
-        "tag": "005",
-        "value": "20140820002431.0"
-      },
-      {
-        "tag": "008",
-        "value": "930101s1951    ne |||||||||||||||||dut||"
-      },
-      {
-        "tag": "035",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "(FI-MELINDA)001500014"
-          }
-        ]
-      },
-      {
-        "tag": "041",
-        "ind1": "0",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "dut"
-          }
-        ]
-      },
-      {
-        "tag": "100",
-        "ind1": "1",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "Pot, J. H. J. van der."
-          }
-        ]
-      },
-      {
-        "tag": "245",
-        "ind1": "1",
-        "ind2": "3",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "De periodisering der geschiedenis /"
-          },
-          {
-            "code": "c",
-            "value": "J. H. J. van der Pot ; met een voorwoord van J. M. Romein."
-          }
-        ]
-      },
-      {
-        "tag": "260",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "'s-Gravenhage,"
-          },
-          {
-            "code": "c",
-            "value": "1951."
-          }
-        ]
-      },
-      {
-        "tag": "300",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "c",
-            "value": "8:o"
-          }
-        ]
-      },
-      {
-        "tag": "336",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "teksti"
-          },
-          {
-            "code": "b",
-            "value": "txt"
-          },
-          {
-            "code": "2",
-            "value": "rdacontent"
-          }
-        ]
-      },
-      {
-        "tag": "337",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "käytettävissä ilman laitetta"
-          },
-          {
-            "code": "b",
-            "value": "n"
-          },
-          {
-            "code": "2",
-            "value": "rdamedia"
-          }
-        ]
-      },
-      {
-        "tag": "338",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "nide"
-          },
-          {
-            "code": "b",
-            "value": "nc"
-          },
-          {
-            "code": "2",
-            "value": "rdacarrier"
-          }
-        ]
-      },
-      {
-        "tag": "700",
-        "ind1": "1",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "Romein, J. M."
-          }
-        ]
-      },
-      {
-        "tag": "SID",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "c",
-            "value": "652264"
-          },
-          {
-            "code": "b",
-            "value": "helka"
-          }
-        ]
-      },
-      {
-        "tag": "SID",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "c",
-            "value": "444923"
-          },
-          {
-            "code": "b",
-            "value": "vaari"
-          }
-        ]
-      },
-      {
-        "tag": "CAT",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "CONV-ISBD"
-          },
-          {
-            "code": "b"
-          },
-          {
-            "code": "c",
-            "value": "20120402"
-          },
-          {
-            "code": "l",
-            "value": "FIN01"
-          },
-          {
-            "code": "h",
-            "value": "0826"
-          }
-        ]
-      },
-      {
-        "tag": "CAT",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "LOAD-HELKA"
-          },
-          {
-            "code": "b"
-          },
-          {
-            "code": "c",
-            "value": "20140820"
-          },
-          {
-            "code": "l",
-            "value": "FIN01"
-          },
-          {
-            "code": "h",
-            "value": "0024"
-          }
-        ]
-      },
-      {
-        "tag": "CAT",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "CONV-RDA"
-          },
-          {
-            "code": "b"
-          },
-          {
-            "code": "c",
-            "value": "20160319"
-          },
-          {
-            "code": "l",
-            "value": "FIN01"
-          },
-          {
-            "code": "h",
-            "value": "0831"
-          }
-        ]
-      },
-      {
-        "tag": "CAT",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "LOAD-ID"
-          },
-          {
-            "code": "b",
-            "value": "00"
-          },
-          {
-            "code": "c",
-            "value": "20190829"
-          },
-          {
-            "code": "l",
-            "value": "FIN01"
-          },
-          {
-            "code": "h",
-            "value": "2222"
-          }
-        ]
-      },
-      {
-        "tag": "LOW",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "HELKA"
-          }
-        ]
-      },
-      {
-        "tag": "LOW",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "VAARI"
-          }
-        ]
-      },
-      {
-        "tag": "LOW",
-        "ind1": " ",
-        "ind2": " ",
-        "subfields": [
-          {
-            "code": "a",
-            "value": "FIKKA"
-          }
-        ]
-      }
-    ]
-  }
+  "leader": "00918cam a22003017i 4500",
+  "fields" : [
+    { "tag": "001", "value": "001500014" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20140820002431.0" },
+    { "tag": "008", "value": "930101s1951    ne |||||r|||||||||||dut||" },
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "(FI-MELINDA)001500014" }
+    ]},
+    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "dut" }
+    ]},
+    { "tag": "100", "ind1": "1", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Pot, J. H. J. van der." }
+    ]},
+    { "tag": "245", "ind1": "1", "ind2": "3", "subfields" : [
+        { "code": "a", "value": "De periodisering der geschiedenis /" },
+        { "code": "c", "value": "J. H. J. van der Pot ; met een voorwoord van J. M. Romein." }
+    ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "'s-Gravenhage," },
+        { "code": "c", "value": "1951." }
+    ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "8:o" }
+    ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "teksti" },
+        { "code": "b", "value": "txt" },
+        { "code": "2", "value": "rdacontent" }
+    ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "käytettävissä ilman laitetta" },
+        { "code": "b", "value": "n" },
+        { "code": "2", "value": "rdamedia" }
+    ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "nide" },
+        { "code": "b", "value": "nc" },
+        { "code": "2", "value": "rdacarrier" }
+    ]},
+    { "tag": "700", "ind1": "1", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Romein, J. M." }
+    ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "652264" },
+        { "code": "b", "value": "helka" }
+    ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "444923" },
+        { "code": "b", "value": "vaari" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-ISBD" },
+        { "code": "b" },
+        { "code": "c", "value": "20120402" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0826" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-HELKA" },
+        { "code": "b" },
+        { "code": "c", "value": "20140820" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0024" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-RDA" },
+        { "code": "b" },
+        { "code": "c", "value": "20160319" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0831" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-ID" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190829" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2222" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "HELKA" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "VAARI" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "FIKKA" }
+    ]}
+  ]
+}

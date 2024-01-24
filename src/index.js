@@ -73,7 +73,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'existence (validation only)', 'function': checkExistence},
   {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
   {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher}, // Bit high on the preference list, isn't it?
-  {'description': '008 test (preference only)', 'function': check008},
+  {'description': '008 test (validation and preference)', 'function': check008},
   {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
   {'description': 'field 042: authentication code (preference only)', 'function': check042},
   {'description': 'CAT test (preference only)', 'function': checkCAT},

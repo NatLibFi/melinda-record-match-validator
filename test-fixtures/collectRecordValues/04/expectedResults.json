@@ -49,6 +49,10 @@
       "code": "|",
       "level": "No attempt to code"
     },
+    "formOfItem": {
+      "code": "|",
+      "form": "No attempt to code"
+    },
     "publicationStatus": {
       "code": "s",
       "level": "Single known/probable date"
