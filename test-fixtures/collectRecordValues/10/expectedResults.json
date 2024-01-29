@@ -49,6 +49,10 @@
       "code": "c",
       "level": "Cooperative cataloging program"
     },
+    "formOfItem": {
+      "code": " ",
+      "form": "None of the following, expect for CF unknown or not specified"
+    },
     "publicationStatus": {
       "code": "c",
       "level": "Continuing resource currently published"

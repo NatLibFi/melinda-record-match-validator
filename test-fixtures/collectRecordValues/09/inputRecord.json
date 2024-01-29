@@ -1,858 +1,231 @@
 {
   "leader": "02120cas a2200613 i 4500",
-  "fields": [
-    {
-      "tag": "001",
-      "value": "000680737"
-    },
-    {
-      "tag": "003",
-      "value": "FI-MELINDA"
-    },
-    {
-      "tag": "005",
-      "value": "20190711232205.0"
-    },
-    {
-      "tag": "007",
-      "value": "tu"
-    },
-    {
-      "tag": "008",
-      "value": "890621d19832006fi ar  | 5||| |   b0swe| "
-    },
-    {
-      "tag": "015",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "fx181562"
-        },
-        {
-          "code": "2",
-          "value": "skl"
-        }
-      ]
-    },
-    {
-      "tag": "022",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "0786-6917"
-        },
-        {
-          "code": "2",
-          "value": "a"
-        }
-      ]
-    },
-    {
-      "tag": "035",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "(FI-MELINDA)000680737"
-        }
-      ]
-    },
-    {
-      "tag": "040",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "FI-NL"
-        }
-      ]
-    },
-    {
-      "tag": "041",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "swe"
-        }
-      ]
-    },
-    {
-      "tag": "042",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "finb"
-        }
-      ]
-    },
-    {
-      "tag": "080",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "059"
-        },
-        {
-          "code": "2",
-          "value": "1974/fin/finuc-s"
-        },
-        {
-          "code": "9",
-          "value": "FENNI<KEEP>"
-        }
-      ]
-    },
-    {
-      "tag": "080",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "378.18"
-        },
-        {
-          "code": "2",
-          "value": "1974/fin/finuc-s"
-        },
-        {
-          "code": "9",
-          "value": "FENNI<KEEP>"
-        }
-      ]
-    },
-    {
-      "tag": "222",
-      "ind1": " ",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Kårkalendern"
-        }
-      ]
-    },
-    {
-      "tag": "245",
-      "ind1": "0",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Kårkalendern /"
-        },
-        {
-          "code": "c",
-          "value": "Åbo Akademis studentkår."
-        }
-      ]
-    },
-    {
-      "tag": "246",
-      "ind1": "1",
-      "ind2": "3",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Åbo Akademis kårkalender."
-        }
-      ]
-    },
-    {
-      "tag": "260",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Åbo :"
-        },
-        {
-          "code": "b",
-          "value": "Åbo Akademis studentkår,"
-        },
-        {
-          "code": "c",
-          "value": "1983-2006."
-        }
-      ]
-    },
-    {
-      "tag": "300",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "c",
-          "value": "15 cm"
-        }
-      ]
-    },
-    {
-      "tag": "310",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Kerran vuodessa."
-        }
-      ]
-    },
-    {
-      "tag": "336",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "teksti"
-        },
-        {
-          "code": "b",
-          "value": "txt"
-        },
-        {
-          "code": "2",
-          "value": "rdacontent"
-        }
-      ]
-    },
-    {
-      "tag": "337",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "käytettävissä ilman laitetta"
-        },
-        {
-          "code": "b",
-          "value": "n"
-        },
-        {
-          "code": "2",
-          "value": "rdamedia"
-        }
-      ]
-    },
-    {
-      "tag": "338",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "nide"
-        },
-        {
-          "code": "b",
-          "value": "nc"
-        },
-        {
-          "code": "2",
-          "value": "rdacarrier"
-        }
-      ]
-    },
-    {
-      "tag": "362",
-      "ind1": "0",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "1983/84-2006/2007."
-        }
-      ]
-    },
-    {
-      "tag": "655",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "kalenterit"
-        },
-        {
-          "code": "2",
-          "value": "slm/fin"
-        },
-        {
-          "code": "0",
-          "value": "http://urn.fi/URN:NBN:fi:au:slm:s342"
-        },
-        {
-          "code": "9",
-          "value": "FENNI<KEEP>"
-        }
-      ]
-    },
-    {
-      "tag": "655",
-      "ind1": " ",
-      "ind2": "7",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "kalendrar"
-        },
-        {
-          "code": "2",
-          "value": "slm/swe"
-        },
-        {
-          "code": "0",
-          "value": "http://urn.fi/URN:NBN:fi:au:slm:s342"
-        }
-      ]
-    },
-    {
-      "tag": "710",
-      "ind1": "2",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "Åbo Akademis studentkår."
-        },
-        {
-          "code": "0",
-          "value": "(FI-ASTERI-N)000007793"
-        }
-      ]
-    },
-    {
-      "tag": "780",
-      "ind1": "0",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "t",
-          "value": "Kalender / Åbo Akademis studentkår"
-        },
-        {
-          "code": "9",
-          "value": "FENNI<KEEP>"
-        }
-      ]
-    },
-    {
-      "tag": "SID",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "c",
-          "value": "181562"
-        },
-        {
-          "code": "b",
-          "value": "fenni"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "O4025"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20101012"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1150"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FENNI"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20110511"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "2310"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "CONV-ISBD"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20120402"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0557"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "O4025"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20130321"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0858"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140117"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0248"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140118"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1757"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140121"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "2350"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20140130"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0500"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20141227"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1416"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20151225"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0405"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "CONV-RDA"
-        },
-        {
-          "code": "b"
-        },
-        {
-          "code": "c",
-          "value": "20160319"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0839"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-ALINK"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20170902"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1830"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-FIX"
-        },
-        {
-          "code": "b",
-          "value": "30"
-        },
-        {
-          "code": "c",
-          "value": "20180118"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "2017"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-YSO"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20190711"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "2322"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-ID"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20190712"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "1851"
-        }
-      ]
-    },
-    {
-      "tag": "CAT",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "LOAD-ELAID"
-        },
-        {
-          "code": "b",
-          "value": "00"
-        },
-        {
-          "code": "c",
-          "value": "20201120"
-        },
-        {
-          "code": "l",
-          "value": "FIN01"
-        },
-        {
-          "code": "h",
-          "value": "0736"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "OULA"
-        }
-      ]
-    },
-    {
-      "tag": "906",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "a"
-        },
-        {
-          "code": "5",
-          "value": "FENNI"
-        }
-      ]
-    },
-    {
-      "tag": "935",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "201103c"
-        },
-        {
-          "code": "5",
-          "value": "FENNI"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "FENNI"
-        }
-      ]
-    },
-    {
-      "tag": "LOW",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "FIKKA"
-        }
-      ]
-    }
+  "fields" : [
+    { "tag": "001", "value": "000680737" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20190711232205.0" },
+    { "tag": "007", "value": "tu" },
+    { "tag": "008", "value": "890621d19832006fi ar  | 5||| |   b0swe| " },
+    { "tag": "015", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "fx181562" },
+        { "code": "2", "value": "skl" }
+    ]},
+    { "tag": "022", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "0786-6917" },
+        { "code": "2", "value": "a" }
+    ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "(FI-MELINDA)000680737" }
+    ]},
+    { "tag": "040", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "FI-NL" }
+    ]},
+    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "swe" }
+    ]},
+    { "tag": "042", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "finb" }
+    ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "059" },
+        { "code": "2", "value": "1974/fin/finuc-s" },
+        { "code": "9", "value": "FENNI<KEEP>" }
+    ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "378.18" },
+        { "code": "2", "value": "1974/fin/finuc-s" },
+        { "code": "9", "value": "FENNI<KEEP>" }
+    ]},
+    { "tag": "222", "ind1": " ", "ind2": "0", "subfields" : [
+        { "code": "a", "value": "Kårkalendern" }
+    ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [
+        { "code": "a", "value": "Kårkalendern /" },
+        { "code": "c", "value": "Åbo Akademis studentkår." }
+    ]},
+    { "tag": "246", "ind1": "1", "ind2": "3", "subfields" : [
+        { "code": "a", "value": "Åbo Akademis kårkalender." }
+    ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Åbo :" },
+        { "code": "b", "value": "Åbo Akademis studentkår," },
+        { "code": "c", "value": "1983-2006." }
+    ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "15 cm" }
+    ]},
+    { "tag": "310", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Kerran vuodessa." }
+    ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "teksti" },
+        { "code": "b", "value": "txt" },
+        { "code": "2", "value": "rdacontent" }
+    ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "käytettävissä ilman laitetta" },
+        { "code": "b", "value": "n" },
+        { "code": "2", "value": "rdamedia" }
+    ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "nide" },
+        { "code": "b", "value": "nc" },
+        { "code": "2", "value": "rdacarrier" }
+    ]},
+    { "tag": "362", "ind1": "0", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "1983/84-2006/2007." }
+    ]},
+    { "tag": "655", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "kalenterit" },
+        { "code": "2", "value": "slm/fin" },
+        { "code": "0", "value": "http://urn.fi/URN:NBN:fi:au:slm:s342" },
+        { "code": "9", "value": "FENNI<KEEP>" }
+    ]},
+    { "tag": "655", "ind1": " ", "ind2": "7", "subfields" : [
+        { "code": "a", "value": "kalendrar" },
+        { "code": "2", "value": "slm/swe" },
+        { "code": "0", "value": "http://urn.fi/URN:NBN:fi:au:slm:s342" }
+    ]},
+    { "tag": "710", "ind1": "2", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "Åbo Akademis studentkår." },
+        { "code": "0", "value": "(FI-ASTERI-N)000007793" }
+    ]},
+    { "tag": "780", "ind1": "0", "ind2": "0", "subfields" : [
+        { "code": "t", "value": "Kalender / Åbo Akademis studentkår" },
+        { "code": "9", "value": "FENNI<KEEP>" }
+    ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "c", "value": "181562" },
+        { "code": "b", "value": "fenni" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "O4025" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20101012" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1150" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FENNI" },
+        { "code": "b" },
+        { "code": "c", "value": "20110511" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2310" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-ISBD" },
+        { "code": "b" },
+        { "code": "c", "value": "20120402" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0557" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "O4025" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20130321" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0858" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b" },
+        { "code": "c", "value": "20140117" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0248" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b" },
+        { "code": "c", "value": "20140118" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1757" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b" },
+        { "code": "c", "value": "20140121" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2350" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b" },
+        { "code": "c", "value": "20140130" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0500" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20141227" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1416" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20151225" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0405" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "CONV-RDA" },
+        { "code": "b" },
+        { "code": "c", "value": "20160319" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0839" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-ALINK" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20170902" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1830" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-FIX" },
+        { "code": "b", "value": "30" },
+        { "code": "c", "value": "20180118" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2017" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-YSO" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190711" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "2322" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-ID" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20190712" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "1851" }
+    ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "LOAD-ELAID" },
+        { "code": "b", "value": "00" },
+        { "code": "c", "value": "20201120" },
+        { "code": "l", "value": "FIN01" },
+        { "code": "h", "value": "0736" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "OULA" }
+    ]},
+    { "tag": "906", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "a" },
+        { "code": "5", "value": "FENNI" }
+    ]},
+    { "tag": "935", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "201103c" },
+        { "code": "5", "value": "FENNI" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "FENNI" }
+    ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
+        { "code": "a", "value": "FIKKA" }
+    ]}
   ]
 }

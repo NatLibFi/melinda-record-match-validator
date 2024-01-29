@@ -55,12 +55,27 @@ const catalogingSourceHash = {
   '|': 'No attempt to code'
 };
 
+const formOfItemHash = {
+  ' ': 'None of the following, expect for CF unknown or not specified',
+  'a': 'Microfilm',
+  'b': 'Microfiche',
+  'c': 'Microopaque',
+  'd': 'Large print',
+  'f': 'Braille',
+  'o': 'Online',
+  'q': 'Direct electronic',
+  'r': 'Regular print reproduction',
+  's': 'Electronic',
+  '|': 'No attempt to code'
+};
+
 export function get008(record) {
   const [f008Value] = record.get('008').map(field => field.value);
 
   const publicationStatus = f008Value ? f008Value[6] : '|'; // eslint-disable-line prefer-destructuring
   const catalogingSource = f008Value ? f008Value[39] : '|'; // eslint-disable-line prefer-destructuring
-  nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}`);
+  const formOfItem = getFormOfItem();
+  //nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}, ${formOfItem}`);
   //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
   //debug('Record type raw: %o', recordTypeRaw);
   //debug('Record bib level raw: %o', recordBibLevelRaw);
@@ -68,10 +83,20 @@ export function get008(record) {
 
   const result = {
     catalogingSource: mapCatalogingSource(catalogingSource),
-    publicationStatus: mapPublicationStatus(publicationStatus)
-
+    publicationStatus: mapPublicationStatus(publicationStatus),
+    formOfItem: mapFormOfItem(formOfItem)
   };
   return result;
+
+  function getFormOfItem() {
+    if (!f008Value) {
+      return '|';
+    }
+    if (record.isMP() || record.isVM()) {
+      return f008Value[29];
+    }
+    return f008Value[23];
+  }
 
   function mapPublicationStatus(publicationStatus) {
     const tmp = publicationStatus in publicationStatusHash ? publicationStatus : '|';
@@ -81,6 +106,12 @@ export function get008(record) {
   function mapCatalogingSource(catalogingSource) {
     const tmp = catalogingSource in catalogingSourceHash ? catalogingSource : '|';
     return {level: catalogingSourceHash[tmp], code: tmp};
+  }
+
+  function mapFormOfItem(formOfItemCode) {
+    const tmp = formOfItemCode in formOfItemHash ? formOfItemCode : '|';
+    nvdebug(`FOO ${tmp}`);
+    return {form: formOfItemHash[tmp], code: tmp};
   }
 
 }
@@ -152,6 +183,10 @@ function innerCompare008(f008A, f008B) {
   nvdebug(`A 008: ${JSON.stringify(f008A)}`);
   nvdebug(`B 008: ${JSON.stringify(f008B)}`);
 
+  if (!isPairableFormOfItem(f008A.formOfItem.code, f008B.formOfItem.code)) {
+    return false;
+  }
+
   const mp06Result = mp06Comparison(f008A.publicationStatus.code, f008B.publicationStatus.code);
 
   if (mp06Result !== true) {
@@ -159,6 +194,18 @@ function innerCompare008(f008A, f008B) {
   }
 
   return true;
+
+  function isPairableFormOfItem(formOfItemA, formOfItemB) {
+    // Prevent online and (local) direct electronic resources from merging:
+    // (There are other conflincting values as well, but this is the case I se most likely to cause merges that should not happen.)
+    if (formOfItemA === 'o' && formOfItemB === 'q') {
+      return false;
+    }
+    if (formOfItemA === 'q' && formOfItemB === 'o') {
+      return false;
+    }
+    return true;
+  }
 
   function mp06Comparison(mp06A, mp06B) {
     if (mp06A === mp06B) {
@@ -270,7 +317,7 @@ export function check005({record1, record2}) {
 }
 
 export function check008({record1, record2}) {
-  nvdebug(`CHECK 008`);
+  //nvdebug(`CHECK 008`);
   const data1 = get008(record1);
   const data2 = get008(record2);
   return innerCompare008(data1, data2);
