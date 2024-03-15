@@ -1,4 +1,5 @@
 {
     "description": "336$a subfields have legal values, but they differ",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

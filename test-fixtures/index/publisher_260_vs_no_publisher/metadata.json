@@ -1,4 +1,5 @@
 {
     "description": "Non-Rda 260 is not better than no publisher, is it?",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

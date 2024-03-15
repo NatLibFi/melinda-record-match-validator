@@ -42,11 +42,7 @@ generateTests({
   }
 });
 
-function callback({getFixture, enabled}) {
-  if (!enabled) {
-    console.log('TEST DISABLED!'); // eslint-disable-line no-console
-    return;
-  }
+function callback({getFixture}) {
   const record = new MarcRecord(getFixture('inputRecord.json'), {subfieldValues: false});
   const expectedResults = getFixture('expectedResults.json');
   const recordValues = collectRecordValues(record);

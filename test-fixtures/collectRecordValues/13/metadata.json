@@ -1,5 +1,6 @@
 {
     "description": "13: improve coverage",
     "comment" : "LDR/17='8' ja 594 'koneellisesti tuotettu tietue'",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

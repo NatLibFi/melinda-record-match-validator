@@ -1,4 +1,5 @@
 {
     "description": "264 is better than 260",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

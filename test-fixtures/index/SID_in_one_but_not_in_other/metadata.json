@@ -1,4 +1,5 @@
 {
     "description": "B has SID field, and A does not: B wins",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

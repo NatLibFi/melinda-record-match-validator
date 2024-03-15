@@ -1,5 +1,6 @@
 {
     "description": "Form of item (008/23 for book) test: fail since 'o' vs 'q'",
-    "enabled": true,
+    "skip": false,
+    "only": false,
     "only": false
 }

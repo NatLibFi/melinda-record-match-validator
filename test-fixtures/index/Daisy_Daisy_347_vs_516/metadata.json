@@ -1,4 +1,5 @@
 {
     "description": "Draw (yes-yes): 347 $a äänitiedosto $b... vs 516 $a Daisy-äänitiedosto",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

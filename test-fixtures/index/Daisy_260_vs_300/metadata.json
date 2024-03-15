@@ -1,4 +1,5 @@
 {
     "description": "Draw (yes-yes): 260$b Celia vs 300$a 2 CD-levyä (Daisy)",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

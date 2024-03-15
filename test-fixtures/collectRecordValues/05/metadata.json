@@ -1,4 +1,5 @@
 {
     "description": "5: Should handle monograph / item - Prepublication level - New - no CATs",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

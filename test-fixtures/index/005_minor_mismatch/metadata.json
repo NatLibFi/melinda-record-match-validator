@@ -1,4 +1,5 @@
 {
     "description": "Tie: same year in 005",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

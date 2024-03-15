@@ -1,6 +1,5 @@
 {
   "description": "Record with (non-load/import/conversion) CATs wins. Two 984$a ALWAYS-PREFER-IN-MERGE cancel each other out",
-  "enabled": true,
   "only": false,
   "skip": false
 }

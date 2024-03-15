@@ -1,4 +1,5 @@
 {
     "description": "008/39: the too-short record does not have this -> loses?",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

@@ -1,6 +1,7 @@
 {
     "description": "LDR/17: prepublication, external recordSources, A: ic, B: db)",
-    "enabled": true,
+    "skip": false,
+    "only": false,
     "record1External": {"recordSource": "incomingRecord"},
     "record2External": {"recordSource": "databaseRecord"}
 }

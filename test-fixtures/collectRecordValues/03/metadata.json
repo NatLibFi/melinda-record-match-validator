@@ -1,4 +1,5 @@
 {
     "description": "Should handle monographic component part",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

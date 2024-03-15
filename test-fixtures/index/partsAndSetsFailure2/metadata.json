@@ -1,6 +1,7 @@
 {
     "description": "Fail validation when partAndSets validation fails: parts of part 1",
-    "enabled": true,
+    "skip": false,
+    "only": false,
     "skip": false,
     "only": false
 }

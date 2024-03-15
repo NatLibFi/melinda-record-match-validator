@@ -1,4 +1,5 @@
 {
     "description": "300$a CD vs NULL",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

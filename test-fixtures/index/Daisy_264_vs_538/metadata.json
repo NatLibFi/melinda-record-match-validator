@@ -1,4 +1,5 @@
 {
     "description": "Draw (yes-yes): 264$b Celia vs 538$a /Daisy/",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

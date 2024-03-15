@@ -1,4 +1,5 @@
 {
     "description": "008/06: 'd' vs 'c'",
-    "enabled": true
+    "skip": false,
+    "only": false
 }
