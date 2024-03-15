@@ -1,0 +1,5 @@
+{
+    "description": "Should handle record with missing f336/empty f300a/empty 020a",
+    "skip": false,
+    "only": true
+}

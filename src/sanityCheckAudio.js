@@ -38,7 +38,7 @@ function physicalDescriptionContainsCdAanilevy(fields300) {
     if (subfield.code !== 'a') {
       return false;
     }
-    if (subfield.value.match(/CD-(?:äänilevy|ljudskiv)/ui)) {
+    if (subfield.value?.match(/CD-(?:äänilevy|ljudskiv)/ui)) {
       return true;
     }
     return false;
@@ -52,7 +52,7 @@ function physicalDescriptionContainsLpAanilevy(fields300) {
     if (subfield.code !== 'a') {
       return false;
     }
-    if (subfield.value.match(/LP-(?:äänilevy|ljudskiv)/ui)) {
+    if (subfield.value?.match(/LP-(?:äänilevy|ljudskiv)/ui)) {
       return true;
     }
     return false;
