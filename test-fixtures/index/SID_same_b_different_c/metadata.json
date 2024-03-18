@@ -1,4 +1,5 @@
 {
     "description": "Same SID $b, different $c subfield",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

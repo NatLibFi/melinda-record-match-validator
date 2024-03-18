@@ -1,4 +1,5 @@
 {
     "description": "008/06: 't' vs 'q'",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

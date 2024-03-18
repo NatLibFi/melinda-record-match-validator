@@ -1,4 +1,5 @@
 {
-    "description": "CAT fork #2: Both carry on after shared element",
-    "enabled": false
+    "description": "SKIPPED - CHECK TEST: CAT fork #2: Both carry on after shared element",
+    "skip": true,
+    "only": false
 }

@@ -1,4 +1,5 @@
 {
     "description": "11: priority: 3, id: 246720, rec_id: 004543730, system_message: issn-tuplia, created: 2015-12-10 19:34:18",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

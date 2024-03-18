@@ -1,4 +1,5 @@
 {
     "description": "LOW tag comparison: FIKKA > HELKA",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

@@ -1,4 +1,5 @@
 {
     "description": "Draw (yes-yes): 028$b Celia vs 245$b Daisy-äänikirja vain lukemisesteisille",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

@@ -1,6 +1,7 @@
 {
     "description": "Record with (non-load/import/conversion) CATs should win",
-    "enabled": true,
+    "skip": false,
+    "only": false,
     "skip": false,
     "only": false
 }

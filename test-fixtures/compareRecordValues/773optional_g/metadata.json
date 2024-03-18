@@ -1,4 +1,5 @@
 {
     "description": "Compare test: optional 773$g",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

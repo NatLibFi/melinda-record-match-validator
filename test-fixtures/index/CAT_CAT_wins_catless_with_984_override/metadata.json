@@ -1,6 +1,5 @@
 {
   "description": "Record with (non-load/import/conversion) CATs should win, but 984$a ALWAYS-PREFER-IN-MERGE overrides",
-  "enabled": true,
   "only": false,
   "skip": false
 }

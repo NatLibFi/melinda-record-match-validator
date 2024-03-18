@@ -1,4 +1,5 @@
 {
     "description": "LDR/17: '8', Notes: A: none, B: 'Koneellisesti tuotettu tietue'",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

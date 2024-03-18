@@ -1,4 +1,5 @@
 {
     "description": "Should handle monograph / item 2",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

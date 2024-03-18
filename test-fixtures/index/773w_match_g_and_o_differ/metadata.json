@@ -1,4 +1,5 @@
 {
     "description": "773$g and 773$q complement each other",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

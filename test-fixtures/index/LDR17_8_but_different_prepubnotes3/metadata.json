@@ -1,4 +1,5 @@
 {
     "description": "LDR/17: '8', Notes: A: 'Koneellisesti tuotettu tietue', B: 'TARKISTETTU ENNAKKOTIETO'",
-    "enabled": true
+    "skip": false,
+    "only": false
 }
