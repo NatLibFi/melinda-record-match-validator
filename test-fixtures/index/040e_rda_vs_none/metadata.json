@@ -1,4 +1,5 @@
 {
     "description": "040 field preference: $e rda wins $-less",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

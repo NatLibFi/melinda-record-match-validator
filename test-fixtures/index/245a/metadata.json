@@ -1,4 +1,5 @@
 {
     "description": "245$a: 'The Title' vs 'Title'. Draw would be great!",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

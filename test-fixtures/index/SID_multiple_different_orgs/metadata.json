@@ -1,4 +1,5 @@
 {
     "description": "Multiple different SID $b subfields",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

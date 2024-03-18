@@ -46,12 +46,7 @@ generateTests({
 });
 
 
-function callback({getFixture, enabled, record1External, record2External}) {
-  if (!enabled) {
-    debug('TEST DISABLED!');
-    return;
-  }
-
+function callback({getFixture, record1External, record2External}) {
   const record1Object = getFixture('inputRecordA.json') || getFixture('inputRecord1.json');
   const record2Object = getFixture('inputRecordB.json') || getFixture('inputRecord2.json');
   const expectedResults = getFixture('expectedResults.json');

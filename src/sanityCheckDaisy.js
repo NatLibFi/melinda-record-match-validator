@@ -44,12 +44,12 @@ function check028(record) {
 
 function check245(record) {
   const fields = record.get('245');
-  return fields.some(field => field.subfields.some(subfield => subfield.code === 'b' && subfield.value.match(/^Daisy-äänikirja vain lukemisesteisille/u)));
+  return fields.some(field => field.subfields.some(subfield => subfield.code === 'b' && subfield.value?.match(/^Daisy-äänikirja vain lukemisesteisille/u)));
 }
 
 function check26X(record) {
   const fields = record.get('26[04]');
-  return fields.some(field => field.subfields.some(subfield => subfield.code === 'b' && subfield.value.match(/^\[?Celia/ui)));
+  return fields.some(field => field.subfields.some(subfield => subfield.code === 'b' && subfield.value?.match(/^\[?Celia/ui)));
 }
 
 function check300(record) {
@@ -79,17 +79,17 @@ function check347(record) {
 
 function check516(record) {
   const fields = record.get('516');
-  return fields.some(field => field.subfields.some(subfield => subfield.code === 'a' && subfield.value.match(/^Daisy-äänitiedosto\.?$/ui)));
+  return fields.some(field => field.subfields.some(subfield => subfield.code === 'a' && subfield.value?.match(/^Daisy-äänitiedosto\.?$/ui)));
 }
 
 function check538(record) {
   const fields = record.get('538');
   // Just /Daisy/i will do, as values are a bit complex
-  return fields.some(field => field.subfields.some(subfield => subfield.code === 'a' && subfield.value.match(/Daisy/ui)));
+  return fields.some(field => field.subfields.some(subfield => subfield.code === 'a' && subfield.value?.match(/Daisy/ui)));
 }
 
 
-//    if (subfield.value.match(/LP-(?:äänilevy|ljudskiv)/ui)) {
+//    if (subfield.value?.match(/LP-(?:äänilevy|ljudskiv)/ui)) {
 
 
 function isDaisy(record) {

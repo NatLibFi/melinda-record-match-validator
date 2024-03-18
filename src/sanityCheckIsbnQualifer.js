@@ -68,8 +68,8 @@ function normalizeIsbn(value) {
 }
 
 function fieldsShareIsbn(field1, field2) {
-  const isbns1 = field1.subfields.filter(sf => sf.code === 'a').map(sf => normalizeIsbn(sf.value));
-  const isbns2 = field2.subfields.filter(sf => sf.code === 'a').map(sf => normalizeIsbn(sf.value));
+  const isbns1 = field1.subfields.filter(sf => sf.code === 'a' && sf.value !== undefined).map(sf => normalizeIsbn(sf.value));
+  const isbns2 = field2.subfields.filter(sf => sf.code === 'a' && sf.value !== undefined).map(sf => normalizeIsbn(sf.value));
 
   //nvdebug(`1: ${isbns1.join(' -- ')}`);
   //nvdebug(`2: ${isbns2.join(' -- ')}`);

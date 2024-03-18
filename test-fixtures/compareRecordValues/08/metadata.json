@@ -1,5 +1,6 @@
 {
     "description": "Coverage improvements",
     "comment": "Prepublication level differs, corrupt type of record in A, corrupt bib level in B",
-    "enabled": true
+    "skip": false,
+    "only": false
 }

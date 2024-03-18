@@ -39,7 +39,7 @@ function physicalDescriptionContainsDvdVideoLevy(fields300) {
       return false;
     }
 
-    if (subfield.value.match(/DVD-video(?:levy|skiv)/ui)) {
+    if (subfield.value?.match(/DVD-video(?:levy|skiv)/ui)) {
       return true;
     }
 
@@ -55,7 +55,7 @@ function physicalDescriptionContainsBluRayVideolevy(fields300) {
       return false;
     }
     // Surprisingly we have 288 Blu-Ray-äänilevy entries, so plain Blu-Ray won't do
-    if (subfield.value.match(/Blu-?Ray-video(?:levy|skiv)/ui)) {
+    if (subfield.value?.match(/Blu-?Ray-video(?:levy|skiv)/ui)) {
       return true;
     }
     return false;
