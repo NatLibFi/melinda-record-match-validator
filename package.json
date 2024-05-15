@@ -13,7 +13,7 @@
     "Merge"
   ],
   "author": "The National Library of Finland",
-  "license": "LGPL-3.0+",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/NatLibFi/melinda-record-match-validator/issues"
   },
