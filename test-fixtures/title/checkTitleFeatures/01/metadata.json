@@ -1,0 +1,66 @@
+{
+    "description": "Return true if both records have partSetFeature.type: unknown",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Piiloleikki",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesTitle": "Vauva tunnustelee",
+                    "seriesNumber": "undefined"
+                }
+            ],
+            "f946Features": [
+                {
+                    "title": "Vauva tunnustelee - Piiloleikki",
+                    "remainderOfTitle": "undefined",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                },
+                {
+                    "title": "Vauva tunnustelee",
+                    "remainderOfTitle": "Piiloleikki",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                }
+            ]
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Piiloleikki",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesTitle": "Vauva tunnustelee",
+                    "seriesNumber": "undefined"
+                }
+            ],
+            "f946Features": [
+                {
+                    "title": "Vauva tunnustelee - Piiloleikki",
+                    "remainderOfTitle": "undefined",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                },
+                {
+                    "title": "Vauva tunnustelee",
+                    "remainderOfTitle": "Piiloleikki",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                }
+            ]
+        }
+    },
+    "expectedResults": true
+}

@@ -7,6 +7,7 @@ import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
 import {compare001, compare005} from './controlFields';
 import {compare042} from './field042';
 import {compare245} from './field245';
+import {compareAllTitleFeatures} from './title';
 import {compare773} from './field773';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X';
 import createDebugLogger from 'debug';
@@ -23,6 +24,7 @@ export function compareRecordValues(recordValuesA, recordValuesB) {
     '005': compare005(recordValuesA, recordValuesB), // A is more recently updated
     '042': compare042(recordValuesA, recordValuesB), // A nor B has any fikka or viola
     '245': compare245(recordValuesA, recordValuesB),
+    'title': compareAllTitleFeatures(recordValuesA, recordValuesB),
     '336': compare336ContentType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
     '337': compare337MediaType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
     '338': compare338CarrierType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false

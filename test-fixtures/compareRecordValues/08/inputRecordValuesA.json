@@ -4,6 +4,16 @@
     "numberOfPartInSectionOfAWork": "undefined",
     "title": "European citizenship /"
   },
+  "title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "European citizenship /"
+    }
+  },
   "336": {
     "types": [
       "txt"

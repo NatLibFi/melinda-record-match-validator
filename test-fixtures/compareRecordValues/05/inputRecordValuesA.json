@@ -4,6 +4,16 @@
     "numberOfPartInSectionOfAWork": "undefined",
     "title": "Kårkalendern /"
   },
+  "title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "Kårkalendern /"
+    }
+  },
   "336": {
     "types": [
       "txt",

@@ -1,0 +1,370 @@
+{
+  "leader": "05696cam a2201345 i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "018168371"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20240910175902.0"
+    },
+    {
+      "tag": "008",
+      "value": "220226t20222022fi ||||j      |0| 1|fin| "
+    },
+    {
+      "tag": "020",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "978-951-1-43509-9"
+        },
+        {
+          "code": "q",
+          "value": "kovakantinen"
+        }
+      ]
+    },
+    {
+      "tag": "035",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "(FI-MELINDA)018168371"
+        }
+      ]
+    },
+    {
+      "tag": "040",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "FI-BTJ"
+        },
+        {
+          "code": "b",
+          "value": "fin"
+        },
+        {
+          "code": "e",
+          "value": "rda"
+        },
+        {
+          "code": "d",
+          "value": "FI-NL"
+        },
+        {
+          "code": "d",
+          "value": "FI-KM"
+        }
+      ]
+    },
+    {
+      "tag": "041",
+      "ind1": "1",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "fin"
+        },
+        {
+          "code": "h",
+          "value": "eng"
+        }
+      ]
+    },
+    {
+      "tag": "130",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Hide and seek."
+        },
+        {
+          "code": "l",
+          "value": "Suomi."
+        }
+      ]
+    },
+    {
+      "tag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Piiloleikki /"
+        },
+        {
+          "code": "c",
+          "value": "kuvittanut: Lemon Ribbon Studio ; suomentanut: Virve Lehväs."
+        }
+      ]
+    },
+    {
+      "tag": "264",
+      "ind1": " ",
+      "ind2": "1",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Helsinki :"
+        },
+        {
+          "code": "b",
+          "value": "Kustannusosakeyhtiö Otava,"
+        },
+        {
+          "code": "c",
+          "value": "[2022]"
+        }
+      ]
+    },
+    {
+      "tag": "264",
+      "ind1": " ",
+      "ind2": "3",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Kiinassa"
+        }
+      ]
+    },
+    {
+      "tag": "264",
+      "ind1": " ",
+      "ind2": "4",
+      "subfields": [
+        {
+          "code": "c",
+          "value": "©2022"
+        }
+      ]
+    },
+    {
+      "tag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "11 numeroimatonta sivua :"
+        },
+        {
+          "code": "b",
+          "value": "kuvitettu ;"
+        },
+        {
+          "code": "c",
+          "value": "26 cm"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "stillkuva"
+        },
+        {
+          "code": "b",
+          "value": "sti"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "teksti"
+        },
+        {
+          "code": "b",
+          "value": "txt"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "käytettävissä ilman laitetta"
+        },
+        {
+          "code": "b",
+          "value": "n"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "nide"
+        },
+        {
+          "code": "b",
+          "value": "nc"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "490",
+      "ind1": "0",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Vauva tunnustelee"
+        }
+      ]
+    },
+    {
+      "tag": "700",
+      "ind1": "1",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Lehväs, Virve,"
+        },
+        {
+          "code": "e",
+          "value": "kääntäjä."
+        }
+      ]
+    },
+    {
+      "tag": "710",
+      "ind1": "2",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Otava, kustannusosakeyhtiö,"
+        },
+        {
+          "code": "e",
+          "value": "kustantaja."
+        },
+        {
+          "code": "0",
+          "value": "(FI-ASTERI-N)000039084"
+        }
+      ]
+    },
+
+    {
+      "tag": "884",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Helmet to Melinda MARC transformation"
+        },
+        {
+          "code": "g",
+          "value": "20231013"
+        },
+        {
+          "code": "k",
+          "value": "HELMET:b66d41f87fb23cd86f17e9730536ecd95549dbc2eb0457e3ae48ce1fdda612da"
+        },
+        {
+          "code": "q",
+          "value": "FI-NL"
+        },
+        {
+          "code": "5",
+          "value": "MELINDA"
+        }
+      ]
+    },
+    {
+      "tag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "i",
+          "value": "Nimeke Onixissa:"
+        },
+        {
+          "code": "a",
+          "value": "Vauva tunnustelee - Piiloleikki"
+        },
+        {
+          "code": "5",
+          "value": "MELINDA"
+        }
+      ]
+    },
+    {
+      "tag": "946",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "i",
+          "value": "Nimeke Onixissa:"
+        },
+        {
+          "code": "a",
+          "value": "Vauva tunnustelee :"
+        },
+        {
+          "code": "b",
+          "value": "Piiloleikki"
+        },
+        {
+          "code": "5",
+          "value": "MELINDA"
+        }
+      ]
+    }
+  ]
+}

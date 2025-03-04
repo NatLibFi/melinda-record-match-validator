@@ -5,6 +5,16 @@
     "remainderOfTitle": "undefined",
     "title": "Lippulaulu"
   },
+"title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "Lippulaulu"
+    }
+  },
   "336": {
     "types": [
       "prm"

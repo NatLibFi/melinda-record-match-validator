@@ -5,6 +5,16 @@
     "remainderOfTitle": "undefined",
     "title": "De periodisering der geschiedenis"
   },
+"title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "De periodisering der geschiedenis"
+    }
+  },
   "336": {
     "types": [
       "txt"

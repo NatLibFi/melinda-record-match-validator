@@ -4,6 +4,13 @@
       "numberOfPartInSectionOfAWork": "undefined",
       "title": "Kuinka äkäpussi kesytetään."
     },
+    "title": {
+      "titleFeatures": {
+        "nameOfPartInSectionOfAWork": "undefined",
+        "numberOfPartInSectionOfAWork": "undefined",
+        "title": "Kuinka äkäpussi kesytetään."
+      }
+    },
     "336": {
       "types": [
         "txt"
