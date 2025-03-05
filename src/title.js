@@ -78,11 +78,24 @@ function compareTitleFeatures(titleA, titleB) {
   // 490 + 245 = 245 OK
   //
 
-  return {
-    'nameOfPartInSectionOfAWork': compareValueContent(titleA.titleFeatures.numberOfPartInSectionOfAWork, titleB.titleFeatures.numberOfPartInSectionOfAWork, '245 name: '),
+  // f946 features
+
+  //  {
+  //  titleFeatures: {title: 'Piiloleikki', remainderOfTitle: 'undefined', numbersOfPartInSectionOfAWork: [], namesOfPartInSectionOfAWork: []},
+  //  seriesFeatures: [
+  //    {seriesTitle: 'Vauva tunnustelee', seriesNumber: 'undefined'}
+  //  ],
+  //  f946Features: [
+  //      { title: 'Vauva tunnustelee', remainderOfTitle: 'Piiloleikki', numbersOfPartInSectionOfAWork: [], namesOfPartInSectionOfAWork: [] } ] }
+  //  }
+
+  const titleFeaturesResult = {
+    'nameOfPartInSectionOfAWork': compareValueContent(titleA.titleFeatures.nameOfPartInSectionOfAWork, titleB.titleFeatures.nameOfPartInSectionOfAWork, '245 name: '),
     'numberOfPartInSectionOfAWork': compareValueContent(titleA.titleFeatures.numberOfPartInSectionOfAWork, titleB.titleFeatures.numberOfPartInSectionOfAWork, '245 number: '),
     'title': compareValueContent(titleA.titleFeatures.title, titleB.titleFeatures.title, '245 title: ')
   };
+  debug(titleFeaturesResult);
+  return titleFeaturesResult;
 }
 
 function checkTitleComparisonResult(result) {
