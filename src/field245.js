@@ -19,7 +19,7 @@ export function get245(record) {
   function f245ToJSON(field) {
     const title = stripPunc(getSubfield(field, 'a'));
     const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
-    // Note: both $p and $n are repeatable, do we get only first(?) instances of them here?
+    // Note: both $p and $n are repeatable, we get only first instances of them here?
     const numberOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'n'));
     const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
 
