@@ -28,8 +28,9 @@ export function get245(record) {
 }
 
 function compare245data(f245A, f245B) {
+  // NOTE: we do nothing with f245 $b remainderOfTitle here!
   return {
-    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 name: '),
+    'nameOfPartInSectionOfAWork': compareValueContent(f245A.nameOfPartInSectionOfAWork, f245B.nameOfPartInSectionOfAWork, '245 name: '),
     'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 number: '),
     'title': compareValueContent(f245A.title, f245B.title, '245 title: ')
   };
