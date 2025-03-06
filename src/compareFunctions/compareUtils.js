@@ -2,6 +2,29 @@ import createDebugLogger from 'debug';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils');
 
+export function compareArrayContentRequireAll(arrayA, arrayB) {
+  debug('"%o" vs "%o"', arrayA, arrayB);
+  // true: sets are equal
+  // false: contents mismatch
+  const normalizedArrayA = arrayA.map(value => normalizeStrings(value));
+  const normalizedArrayB = arrayB.map(value => normalizeStrings(value));
+
+  const onlyA = normalizedArrayA.filter(value => !normalizedArrayB.includes(value));
+  const onlyB = normalizedArrayB.filter(value => !normalizedArrayA.includes(value));
+
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  debug(onlyA);
+  debug(onlyB);
+  if (onlyA.length === 0 && onlyB.length === 0) {
+    return true;
+  }
+
+  debug('Arrays A or B do not contain all values from each other');
+  return false;
+}
+
+
 export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
   debug('"%o" vs "%o"', arrayA, arrayB);
   // true: sets are equal
@@ -120,13 +143,13 @@ export function compareValueContent(valueA, valueB, prefix = '') {
     const averageFoundWords = foundWords.length / wordArray.length;
     return averageFoundWords;
   }
+}
 
-  function normalizeStrings(stringValue) {
-    // decompose/precompose diacritics here
-    const compNormalizedStringValue = String(stringValue).normalize('NFD');
+function normalizeStrings(stringValue) {
+  // decompose/precompose diacritics here
+  const compNormalizedStringValue = String(stringValue).normalize('NFD');
 
-    return compNormalizedStringValue
-      .replace(/[^\w\s\p{Alphabetic}]/gu, '')
-      .trim();
-  }
+  return compNormalizedStringValue
+    .replace(/[^\w\s\p{Alphabetic}]/gu, '')
+    .trim();
 }

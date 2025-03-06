@@ -1,5 +1,5 @@
 
-import {get245} from './field245';
+import {getTitleFeatures} from './title';
 import {getExtentsForPartsAndSets} from './partsAndSetsExtent';
 
 import createDebugLogger from 'debug';
@@ -80,35 +80,40 @@ export function getPartSetFeatures(record) {
 
 export function getTitleForPartsAndSets(record) {
   // Both $n (number of part) and $p (name of part) are repeatable subfields - do we get all of the instances?
-  const title = get245(record);
-  const type = getTitleType(title);
+  //const title = get245(record);
+  const titleFeatures = getTitleFeatures(record);
+  //debug(titleFeatures);
+  //const type = getTitleType(title);
+  const featuresType = getTitleFeaturesType(titleFeatures);
+  debug(featuresType);
 
-  return {...title, type};
+  return {...titleFeatures, type: featuresType};
 }
 
-export function getTitleType(title) {
+
+export function getTitleFeaturesType(title) {
   debugData(title);
 
-  const {nameOfPartInSectionOfAWork, numberOfPartInSectionOfAWork} = title;
+  const {namesOfPartInSectionOfAWork, numbersOfPartInSectionOfAWork} = title;
 
-  if (nameOfPartInSectionOfAWork === 'undefined' && numberOfPartInSectionOfAWork === 'undefined') {
+  if (namesOfPartInSectionOfAWork.length < 1 && numbersOfPartInSectionOfAWork.length < 1) {
     return 'unknown';
   }
 
-  // If we have subfield $n and its has not `1-2` type of content we can assume part
+  // If we have one subfield $n and its has not `1-2` type of content we can assume part
   // Note: we can have a case where we have a set of subparts that contain a part ...
-  if (numberOfPartInSectionOfAWork && numberOfPartInSectionOfAWork !== 'undefined') {
-    debug(`We have number: ${numberOfPartInSectionOfAWork}`);
-    if (numberOfPartInSectionOfAWork.match(/\d+-\d+/u)) {
-      debug(`But number is of several parts: ${numberOfPartInSectionOfAWork}`);
+  if (numbersOfPartInSectionOfAWork.length === 1) {
+    debug(`We have a number: ${numbersOfPartInSectionOfAWork[0]}`);
+    if (numbersOfPartInSectionOfAWork[0].match(/\d+-\d+/u)) {
+      debug(`But number is of several parts: ${numbersOfPartInSectionOfAWork[0]}`);
       return 'unknown';
     }
     return 'part';
   }
 
   // If we have a subgield $p we can assume part
-  if (nameOfPartInSectionOfAWork && nameOfPartInSectionOfAWork !== 'undefined') {
-    debug(`We have name: ${nameOfPartInSectionOfAWork}`);
+  if (namesOfPartInSectionOfAWork.length === 1) {
+    debug(`We have a name: ${namesOfPartInSectionOfAWork[0]}`);
     return 'part';
   }
 
@@ -116,7 +121,6 @@ export function getTitleType(title) {
 
   return 'unknown';
 }
-
 
 // Compare two records by their partSetFeatures
 export function compareRecordsPartSetFeatures({record1, record2}) {

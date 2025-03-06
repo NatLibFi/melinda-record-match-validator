@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getPartSetFeatures, checkPartSetFeatures, getTitleType} from './partsAndSets';
+import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from './partsAndSets';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 
@@ -53,12 +53,12 @@ function testCheck() {
 }
 
 function testTitle() {
-  testGetTitleType();
+  testGetTitleFeaturesType();
 
-  function testGetTitleType() {
+  function testGetTitleFeaturesType() {
     generateTests({
       callback,
-      path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'partsAndSetsTitle'],
+      path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'partsAndSetsTitleFeatures'],
       useMetadataFile: true,
       recurse: false,
       fixura: {
@@ -68,9 +68,11 @@ function testTitle() {
 
     function callback({title, expectedResults}) {
       debug(`Testing: ${JSON.stringify(title)}`);
-      const type = getTitleType(title);
+      const type = getTitleFeaturesType(title);
       debug(`Result: ${type}`);
       expect(type).to.eql(expectedResults);
     }
   }
+
+
 }

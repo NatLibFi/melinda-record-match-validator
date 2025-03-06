@@ -2,8 +2,7 @@
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
 import {hasFields, getSubfield, getSubfields, stripPunc} from './collectFunctions/collectUtils';
-import {compareValueContent} from './compareFunctions/compareUtils';
-//import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
+import {compareValueContent, compareArrayContentRequireAll} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 
@@ -24,7 +23,6 @@ export function getTitleFeatures(record) {
   // we have just one f245
   const [f245] = hasFields('245', record, titleFieldToJSON);
   debug('Field 245 info: %o', f245);
-
   return f245;
 }
 
@@ -89,9 +87,10 @@ function compareTitleFeatures(titleA, titleB) {
   //      { title: 'Vauva tunnustelee', remainderOfTitle: 'Piiloleikki', numbersOfPartInSectionOfAWork: [], namesOfPartInSectionOfAWork: [] } ] }
   //  }
 
+  debug(JSON.stringify(titleA.titleFeatures.nameOfPartInSectionOfAWork));
   const titleFeaturesResult = {
-    'nameOfPartInSectionOfAWork': compareValueContent(titleA.titleFeatures.nameOfPartInSectionOfAWork, titleB.titleFeatures.nameOfPartInSectionOfAWork, '245 name: '),
-    'numberOfPartInSectionOfAWork': compareValueContent(titleA.titleFeatures.numberOfPartInSectionOfAWork, titleB.titleFeatures.numberOfPartInSectionOfAWork, '245 number: '),
+    'nameOfPartInSectionOfAWork': compareArrayContentRequireAll(titleA.titleFeatures.namesOfPartInSectionOfAWork, titleB.titleFeatures.namesOfPartInSectionOfAWork, '245 name: '),
+    'numberOfPartInSectionOfAWork': compareArrayContentRequireAll(titleA.titleFeatures.numbersOfPartInSectionOfAWork, titleB.titleFeatures.numbersOfPartInSectionOfAWork, '245 number: '),
     'title': compareValueContent(titleA.titleFeatures.title, titleB.titleFeatures.title, '245 title: ')
   };
   debug(titleFeaturesResult);

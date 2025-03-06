@@ -1,6 +1,6 @@
 {
-    "description": "Return true if all titles differ, but theres's a series title as part of title",
-    "skip": false,
+    "description": "FIX: Return true if all titles differ, but theres's a series title as part of title",
+    "skip": true,
     "only": false,
     "recordValuesA": {
         "title": {

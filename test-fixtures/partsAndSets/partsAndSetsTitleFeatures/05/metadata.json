@@ -1,0 +1,13 @@
+{
+    "description": "Get type 'unknown' if there are several numbers of a part",
+
+    "title": {
+        "title": "Entisajan Forssaa ja sen väkeä",
+        "remainderOfTitle": "undefined",
+        "numbersOfPartInSectionOfAWork": ["Osa 1", "Osa 2"],
+        "namesOfPartInSectionOfAWork": ["Osan nimi", "Toisen osan nimi"]
+    },
+    "expectedResults": "unknown",
+    "skip": false,
+    "only": false
+}
