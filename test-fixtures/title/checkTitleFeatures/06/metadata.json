@@ -1,6 +1,6 @@
 {
     "description": "FIX: Return true if all titleFeatures match (several f245 $n & $p)",
-    "skip": true,
+    "skip": false,
     "only": false,
     "recordValuesA": {
         "title": {

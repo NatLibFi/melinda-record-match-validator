@@ -2,8 +2,8 @@ import createDebugLogger from 'debug';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils');
 
-export function compareArrayContentRequireAll(arrayA, arrayB) {
-  debug('"%o" vs "%o"', arrayA, arrayB);
+export function compareArrayContentRequireAll(arrayA, arrayB, prefix = '') {
+  debug(`${prefix}"%o" vs "%o"`, arrayA, arrayB);
   // true: sets are equal
   // false: contents mismatch
   const normalizedArrayA = arrayA.map(value => normalizeStrings(value));
@@ -14,22 +14,40 @@ export function compareArrayContentRequireAll(arrayA, arrayB) {
 
   // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
   // Anyway, close enough, and not sure which to prefer, thus return true:
-  debug(onlyA);
-  debug(onlyB);
+  //debug(onlyA);
+  //debug(onlyB);
   if (onlyA.length === 0 && onlyB.length === 0) {
     return true;
   }
 
-  debug('Arrays A or B do not contain all values from each other');
+  debug(`${prefix} Arrays A or B do not contain all values from each other`);
   return false;
 }
 
+export function compareStringToArray(string, array, prefix = '') {
+  debug(`${prefix}"%o" vs "%o"`, string, array);
+  // true: string found in array
+  // false: string not found in array
+  const normalizedString = normalizeStrings(string);
+  const normalizedArray = array.map(value => normalizeStrings(value));
 
-export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
-  debug('"%o" vs "%o"', arrayA, arrayB);
+  const found = normalizedArray.filter(value => value === normalizedString);
+
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  if (found.length > 0) {
+    return true;
+  }
+
+  debug(`${prefix} Array does not contain string`);
+  return false;
+}
+
+export function compareArrayContent(arrayA, arrayB, prefix = '' /*, ifOtherEmpty = false*/) {
+  debug(`${prefix}"%o" vs "%o"`, arrayA, arrayB);
   // true: sets are equal
-  // A: B is a subset of A
-  // B: A is a sibset of B
+  // A: B is a subset of A - note: empty array is a subset of any non-empty array!
+  // B: A is a subset of B - note: empty array is a subset of any non-empty array!
   // false: contents mismatch
 
   // NV: I don't think we really need ifOtherEmpty at all.
@@ -79,7 +97,7 @@ export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
   }
   */
 
-  debug('Arrays A or B do not contain all values from each other');
+  debug(`${prefix}Arrays A or B do not contain all values from each other`);
   return false;
 }
 
@@ -106,36 +124,39 @@ export function compareValueContent(valueA, valueB, prefix = '') {
     return true;
   }
 
-  const valueAContainsBAvg = compareStrings(valueA, valueB);
-  const valueBContainsAAvg = compareStrings(valueB, valueA);
+  const valueAContainsBAvg = compareStrings(valueA, valueB, prefix);
+  const valueBContainsAAvg = compareStrings(valueB, valueA, prefix);
 
   if (valueAContainsBAvg === 1 && valueBContainsAAvg === 1) {
-    debug('Normalized values of A and B are same: %o', valueAContainsBAvg);
+    debug(`${prefix}Normalized values of A and B are same: %o`, valueAContainsBAvg);
     return true;
   }
 
+  // DEVELOP: if contain-% are same we return false!
+  // This might be a good idea (for example part numbers?)
+
   if (valueAContainsBAvg > valueBContainsAAvg && valueAContainsBAvg > threshold) {
-    debug('Value A contains %o of B', valueAContainsBAvg);
+    debug(`${prefix}Value A contains %o of B`, valueAContainsBAvg);
     return 'A';
   }
 
   if (valueBContainsAAvg > valueAContainsBAvg && valueBContainsAAvg > threshold) {
-    debug('Value B contains %o of A', valueBContainsAAvg);
+    debug(`${prefix}Value B contains %o of A`, valueBContainsAAvg);
     return 'B';
   }
 
-  debug('Value A contains %o of B', valueAContainsBAvg);
-  debug('Value B contains %o of A', valueBContainsAAvg);
-  debug(`${prefix}Minimium of ${threshold} did not happen setting: false`);
+  debug(`${prefix}Value A contains %o of B`, valueAContainsBAvg);
+  debug(`${prefix}Value B contains %o of A`, valueBContainsAAvg);
+  debug(`${prefix}Minimum of ${threshold} did not happen setting: false`);
 
   return false;
 
-  function compareStrings(stringCompareTo, stringToCompare) {
+  function compareStrings(stringCompareTo, stringToCompare, prefix = '') {
     const stringCompareToNormalizedLowerCase = normalizeStrings(stringCompareTo).toLowerCase();
     const stringToCompareNormalizedLowerCase = normalizeStrings(stringToCompare).toLowerCase();
 
-    debug('StringCompareTo: %o', stringCompareToNormalizedLowerCase);
-    debug('StringToCompare: %o', stringToCompareNormalizedLowerCase);
+    debug(`${prefix}StringCompareTo: %o`, stringCompareToNormalizedLowerCase);
+    debug(`${prefix}StringToCompare: %o`, stringToCompareNormalizedLowerCase);
 
     const wordArray = stringToCompareNormalizedLowerCase.split(' ');
     const foundWords = wordArray.filter(word => stringCompareToNormalizedLowerCase.includes(word));
