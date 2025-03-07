@@ -1,0 +1,46 @@
+{
+    "description": "FIX: Do not fail differently constructed title vs series statements + extra information in title ",
+    "note": "This would need more mixing of title and series parts!",
+    "issueNotSolved": "[MET-420]",
+    "skip": true,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Kuuntele sanoja!",
+                "remainderOfTitle": "Minun päiväni 0-2 v",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesNumber": "undefined",
+                    "seriesTitle": "Oppi&ilo"
+                }
+            ],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Minun päiväni",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesNumber": "undefined",
+                    "seriesTitle": "Oppi&ilo"
+                },
+                {
+                    "seriesNumber": "undefined",
+                    "seriesTitle": "Kuuntele sanoja!"
+                }
+            ],
+            "f946Features": []
+        }
+    },
+    "expectedResults": "FIX"
+}

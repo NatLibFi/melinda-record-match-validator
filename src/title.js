@@ -88,6 +88,7 @@ function compareTitleFeatures(titleA, titleB) {
   debug(`CombinedFeatures: ${combinedFeaturesResult}`);
 
   // We do not need to do more checking if 245 is a total match
+  // Note: we can also get non-false "A" or "B" if one record's combined features is a subset of another records combined features
   if (combinedFeaturesResult === true) {
     return {
       'combinedFeatures': combinedFeaturesResult
@@ -109,9 +110,10 @@ function compareTitleFeatures(titleA, titleB) {
     'series': seriesResult,
     'nameOfPartInSectionOfAWork': compareArrayContentRequireAll(titleA.titleFeatures.namesOfPartInSectionOfAWork, titleB.titleFeatures.namesOfPartInSectionOfAWork, '245 name: '),
     'numberOfPartInSectionOfAWork': compareArrayContentRequireAll(titleA.titleFeatures.numbersOfPartInSectionOfAWork, titleB.titleFeatures.numbersOfPartInSectionOfAWork, '245 number: '),
+    // Note: we can also get non-false "A" or "B" if one record's title is a subset of another record's title
     'title': compareValueContent(titleA.titleFeatures.title, titleB.titleFeatures.title, '245 title: ')
   };
-  debug(titleFeaturesResult);
+  //debug(titleFeaturesResult);
   return titleFeaturesResult;
 }
 
@@ -143,7 +145,7 @@ function compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
   debug(combined946FeaturesA);
 
   debug(titleB.f946Features);
-  const combined946FeaturesB = combineF946Features(titleA);
+  const combined946FeaturesB = combineF946Features(titleB);
   debug(combined946FeaturesB);
 
   debug(`Running f946 comparison`);
@@ -204,6 +206,7 @@ function checkTitleComparisonResult(result) {
     return true;
   }
 
+  // Note: title, combinedFeatures or combinedTitle can be "A" or "B" if title of one record is subset of title in another
   if (result.title === false || result.numberOfPartInSectionOfAWork === false || result.nameOfPartInSectionOfAWork === false) {
     // Matches from 245 vs 946 or 245 vs 490 are OK
     if (result.series === true || result.f946 === true) {

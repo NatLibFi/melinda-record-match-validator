@@ -1,0 +1,37 @@
+{
+    "description": "Return true for a differently constructed title",
+    "issueSolved": "[MET-419]",
+    "note": "issue [MET-419] actual example had also difference between '&' vs 'ja' which causes failure",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Kosketus",
+                "remainderOfTitle": "Humaani kauneus : Lasin ja keramiikan mestarit 4",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesTitle": "Lasin ja keramiikan mestarit",
+                    "seriesNumber": "4"
+                }
+            ],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Lasin ja keramiikan mestarit",
+                "remainderOfTitle": "humaani kauneus",
+                "numbersOfPartInSectionOfAWork": ["4"],
+                "namesOfPartInSectionOfAWork": ["Kosketus"]
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "expectedResults": true
+}
