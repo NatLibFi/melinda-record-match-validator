@@ -36,7 +36,7 @@ export function get946Features(record) {
 
 function titleFieldToJSON(field) {
   const title = stripPunc(getSubfield(field, 'a'));
-  const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
+  const remainderOfTitle = stripPunc(getSubfield(field, 'b'));
   // Note: get all subfields $p & $n
   const numbersOfPartInSectionOfAWork = getSubfields(field, 'n').map(sf => stripPunc(sf));
   const namesOfPartInSectionOfAWork = getSubfields(field, 'p').map(sf => stripPunc(sf));
@@ -198,13 +198,14 @@ function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 function checkTitleComparisonResult(result) {
   debug(`checkTitleComparisonResult`);
   debug(result);
-  // DEVELOP check other title features
-  // if any of comparison results is false?
+
+  // If all titleFeatures match, we don't even compare others
   if (result.combinedFeatures === true) {
     return true;
   }
 
   if (result.title === false || result.numberOfPartInSectionOfAWork === false || result.nameOfPartInSectionOfAWork === false) {
+    // Matches from 245 vs 946 or 245 vs 490 are OK
     if (result.series === true || result.f946 === true) {
       return true;
     }
