@@ -5,7 +5,8 @@ import {compareValueContent, compareArrayContentRequireAll, compareStringToArray
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 
-// NOTE: do not use with field245 -matchValidator
+// NOTE: do not use with field245 -matchValidator - these do partly same things
+// NOTE: not yet in use in index.js!
 
 // Compare titles from 245 betweeen records.
 // Compare f245 to f946
