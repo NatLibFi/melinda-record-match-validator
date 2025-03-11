@@ -85,7 +85,7 @@ function compareTitleFeatures(titleA, titleB) {
   const combinedFeaturesA = combineTitleFeatures(titleA.titleFeatures);
   const combinedFeaturesB = combineTitleFeatures(titleB.titleFeatures);
   const combinedFeaturesResult = compareValueContent(combinedFeaturesA, combinedFeaturesB, '245-combined: ');
-  debug(`CombinedFeatures: ${combinedFeaturesResult}`);
+  debug(`CombinedFeatures: ${JSON.stringify(combinedFeaturesResult)}`);
 
   // We do not need to do more checking if 245 is a total match
   // Note: we can also get non-false "A" or "B" if one record's combined features is a subset of another records combined features
@@ -97,11 +97,11 @@ function compareTitleFeatures(titleA, titleB) {
 
   // NOTE: this is not used!
   const combinedTitleResult = compareCombinedTitle(titleA, titleB);
-  debug(`CombinedTitle: ${combinedFeaturesResult}`);
+  debug(`CombinedTitle: ${JSON.stringify(combinedFeaturesResult)}`);
   const f946Result = compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB);
-  debug(`F946: ${f946Result}`);
+  debug(`F946: ${JSON.stringify(f946Result)}`);
   const seriesResult = compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB);
-  debug(`Series: ${seriesResult}`);
+  debug(`Series: ${JSON.stringify(seriesResult)}`);
 
   const titleFeaturesResult = {
     'combinedFeatures': combinedFeaturesResult,
@@ -133,24 +133,24 @@ function compareCombinedTitle(titleA, titleB) {
   const combinedTitleA = combineTitle(titleA.titleFeatures);
   const combinedTitleB = combineTitle(titleB.titleFeatures);
   const combinedTitleResult = compareValueContent(combinedTitleA, combinedTitleB, '245-$a+$b: ');
-  debug(`combinedTitleResult: ${combinedTitleResult}`);
+  debug(`combinedTitleResult: ${JSON.stringify(combinedTitleResult)}`);
   return combinedTitleResult;
 }
 
 // compare 245 to 946s
 function compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 
-  debug(titleA.f946Features);
+  //debug(titleA.f946Features);
   const combined946FeaturesA = combineF946Features(titleA);
-  debug(`F946A: ${combined946FeaturesA}`);
+  debug(`F946A: ${JSON.stringify(combined946FeaturesA)}`);
 
-  debug(titleB.f946Features);
+  //debug(titleB.f946Features);
   const combined946FeaturesB = combineF946Features(titleB);
-  debug(`F946B: ${combined946FeaturesB}`);
+  debug(`F946B: ${JSON.stringify(combined946FeaturesB)}`);
 
   //debug(`Running f946 comparison`);
   const compareToF946Result = compareStringToArray(combinedFeaturesA, combined946FeaturesB, 'A:245 to B:946: ') || compareStringToArray(combinedFeaturesB, combined946FeaturesA, 'B:245 to A:946: ');
-  debug(`F946 comparison result: ${compareToF946Result}`);
+  debug(`F946 comparison result: ${JSON.stringify(compareToF946Result)}`);
   return compareToF946Result ? compareToF946Result : undefined;
 
   function combineF946Features(title) {
@@ -165,14 +165,14 @@ function compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 
   const combined490TitlesA = combine490Titles(combinedFeaturesA, titleA.seriesFeatures);
-  debug(`F490: ${combined490TitlesA}`);
+  debug(`F490: ${JSON.stringify(combined490TitlesA)}`);
 
   const combined490TitlesB = combine490Titles(combinedFeaturesB, titleB.seriesFeatures);
-  debug(`F490: ${combined490TitlesB}`);
+  debug(`F490: ${JSON.stringify(combined490TitlesB)}`);
 
   //debug(`Running series comparison`);
   const compareTo490Result = compareStringToArray(combinedFeaturesA, combined490TitlesB, 'A:245 to B:245+490: ') || compareStringToArray(combinedFeaturesB, combined490TitlesA, 'B:245 to A:245+490: ');
-  debug(`F490/series comparison result: ${compareTo490Result}`);
+  debug(`F490/series comparison result: ${JSON.stringify(compareTo490Result)}`);
   return compareTo490Result ? compareTo490Result : undefined;
 
   function combine490Titles(combinedFeatures, seriesFeatures) {
@@ -192,13 +192,13 @@ function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
       `${seriesFeature.seriesTitle} ${combinedFeatures}`,
       `${seriesFeature.seriesTitle}${seriesFeature.seriesNumber === 'undefined' ? '' : ' '.concat(seriesFeature.seriesNumber)} ${combinedFeatures}`
     ];
-    debug(combArray);
+    //debug(combArray);
     return [...new Set(combArray)];
   }
 }
 
 function checkTitleComparisonResult(result) {
-  debug(`checkTitleComparisonResult: ${result}`);
+  debug(`checkTitleComparisonResult: ${JSON.stringify(result)}`);
 
   // If all titleFeatures match, we don't even compare others
   if (result.combinedFeatures === true) {

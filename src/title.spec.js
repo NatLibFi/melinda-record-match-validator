@@ -45,9 +45,9 @@ function testCheck() {
   });
 
   function callback({recordValuesA, recordValuesB, expectedResults}) {
-    debug(recordValuesA);
+    //debug(recordValuesA);
     const checkResults = compareAllTitleFeatures(recordValuesA, recordValuesB);
-    debug(`Result: ${checkResults}`);
+    debug(`Result: ${JSON.stringify(checkResults)}`);
     expect(checkResults).to.eql(expectedResults);
   }
 }
