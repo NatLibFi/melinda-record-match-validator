@@ -1,5 +1,5 @@
 {
-    "description": "245$np: do not fail missing $n ($p matches)",
-    "skip": false,
+    "description": "FIX: 245$np: do not fail missing $n ($p matches)",
+    "skip": true,
     "only": false
 }

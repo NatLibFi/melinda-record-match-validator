@@ -7,8 +7,8 @@ import {checkSID} from './fieldSID';
 import {checkLOW} from './fieldLOW';
 import {checkCAT} from './fieldCAT';
 import {check040b, check040e} from './field040';
-import {check245} from './field245';
-//import {checkAllTitleFeatures} from './title';
+//import {check245} from './field245';
+import {checkAllTitleFeatures} from './title';
 import {checkPublisher} from './field26X';
 //import {getSubfieldValues} from './collectFunctions/collectUtils';
 //import {collectRecordValues} from './collectRecordValues';
@@ -52,8 +52,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'field 042: authentication code (preference only)', 'function': check042},
   {'description': 'CAT test (preference only)', 'function': checkCAT},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
-  //{'description': 'title (245+490+946)', 'function': checkAllTitleFeatures},
-  {'description': 'field 245 (title)', 'function': check245},
+  {'description': 'field 245 (title)', 'function': checkAllTitleFeatures},
+  //{'description': 'field 245 (title)', 'function': check245},
   {'description': 'field 336 (content type) test (validation and preference)', 'function': check336},
   {'description': 'field 337 (media type) test (validation and preference)', 'function': check337},
   {'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338},
