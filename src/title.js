@@ -6,7 +6,6 @@ import {compareValueContent, compareArrayContentRequireAll, compareStringToArray
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 
 // NOTE: do not use with field245 -matchValidator - these do partly same things
-// NOTE: not yet in use in index.js!
 
 // Compare titles from 245 betweeen records.
 // Compare f245 to f946
@@ -134,7 +133,7 @@ function compareCombinedTitle(titleA, titleB) {
   const combinedTitleA = combineTitle(titleA.titleFeatures);
   const combinedTitleB = combineTitle(titleB.titleFeatures);
   const combinedTitleResult = compareValueContent(combinedTitleA, combinedTitleB, '245-$a+$b: ');
-  debug(combinedTitleResult);
+  debug(`combinedTitleResult: ${combinedTitleResult}`);
   return combinedTitleResult;
 }
 
@@ -143,19 +142,19 @@ function compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 
   debug(titleA.f946Features);
   const combined946FeaturesA = combineF946Features(titleA);
-  debug(combined946FeaturesA);
+  debug(`F946A: ${combined946FeaturesA}`);
 
   debug(titleB.f946Features);
   const combined946FeaturesB = combineF946Features(titleB);
-  debug(combined946FeaturesB);
+  debug(`F946B: ${combined946FeaturesB}`);
 
-  debug(`Running f946 comparison`);
+  //debug(`Running f946 comparison`);
   const compareToF946Result = compareStringToArray(combinedFeaturesA, combined946FeaturesB, 'A:245 to B:946: ') || compareStringToArray(combinedFeaturesB, combined946FeaturesA, 'B:245 to A:946: ');
-  debug(compareToF946Result);
+  debug(`F946 comparison result: ${compareToF946Result}`);
   return compareToF946Result ? compareToF946Result : undefined;
 
   function combineF946Features(title) {
-    debug(title);
+    //debug(title);
     return title.f946Features.map((f946Features) => combineTitleFeatures(f946Features));
   }
 
@@ -166,14 +165,14 @@ function compareWith946(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 
   const combined490TitlesA = combine490Titles(combinedFeaturesA, titleA.seriesFeatures);
-  debug(combined490TitlesA);
+  debug(`F490: ${combined490TitlesA}`);
 
   const combined490TitlesB = combine490Titles(combinedFeaturesB, titleB.seriesFeatures);
-  debug(combined490TitlesB);
+  debug(`F490: ${combined490TitlesB}`);
 
-  debug(`Running series comparison`);
+  //debug(`Running series comparison`);
   const compareTo490Result = compareStringToArray(combinedFeaturesA, combined490TitlesB, 'A:245 to B:245+490: ') || compareStringToArray(combinedFeaturesB, combined490TitlesA, 'B:245 to A:245+490: ');
-  debug(compareTo490Result);
+  debug(`F490/series comparison result: ${compareTo490Result}`);
   return compareTo490Result ? compareTo490Result : undefined;
 
   function combine490Titles(combinedFeatures, seriesFeatures) {
@@ -199,8 +198,7 @@ function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 }
 
 function checkTitleComparisonResult(result) {
-  debug(`checkTitleComparisonResult`);
-  debug(result);
+  debug(`checkTitleComparisonResult: ${result}`);
 
   // If all titleFeatures match, we don't even compare others
   if (result.combinedFeatures === true) {

@@ -7,6 +7,8 @@ import {compareValueContent} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
 
+// Note: title.js replaces this
+
 // 245 n & p
 // tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
 // niissä tapauksissa, joissa tuodaan alunperin marc21-kirjastodataa tai yhdistetään Melindan tietueita, tää on oleellisehko
