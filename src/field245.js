@@ -6,6 +6,8 @@ import {compareValueContent} from './compareFunctions/compareUtils';
 //import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 // Note: title.js replaces this
 
@@ -14,7 +16,7 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field2
 // niissä tapauksissa, joissa tuodaan alunperin marc21-kirjastodataa tai yhdistetään Melindan tietueita, tää on oleellisehko
 export function get245(record) {
   const [f245] = hasFields('245', record, f245ToJSON);
-  debug('Field 245 info: %o', f245);
+  debugDev('Field 245 info: %o', f245);
 
   return f245;
 
@@ -44,7 +46,7 @@ function compare245data(f245A, f245B) {
 export function compare245(recordValuesA, recordValuesB) {
   const f245A = recordValuesA['245'];
   const f245B = recordValuesB['245'];
-  debug('%o vs %o', f245A, f245B);
+  debugDev('%o vs %o', f245A, f245B);
   return compare245data(f245A, f245B);
 }
 

@@ -10,12 +10,16 @@ import {compare245} from './field245';
 import {compareAllTitleFeatures} from './title';
 import {compare773} from './field773';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X';
+
 import createDebugLogger from 'debug';
 
 export function compareRecordValues(recordValuesA, recordValuesB) {
   const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues');
-  debug('Record values A: %o', recordValuesA);
-  debug('Record values B: %o', recordValuesB);
+  const debugDev = debug.extend('dev');
+  //const debugData = debug.extend('data');
+
+  debugDev('Record values A: %o', recordValuesA);
+  debugDev('Record values B: %o', recordValuesB);
 
   return {
     'commonIdentifiers': compareCommonIdentifiers(recordValuesA, recordValuesB),

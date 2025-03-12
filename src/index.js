@@ -25,13 +25,11 @@ import {performAudioSanityCheck} from './sanityCheckAudio';
 import {performDaisySanityCheck} from './sanityCheckDaisy';
 import {performDvdSanityCheck} from './sanityCheckDvd';
 import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer';
+import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
-
-function nvdebug(message) {
-  debug(message);
-  //console.info(message); // eslint-disable-line no-console
-}
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 function checkExistence({record1, record2}) {
   if (record1 === undefined || record2 === undefined) {
@@ -88,7 +86,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External});
   // If any test fails, return false.
   if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
-    nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`);
+    nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
     return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
   }
 
@@ -141,14 +139,14 @@ export default ({record1Object, record2Object, checkPreference = true, record1Ex
     throw new Error('Record missing!');
   }
   const recordValuesA = collectRecordValues(recordA);
-  debug('Record values A: %o', recordValuesA);
+  debugDev('Record values A: %o', recordValuesA);
   const recordValuesB = collectRecordValues(recordB);
-  debug('Record values B: %o', recordValuesB);
+  debugDev('Record values B: %o', recordValuesB);
 
   // Check record type if e & f -> false
 
   const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
-  debug('Compared record values: %o', comparedRecordValues);
+  debugDev('Compared record values: %o', comparedRecordValues);
 
   return validateCompareResults(comparedRecordValues);
 */

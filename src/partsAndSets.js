@@ -5,6 +5,7 @@ import {getExtentsForPartsAndSets} from './partsAndSetsExtent';
 import createDebugLogger from 'debug';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:partsAndSets');
+const debugDev = debug.extend('dev');
 const debugData = debug.extend('data');
 
 // This validator checks (or tries to check) that a record that describes a part of a set and a record
@@ -85,7 +86,7 @@ export function getTitleForPartsAndSets(record) {
   //debug(titleFeatures);
   //const type = getTitleType(title);
   const featuresType = getTitleFeaturesType(titleFeatures);
-  debug(featuresType);
+  debugDev(`FeaturesType: ${featuresType}`);
 
   return {...titleFeatures, type: featuresType};
 }
@@ -103,9 +104,9 @@ export function getTitleFeaturesType(title) {
   // If we have one subfield $n and its has not `1-2` type of content we can assume part
   // Note: we can have a case where we have a set of subparts that contain a part ...
   if (numbersOfPartInSectionOfAWork.length === 1) {
-    debug(`We have a number: ${numbersOfPartInSectionOfAWork[0]}`);
+    debugDev(`We have a number: ${numbersOfPartInSectionOfAWork[0]}`);
     if (numbersOfPartInSectionOfAWork[0].match(/\d+-\d+/u)) {
-      debug(`But number is of several parts: ${numbersOfPartInSectionOfAWork[0]}`);
+      debugDev(`But number is of several parts: ${numbersOfPartInSectionOfAWork[0]}`);
       return 'unknown';
     }
     return 'part';
@@ -113,7 +114,7 @@ export function getTitleFeaturesType(title) {
 
   // If we have a subgield $p we can assume part
   if (namesOfPartInSectionOfAWork.length === 1) {
-    debug(`We have a name: ${namesOfPartInSectionOfAWork[0]}`);
+    debugDev(`We have a name: ${namesOfPartInSectionOfAWork[0]}`);
     return 'part';
   }
 

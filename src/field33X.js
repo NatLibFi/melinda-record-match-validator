@@ -7,13 +7,14 @@ import {hasFields, getSubfield} from './collectFunctions/collectUtils';
 import {compareArrayContent} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field33X');
-
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 // COLLECT:
 function get33Xb(record, tag) {
   const types = hasFields(tag, record, getSubfield, 'b');
-  debug('Field %s types: %o', tag, types);
-  nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debug);
+  debugDev('Field %s types: %o', tag, types);
+  nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debugDev);
   return {types};
 }
 
@@ -40,7 +41,7 @@ export function get338bCarrierType(record) { // Test-only
 function compare33XType(recordValuesA, recordValuesB, tag) {
   const f33XA = recordValuesA[tag];
   const f33XB = recordValuesB[tag];
-  debug('%s type(s): %o vs %o', tag, f33XA, f33XB);
+  debugDev('%s type(s): %o vs %o', tag, f33XA, f33XB);
 
   return compareArrayContent(f33XA.types, f33XB.types);
 }
@@ -62,7 +63,7 @@ export function compare338CarrierType(recordValuesA, recordValuesB) {
 function check33X(record1, record2, tag) {
   const data1 = get33Xb(record1, tag);
   const data2 = get33Xb(record2, tag);
-  debug('CC Field %s types: %o vs %o', tag, data1, data2);
+  debugDev('CC Field %s types: %o vs %o', tag, data1, data2);
   return compareArrayContent(data1.types, data2.types);
   //return compare336ContentType(data1, data2);
 }
