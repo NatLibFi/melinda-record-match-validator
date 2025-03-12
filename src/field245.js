@@ -6,20 +6,24 @@ import {compareValueContent} from './compareFunctions/compareUtils';
 //import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
+
+// Note: title.js replaces this
 
 // 245 n & p
 // tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
 // niissä tapauksissa, joissa tuodaan alunperin marc21-kirjastodataa tai yhdistetään Melindan tietueita, tää on oleellisehko
 export function get245(record) {
   const [f245] = hasFields('245', record, f245ToJSON);
-  debug('Field 245 info: %o', f245);
+  debugDev('Field 245 info: %o', f245);
 
   return f245;
 
   function f245ToJSON(field) {
     const title = stripPunc(getSubfield(field, 'a'));
     const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
-    // Note: both $p and $n are repeatable, do we get only first(?) instances of them here?
+    // Note: both $p and $n are repeatable, we get only first instances of them here?
     const numberOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'n'));
     const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
 
@@ -28,8 +32,9 @@ export function get245(record) {
 }
 
 function compare245data(f245A, f245B) {
+  // NOTE: we do nothing with f245 $b remainderOfTitle here!
   return {
-    'nameOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 name: '),
+    'nameOfPartInSectionOfAWork': compareValueContent(f245A.nameOfPartInSectionOfAWork, f245B.nameOfPartInSectionOfAWork, '245 name: '),
     'numberOfPartInSectionOfAWork': compareValueContent(f245A.numberOfPartInSectionOfAWork, f245B.numberOfPartInSectionOfAWork, '245 number: '),
     'title': compareValueContent(f245A.title, f245B.title, '245 title: ')
   };
@@ -41,7 +46,7 @@ function compare245data(f245A, f245B) {
 export function compare245(recordValuesA, recordValuesB) {
   const f245A = recordValuesA['245'];
   const f245B = recordValuesB['245'];
-  debug('%o vs %o', f245A, f245B);
+  debugDev('%o vs %o', f245A, f245B);
   return compare245data(f245A, f245B);
 }
 

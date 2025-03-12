@@ -4,6 +4,16 @@
     "numberOfPartInSectionOfAWork": "undefined",
     "title": "773testi /"
   },
+  "title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "773testi /"
+    }
+  },
   "336": {
     "types": [
       "txt"

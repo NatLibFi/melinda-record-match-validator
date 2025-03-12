@@ -5,6 +5,16 @@
         "remainderOfTitle": "undefined",
         "title": "Studia Romanica Upsaliensia"
     },
+  "title": {
+        "f946Features": [],
+        "seriesFeatures": [],
+        "titleFeatures": {
+          "namesOfPartInSectionOfAWork": [],
+          "numbersOfPartInSectionOfAWork": [],
+          "remainderOfTitle": "undefined",
+          "title": "Studia Romanica Upsaliensia"
+        }
+      },
     "336": {
         "types": [
             "txt"

@@ -1,0 +1,13 @@
+{
+    "description": "Get type 'part' if there is a number of a part",
+
+    "title": {
+        "title": "Entisajan Forssaa ja sen väkeä",
+        "remainderOfTitle": "undefined",
+        "numbersOfPartInSectionOfAWork": ["Osa 1"],
+        "namesOfPartInSectionOfAWork": ["Osan nimi"]
+    },
+    "expectedResults": "part",
+    "skip": false,
+    "only": false
+}

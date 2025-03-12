@@ -4,10 +4,12 @@ import createDebugLogger from 'debug';
 import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:fieldLOW');
+const debugDev = debug.extend('dev');
+const debugData = debug.extend('data');
 
 export function getLOW(record) {
   const LOWs = hasFields('LOW', record, getSubfield, 'a');
-  debug('LOWs: %o', LOWs);
+  debugData('LOWs: %o', LOWs);
   return LOWs;
 }
 
@@ -22,13 +24,13 @@ const LOW2Points = {
 
 
 function compareLOWValues(LOWsA, LOWsB) {
-  debug('compareLOW: A: %o vs B: %o', LOWsA, LOWsB);
+  debugDev('compareLOW: A: %o vs B: %o', LOWsA, LOWsB);
 
   // return compareArrayContent(LOWsA, LOWsB, true); // NV: size does not matter
 
   const score1 = lowFieldsToScore(LOWsA);
   const score2 = lowFieldsToScore(LOWsB);
-  nvdebug(`LOW scores: ${score1} vs ${score2}`, debug);
+  nvdebug(`LOW scores: ${score1} vs ${score2}`, debugDev);
   if (score1 > score2) {
     return 'A';
   }

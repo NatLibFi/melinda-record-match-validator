@@ -1,12 +1,56 @@
 import createDebugLogger from 'debug';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils');
+const debugDev = debug.extend('dev');
+const debugData = debug.extend('data');
 
-export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
-  debug('"%o" vs "%o"', arrayA, arrayB);
+
+export function compareArrayContentRequireAll(arrayA, arrayB, prefix = '') {
+  debugDev(`${prefix}"%o" vs "%o"`, arrayA, arrayB);
   // true: sets are equal
-  // A: B is a subset of A
-  // B: A is a sibset of B
+  // false: contents mismatch
+  const normalizedArrayA = arrayA.map(value => normalizeStrings(value));
+  const normalizedArrayB = arrayB.map(value => normalizeStrings(value));
+
+  const onlyA = normalizedArrayA.filter(value => !normalizedArrayB.includes(value));
+  const onlyB = normalizedArrayB.filter(value => !normalizedArrayA.includes(value));
+
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  //debug(onlyA);
+  //debug(onlyB);
+  if (onlyA.length === 0 && onlyB.length === 0) {
+    return true;
+  }
+
+  debugDev(`${prefix} Arrays A or B do not contain all values from each other`);
+  return false;
+}
+
+export function compareStringToArray(string, array, prefix = '') {
+  debugDev(`${prefix}"%o" vs "%o"`, string, array);
+  // true: string found in array
+  // false: string not found in array
+  const normalizedString = normalizeStrings(string);
+  const normalizedArray = array.map(value => normalizeStrings(value));
+
+  const found = normalizedArray.filter(value => value === normalizedString);
+
+  // Same content, different order (NB: true even when [ A, A, B ] vs [ B, B, A ]).
+  // Anyway, close enough, and not sure which to prefer, thus return true:
+  if (found.length > 0) {
+    return true;
+  }
+
+  debugDev(`${prefix} Array does not contain string`);
+  return false;
+}
+
+export function compareArrayContent(arrayA, arrayB, prefix = '' /*, ifOtherEmpty = false*/) {
+  debugDev(`${prefix}"%o" vs "%o"`, arrayA, arrayB);
+  // true: sets are equal
+  // A: B is a subset of A - note: empty array is a subset of any non-empty array!
+  // B: A is a subset of B - note: empty array is a subset of any non-empty array!
   // false: contents mismatch
 
   // NV: I don't think we really need ifOtherEmpty at all.
@@ -56,7 +100,7 @@ export function compareArrayContent(arrayA, arrayB /*, ifOtherEmpty = false*/) {
   }
   */
 
-  debug('Arrays A or B do not contain all values from each other');
+  debugDev(`${prefix}Arrays A or B do not contain all values from each other`);
   return false;
 }
 
@@ -64,55 +108,58 @@ const threshold = 0.6;
 // eslint-disable-next-line max-statements
 export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
-    debug(`${prefix}Value A and B are "undefined"`);
+    debugDev(`${prefix}Value A and B are "undefined"`);
     return 'undefined';
   }
 
   if (valueA === 'undefined') {
-    debug(`${prefix}Value A is "undefined"`);
+    debugDev(`${prefix}Value A is "undefined"`);
     return 'B';
   }
 
   if (valueB === 'undefined') {
-    debug(`${prefix}Value B is "undefined"`);
+    debugDev(`${prefix}Value B is "undefined"`);
     return 'A';
   }
 
   if (valueA === valueB) {
-    debug(`${prefix}Value A and B are same`);
+    debugDev(`${prefix}Value A and B are same`);
     return true;
   }
 
-  const valueAContainsBAvg = compareStrings(valueA, valueB);
-  const valueBContainsAAvg = compareStrings(valueB, valueA);
+  const valueAContainsBAvg = compareStrings(valueA, valueB, prefix);
+  const valueBContainsAAvg = compareStrings(valueB, valueA, prefix);
 
   if (valueAContainsBAvg === 1 && valueBContainsAAvg === 1) {
-    debug('Normalized values of A and B are same: %o', valueAContainsBAvg);
+    debugDev(`${prefix}Normalized values of A and B are same: %o`, valueAContainsBAvg);
     return true;
   }
 
+  // DEVELOP: if contain-% are same we return false!
+  // This might be a good idea (for example part numbers?)
+
   if (valueAContainsBAvg > valueBContainsAAvg && valueAContainsBAvg > threshold) {
-    debug('Value A contains %o of B', valueAContainsBAvg);
+    debugDev(`${prefix}Value A contains %o of B`, valueAContainsBAvg);
     return 'A';
   }
 
   if (valueBContainsAAvg > valueAContainsBAvg && valueBContainsAAvg > threshold) {
-    debug('Value B contains %o of A', valueBContainsAAvg);
+    debugDev(`${prefix}Value B contains %o of A`, valueBContainsAAvg);
     return 'B';
   }
 
-  debug('Value A contains %o of B', valueAContainsBAvg);
-  debug('Value B contains %o of A', valueBContainsAAvg);
-  debug(`${prefix}Minimium of ${threshold} did not happen setting: false`);
+  debugDev(`${prefix}Value A contains %o of B`, valueAContainsBAvg);
+  debugDev(`${prefix}Value B contains %o of A`, valueBContainsAAvg);
+  debugDev(`${prefix}Minimum of ${threshold} did not happen setting: false`);
 
   return false;
 
-  function compareStrings(stringCompareTo, stringToCompare) {
+  function compareStrings(stringCompareTo, stringToCompare, prefix = '') {
     const stringCompareToNormalizedLowerCase = normalizeStrings(stringCompareTo).toLowerCase();
     const stringToCompareNormalizedLowerCase = normalizeStrings(stringToCompare).toLowerCase();
 
-    debug('StringCompareTo: %o', stringCompareToNormalizedLowerCase);
-    debug('StringToCompare: %o', stringToCompareNormalizedLowerCase);
+    debugData(`${prefix}StringCompareTo: %o`, stringCompareToNormalizedLowerCase);
+    debugData(`${prefix}StringToCompare: %o`, stringToCompareNormalizedLowerCase);
 
     const wordArray = stringToCompareNormalizedLowerCase.split(' ');
     const foundWords = wordArray.filter(word => stringCompareToNormalizedLowerCase.includes(word));
@@ -120,13 +167,13 @@ export function compareValueContent(valueA, valueB, prefix = '') {
     const averageFoundWords = foundWords.length / wordArray.length;
     return averageFoundWords;
   }
+}
 
-  function normalizeStrings(stringValue) {
-    // decompose/precompose diacritics here
-    const compNormalizedStringValue = String(stringValue).normalize('NFD');
+function normalizeStrings(stringValue) {
+  // decompose/precompose diacritics here
+  const compNormalizedStringValue = String(stringValue).normalize('NFD');
 
-    return compNormalizedStringValue
-      .replace(/[^\w\s\p{Alphabetic}]/gu, '')
-      .trim();
-  }
+  return compNormalizedStringValue
+    .replace(/[^\w\s\p{Alphabetic}]/gu, '')
+    .trim();
 }

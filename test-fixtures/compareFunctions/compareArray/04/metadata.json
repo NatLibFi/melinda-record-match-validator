@@ -1,0 +1,8 @@
+{
+    "description": "Return 'A' for two arrays with where second one includes subset of first one",
+    "arrayA": ["FOO", "BAR"],
+    "arrayB": ["BAR"],
+    "expectedResult": "A",
+    "skip": false,
+    "only": false
+}

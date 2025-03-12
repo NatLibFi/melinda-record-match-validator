@@ -1,0 +1,8 @@
+{
+    "description": "Return true for two arrays with same elements in differing order",
+    "arrayA": ["FOO", "BAR"],
+    "arrayB": ["BAR", "FOO"],
+    "expectedResult": true,
+    "skip": false,
+    "only": false
+}

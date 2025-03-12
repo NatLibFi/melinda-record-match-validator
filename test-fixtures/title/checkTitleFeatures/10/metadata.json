@@ -1,0 +1,31 @@
+{
+    "description": "Return true if only mismatch is in diacritics [MET-406]",
+    "note": "Actual case in [MET-406] has also a typo in title",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Behtolaccat ja ipmasat",
+                "remainderOfTitle": "noveallat",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Behtolaččat ja ipmašat",
+                "remainderOfTitle": "Noveallat",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "expectedResults": true
+}

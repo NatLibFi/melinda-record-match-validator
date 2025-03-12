@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/melinda-record-match-validator",
-  "version": "2.2.5",
+  "version": "2.3.0-alpha.3",
   "description": "Validates if two records matched by melinda-record-matching can be merged and sets merge priority",
   "main": "dist/index.js",
   "repository": {
@@ -30,37 +30,37 @@
     "lint": "eslint src",
     "lint:dev": "eslint --fix src",
     "test:base": "cross-env NODE_ENV=test nyc mocha --require @babel/register",
-    "test": "npm run lint && npm run test:base -- --recursive src",
-    "test:dev": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- --recursive src && npm run coverage",
-    "test:dev:collect": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- src/collectRecordValues.spec.js && npm run coverage",
-    "test:dev:compare": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- src/compareRecordValues.spec.js && npm run coverage",
+    "test": "npm run lint && npm run test:base -- --recursive test",
+    "test:dev": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- --recursive test && npm run coverage",
+    "test:dev:collect": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/collectRecordValues.spec.js && npm run coverage",
+    "test:dev:compare": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/compareRecordValues.spec.js && npm run coverage",
     "coverage": "nyc check-coverage --per-file",
     "build": "babel src --source-maps --copy-files --delete-dir-on-start --out-dir=dist",
     "watch:test": "cross-env NODE_ENV=test nodemon -w src -w test-fixtures --exec 'npm run test:dev'"
   },
   "dependencies": {
-    "@natlibfi/marc-record": "^9.1.2",
-    "@natlibfi/melinda-commons": "^13.0.18",
+    "@natlibfi/marc-record": "^9.1.4",
+    "@natlibfi/melinda-commons": "^13.0.19",
     "debug": "^4.4.0",
-    "isbn3": "^1.2.6",
+    "isbn3": "^1.2.8",
     "moment": "^2.30.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
-    "@babel/core": "^7.26.0",
+    "@babel/core": "^7.26.10",
     "@babel/node": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-env": "^7.26.9",
     "@babel/register": "^7.25.9",
     "@natlibfi/eslint-config-melinda-backend": "^3.0.5",
-    "@natlibfi/fixugen": "^2.0.12",
-    "@natlibfi/fixura": "^3.0.11",
+    "@natlibfi/fixugen": "^2.0.13",
+    "@natlibfi/fixura": "^3.0.12",
     "babel-plugin-istanbul": "^7.0.0",
     "babel-plugin-rewire": "^1.2.0",
     "chai": "^4.5.0",
     "chai-as-promised": "^7.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.1",
-    "mocha": "^11.0.1",
+    "mocha": "^11.1.0",
     "nodemon": "^3.1.9",
     "nyc": "^17.1.0"
   },
@@ -91,8 +91,7 @@
       "*/**/*.spec.js"
     ],
     "reporter": [
-      "lcov",
-      "html"
+      "text"
     ],
     "require": [
       "@babel/register"

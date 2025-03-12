@@ -5,6 +5,16 @@
     "remainderOfTitle": "undefined",
     "title": "European citizenship"
   },
+  "title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "European citizenship"
+    }
+  },
   "336": {
     "types": [
       "txt"
@@ -31,8 +41,8 @@
       "level": "Core level"
     },
     "prepublicationLevel": {
-        "code": "0",
-        "level": "Not a prepublication"
+      "code": "0",
+      "level": "Not a prepublication"
     },
     "typeOfRecord": {
       "code": "a",
