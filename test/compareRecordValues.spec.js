@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {compareRecordValues} from './compareRecordValues';
+import {compareRecordValues} from '../src/compareRecordValues';
 
 generateTests({
   callback,

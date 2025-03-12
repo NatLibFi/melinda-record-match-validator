@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {parseExtentString, getExtentType} from './partsAndSetsExtent';
+import {parseExtentString, getExtentType} from '../src/partsAndSetsExtent';
 //import createDebugLogger from 'debug';
 
 

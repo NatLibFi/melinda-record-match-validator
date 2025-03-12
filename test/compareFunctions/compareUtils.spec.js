@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent, compareArrayContentRequireAll} from './compareUtils';
+import {compareArrayContent, compareValueContent, compareArrayContentRequireAll} from '../../src/compareFunctions/compareUtils';
 
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils:test');

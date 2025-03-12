@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import {MarcRecord} from '@natlibfi/marc-record';
 import generateTests from '@natlibfi/fixugen';
-import {collectRecordValues} from './collectRecordValues';
+import {collectRecordValues} from '../src/collectRecordValues';
 
 generateTests({
   callback,

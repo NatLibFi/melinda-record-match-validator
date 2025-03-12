@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getAllTitleFeatures, compareAllTitleFeatures} from './title';
+import {getAllTitleFeatures, compareAllTitleFeatures} from '../src/title';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 

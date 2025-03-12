@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import createDebugLogger from 'debug';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import validateRecordMatch from './index';
+import validateRecordMatch from '../src/index';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index:test');
 
