@@ -5,6 +5,21 @@
     "remainderOfTitle": "undefined",
     "title": "Kuinka äkäpussi kesytetään"
   },
+"title": {
+    "f946Features": [],
+    "seriesFeatures": [
+      {
+        "seriesNumber": "undefined",
+        "seriesTitle": "Shakespeare"
+      }
+    ],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "Kuinka äkäpussi kesytetään"
+    }
+  },
   "336": {
     "types": [
       "txt"

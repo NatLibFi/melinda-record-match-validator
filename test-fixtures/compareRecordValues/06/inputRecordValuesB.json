@@ -4,6 +4,16 @@
     "numberOfPartInSectionOfAWork": "undefined",
     "title": "African dental journal :"
   },
+  "title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "African dental journal :"
+    }
+  },
   "336": {
     "types": [
       "spw"

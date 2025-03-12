@@ -1,0 +1,65 @@
+{
+    "description": "Return true if theres a series match (f245 vs f245 + f490)",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+        "titleFeatures": {
+            "title": "Asterix Belgiassa",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Asterix",
+                "seriesNumber": "24"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Asterix 24: Asterix Belgiassa",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            {
+                "title": "Asterix 24:",
+                "remainderOfTitle": "Asterix Belgiassa",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }},
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Asterix 24:",
+                "remainderOfTitle": "Asterix Belgiassa",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [
+                {
+                    "seriesTitle": "Asterix",
+                    "seriesNumber": "24"
+                }
+            ],
+            "f946Features": [
+                {
+                    "title": "Asterix 24: Asterix Belgiassa",
+                    "remainderOfTitle": "undefined",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                },
+                {
+                    "title": "Asterix 24:",
+                    "remainderOfTitle": "Asterix Belgiassa",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                }
+            ]
+        }
+    },
+    "expectedResults": true
+}

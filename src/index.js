@@ -7,7 +7,8 @@ import {checkSID} from './fieldSID';
 import {checkLOW} from './fieldLOW';
 import {checkCAT} from './fieldCAT';
 import {check040b, check040e} from './field040';
-import {check245} from './field245';
+//import {check245} from './field245';
+import {checkAllTitleFeatures} from './title';
 import {checkPublisher} from './field26X';
 //import {getSubfieldValues} from './collectFunctions/collectUtils';
 //import {collectRecordValues} from './collectRecordValues';
@@ -24,13 +25,11 @@ import {performAudioSanityCheck} from './sanityCheckAudio';
 import {performDaisySanityCheck} from './sanityCheckDaisy';
 import {performDvdSanityCheck} from './sanityCheckDvd';
 import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer';
+import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
-
-function nvdebug(message) {
-  debug(message);
-  //console.info(message); // eslint-disable-line no-console
-}
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 function checkExistence({record1, record2}) {
   if (record1 === undefined || record2 === undefined) {
@@ -51,7 +50,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'field 042: authentication code (preference only)', 'function': check042},
   {'description': 'CAT test (preference only)', 'function': checkCAT},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
-  {'description': 'field 245 (title)', 'function': check245},
+  {'description': 'field 245 (title)', 'function': checkAllTitleFeatures},
+  //{'description': 'field 245 (title)', 'function': check245},
   {'description': 'field 336 (content type) test (validation and preference)', 'function': check336},
   {'description': 'field 337 (media type) test (validation and preference)', 'function': check337},
   {'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338},
@@ -64,7 +64,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck},
   {'description': 'DVD vs Blu-Ray sanity check (validation only)', 'function': performDvdSanityCheck},
   {'description': 'ISBN qualifier sanity check (validation only)', 'function': performIsbnQualifierCheck},
-  {'description': 'Parts vs checks test (validation)', 'function': compareRecordsPartSetFeatures}
+  {'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
@@ -86,7 +86,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External});
   // If any test fails, return false.
   if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
-    nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`);
+    nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
     return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
   }
 
@@ -139,14 +139,14 @@ export default ({record1Object, record2Object, checkPreference = true, record1Ex
     throw new Error('Record missing!');
   }
   const recordValuesA = collectRecordValues(recordA);
-  debug('Record values A: %o', recordValuesA);
+  debugDev('Record values A: %o', recordValuesA);
   const recordValuesB = collectRecordValues(recordB);
-  debug('Record values B: %o', recordValuesB);
+  debugDev('Record values B: %o', recordValuesB);
 
   // Check record type if e & f -> false
 
   const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
-  debug('Compared record values: %o', comparedRecordValues);
+  debugDev('Compared record values: %o', comparedRecordValues);
 
   return validateCompareResults(comparedRecordValues);
 */

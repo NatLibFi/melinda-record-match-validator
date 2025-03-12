@@ -1,0 +1,42 @@
+{
+    "description": "Return true if all titleFeatures match (several f245 $n & $p - differing order)",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Räsästen sukuyhdistys ry",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [
+                    "II-osa",
+                    "I-osa"
+                ],
+                "namesOfPartInSectionOfAWork": [
+                    "DNA-tutkimus 2023",
+                    "Historiikki 1945-2023"
+                ]
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Räsästen sukuyhdistys ry",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [
+                    "I-osa",
+                    "II-osa"
+                ],
+                "namesOfPartInSectionOfAWork": [
+                    "Historiikki 1945-2023",
+                    "DNA-tutkimus 2023"
+                ]
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "expectedResults": true
+}

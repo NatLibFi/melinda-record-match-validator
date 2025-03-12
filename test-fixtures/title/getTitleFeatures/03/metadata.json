@@ -1,0 +1,21 @@
+{
+    "description": "Get title features: multiple f245 $n and $p",
+    "skip": false,
+    "only": false,
+    "expectedResults": {
+        "titleFeatures": {
+            "title": "Räsästen sukuyhdistys ry",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": [
+                "I-osa",
+                "II-osa"
+            ],
+            "namesOfPartInSectionOfAWork": [
+                "Historiikki 1945-2023",
+                "DNA-tutkimus 2023"
+            ]
+        },
+        "seriesFeatures": [],
+        "f946Features": []
+    }
+}

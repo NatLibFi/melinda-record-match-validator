@@ -3,11 +3,13 @@ import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './
 import {hasIdMismatch, normalizeMelindaId, nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field773');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 function getX73(record, paramTag) {
   // Tag should be 773 or 973. Add sanity check?
   const F773s = hasFields(paramTag, record, f773ToJSON);
-  debug('Field %ss: %o', paramTag, F773s);
+  debugDev('Field %ss: %o', paramTag, F773s);
 
   return F773s;
 
@@ -51,10 +53,10 @@ export function check773({record1, record2}) {
 
 function compare773values(f773sA, f773sB) {
 
-  debug('Collected f773s: %o vs %o', f773sA, f773sB);
-  nvdebug('compare773values() in...');
-  nvdebug(JSON.stringify(f773sA), debug);
-  nvdebug(JSON.stringify(f773sB), debug);
+  debugDev('Collected f773s: %o vs %o', f773sA, f773sB);
+  nvdebug('compare773values() in...', debugDev);
+  nvdebug(JSON.stringify(f773sA), debugDev);
+  nvdebug(JSON.stringify(f773sB), debugDev);
 
   // Fail if one of the records has multiple 773/973 fields:
   // (Multiple 773 fields means that it's a Viola record, or that some weeding is need first.)
@@ -88,7 +90,7 @@ function compare773values(f773sA, f773sB) {
   return innerCompare(f773sA[0], f773sB[0]);
 
   function noMultivals(val1, val2) {
-    nvdebug(`compare '${val1}' vs '${val2}' (default: '${undefinedHack}')`, debug);
+    nvdebug(`compare '${val1}' vs '${val2}' (default: '${undefinedHack}')`, debugDev);
     return val1 === val2 || !val1 || !val2 || val1 === undefinedHack || val2 === undefinedHack;
   }
 
@@ -98,12 +100,12 @@ function compare773values(f773sA, f773sB) {
 
   function innerCompare(data1, data2) {
     const recordControlNumbers = acceptControlNumbers(data1.recordControlNumbers, data2.recordControlNumbers);
-    nvdebug(`RECORD CONTROL NUMBERS ${recordControlNumbers}`, debug);
+    nvdebug(`RECORD CONTROL NUMBERS ${recordControlNumbers}`, debugDev);
     // $g and $q are optional:
     const relatedParts = noMultivals(data1.relatedParts, data2.relatedParts);
     const enumerationAndFirstPage = noMultivals(data1.enumerationAndFirstPage, data2.enumerationAndFirstPage);
-    nvdebug(`RCN ${recordControlNumbers}\tRP ${relatedParts ? 'true' : 'false'}\tEAFP ${enumerationAndFirstPage ? 'true' : 'false'}`, debug);
-    nvdebug(`SOME RESULT: ${enumerationAndFirstPage && recordControlNumbers && relatedParts ? 'true' : 'false'}`);
+    nvdebug(`RCN ${recordControlNumbers}\tRP ${relatedParts ? 'true' : 'false'}\tEAFP ${enumerationAndFirstPage ? 'true' : 'false'}`, debugDev);
+    nvdebug(`SOME RESULT: ${enumerationAndFirstPage && recordControlNumbers && relatedParts ? 'true' : 'false'}`, debugDev);
     return enumerationAndFirstPage && recordControlNumbers && relatedParts;
   }
 }

@@ -3,6 +3,8 @@ import createDebugLogger from 'debug';
 import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 // Descriptions of type of record, bibliographical level and encoding level are taken from official specs:
 // https://www.loc.gov/marc/bibliographic/bdleader.html
@@ -133,9 +135,9 @@ export function getRecordInfo(record) {
 
 // eslint-disable-next-line max-statements
 function rateValues(valueA, valueB, rateArray) {
-  debug('%o vs %o', valueA, valueB);
+  debugDev('%o vs %o', valueA, valueB);
   if (valueA.code === valueB.code) {
-    debug('Both same: returning true');
+    debugDev('Both same: returning true');
     return true;
   }
 
@@ -145,53 +147,53 @@ function rateValues(valueA, valueB, rateArray) {
 
     if (ratingOfA === 0) {
       if (ratingOfB !== 0) {
-        debug('A\'s value not found in array. Return B');
+        debugDev('A\'s value not found in array. Return B');
         return 'B';
       }
-      //debug('Value not found from array');
+      //debugDev('Value not found from array');
       return false;
     }
     if (ratingOfB === 0) {
-      debug('B\'s value not found in array. Return A');
+      debugDev('B\'s value not found in array. Return A');
       return 'A';
     }
 
 
     if (ratingOfA < ratingOfB) {
-      debug('A better: returning A');
+      debugDev('A better: returning A');
       return 'A';
     }
 
-    debug('B better: returning B');
+    debugDev('B better: returning B');
     return 'B';
   }
 
-  debug('Both different: returning false');
+  debugDev('Both different: returning false');
   return false;
 }
 
 function compareTypeOfRecord(a, b) {
-  debug('Record A type: %o', a);
-  debug('Record B type: %o', b);
-  //nvdebug(`type of record: '${a}' vs '${b}', debug`);
+  debugDev('Record A type: %o', a);
+  debugDev('Record B type: %o', b);
+  //nvdebug(`type of record: '${a}' vs '${b}', debugDev`);
   return rateValues(a, b);
 }
 
 function compareBibliographicalLevel(a, b) {
-  debug('Record A bib level: %o', a);
-  debug('Record B bib level: %o', b);
+  debugDev('Record A bib level: %o', a);
+  debugDev('Record B bib level: %o', b);
 
   return rateValues(a, b);
 }
 
 // eslint-disable-next-line max-params
 function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourceB) {
-  debug('Record A completion level: %o', a);
-  debug('Record B completion level: %o', b);
-  nvdebug(prePubA ? `Record A prepub level: ${JSON.stringify(prePubA)}` : 'N/A', debug);
-  nvdebug(prePubB ? `Record B prepub level: ${JSON.stringify(prePubB)}` : 'N/A', debug);
-  nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debug);
-  nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debug);
+  debugDev('Record A completion level: %o', a);
+  debugDev('Record B completion level: %o', b);
+  nvdebug(prePubA ? `Record A prepub level: ${JSON.stringify(prePubA)}` : 'N/A', debugDev);
+  nvdebug(prePubB ? `Record B prepub level: ${JSON.stringify(prePubB)}` : 'N/A', debugDev);
+  nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debugDev);
+  nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debugDev);
 
   if (prePubA && prePubB && a.code === '8' && b.code === '8') { // Handle exception first: all prepublications are not equal!
 
@@ -223,8 +225,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
     bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
   };
-  //nvdebug('NV WP9', debug);// eslint-disable-line no-console
-  //nvdebug(JSON.stringify(result), debug); // eslint-disable-line no-console
+  //nvdebug('NV WP9', debugDev);// eslint-disable-line no-console
+  //nvdebug(JSON.stringify(result), debugDev); // eslint-disable-line no-console
   return result;
 }
 
@@ -235,21 +237,21 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
   const recordSource2 = record2External.recordSource || undefined;
 
 
-  debug(`checkLeader()`); // eslint-disable-line no-console
+  debugDev(`checkLeader()`); // eslint-disable-line no-console
 
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
-    debug(`LDR: type of record failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: type of record failed!`); // eslint-disable-line no-console
     return false;
   }
 
   if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
-    debug(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
     return false;
   }
 
   const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordSource1, recordSource2);
   if (encodingLevelPreference === false) {
-    debug(`LDR: encoding level failed!`);
+    debugDev(`LDR: encoding level failed!`);
     return false;
   }
 

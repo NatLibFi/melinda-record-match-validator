@@ -1,0 +1,37 @@
+{
+    "description": "Get titleFeatures: series title and number for several f490",
+    "skip": false,
+    "only": false,
+    "expectedResults": {
+        "titleFeatures": {
+            "title": "Asterix Belgiassa",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Asterix",
+                "seriesNumber": "24"
+            },
+            {
+               "seriesNumber": "undefined",
+               "seriesTitle": "Parhaat sarjakuvat"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Asterix 24: Asterix Belgiassa",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            {
+                "title": "Asterix 24:",
+                "remainderOfTitle": "Asterix Belgiassa",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }
+}

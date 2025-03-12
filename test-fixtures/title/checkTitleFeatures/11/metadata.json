@@ -1,0 +1,37 @@
+{
+    "description": "Return true if title matches with a title in f946",
+    "issueSolved": "[MET-416]",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "titleFeatures": {
+                "title": "Päivän tunnussana 2024 (iso, kartonkikantinen)",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "titleFeatures": {
+                "title": "Bazbar 2024",
+                "remainderOfTitle": "Foobar",
+                "numbersOfPartInSectionOfAWork": ["2024"],
+                "namesOfPartInSectionOfAWork": []
+            },
+            "seriesFeatures": [],
+            "f946Features": [ {
+                    "title": "Päivän tunnussana 2024 (iso, kartonkikantinen)",
+                    "remainderOfTitle": "undefined",
+                    "numbersOfPartInSectionOfAWork": [],
+                    "namesOfPartInSectionOfAWork": []
+                }
+            ]
+        }
+    },
+    "expectedResults": true
+}

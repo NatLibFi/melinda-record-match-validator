@@ -4,6 +4,8 @@ import createDebugLogger from 'debug';
 
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:CAT');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 export function getCAT(record) {
   // if not fields []
@@ -14,8 +16,8 @@ export function getCAT(record) {
     return {latest: {cataloger: 'undefined', time: 'undefined'}, otherCats: [], noCats: true};
   }
 
-  debug('Latest CAT: %o', latest);
-  debug('Other CATs: %o', otherCats);
+  debugDev('Latest CAT: %o', latest);
+  debugDev('Other CATs: %o', otherCats);
 
   return {latest, otherCats};
 
@@ -40,7 +42,7 @@ export function compareCAT(recordValuesA, recordValuesB) {
 // eslint-disable-next-line complexity, max-statements
 function innerCompareCat(CATsA, CATsB) {
 
-  debug('Comparing CATs: A: %o vs B: %o', CATsA, CATsB);
+  debugDev('Comparing CATs: A: %o vs B: %o', CATsA, CATsB);
 
   // No need for analysing CATs if neither of records has CATs
   if (CATsA.noCats && CATsB.noCats) {
@@ -49,15 +51,15 @@ function innerCompareCat(CATsA, CATsB) {
 
   // The latest CAT is same -> merging ok, no preference
   const hasSameLatestCAT = CATsA.latest.cataloger === CATsB.latest.cataloger && CATsA.latest.time === CATsB.latest.time;
-  debug('Has same latest CAT: %o', hasSameLatestCAT);
+  debugDev('Has same latest CAT: %o', hasSameLatestCAT);
 
   if (hasSameLatestCAT) {
     return true;
   }
 
-  debug(`-- Comparing AtoB`);
+  debugDev(`-- Comparing AtoB`);
   const resultA = analyzeCATs(CATsA, CATsB);
-  debug(`-- Comparing BtoA`);
+  debugDev(`-- Comparing BtoA`);
   const resultB = analyzeCATs(CATsB, CATsA);
 
   // Preference for record that has extra CATs after common CAT history
@@ -105,16 +107,16 @@ function innerCompareCat(CATsA, CATsB) {
   function analyzeCATs(CATsCompareTo, CATsToCompare) {
     // Look for identical CATs:
     const isAheadOfOther = compareIfArrayContainsCat(CATsToCompare.latest, CATsCompareTo.otherCats);
-    debug('Is ahead of the other: %o', isAheadOfOther);
+    debugDev('Is ahead of the other: %o', isAheadOfOther);
 
     const commonOtherCats = CATsCompareTo.otherCats.filter(cat => compareIfArrayContainsCat(cat, CATsToCompare.otherCats));
-    debug('Contains common CATs: %o', commonOtherCats);
+    debugDev('Contains common CATs: %o', commonOtherCats);
 
     const updatesAfterCommonCAT = CATsCompareTo.otherCats.indexOf(commonOtherCats[0]);
-    debug('Contains %o CATs after common CAT', updatesAfterCommonCAT);
+    debugDev('Contains %o CATs after common CAT', updatesAfterCommonCAT);
 
     const nonCompCats = catsContainNonImpOrLoad(CATsCompareTo.latest, CATsCompareTo.otherCats);
-    debug('CATs contains NON "IMP-" or "LOAD-" or "CONV-" CATs: %o', nonCompCats);
+    debugDev('CATs contains NON "IMP-" or "LOAD-" or "CONV-" CATs: %o', nonCompCats);
 
     return {
       isAheadOfOther,

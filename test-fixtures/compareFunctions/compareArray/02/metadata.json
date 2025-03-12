@@ -1,0 +1,8 @@
+{
+    "description": "Return true for two empty arrays",
+    "arrayA": [],
+    "arrayB": [],
+    "expectedResult": true,
+    "skip": false,
+    "only": false
+}

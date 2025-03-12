@@ -1,0 +1,33 @@
+{
+    "description": "Return titleFeatures",
+    "skip": false,
+    "only": false,
+    "expectedResults": {
+        "titleFeatures": {
+            "title": "Piiloleikki",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Vauva tunnustelee",
+                "seriesNumber": "undefined"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Vauva tunnustelee - Piiloleikki",
+                "remainderOfTitle": "undefined",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            },
+            {
+                "title": "Vauva tunnustelee",
+                "remainderOfTitle": "Piiloleikki",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }
+}

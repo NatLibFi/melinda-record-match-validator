@@ -7,6 +7,7 @@ import {getLOW} from './fieldLOW';
 import {getSID} from './fieldSID';
 import {get042} from './field042';
 import {get245} from './field245';
+import {getAllTitleFeatures} from './title';
 import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X';
 import {get773} from './field773';
 
@@ -23,6 +24,7 @@ export function collectRecordValues(record) {
     '008': get008(record),
     '042': get042(record),
     '245': get245(record),
+    'title': getAllTitleFeatures(record),
     '336': get336bContentType(record),
     '337': get337bMediaType(record),
     '338': get338bCarrierType(record),

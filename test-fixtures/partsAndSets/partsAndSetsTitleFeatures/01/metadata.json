@@ -1,0 +1,12 @@
+{
+    "description": "Get type 'unknown' if there are no names or numbers of parts in title",
+    "title": {
+            "title": "Entisajan Forssaa ja sen väkeä",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+    },
+    "expectedResults": "unknown",
+    "skip": false,
+    "only": false
+}

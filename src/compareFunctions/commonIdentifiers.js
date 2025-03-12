@@ -2,12 +2,14 @@ import createDebugLogger from 'debug';
 import {compareArrayContent, compareValueContent} from './compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareCommonIdentifiers');
+const debugDev = debug.extend('dev');
+//const debugData = debug.extend('data');
 
 
 export function compareCommonIdentifiers(recordValuesA, recordValuesB) {
   const commonIdentifiersA = recordValuesA.commonIdentifiers;
   const commonIdentifiersB = recordValuesB.commonIdentifiers;
-  debug('%o vs %o', commonIdentifiersA, commonIdentifiersB);
+  debugDev('%o vs %o', commonIdentifiersA, commonIdentifiersB);
 
   return {
     'deleted': commonIdentifiersA.deleted || commonIdentifiersB.deleted,

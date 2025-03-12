@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent} from './compareUtils';
+import {compareArrayContent, compareValueContent, compareArrayContentRequireAll} from './compareUtils';
 
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils:test');
@@ -10,6 +10,7 @@ const debugData = debug.extend('data');
 
 testValue();
 testArray();
+testArrayRequireAll();
 
 function testValue() {
   generateTests({
@@ -47,6 +48,25 @@ function testArray() {
   function callback({arrayA, arrayB, expectedResult}) {
 
     const result = compareArrayContent(arrayA, arrayB);
+
+    expect(result).to.eql(expectedResult);
+  }
+}
+
+function testArrayRequireAll() {
+  generateTests({
+    callback,
+    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArrayRequireAll'],
+    useMetadataFile: true,
+    recurse: false,
+    fixura: {
+      reader: READERS.JSON
+    }
+  });
+
+  function callback({arrayA, arrayB, expectedResult}) {
+
+    const result = compareArrayContentRequireAll(arrayA, arrayB);
 
     expect(result).to.eql(expectedResult);
   }
