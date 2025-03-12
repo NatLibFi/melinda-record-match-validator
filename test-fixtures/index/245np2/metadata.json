@@ -1,5 +1,6 @@
 {
-    "description": "FIX: 245$np: do not fail missing $n ($p matches)",
+    "description": "FIX/IMPLEMENT LATER 245$np: do not fail missing $n ($p matches)",
+    "notes": "Currently missing $n fails - should it?",
     "skip": true,
     "only": false
 }

@@ -1,5 +1,5 @@
 {
-    "description": "FIX: Do not fail differently constructed title vs series statements + extra information in title ",
+    "description": "IMPLEMENT LATER: Do not fail differently constructed title vs series statements + extra information in title ",
     "note": "This would need more mixing of title and series parts!",
     "issueNotSolved": "[MET-420]",
     "skip": true,
