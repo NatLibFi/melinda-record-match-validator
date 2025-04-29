@@ -28,14 +28,11 @@ function getX73(record, paramTag) {
   }
 
   function getRecordControlNumbers(field) {
-    // Get normalized subfields:
+    // Get normalized subfields that have an record control number with a source identifier:
     const wSubfields = getSubfieldValues(field, 'w')
       .map(value => normalizeMelindaId(value)) // normalize, though filter would succeed anyway
       .filter(value => !(/^[0-9]+$/u).test(value)); // Filter digit-only values away
-    if (wSubfields.length > 0) {
-      return wSubfields;
-    }
-    return getDefaultMissValue();
+    return wSubfields;
   }
 }
 
