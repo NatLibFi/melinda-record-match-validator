@@ -1,5 +1,5 @@
 {
     "description": "CREATE TEST: Compare test: 773 without source-prefix",
-    "skip": true,
-    "only": true
+    "skip": false,
+    "only": false
 }

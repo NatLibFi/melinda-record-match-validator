@@ -35,7 +35,8 @@ function getX73(record, paramTag) {
     if (wSubfields.length > 0) {
       return wSubfields;
     }
-    return getDefaultMissValue();
+    return [];
+    //return getDefaultMissValue();
   }
 }
 
@@ -95,6 +96,10 @@ function compare773values(f773sA, f773sB) {
   }
 
   function acceptControlNumbers(nums1, nums2) {
+    // Check that nums1 && nums2 are not undefined
+    /*if (nums1 === undefined || nums2 === undefined) {
+      return true;
+    }*/
     return !(nums1.some(val => hasIdMismatch(val, nums2)) || nums2.some(val2 => hasIdMismatch(val2, nums1)));
   }
 
