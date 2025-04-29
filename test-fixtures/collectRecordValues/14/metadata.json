@@ -1,0 +1,5 @@
+{
+    "description": "Should handle monographic component part with 773 $w that does not have a source prefix",
+    "skip": false,
+    "only": true
+}

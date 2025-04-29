@@ -1,0 +1,117 @@
+{
+  "245": {
+    "nameOfPartInSectionOfAWork": "undefined",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "remainderOfTitle": "undefined",
+    "title": "Lippulaulu"
+  },
+"title": {
+    "f946Features": [],
+    "seriesFeatures": [],
+    "titleFeatures": {
+      "namesOfPartInSectionOfAWork": [],
+      "numbersOfPartInSectionOfAWork": [],
+      "remainderOfTitle": "undefined",
+      "title": "Lippulaulu"
+    }
+  },
+  "336": {
+    "types": [
+      "prm"
+    ]
+  },
+  "337": {
+    "types": [
+      "s"
+    ]
+  },
+  "338": {
+    "types": []
+  },
+  "773": [
+    {
+      "enumerationAndFirstPage": "undefined",
+      "recordControlNumbers": [
+        "(FI-MELINDA)015633197",
+        "(FI-Arto)54331"
+      ],
+      "relatedParts": "Raita 7",
+      "tag": "773"
+    }
+  ],
+  "000": {
+    "bibliographicLevel": {
+      "code": "a",
+      "level": "Monographic component part"
+    },
+    "encodingLevel": {
+      "code": "4",
+      "level": "Core level"
+    },
+    "prepublicationLevel": {
+      "code": "0",
+      "level": "Not a prepublication"
+    },
+    "typeOfRecord": {
+      "code": "j",
+      "level": "Musical sound recording"
+    }
+  },
+  "001": {
+    "isMelindaId": true,
+    "value": "015906014"
+  },
+  "005": "2020-08-06T15:20:53",
+  "008": {
+    "catalogingSource": {
+      "code": " ",
+      "level": "National bibliographical agency"
+    },
+    "formOfItem": {
+      "code": "|",
+      "form": "No attempt to code"
+    },
+    "publicationStatus": {
+      "code": "s",
+      "level": "Single known/probable date"
+    }
+  },
+  "042": [
+    "finbd"
+  ],
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-FIX",
+      "time": "2020-08-06T15:20:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "LOAD-ID",
+        "time": "2019-08-31T01:14:00"
+      },
+      {
+        "cataloger": "LOAD-ID",
+        "time": "2019-07-13T00:07:00"
+      },
+      {
+        "cataloger": "LOAD-VIOLA",
+        "time": "2019-06-06T09:50:00"
+      }
+    ]
+  },
+  "LOW": [
+    "VIOLA",
+    "FIKKA"
+  ],
+  "SID": [
+    {
+      "database": "viola",
+      "id": "881913"
+    }
+  ],
+  "commonIdentifiers": {
+    "deleted": false,
+    "standardIdentifiers": [],
+    "title": "Lippulaulu"
+  }
+}
