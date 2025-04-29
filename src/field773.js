@@ -28,15 +28,11 @@ function getX73(record, paramTag) {
   }
 
   function getRecordControlNumbers(field) {
-    // Get normalized subfields:
+    // Get normalized subfields that have an record control number with a source identifier:
     const wSubfields = getSubfieldValues(field, 'w')
       .map(value => normalizeMelindaId(value)) // normalize, though filter would succeed anyway
       .filter(value => !(/^[0-9]+$/u).test(value)); // Filter digit-only values away
-    if (wSubfields.length > 0) {
-      return wSubfields;
-    }
-    return [];
-    //return getDefaultMissValue();
+    return wSubfields;
   }
 }
 
@@ -96,10 +92,6 @@ function compare773values(f773sA, f773sB) {
   }
 
   function acceptControlNumbers(nums1, nums2) {
-    // Check that nums1 && nums2 are not undefined
-    /*if (nums1 === undefined || nums2 === undefined) {
-      return true;
-    }*/
     return !(nums1.some(val => hasIdMismatch(val, nums2)) || nums2.some(val2 => hasIdMismatch(val2, nums1)));
   }
 
