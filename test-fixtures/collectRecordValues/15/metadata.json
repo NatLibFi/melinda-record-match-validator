@@ -1,0 +1,5 @@
+{
+    "description": "Should handle monographic component part without 773 $w",
+    "skip": false,
+    "only": true
+}
