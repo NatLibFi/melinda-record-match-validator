@@ -42,28 +42,49 @@ function checkExistence({record1, record2}) {
 }
 
 const comparisonTasks = [ // NB! These are/should be in priority order!
+  // undefined or deleted records cannot be merged (both automatic and human merge)
   {'description': 'existence (validation only)', 'function': checkExistence},
+  // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)
+  // DEVELOP: we'll need more nuanced check for human merge:
+  //          record type & specific bibliographic level can be warnings,
+  //          generic non-component / component difference should prevent merge
+  //          we should currently be able to block merge for records that *have* components, but that needs Melinda-search or f774, so...
   {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
+  // just preference also for human merge
   {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher}, // Bit high on the preference list, isn't it?
+  // what are we checking here? could probably be a warning for human merge
   {'description': '008 test (validation and preference)', 'function': check008},
+  // This test checks is just for preference despite its description!
+  // DEVELOP: human merge should not merge records with same LOW
   {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
+  // This test check 042 to preference
   {'description': 'field 042: authentication code (preference only)', 'function': check042},
   {'description': 'CAT test (preference only)', 'function': checkCAT},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
   {'description': 'field 245 (title)', 'function': checkAllTitleFeatures},
   //{'description': 'field 245 (title)', 'function': check245},
+  // human merge: warning
   {'description': 'field 336 (content type) test (validation and preference)', 'function': check336},
+  // human merge: warning
   {'description': 'field 337 (media type) test (validation and preference)', 'function': check337},
+  // human merge: warning
   {'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338},
+  // human merge: warning for subfields q&g - $w actually should be different ...
   {'description': '773 $wgq test (validation only)', 'function': check773},
   {'description': '040$b (language of cataloging) (preference only)', 'function': check040b},
   {'description': '040$e (description conventions) (preference only)', 'function': check040e},
   {'description': 'SID test (validation and preference)', 'function': checkSID},
+  // just preference?
   {'description': '005 timestamp test (validation and preference)', 'function': check005},
+  // human merge: warning
   {'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck},
+  // human merge: warning
   {'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck},
+  // human merge: warning
   {'description': 'DVD vs Blu-Ray sanity check (validation only)', 'function': performDvdSanityCheck},
+  // human merge: warning
   {'description': 'ISBN qualifier sanity check (validation only)', 'function': performIsbnQualifierCheck},
+  // human merge: warning
   {'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 

@@ -107,6 +107,9 @@ export function getRecordInfo(record) {
   }
   */
 
+  // DEVELOP:
+  // encoding level '2' && 'Koneellisesti tuotettu tietue'
+  // Non-all caps terms
   function getPrepublicationLevel(record, encodingLevel = '8') {
     if (encodingLevel !== '8') {
       return {code: '0', level: 'Not a prepublication'};
