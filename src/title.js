@@ -243,7 +243,7 @@ function checkTitleComparisonResult(result) {
   debugDev(`checkTitleComparisonResult: ${JSON.stringify(result)}`);
 
   // If we had undefined as titleFeatures, one of records is missing a title, we do not want to match these
-  if (result.undefinedTitleFeatures !== true) {
+  if (result.undefinedTitleFeatures !== undefined && result.undefinedTitleFeatures !== true) {
     return result.undefinedTitleFeatures;
   }
 
