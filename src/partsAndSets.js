@@ -24,10 +24,10 @@ export function getPartSetFeatures(record) {
 
   // Get parts and sets features from f300 : extent
   const extentsForPartsAndSets = getExtentsForPartsAndSets(record);
-  debugData(extentsForPartsAndSets);
+  debugData(`Extents: <${JSON.stringify(extentsForPartsAndSets)}>`);
   // Get parts and sets feature from f245 subfields for parts
   const titleForPartsAndSets = getTitleForPartsAndSets(record);
-  debugData(titleForPartsAndSets);
+  debugData(`Title: <${JSON.stringify(titleForPartsAndSets)}>`);
 
   // We should also get parts and sets features from:
 
@@ -94,6 +94,10 @@ export function getTitleForPartsAndSets(record) {
 
 export function getTitleFeaturesType(title) {
   debugData(title);
+
+  if (title === undefined) {
+    return 'unknown';
+  }
 
   const {namesOfPartInSectionOfAWork, numbersOfPartInSectionOfAWork} = title;
 
