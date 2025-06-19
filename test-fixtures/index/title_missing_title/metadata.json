@@ -1,0 +1,5 @@
+{
+    "description": "Missing title - fail validation if one or both records are missing title",
+    "skip": false,
+    "only": false
+}

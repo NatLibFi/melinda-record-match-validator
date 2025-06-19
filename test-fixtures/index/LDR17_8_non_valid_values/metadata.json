@@ -1,0 +1,6 @@
+{
+    "description": "TO IMPLEMENT: LDR/17: do not crash for nonvalid values",
+    "comment": "Currently matchValidator errors for non-valid LDR/06, LDR/07, LDR/17 values, we might want it to be able to handle them?",
+    "skip": true,
+    "only": false
+}

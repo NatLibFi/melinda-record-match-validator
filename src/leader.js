@@ -107,6 +107,8 @@ export function getRecordInfo(record) {
   }
   */
 
+  // DEVELOP:
+  // encoding level '2' && 'Koneellisesti tuotettu tietue'
   function getPrepublicationLevel(record, encodingLevel = '8') {
     if (encodingLevel !== '8') {
       return {code: '0', level: 'Not a prepublication'};
@@ -118,11 +120,11 @@ export function getRecordInfo(record) {
         return {code: '1', level: 'Koneellisesti tuotettu tietue'};
       }
 
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO')))) {
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
         return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
       }
 
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO')))) {
+      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
         return {code: '3', level: 'ENNAKKOTIETO'};
       }
 

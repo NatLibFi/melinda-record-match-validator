@@ -16,6 +16,7 @@ export function getLOW(record) {
 // Priority array for various LOW tags. Default value for an existing LOW is 50, and for no LOW 0.
 const LOW2Points = {
   'FIKKA': 100,
+  // DEVELOP: there's no FENNICA LOW ...
   'FENNICA': 90,
   'VIOLA': 90,
   // 'HELKA': 80, // We could add more libraries here. Eg. HELKA is usually good.

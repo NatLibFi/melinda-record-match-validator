@@ -83,6 +83,10 @@ export function compareAllTitleFeatures(recordValuesA, recordValuesB) {
 
 function compareTitleFeatures(titleA, titleB) {
 
+  if (titleA.titleFeatures === undefined || titleB.titleFeatures === undefined) {
+    return checkUndefinedTitle(titleA.titleFeatures, titleB.titleFeaturesB);
+  }
+
   // Compare 245 $a + $b + $n + $p
   const combinedFeaturesA = combineTitleFeatures(titleA.titleFeatures);
   const combinedFeaturesB = combineTitleFeatures(titleB.titleFeatures);
@@ -117,6 +121,42 @@ function compareTitleFeatures(titleA, titleB) {
   };
   //debug(titleFeaturesResult);
   return titleFeaturesResult;
+}
+
+function checkUndefinedTitle(titleFeaturesA, titleFeaturesB) {
+
+  // Fail matchValidation if one of the records is missing title
+  if (titleFeaturesA === undefined || titleFeaturesB === undefined) {
+    return {
+      'undefinedTitleFeatures': false
+    };
+  }
+
+  // We could also prefer record with existing title
+  /*
+
+  if (titleFeaturesA === undefined && titleFeaturesB === undefined) {
+    return {
+      'undefinedTitleFeatures': false
+    };
+  }
+
+  if (titleFeaturesA === undefined && titleFeaturesB !== undefined) {
+    return {
+      'undefinedTitleFeatures': 'B'
+    };
+  }
+
+  if (titleFeaturesA !== undefined && titleFeaturesB === undefined) {
+    return {
+      'undefinedTitleFeatures': 'A'
+    };
+  }
+  */
+
+  return {
+    'undefinedTitleFeatures': true
+  };
 }
 
 // 245 $a + $b + $p's + $n's
@@ -201,6 +241,11 @@ function compareWith490(titleA, titleB, combinedFeaturesA, combinedFeaturesB) {
 
 function checkTitleComparisonResult(result) {
   debugDev(`checkTitleComparisonResult: ${JSON.stringify(result)}`);
+
+  // If we had undefined as titleFeatures, one of records is missing a title, we do not want to match these
+  if (result.undefinedTitleFeatures !== undefined && result.undefinedTitleFeatures !== true) {
+    return result.undefinedTitleFeatures;
+  }
 
   // If all titleFeatures match, we don't even compare others
   if (result.combinedFeatures === true) {

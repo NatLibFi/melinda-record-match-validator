@@ -208,6 +208,7 @@ function innerCompare008(f008A, f008B) {
     return true;
   }
 
+  // eslint-disable-next-line max-statements
   function mp06Comparison(mp06A, mp06B) {
     if (mp06A === mp06B) {
       return true;

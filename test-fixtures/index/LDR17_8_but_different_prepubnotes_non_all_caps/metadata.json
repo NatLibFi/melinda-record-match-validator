@@ -1,0 +1,5 @@
+{
+    "description": "LDR/17: '8', Notes: A: 'Ennakkotieto', B: 'Tarkistettu ennakkotieto' (recognize non-allCaps versions of prepub notes)",
+    "skip": false,
+    "only": false
+}
