@@ -1,0 +1,27 @@
+{
+    "description": "Get titleFeatures: example for [MET-702]",
+    "skip": false,
+    "only": false,
+    "expectedResults": {
+        "titleFeatures": {
+            "title": "Weed",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": ["1"],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Weed",
+                "seriesNumber": "1"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Weed 1",
+                "remainderOfTitle": "Seikkailu alkaa!",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }
+}

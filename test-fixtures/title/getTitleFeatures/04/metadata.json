@@ -1,5 +1,5 @@
 {
-    "description": "Get titleFeatures: series title and number for several f490",
+    "description": "Get titleFeatures []",
     "skip": false,
     "only": false,
     "expectedResults": {
