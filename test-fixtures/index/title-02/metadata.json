@@ -1,5 +1,5 @@
 {
-    "description": "Do not fail validation when 245 f946 matches: normalize extra space",
+    "description": "Do not fail validation when f245 + f946 matches: normalize extra space",
     "issueSolved": "[MET-702]",
     "skip": false,
     "only": false
