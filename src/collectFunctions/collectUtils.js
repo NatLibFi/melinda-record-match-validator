@@ -65,5 +65,8 @@ export function getSubfieldValues(field, subfieldCode) {
 
 export function stripPunc(value) {
   return value.replace(/(?: [=;:/]|[.,])$/u, '');
+}
 
+export function removeExtraSpaces(value) {
+  return value.replace(/ +/u, ' ');
 }

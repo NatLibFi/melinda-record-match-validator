@@ -1,6 +1,6 @@
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils';
-import {hasFields, getSubfield, getSubfields, stripPunc} from './collectFunctions/collectUtils';
+import {hasFields, getSubfield, getSubfields, stripPunc, removeExtraSpaces} from './collectFunctions/collectUtils';
 import {compareValueContent, compareArrayContentRequireAll, compareStringToArray} from './compareFunctions/compareUtils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
@@ -37,11 +37,11 @@ export function get946Features(record) {
 }
 
 function titleFieldToJSON(field) {
-  const title = stripPunc(getSubfield(field, 'a'));
-  const remainderOfTitle = stripPunc(getSubfield(field, 'b'));
+  const title = cleanValue(getSubfield(field, 'a'));
+  const remainderOfTitle = cleanValue(getSubfield(field, 'b'));
   // Note: get all subfields $p & $n
-  const numbersOfPartInSectionOfAWork = getSubfields(field, 'n').map(sf => stripPunc(sf));
-  const namesOfPartInSectionOfAWork = getSubfields(field, 'p').map(sf => stripPunc(sf));
+  const numbersOfPartInSectionOfAWork = getSubfields(field, 'n').map(sf => cleanValue(sf));
+  const namesOfPartInSectionOfAWork = getSubfields(field, 'p').map(sf => cleanValue(sf));
 
   return {title, remainderOfTitle, numbersOfPartInSectionOfAWork, namesOfPartInSectionOfAWork};
 }
@@ -53,8 +53,8 @@ export function getSeriesFeatures(record) {
   return f490Data;
 
   function f490ToJSON(field) {
-    const seriesTitle = stripPunc(getSubfield(field, 'a'));
-    const seriesNumber = stripPunc(getSubfield(field, 'v')); // Do we want
+    const seriesTitle = cleanValue(getSubfield(field, 'a'));
+    const seriesNumber = cleanValue(getSubfield(field, 'v')); // Do we want
 
     return {seriesTitle, seriesNumber};
   }
@@ -275,3 +275,6 @@ export function checkAllTitleFeatures({record1, record2}) {
   return compareAllTitleFeatures(recordValuesA, recordValuesB);
 }
 
+function cleanValue(value) {
+  return removeExtraSpaces(stripPunc(value));
+}

@@ -1,0 +1,28 @@
+{
+    "description": "Get titleFeatures: normalize extra white space.",
+    "issueSolved": "[MET-702]",
+    "skip": false,
+    "only": false,
+    "expectedResults": {
+        "titleFeatures": {
+            "title": "Weed 1",
+            "remainderOfTitle": "Seikkailu alkaa!",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Weed",
+                "seriesNumber": "1"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Weed 1",
+                "remainderOfTitle": "Seikkailu alkaa!",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }
+}

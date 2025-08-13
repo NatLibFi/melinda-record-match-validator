@@ -1,0 +1,54 @@
+{
+    "description": "Return true if title matches with a title in f946",
+    "issueSolved": "[MET-702]",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+        "titleFeatures": {
+            "title": "Weed 1",
+            "remainderOfTitle": "Seikkailu alkaa!",
+            "numbersOfPartInSectionOfAWork": [],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Weed",
+                "seriesNumber": "1"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Weed 1",
+                "remainderOfTitle": "Seikkailu alkaa!",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]
+    }
+    },
+    "recordValuesB": {
+        "title": {
+      "titleFeatures": {
+            "title": "Weed",
+            "remainderOfTitle": "undefined",
+            "numbersOfPartInSectionOfAWork": ["1"],
+            "namesOfPartInSectionOfAWork": []
+        },
+        "seriesFeatures": [
+            {
+                "seriesTitle": "Weed",
+                "seriesNumber": "1"
+            }
+        ],
+        "f946Features": [
+            {
+                "title": "Weed 1",
+                "remainderOfTitle": "Seikkailu alkaa!",
+                "numbersOfPartInSectionOfAWork": [],
+                "namesOfPartInSectionOfAWork": []
+            }
+        ]}
+    },
+    "expectedResults": true
+}
