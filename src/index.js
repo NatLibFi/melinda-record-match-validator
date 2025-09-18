@@ -41,7 +41,7 @@ function checkExistence({record1, record2}) {
   return true;
 }
 
-const comparisonTasks = [ // NB! These are/should be in priority order!
+const originalComparisonTasks = [ // NB! These are/should be in priority order!
   // undefined or deleted records cannot be merged (both automatic and human merge)
   {'description': 'existence (validation only)', 'function': checkExistence},
   // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)
@@ -50,7 +50,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   //          generic non-component / component difference should prevent merge
   //          we should currently be able to block merge for records that *have* components, but that needs Melinda-search or f774, so...
   {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
-  // just preference also for human merge
+  // just preference also for human merge (we like records with 264 instead of 260, they are probably more RDA-compatible)
   {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher}, // Bit high on the preference list, isn't it?
   // what are we checking here? could probably be a warning for human merge
   {'description': '008 test (validation and preference)', 'function': check008},
@@ -88,20 +88,25 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 
-//const comparisonTasksForMergeUi = comparisonTasks;
+const comparisonTasksTable = {
+  recordImport: [...originalComparisonTasks],
+  humanMerge: [...originalComparisonTasks]
+};
+
+// const comparisonTasks = [...originalComparisonTasks];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
-function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false}) {
+function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
-  debug(`Runnin task ${nth} - returnAll: ${returnAll}`);
+  debug(`Running task ${nth} - returnAll: ${returnAll}`);
   if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) { // eslint-disable-line no-extra-parens
     return [currResult];
   }
   return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External, returnAll}));
 }
 
-function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false}) {
+function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
   debug(`returnAll: ${returnAll}`);
   // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
@@ -144,7 +149,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
 
 
-export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}}) {
+export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, comparisonTasks = comparisonTasksTable.humanMerge}) {
   //debug(recordAObject);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
@@ -159,7 +164,7 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
   // New version: Make checks only to the point of first failure...
   // console.log('ENTER THE PROGRAM');
 
-  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true});
+  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true, comparisonTasks});
   debug(JSON.stringify(result));
   return result;
 
@@ -193,7 +198,7 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
 
 
-export default ({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}}) => {
+export default ({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, comparisonTasks = comparisonTasksTable.recordImport}) => {
   //debug(recordAObject);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
@@ -208,7 +213,7 @@ export default ({record1Object, record2Object, checkPreference = true, record1Ex
   // New version: Make checks only to the point of first failure...
   // console.log('ENTER THE PROGRAM');
 
-  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External});
+  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, comparisonTasks});
   debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
   if (result.result === false) {
     return {action: false, preference: false, message: result.reason};
