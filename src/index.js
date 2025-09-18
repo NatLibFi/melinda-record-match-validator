@@ -99,7 +99,7 @@ const comparisonTasksTable = {
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
-  debug(`Running task ${nth} - returnAll: ${returnAll}`);
+  debugDev(`Running task ${nth} - returnAll: ${returnAll}`);
   if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) { // eslint-disable-line no-extra-parens
     return [currResult];
   }
@@ -107,42 +107,67 @@ function runComparisonTasks({nth, record1, record2, checkPreference = true, reco
 }
 
 function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
-  debug(`returnAll: ${returnAll}`);
+  debugDev(`returnAll: ${returnAll}`);
   // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
-    return true;
+    return {result: true, reason: `No rules defined`};
   }
-  // Get results (up to the point of first failure):
+  // Get results (if not returnAll, just up to the point of first failure):
   const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External, returnAll});
 
-  if (returnAll) {
-    return results.map((result, i) => ({
+  return returnAll ? returnAllResults() : returnDecisionPointResult();
+
+
+  function returnAllResults() {
+    const allResults = results.map((result, i) => ({
       result, reason: comparisonTasks[i].description
     }));
+
+    if (checkPreference) {
+      // Add f984 overide result
+      const field984OverrideResult = getField984OverrideResult();
+      if (field984OverrideResult) {
+        return allResults.concatenate(field984OverrideResult);
+      }
+      return allResults;
+    }
+    return allResults;
+
   }
 
-  // If any test fails, return false.
-  if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
-    nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
-    return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
-  }
+  function returnDecisionPointResult() {
 
-  if (!checkPreference) {
+    // If we do not all results, if any test fails, return false and desciprion for failing test
+    if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
+      nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
+      return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
+    }
+
+    if (!checkPreference) {
     // This will also skip separate field 984 check
-    return {result: true, reason: 'all tests passed'};
+      return {result: true, reason: 'all tests passed'};
+    }
+
+    const field984OverrideResult = getField984OverrideResult();
+    if (field984OverrideResult) {
+      return field984OverrideResult;
+    }
+
+    const decisionPoint = results.findIndex(val => val !== true && val !== false);
+    if (decisionPoint === -1) {
+      return {result: true, reason: 'both records passed all tests, but no winner was found'};
+    }
+    return {result: results[decisionPoint], reason: `${results[decisionPoint]} won ${comparisonTasks[decisionPoint].description}`};
   }
 
-  // Note: we do not run this check if returnAll is active (FIX!)
-  const field984Override = check984({record1, record2});
-  if (field984Override === 'A' || field984Override === 'B') {
-    return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
+  // We get a separate override result, because normal preference checks find first preference
+  function getField984OverrideResult() {
+    const field984Override = check984({record1, record2});
+    if (field984Override === 'A' || field984Override === 'B') {
+      return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
+    }
+    return;
   }
-
-  const decisionPoint = results.findIndex(val => val !== true && val !== false);
-  if (decisionPoint === -1) {
-    return {result: true, reason: 'both records passed all tests, but no winner was found'};
-  }
-  return {result: results[decisionPoint], reason: `${results[decisionPoint]} won ${comparisonTasks[decisionPoint].description}`};
 }
 
 // {Record, source, yms}
