@@ -98,7 +98,7 @@ function runComparisonTasks({nth, record1, record2, checkPreference = true, reco
   return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External}));
 }
 
-function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
+function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false}) {
   // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
     return true;
@@ -106,7 +106,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   // Get results (up to the point of first failure):
   const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External});
   // If any test fails, return false.
-  if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
+  if (!returnAll && (results.length < comparisonTasks.length || results[results.length - 1] === false)) {
     nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
     return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
   }
@@ -121,6 +121,10 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
     return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
   }
 
+  if (returnAll) {
+    return results;
+  }
+
   const decisionPoint = results.findIndex(val => val !== true && val !== false);
   if (decisionPoint === -1) {
     return {result: true, reason: 'both records passed all tests, but no winner was found'};
@@ -130,6 +134,53 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 
 // {Record, source, yms}
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
+
+
+export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}}) {
+  //debug(recordAObject);
+
+  // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
+  const record1 = new MarcRecord(record1Object, {subfieldValues: false});
+  const record2 = new MarcRecord(record2Object, {subfieldValues: false});
+
+  // checkPreference should be multivalue:
+  // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
+  //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
+
+  //if (1) {
+  // New version: Make checks only to the point of first failure...
+  // console.log('ENTER THE PROGRAM');
+
+  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External});
+  debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
+  if (result.result === false) {
+    return {action: false, preference: false, message: result.reason};
+  }
+
+  return {action: 'merge', preference: {'name': result.reason, 'value': result.result}};
+  //}
+/*
+  // We never get here...
+  if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
+    throw new Error('Record missing!');
+  }
+  const recordValuesA = collectRecordValues(recordA);
+  debugDev('Record values A: %o', recordValuesA);
+  const recordValuesB = collectRecordValues(recordB);
+  debugDev('Record values B: %o', recordValuesB);
+
+  // Check record type if e & f -> false
+
+  const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
+  debugDev('Compared record values: %o', comparedRecordValues);
+
+  return validateCompareResults(comparedRecordValues);
+*/
+}
+
+// {Record, source, yms}
+// record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
+
 
 export default ({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}}) => {
   //debug(recordAObject);
