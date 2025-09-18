@@ -91,24 +91,33 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
 //const comparisonTasksForMergeUi = comparisonTasks;
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
-function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
+function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false}) {
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
-  if (nth === comparisonTasks.length - 1 || currResult === false) {
+  debug(`Runnin task ${nth} - returnAll: ${returnAll}`);
+  if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) { // eslint-disable-line no-extra-parens
     return [currResult];
   }
-  return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External}));
+  return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External, returnAll}));
 }
 
 function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false}) {
+  debug(`returnAll: ${returnAll}`);
   // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
     return true;
   }
   // Get results (up to the point of first failure):
-  const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External});
+  const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External, returnAll});
+
+  if (returnAll) {
+    return results.map((result, i) => ({
+      result, reason: comparisonTasks[i].description
+    }));
+  }
+
   // If any test fails, return false.
-  if (!returnAll && (results.length < comparisonTasks.length || results[results.length - 1] === false)) {
+  if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
     nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
     return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
   }
@@ -118,13 +127,10 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
     return {result: true, reason: 'all tests passed'};
   }
 
+  // Note: we do not run this check if returnAll is active (FIX!)
   const field984Override = check984({record1, record2});
   if (field984Override === 'A' || field984Override === 'B') {
     return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
-  }
-
-  if (returnAll) {
-    return results;
   }
 
   const decisionPoint = results.findIndex(val => val !== true && val !== false);
