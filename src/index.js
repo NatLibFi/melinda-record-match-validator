@@ -88,6 +88,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   {'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures}
 ];
 
+//const comparisonTasksForMergeUi = comparisonTasks;
+
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
@@ -151,13 +153,16 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
   // New version: Make checks only to the point of first failure...
   // console.log('ENTER THE PROGRAM');
 
-  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External});
-  debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
+  const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true});
+  debug(JSON.stringify(result));
+  return result;
+
+  /*   debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
   if (result.result === false) {
     return {action: false, preference: false, message: result.reason};
   }
 
-  return {action: 'merge', preference: {'name': result.reason, 'value': result.result}};
+  return {action: 'merge', preference: {'name': result.reason, 'value': result.result}}; */
   //}
 /*
   // We never get here...
