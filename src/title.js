@@ -13,6 +13,13 @@ const debugData = debug.extend('data');
 // Compare f245 to f946
 // Compare f245 t0 combinations of f490+f245
 
+// DEVELOP: could set preference for record with more complex title structure
+
+// type: {
+//   validation: true,
+//   preference: false
+// }
+
 export function getAllTitleFeatures(record) {
   return {
     titleFeatures: getTitleFeatures(record),

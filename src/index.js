@@ -43,88 +43,122 @@ function checkExistence({record1, record2}) {
 
 const originalComparisonTasks = [ // NB! These are/should be in priority order!
   // undefined or deleted records cannot be merged (both automatic and human merge)
-  {'description': 'existence (validation only)', 'function': checkExistence},
-  // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)
+  {'name': 'existence', 'description': 'existence (validation only)', 'function': checkExistence, 'validation': true, 'preference': false},
+  // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)s
   // DEVELOP: we'll need more nuanced check for human merge:
   //          record type & specific bibliographic level can be warnings,
   //          generic non-component / component difference should prevent merge
   //          we should currently be able to block merge for records that *have* components, but that needs Melinda-search or f774, so...
-  {'description': 'leader (validation and preference)', 'function': checkLeader}, // Prioritize LDR/17 (encoding level)
+  {'name': 'leader', 'description': 'leader (validation and preference)', 'function': checkLeader, 'validation': true, 'preference': true, 'manual': 'warning'}, // Prioritize LDR/17 (encoding level)
   // just preference also for human merge (we like records with 264 instead of 260, they are probably more RDA-compatible)
-  {'description': 'publisher (264>260) (preference only)', 'function': checkPublisher}, // Bit high on the preference list, isn't it?
+  {'name': 'RDA from publisher', 'description': 'publisher (264>260) (preference only)', 'function': checkPublisher, 'validation': false, 'preference': true}, // Bit high on the preference list, isn't it?
   // what are we checking here? could probably be a warning for human merge
-  {'description': '008 test (validation and preference)', 'function': check008},
+  // - fail merging online and direct using electronical resources (008/23 or 008/29 form of item)
+  // - fail merge if 008/06 type of date/publication status codes are a severe mismatch
+  // - preference from 008/06 type of date/publication status codes
+  // - gathers 008/39 cataloiguingSource, but does do anything with it?
+  {'name': 'f008', 'description': '008 test (validation and preference)', 'function': check008, 'validation': true, 'preference': true, 'manual': 'warning'},
   // This test checks is just for preference despite its description!
   // DEVELOP: human merge should not merge records with same LOW
-  {'description': 'LOW test (validation and preference)', 'function': checkLOW}, // Priority order: FIKKA > ANY > NONE
+  {'name': 'LOW-for-preference', 'description': 'LOW test (preference)', 'function': checkLOW, 'validation': false, 'preference': true}, // Priority order: FIKKA > ANY > NONE
   // This test check 042 to preference
-  {'description': 'field 042: authentication code (preference only)', 'function': check042},
-  {'description': 'CAT test (preference only)', 'function': checkCAT},
+  {'name': 'f042-authentication-code', 'description': 'field 042: authentication code (preference only)', 'function': check042, 'validation': false, 'preference': true},
+  {'name': 'CAT', 'description': 'CAT test (preference only)', 'function': checkCAT, 'validation': false, 'preference': true},
   // NB! I'd like to have a test for 008/06, but them specs for it are elusive?
-  {'description': 'field 245 (title)', 'function': checkAllTitleFeatures},
-  //{'description': 'field 245 (title)', 'function': check245},
+  {'name': 'title', 'description': 'field 245 (title)', 'function': checkAllTitleFeatures, 'validation': true, 'preference': false, 'manual': 'warning'},
+  //{'name': 'title-old', 'description': 'field 245 (title)', 'function': check245, 'validation': true, 'preference': false, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'field 336 (content type) test (validation and preference)', 'function': check336},
+  {'name': 'f336', 'description': 'field 336 (content type) test (validation and preference)', 'function': check336, 'validation': true, 'preference': true, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'field 337 (media type) test (validation and preference)', 'function': check337},
+  {'name': 'f337', 'description': 'field 337 (media type) test (validation and preference)', 'function': check337, 'validation': true, 'preference': true, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338},
+  {'name': 'f338', 'description': 'field 338 (carrier type) test (validation and preference)', 'function': check338, 'validation': true, 'preference': true, 'manual': 'warning'},
   // human merge: warning for subfields q&g - $w actually should be different ...
-  {'description': '773 $wgq test (validation only)', 'function': check773},
-  {'description': '040$b (language of cataloging) (preference only)', 'function': check040b},
-  {'description': '040$e (description conventions) (preference only)', 'function': check040e},
-  {'description': 'SID test (validation and preference)', 'function': checkSID},
-  // just preference?
-  {'description': '005 timestamp test (validation and preference)', 'function': check005},
+  {'name': 'f773', 'description': '773 $wgq test (validation only)', 'function': check773, 'validation': true, 'preference': false, 'manual': false},
+  {'name': 'f040b', 'description': '040$b (language of cataloging) (preference only)', 'function': check040b, 'validation': true, 'preference': true},
+  {'name': 'f040e', 'description': '040$e (description conventions) (preference only)', 'function': check040e, 'validation': false, 'preference': true},
+  // SID for import (do not use for manual)
+  // - fail merge for different SIDs from same database
+  // set preference for record that has most commons SIDs
+  {'name': 'fSID-for-import', 'description': 'SID test (validation and preference)', 'function': checkSID, 'validation': true, 'preference': true, 'manual': false},
+  // preference for record that's updated more recently
+  {'name': 'f005', 'description': '005 timestamp test (preference)', 'function': check005, 'validation': false, 'preference': true},
   // human merge: warning
-  {'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck},
+  // - fail merge, for CD vs LP record
+  {'name': 'audio-sanity', 'description': 'audio sanity check (validation only)', 'function': performAudioSanityCheck, 'validation': true, 'preference': false, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck},
+  // - fail merge, for daisy-audiobook vs generic audiobook
+  {'name': 'daisy-sanity', 'description': 'Daisy sanity check (validation only)', 'function': performDaisySanityCheck, 'validation': true, 'preference': false, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'DVD vs Blu-Ray sanity check (validation only)', 'function': performDvdSanityCheck},
+  // - fail merge, for DVD vs Blueray video discs
+  {'name': 'dvd-blueray-sanity', 'description': 'DVD vs Blu-Ray sanity check (validation only)', 'function': performDvdSanityCheck, 'validation': true, 'preference': false, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'ISBN qualifier sanity check (validation only)', 'function': performIsbnQualifierCheck},
+  // - fail merge, for mismatching ISBN qualifiers
+  {'name': 'isbn-qualifier', 'description': 'ISBN qualifier sanity check (validation only)', 'function': performIsbnQualifierCheck, 'validation': true, 'preference': false, 'manual': 'warning'},
   // human merge: warning
-  {'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures}
+  // - fail merge, part of a multipart monograph vs whole set of multipart monographs
+  {'name': 'parts-sets', 'description': 'Parts vs sets test (validation)', 'function': compareRecordsPartSetFeatures, 'validation': true, 'preference': false, 'manual': 'warning'}
 ];
 
 const comparisonTasksTable = {
   recordImport: [...originalComparisonTasks],
-  humanMerge: [...originalComparisonTasks]
+  humanMerge: [...originalComparisonTasks.filter(isUsableForManual)]
 };
+
+function isUsableForManual(task) {
+  if (task.manual !== undefined && task.manual === false) {
+    debugDev(`${task.name} has manual: ${task.manual}`);
+    return false;
+  }
+  debugDev(`${task.name} has manual: ${task.manual}`);
+  return true;
+}
 
 // const comparisonTasks = [...originalComparisonTasks];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
+
+  // We could skip those tasks that are !validation if !checkPreference - but how?
+
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
-  debugDev(`Running task ${nth} - returnAll: ${returnAll}`);
+  debugDev(`Running task ${nth} (${comparisonTasks[nth].name}) - returnAll: ${returnAll}`);
   if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) { // eslint-disable-line no-extra-parens
     return [currResult];
   }
-  return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External, returnAll}));
+  return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External, returnAll, comparisonTasks}));
 }
 
 function makeComparisons({record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
   debugDev(`returnAll: ${returnAll}`);
+
   // Start with sanity check(s): if there are no tasks, it is not a failure:
   if (comparisonTasks.length === 0) {
-    return {result: true, reason: `No rules defined`};
+    const resultForZeroTasks = {result: true, reason: `No rules defined`};
+    if (returnAll) {
+      return [resultForZeroTasks];
+    }
+    return resultForZeroTasks;
   }
+
   // Get results (if not returnAll, just up to the point of first failure):
-  const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External, returnAll});
+  const results = runComparisonTasks({nth: 0, record1, record2, checkPreference, record1External, record2External, returnAll, comparisonTasks});
 
   return returnAll ? returnAllResults() : returnDecisionPointResult();
 
-
+  // return array of all comparison task results
   function returnAllResults() {
     const allResults = results.map((result, i) => ({
-      result, reason: comparisonTasks[i].description
+      result,
+      reason: comparisonTasks[i].name,
+      preference: comparisonTasks[i].preference,
+      validation: comparisonTasks[i].validation,
+      type: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual
     }));
 
     if (checkPreference) {
-      // Add f984 overide result
+      // Add f984 overide result (check preference override from records f984)
       const field984OverrideResult = getField984OverrideResult();
       if (field984OverrideResult) {
         return allResults.concatenate(field984OverrideResult);
@@ -135,9 +169,10 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 
   }
 
+  // return result from the decision point where first task fails
   function returnDecisionPointResult() {
 
-    // If we do not all results, if any test fails, return false and desciprion for failing test
+    // If we do not want all results, if any of tests fails, return false and desciprion for failing test
     if (results.length < comparisonTasks.length || results[results.length - 1] === false) {
       nvdebug(`makeComparisons() failed. Reason: ${comparisonTasks[results.length - 1].description}. (TEST: ${results.length}/${comparisonTasks.length})`, debugDev);
       return {result: false, reason: `${comparisonTasks[results.length - 1].description} failed`};
@@ -148,6 +183,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
       return {result: true, reason: 'all tests passed'};
     }
 
+    // Let's do extra check for preference override in records
     const field984OverrideResult = getField984OverrideResult();
     if (field984OverrideResult) {
       return field984OverrideResult;
@@ -170,97 +206,33 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   }
 }
 
-// {Record, source, yms}
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
-
-
-export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, comparisonTasks = comparisonTasksTable.humanMerge}) {
-  //debug(recordAObject);
+export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
+  debugDev(`Manual ${manual} (for Merge UI) - we have ${comparisonTasks.length} comparison tasks`);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
   const record1 = new MarcRecord(record1Object, {subfieldValues: false});
   const record2 = new MarcRecord(record2Object, {subfieldValues: false});
-
-  // checkPreference should be multivalue:
-  // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
-  //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
-
-  //if (1) {
-  // New version: Make checks only to the point of first failure...
-  // console.log('ENTER THE PROGRAM');
 
   const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true, comparisonTasks});
-  debug(JSON.stringify(result));
+  debugDev(JSON.stringify(result));
+  // return result-array of all results
   return result;
-
-  /*   debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
-  if (result.result === false) {
-    return {action: false, preference: false, message: result.reason};
-  }
-
-  return {action: 'merge', preference: {'name': result.reason, 'value': result.result}}; */
-  //}
-/*
-  // We never get here...
-  if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
-    throw new Error('Record missing!');
-  }
-  const recordValuesA = collectRecordValues(recordA);
-  debugDev('Record values A: %o', recordValuesA);
-  const recordValuesB = collectRecordValues(recordB);
-  debugDev('Record values B: %o', recordValuesB);
-
-  // Check record type if e & f -> false
-
-  const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
-  debugDev('Compared record values: %o', comparedRecordValues);
-
-  return validateCompareResults(comparedRecordValues);
-*/
 }
 
-// {Record, source, yms}
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
-
-
-export default ({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, comparisonTasks = comparisonTasksTable.recordImport}) => {
-  //debug(recordAObject);
-
+export default ({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, manual = false, comparisonTasks = comparisonTasksTable.recordImport}) => {
+  debugDev(`Default (manual: ${manual}) (for record import) we have ${comparisonTasks.length} comparison tasks`);
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
   const record1 = new MarcRecord(record1Object, {subfieldValues: false});
   const record2 = new MarcRecord(record2Object, {subfieldValues: false});
-
-  // checkPreference should be multivalue:
-  // X: NOT CHECK (current false), Y: CHECK MERGABILITY FOR HUMANS, Z: CHECK MERGABILITY FOR AUTOMATON (current true)
-  //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
-
-  //if (1) {
-  // New version: Make checks only to the point of first failure...
-  // console.log('ENTER THE PROGRAM');
 
   const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, comparisonTasks});
   debug(`Comparison result: ${result.result}, reason: ${result.reason}`);
+
   if (result.result === false) {
     return {action: false, preference: false, message: result.reason};
   }
 
   return {action: 'merge', preference: {'name': result.reason, 'value': result.result}};
-  //}
-/*
-  // We never get here...
-  if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
-    throw new Error('Record missing!');
-  }
-  const recordValuesA = collectRecordValues(recordA);
-  debugDev('Record values A: %o', recordValuesA);
-  const recordValuesB = collectRecordValues(recordB);
-  debugDev('Record values B: %o', recordValuesB);
-
-  // Check record type if e & f -> false
-
-  const comparedRecordValues = compareRecordValues(recordValuesA, recordValuesB);
-  debugDev('Compared record values: %o', comparedRecordValues);
-
-  return validateCompareResults(comparedRecordValues);
-*/
 };
