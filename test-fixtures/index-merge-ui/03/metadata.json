@@ -1,5 +1,5 @@
 {
     "description": "Do not fail merge if records do not have a common LOW",
     "skip": false,
-    "only": true
+    "only": false
 }
