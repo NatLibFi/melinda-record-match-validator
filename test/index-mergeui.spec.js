@@ -26,5 +26,6 @@ function callback({getFixture, record1External, record2External}) {
   debug(record1Object);
   debug(record2Object);
   const compareResults = validateRecordMatch({record1Object, record2Object, record1External, record2External});
+  debug(compareResults);
   expect(compareResults).to.eql(expectedResults);
 }

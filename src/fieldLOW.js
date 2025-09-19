@@ -69,15 +69,17 @@ function compareLOWValues(LOWsA, LOWsB) {
 }
 
 export function compareLOW(recordValuesA, recordValuesB) {
+  debugData(`We got recordValuesA (compareLOW): ${JSON.stringify(recordValuesA)}`);
   const LOWsA = recordValuesA.LOW;
   const LOWsB = recordValuesB.LOW;
   return compareLOWValues(LOWsA, LOWsB);
 }
 
-export function compareLOWmanual(recordValuesA, recordValuesB) {
-  const LOWsA = recordValuesA.LOW;
-  const LOWsB = recordValuesB.LOW;
-  if (LOWsA.some(lowa => LOWsB.includes(lowa))) {
+export function compareLOWinternal(recordValuesA, recordValuesB) {
+  debugData(`We got recordValuesA (compareLowInternal): ${JSON.stringify(recordValuesA)}`);
+  const LOWsA = recordValuesA.LOW || recordValuesA;
+  const LOWsB = recordValuesB.LOW || recordValuesB;
+  if (LOWsA.some(low => LOWsB.includes(low))) {
     return false;
   }
   return true;
@@ -90,9 +92,11 @@ export function checkLOW({record1, record2}) {
   return compareLOWValues(low1, low2);
 }
 
-export function checkLOWInternal({record1, record2}) {
+export function checkLOWinternal({record1, record2}) {
   const low1 = getLOW(record1);
   const low2 = getLOW(record2);
-  return compareLOWmanual(low1, low2);
+  debugData('LOWs A: %o', low1);
+  debugData('LOWs B: %o', low2);
+  return compareLOWinternal(low1, low2);
 }
 

@@ -48,6 +48,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkExistence,
     'validation': true,
     'preference': false,
+    'preference_message_fi': '',
     'validation_message_fi': 'poistettuja tietueita ei voi yhdistää'},
 
   // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)s
@@ -74,7 +75,8 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkPublisher,
     'validation': false,
     'preference': true,
-    'preference_message_fi': 'suosi tietuetta, jossa julkaisutiedot ovat kentässä 264'},
+    'preference_message_fi': 'suosi tietuetta, jossa julkaisutiedot ovat kentässä 264',
+    'validation_message_fi': ''},
 
   // what are we checking here? could probably be a warning for human merge
   // - fail merging online and direct using electronical resources (008/23 or 008/29 form of item)
@@ -338,7 +340,11 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
       reason: comparisonTasks[i].name,
       preference: comparisonTasks[i].preference,
       validation: comparisonTasks[i].validation,
-      type: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual
+      type: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual,
+      // eslint-disable-next-line camelcase
+      validation_message_fi: comparisonTasks[i].validation_message_fi,
+      // eslint-disable-next-line camelcase
+      preference_message_fi: comparisonTasks[i].preference_message_fi
     }));
 
     if (checkPreference) {

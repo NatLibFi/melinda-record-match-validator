@@ -1,0 +1,5 @@
+{
+    "description": "Fail merge if records have a common LOW",
+    "skip": false,
+    "only": true
+}

@@ -1,0 +1,200 @@
+[
+    {
+        "result": true,
+        "reason": "existence",
+        "preference": false,
+        "validation": true,
+        "type": "error",
+        "validation_message_fi": "poistettuja tietueita ei voi yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": "B",
+        "reason": "leader",
+        "preference": true,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "ainestotyypiltään tai bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää",
+        "preference_message_fi": "suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta"
+    },
+    {
+        "result": true,
+        "reason": "RDA from publisher",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "preference_message_fi": "suosi tietuetta, jossa julkaisutiedot ovat kentässä 264",
+        "validation_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "f008",
+        "preference": true,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueita, joissa on ristiriitainen julkaisuajan tyyppi/julkaisun tila ei voi yhdistää",
+        "preference_message_fi": "suosi tietuetta, jossa on tarkemmin ilmoitettu julkaisuajan tyyppi/julkaisun tila"
+    },
+    {
+        "result": "B",
+        "reason": "LOW-for-preference",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus"
+    },
+    {
+        "result": true,
+        "reason": "LOW-validation-for-internal",
+        "preference": false,
+        "validation": true,
+        "type": "error",
+        "validation_message_fi": "tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "f042-authentication-code",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, jossa on Kansallisbibliografian tai Kansallisdiskografian autentikaatiokoodi"
+    },
+    {
+        "result": true,
+        "reason": "CAT",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, jolla on paremmat kuvailuhistoriatiedot"
+    },
+    {
+        "result": true,
+        "reason": "title",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, niiden nimeketiedot eroavat",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "f336",
+        "preference": true,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, niiden sisältötyyppitiedot eroavat",
+        "preference_message_fi": "suosi tietuetta, jolla on tarkemmat sisältötyyppitiedot"
+    },
+    {
+        "result": true,
+        "reason": "f337",
+        "preference": true,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, niiden mediatyyppitiedot eroavat",
+        "preference_message_fi": "suosi tietuetta, jolla on tarkemmat mediatyyppitiedot"
+    },
+    {
+        "result": true,
+        "reason": "f338",
+        "preference": true,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, niiden tallennetyyppitiedot eroavat",
+        "preference_message_fi": "suosi tietuetta, jolla on tarkemmat tallennetyyppitiedot"
+    },
+    {
+        "result": true,
+        "reason": "f773",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, osakohteen sijaintiedot eroavat",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "f040b",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, jolla on soveltuvin kuvailukieli"
+    },
+    {
+        "result": true,
+        "reason": "f040e",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA"
+    },
+    {
+        "result": true,
+        "reason": "fSID-for-import",
+        "preference": true,
+        "validation": true,
+        "type": "error",
+        "validation_message_fi": "tietueita, joilla on paikalliskannassa eri tunniste ei voi yhdistää",
+        "preference_message_fi": "suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa"
+    },
+    {
+        "result": "B",
+        "reason": "f005",
+        "preference": true,
+        "validation": false,
+        "type": "error",
+        "validation_message_fi": "",
+        "preference_message_fi": "suosi tietuetta, joka on päivitetty viimeksi"
+    },
+    {
+        "result": true,
+        "reason": "audio-sanity",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueissa on kuvailtu CD- ja LP-levy, tarkista voiko ne yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "daisy-sanity",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueissa on kuvailtu yleinen ja Daisy-äänikirja, tarkista voiko ne yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "dvd-blueray-sanity",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueissa on kuvailtu DVD- ja Bluray-levy, tarkista voiko ne yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "isbn-qualifier",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueissa on eroava ISBN-tarkenne, tarkista voiko ne yhdistää",
+        "preference_message_fi": ""
+    },
+    {
+        "result": true,
+        "reason": "parts-sets",
+        "preference": false,
+        "validation": true,
+        "type": "warning",
+        "validation_message_fi": "tietueissa on kuvailtu yksittäinen moniosaisen monografian osa ja moniosainen monografia kokonaisuutena, tarkista voiko ne yhdistää",
+        "preference_message_fi": ""
+    }
+]

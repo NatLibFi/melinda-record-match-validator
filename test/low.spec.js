@@ -2,8 +2,8 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-//import {getLOW, checkLOW, checkLOWInternal} from '../src/fieldLOW.js';
-import {getLOW, compareLOWmanual} from '../src/fieldLOW.js';
+//import {getLOW, checkLOW, checkLOWinternal} from '../src/fieldLOW.js';
+import {getLOW, compareLOWinternal} from '../src/fieldLOW.js';
 import createDebugLogger from 'debug';
 import {MarcRecord} from '@natlibfi/marc-record';
 
@@ -13,7 +13,7 @@ const debugData = debug.extend('data');
 testGetLow();
 
 //testCheckLow();
-testCompareLowManual();
+testCompareLOWinternal();
 
 function testGetLow() {
   generateTests({
@@ -35,11 +35,11 @@ function testGetLow() {
   }
 }
 
-function testCompareLowManual() {
+function testCompareLOWinternal() {
 
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'low', 'compareLowManual'],
+    path: [__dirname, '..', 'test-fixtures', 'low', 'compareLOWinternal'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -51,7 +51,7 @@ function testCompareLowManual() {
   function callback({expectedResults, recordValuesA, recordValuesB}) {
     debugData(JSON.stringify(recordValuesA));
     debugData(JSON.stringify(recordValuesB));
-    const result = compareLOWmanual(recordValuesA, recordValuesB);
+    const result = compareLOWinternal(recordValuesA, recordValuesB);
     debugData(JSON.stringify(result));
     expect(result).to.eql(expectedResults);
   }
