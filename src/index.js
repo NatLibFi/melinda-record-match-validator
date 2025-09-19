@@ -4,7 +4,7 @@ import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {MarcRecord} from '@natlibfi/marc-record';
 
 import {checkSID} from './fieldSID';
-import {checkLOW, checkLOWmanual} from './fieldLOW';
+import {checkLOW, checkLOWinternal} from './fieldLOW';
 import {checkCAT} from './fieldCAT';
 import {check040b, check040e} from './field040';
 //import {check245} from './field245';
@@ -101,12 +101,13 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus',
     'validation_message_fi': ''},
 
-  {'name': 'LOW-validation-for-manua',
-    'description': 'LOW test (validation for manual)',
-    'function': checkLOWmanual,
+  {'name': 'LOW-validation-for-internal',
+    'description': 'LOW test (validation for internal)',
+    'function': checkLOWinternal,
     'validation': true,
     'preference': false,
     'import': false,
+    'internal': true,
     'preference_message_fi': '',
     'validation_message_fi': 'tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää'},
 
@@ -176,7 +177,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': check773,
     'validation': true,
     'preference': false,
-    'manual': false,
+    'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintiedot eroavat'},
 
@@ -196,7 +197,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference_message_fi': 'suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA',
     'validation_message_fi': ''},
 
-  // SID for import (do not use for manual)
+  // SID for import (do not use for manual database internal merge)
   // - fail merge for different SIDs from same database
   // set preference for record that has most commons SIDs
   {'name': 'fSID-for-import',
@@ -204,7 +205,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkSID,
     'validation': true,
     'preference': true,
-    'manual': false,
+    'internal': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
     'validation_message_fi': 'tietueita, joilla on paikalliskannassa eri tunniste ei voi yhdistää'},
 
@@ -276,18 +277,20 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
 
 const comparisonTasksTable = {
   recordImport: [...originalComparisonTasks].filter(isUsableForImport),
-  humanMerge: [...originalComparisonTasks.filter(isUsableForManual)]
+  humanMerge: [...originalComparisonTasks.filter(isUsableForInternal)]
 };
 
-function isUsableForManual(task) {
-  if (task.manual !== undefined && task.manual === false) {
-    debugDev(`${task.name} has manual: ${task.manual}`);
+// Internal merge: merging two records in the database together
+function isUsableForInternal(task) {
+  if (task.manual !== undefined && task.internal === false) {
+    debugDev(`${task.name} has internal: ${task.internal}`);
     return false;
   }
-  debugDev(`${task.name} has manual: ${task.manual}`);
+  debugDev(`${task.name} has internal: ${task.internal}`);
   return true;
 }
 
+// Import merge: merging incoming record and database record together
 function isUsableForImport(task) {
   if (task.import !== undefined && task.import === false) {
     debugDev(`${task.name} has import: ${task.import}`);
@@ -296,8 +299,6 @@ function isUsableForImport(task) {
   debugDev(`${task.name} has import: ${task.import}`);
   return true;
 }
-
-// const comparisonTasks = [...originalComparisonTasks];
 
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {

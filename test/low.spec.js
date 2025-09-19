@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-//import {getLOW, checkLOW, checkLOWmanual} from '../src/fieldLOW.js';
+//import {getLOW, checkLOW, checkLOWInternal} from '../src/fieldLOW.js';
 import {getLOW, compareLOWmanual} from '../src/fieldLOW.js';
 import createDebugLogger from 'debug';
 import {MarcRecord} from '@natlibfi/marc-record';

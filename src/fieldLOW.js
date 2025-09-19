@@ -90,7 +90,7 @@ export function checkLOW({record1, record2}) {
   return compareLOWValues(low1, low2);
 }
 
-export function checkLOWmanual({record1, record2}) {
+export function checkLOWInternal({record1, record2}) {
   const low1 = getLOW(record1);
   const low2 = getLOW(record2);
   return compareLOWmanual(low1, low2);
