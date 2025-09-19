@@ -73,10 +73,25 @@ export function compareLOW(recordValuesA, recordValuesB) {
   return compareLOWValues(LOWsA, LOWsB);
 }
 
+export function compareLOWmanual(recordValuesA, recordValuesB) {
+  const LOWsA = recordValuesA.LOW;
+  const LOWsB = recordValuesB.LOW;
+  if (LOWsA.some(lowa => LOWsB.includes(lowa))) {
+    return false;
+  }
+  return true;
+}
+
+
 export function checkLOW({record1, record2}) {
   const low1 = getLOW(record1);
   const low2 = getLOW(record2);
   return compareLOWValues(low1, low2);
 }
 
+export function checkLOWmanual({record1, record2}) {
+  const low1 = getLOW(record1);
+  const low2 = getLOW(record2);
+  return compareLOWmanual(low1, low2);
+}
 
