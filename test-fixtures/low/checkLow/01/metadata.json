@@ -1,7 +1,7 @@
 {
     "description": "Return true",
     "skip": false,
-    "only": true,
+    "only": false,
     "recordValuesA": {
         "title": {
             "titleFeatures": {

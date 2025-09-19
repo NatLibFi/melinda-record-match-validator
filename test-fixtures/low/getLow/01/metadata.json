@@ -1,6 +1,6 @@
 {
     "description": "Return LOWs",
     "skip": false,
-    "only": true,
+    "only": false,
     "expectedResults": ["FIKKA","TEST"]
 }

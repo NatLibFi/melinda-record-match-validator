@@ -1,6 +1,6 @@
 {
     "description": "Do not return undfined for a LOW field without $a",
     "skip": false,
-    "only": true,
+    "only": false,
     "expectedResults": ["FIKKA"]
 }

@@ -8,7 +8,8 @@ const debugDev = debug.extend('dev');
 const debugData = debug.extend('data');
 
 export function getLOW(record) {
-  const LOWs = hasFields('LOW', record, getSubfield, 'a');
+  // Do not return empty/non-existent LOW $a's as 'undefined'
+  const LOWs = hasFields('LOW', record, getSubfield, 'a').filter(element => element && element !== 'undefined');
   debugData('LOWs: %o', LOWs);
   return LOWs;
 }
