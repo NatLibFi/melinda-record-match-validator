@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 //import {getLOW, checkLOW, checkLOWmanual} from '../src/fieldLOW.js';
-import {getLOW} from '../src/fieldLOW.js';
+import {getLOW, compareLOWmanual} from '../src/fieldLOW.js';
 import createDebugLogger from 'debug';
 import {MarcRecord} from '@natlibfi/marc-record';
 
@@ -13,7 +13,7 @@ const debugData = debug.extend('data');
 testGetLow();
 
 //testCheckLow();
-//testCheckLowManual();
+testCompareLowManual();
 
 function testGetLow() {
   generateTests({
@@ -34,6 +34,29 @@ function testGetLow() {
     expect(lows).to.eql(expectedResults);
   }
 }
+
+function testCompareLowManual() {
+
+  generateTests({
+    callback,
+    path: [__dirname, '..', 'test-fixtures', 'low', 'compareLowManual'],
+    useMetadataFile: true,
+    recurse: false,
+    fixura: {
+      reader: READERS.JSON1
+    }
+  });
+
+
+  function callback({expectedResults, recordValuesA, recordValuesB}) {
+    debugData(JSON.stringify(recordValuesA));
+    debugData(JSON.stringify(recordValuesB));
+    const result = compareLOWmanual(recordValuesA, recordValuesB);
+    debugData(JSON.stringify(result));
+    expect(result).to.eql(expectedResults);
+  }
+}
+
 
 /*
 
@@ -58,32 +81,6 @@ function testCheckLow() {
       expect(type).to.eql(expectedResults);
     }
   }
-
-
-}
-
-function testCheckLowManual() {
-  testGetTitleFeaturesType();
-
-  function testGetTitleFeaturesType() {
-    generateTests({
-      callback,
-      path: [__dirname, '..', 'test-fixtures', 'low', 'checkLowManual'],
-      useMetadataFile: true,
-      recurse: false,
-      fixura: {
-        reader: READERS.JSON1
-      }
-    });
-
-    function callback({title, expectedResults}) {
-      debug(`Testing: ${JSON.stringify(title)}`);
-      const type = getTitleFeaturesType(title);
-      debug(`Result: ${type}`);
-      expect(type).to.eql(expectedResults);
-    }
-  }
-
-
 }
 */
+
