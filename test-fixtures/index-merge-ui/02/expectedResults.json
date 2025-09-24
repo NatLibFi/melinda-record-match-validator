@@ -113,7 +113,7 @@
         "preference": false,
         "validation": true,
         "type": "warning",
-        "validation_message_fi": "tarkista voiko tietueet yhdistää, osakohteen sijaintiedot eroavat",
+        "validation_message_fi": "tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat",
         "preference_message_fi": ""
     },
     {
@@ -140,7 +140,7 @@
         "preference": true,
         "validation": true,
         "type": "error",
-        "validation_message_fi": "tietueita, joilla on paikalliskannassa eri tunniste ei voi yhdistää",
+        "validation_message_fi": "tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää",
         "preference_message_fi": "suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa"
     },
     {
@@ -150,7 +150,7 @@
         "validation": false,
         "type": "error",
         "validation_message_fi": "",
-        "preference_message_fi": "suosi tietuetta, joka on päivitetty viimeksi"
+        "preference_message_fi": "suosi tietuetta, jota on päivitetty viimeksi"
     },
     {
         "result": true,

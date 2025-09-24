@@ -94,7 +94,6 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
 
   // This test checks is just for preference despite its description!
   // Priority order: FIKKA > ANY > NONE
-  // DEVELOP: human merge should not merge records with same LOW
   {'name': 'LOW-for-preference',
     'description': 'LOW test (preference)',
     'function': checkLOW,
@@ -103,6 +102,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus',
     'validation_message_fi': ''},
 
+  // database internal merge cannot merge two records with same low
   {'name': 'LOW-validation-for-internal',
     'description': 'LOW test (validation for internal)',
     'function': checkLOWinternal,
@@ -181,7 +181,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference': false,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintiedot eroavat'},
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
 
   {'name': 'f040b',
     'description': '040$b (language of cataloging) (preference only)',
@@ -209,7 +209,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference': true,
     'internal': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
-    'validation_message_fi': 'tietueita, joilla on paikalliskannassa eri tunniste ei voi yhdistää'},
+    'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
 
 
   // preference for record that's updated more recently
@@ -218,7 +218,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': check005,
     'validation': false,
     'preference': true,
-    'preference_message_fi': 'suosi tietuetta, joka on päivitetty viimeksi',
+    'preference_message_fi': 'suosi tietuetta, jota on päivitetty viimeksi',
     'validation_message_fi': ''},
 
   // human merge: warning
@@ -279,6 +279,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
 
 const comparisonTasksTable = {
   recordImport: [...originalComparisonTasks].filter(isUsableForImport),
+  // merge two records existing in database together, checked by human user in UI
   humanMerge: [...originalComparisonTasks.filter(isUsableForInternal)]
 };
 
@@ -305,7 +306,7 @@ function isUsableForImport(task) {
 // Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
 
-  // We could skip those tasks that are !validation if !checkPreference - but how?
+  // DEVELOP: We could skip those tasks that are !validation if !checkPreference - but how?
 
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
@@ -397,7 +398,8 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 }
 
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
-export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {}, record2External = {}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
+// MergeUI is currently used for manual merging of two database records
+export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
   debugDev(`Manual ${manual} (for Merge UI) - we have ${comparisonTasks.length} comparison tasks`);
 
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.

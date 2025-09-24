@@ -72,8 +72,42 @@ function mapEncodingLevel(encodingLevel) {
   throw new Error('Invalid record completion level');
 }
 
+export function getTypeOfRecord(record) {
+  const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
+  const result = {
+    typeOfRecord: mapTypeOfRecord(recordTypeRaw)
+  };
+  return result;
+}
+
+export function getBibliographicalLevel(record) {
+  const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
+  const result = {
+    bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw)
+  };
+  return result;
+}
+
+export function getRecordLevel(record) {
+  const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
+  const result = {
+    encodingLevel: mapEncodingLevel(recordCompletionLevel),
+    prepublicationLevel: getPrepublicationLevel(record, recordCompletionLevel)
+  };
+  return result;
+}
+
 export function getRecordInfo(record) {
 
+  const result = {
+    ...getTypeOfRecord(record),
+    ...getBibliographicalLevel(record),
+    ...getRecordLevel(record)
+  };
+
+  return result;
+
+  /*
   const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
   const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
   const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
@@ -97,7 +131,7 @@ export function getRecordInfo(record) {
   */
 
 
-  return result;
+  //return result;
 
   /*
   function addPrepublicationLevel(result, record) {
@@ -107,32 +141,33 @@ export function getRecordInfo(record) {
   }
   */
 
-  // DEVELOP:
-  // encoding level '2' && 'Koneellisesti tuotettu tietue'
-  function getPrepublicationLevel(record, encodingLevel = '8') {
-    if (encodingLevel !== '8') {
-      return {code: '0', level: 'Not a prepublication'};
-    }
+}
 
-    const fields = record.get(/^(?:500|594)$/u);
-    if (fields) {
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
-        return {code: '1', level: 'Koneellisesti tuotettu tietue'};
-      }
-
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
-        return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
-      }
-
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
-        return {code: '3', level: 'ENNAKKOTIETO'};
-      }
-
-      return {code: '3', level: 'No prepublication type found'};
-    }
-
-    return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
+// DEVELOP:
+// encoding level '2' && 'Koneellisesti tuotettu tietue'
+export function getPrepublicationLevel(record, encodingLevel = '8') {
+  if (encodingLevel !== '8') {
+    return {code: '0', level: 'Not a prepublication'};
   }
+
+  const fields = record.get(/^(?:500|594)$/u);
+  if (fields) {
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
+      return {code: '1', level: 'Koneellisesti tuotettu tietue'};
+    }
+
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
+      return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
+    }
+
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
+      return {code: '3', level: 'ENNAKKOTIETO'};
+    }
+
+    return {code: '3', level: 'No prepublication type found'};
+  }
+
+  return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
 }
 
 // eslint-disable-next-line max-statements
@@ -232,6 +267,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
   return result;
 }
 
+
+// Check all values from leader
 export function checkLeader({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
   const recordInfo1 = getRecordInfo(record1);
   const recordInfo2 = getRecordInfo(record2);
