@@ -1,6 +1,6 @@
 
 import createDebugLogger from 'debug';
-import {isDeletedRecord} from '@natlibfi/melinda-commons';
+import {isDeletedRecord, isTestRecord} from '@natlibfi/melinda-commons';
 import {MarcRecord} from '@natlibfi/marc-record';
 
 import {checkSID} from './fieldSID';
@@ -41,6 +41,13 @@ function checkExistence({record1, record2}) {
   return true;
 }
 
+function checkTestRecord({record1, record2}) {
+  if (isTestRecord(record1) !== isTestRecord(record2)) {
+    return false;
+  }
+  return true;
+}
+
 const originalComparisonTasks = [ // NB! These are/should be in priority order!
   // undefined or deleted records cannot be merged (both automatic and human merge)
   {'name': 'existence',
@@ -50,6 +57,15 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference': false,
     'preference_message_fi': '',
     'validation_message_fi': 'poistettuja tietueita ei voi yhdistää'},
+
+  // test records and non test records should not be merged
+  {'name': 'test record',
+    'description': 'test record',
+    'function': checkTestRecord,
+    'validation': true,
+    'preference': false,
+    'preference_message_fi': '',
+    'validation_message_fi': 'testitietuetta ja normaalia tietuetta ei voi yhdistää'},
 
   // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)s
   // - fail merge if LDR/006-7 are mismatch
