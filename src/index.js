@@ -1,6 +1,6 @@
 
 import createDebugLogger from 'debug';
-import {isDeletedRecord, isTestRecord} from '@natlibfi/melinda-commons';
+import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melinda-commons';
 import {MarcRecord} from '@natlibfi/marc-record';
 
 import {checkSID} from './fieldSID';
@@ -48,6 +48,13 @@ function checkTestRecord({record1, record2}) {
   return true;
 }
 
+function checkHostComponent({record1, record2}) {
+  if (isComponentRecord(record1, false, ['973']) !== isComponentRecord(record2, false, ['973'])) {
+    return false;
+  }
+  return true;
+}
+
 const originalComparisonTasks = [ // NB! These are/should be in priority order!
   // undefined or deleted records cannot be merged (both automatic and human merge)
   {'name': 'existence',
@@ -66,6 +73,15 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'preference': false,
     'preference_message_fi': '',
     'validation_message_fi': 'testitietuetta ja normaalia tietuetta ei voi yhdistää'},
+
+  // test records and non test records should not be merged
+  {'name': 'host/component',
+    'description': 'host/component record',
+    'function': checkHostComponent,
+    'validation': true,
+    'preference': false,
+    'preference_message_fi': '',
+    'validation_message_fi': 'osakohdetta ja ei-osakohdetta ei voi yhdistää'},
 
   // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)s
   // - fail merge if LDR/006-7 are mismatch

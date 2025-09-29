@@ -18,7 +18,7 @@
         "preference_message_fi": ""
     },
 {
-        "result": true,
+        "result": false,
         "reason": "host/component",
         "preference": false,
         "validation": true,

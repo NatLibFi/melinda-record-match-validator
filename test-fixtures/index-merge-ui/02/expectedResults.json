@@ -17,6 +17,15 @@
         "validation_message_fi": "testitietuetta ja normaalia tietuetta ei voi yhdistää",
         "preference_message_fi": ""
     },
+{
+        "result": true,
+        "reason": "host/component",
+        "preference": false,
+        "validation": true,
+        "type": "error",
+        "validation_message_fi": "osakohdetta ja ei-osakohdetta ei voi yhdistää",
+        "preference_message_fi": ""
+    },
     {
     "result": true,
     "reason": "typeOfRecord",

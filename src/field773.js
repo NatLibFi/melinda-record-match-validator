@@ -42,13 +42,13 @@ export function get773(record) { // collect
   return [...f773, ...f973];
 }
 
-export function check773({record1, record2}) {
+export function check773({record1, record2, failMultipleHostLinks = true, failF973 = true}) {
   const data1 = get773(record1);
   const data2 = get773(record2);
-  return compare773values(data1, data2);
+  return compare773values(data1, data2, failMultipleHostLinks, failF973);
 }
 
-function compare773values(f773sA, f773sB) {
+function compare773values(f773sA, f773sB, failMultipleHostLinks = false, failF973 = true) {
 
   debugDev('Collected f773s: %o vs %o', f773sA, f773sB);
   nvdebug('compare773values() in...', debugDev);
@@ -57,11 +57,11 @@ function compare773values(f773sA, f773sB) {
 
   // Fail if one of the records has multiple 773/973 fields:
   // (Multiple 773 fields means that it's a Viola record, or that some weeding is need first.)
-  if (f773sA.length > 1 || f773sB.length > 1) {
+  if (failMultipleHostLinks && (f773sA.length > 1 || f773sB.length > 1)) {
     return false;
   }
   // Fail if one of the fields is 973
-  if (f773sA.some(val => val.tag === '973') || f773sB.some(val => val.tag === '973')) {
+  if (failF973 && (f773sA.some(val => val.tag === '973') || f773sB.some(val => val.tag === '973'))) {
     return false;
   }
 
