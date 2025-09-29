@@ -18,7 +18,7 @@ import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
 import {check773} from './field773';
 import {check984} from './field984';
-import {checkLeader} from './leader';
+import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './leader';
 import {check005, check008} from './controlFields';
 import {compareRecordsPartSetFeatures} from './partsAndSets';
 import {performAudioSanityCheck} from './sanityCheckAudio';
@@ -64,8 +64,44 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkLeader,
     'validation': true,
     'preference': true,
-    'manual': 'warning',
+    'manual': false,
     'validation_message_fi': 'ainestotyypiltään tai bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
+    'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
+
+  // leader typeOfRecord LDR/006
+  // do not use same time as checkLeader that checks all three leader values
+  {'name': 'typeOfRecord',
+    'description': 'leader: typeOfRecord (validation)',
+    'function': checkTypeOfRecord,
+    'validation': true,
+    'preference': false,
+    'manual': 'warning',
+    'import': false,
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään; yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
+    'preference_message_fi': ''},
+
+  // leader bibliographicLevel LDR/006
+  // do not use same time as checkLeader that checks all three leader values
+  {'name': 'bibliographicLevel',
+    'description': 'leader: bibliographicLevel (validation)',
+    'function': checkTypeOfRecord,
+    'validation': true,
+    'preference': false,
+    'import': false,
+    'manual': 'error',
+    'validation_message_fi': 'bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
+    'preference_message_fi': ''},
+
+  // leader encodingLevel LDR/017 + f500/f594
+  // do not use same time as checkLeader that checks all three leader values
+  {'name': 'recordLevel',
+    'description': 'leader + 500/594: recordLevel (preference)',
+    'function': checkRecordLevel,
+    'validation': false,
+    'preference': true,
+    'import': false,
+    'manual': 'warning',
+    'validation_message_fi': '',
     'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
 
   // just preference also for human merge (we like records with 264 instead of 260, they are probably more RDA-compatible)
@@ -203,11 +239,12 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
   // - fail merge for different SIDs from same database
   // set preference for record that has most commons SIDs
   {'name': 'fSID-for-import',
-    'description': 'SID test (validation and preference)',
+    'description': 'SID test (validation and preference), for import only',
     'function': checkSID,
     'validation': true,
     'preference': true,
     'internal': false,
+    //'manual': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
     'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
 
@@ -280,12 +317,29 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
 const comparisonTasksTable = {
   recordImport: [...originalComparisonTasks].filter(isUsableForImport),
   // merge two records existing in database together, checked by human user in UI
-  humanMerge: [...originalComparisonTasks.filter(isUsableForInternal)]
+  humanMerge: [...originalComparisonTasks.filter(isUsableForInternal).filter(isUsableForManual)]
 };
+
+debugDev(`------------ RECORD IMPORT --------`);
+debugDev(`comparisonTasksTable.recordImport has ${comparisonTasksTable.recordImport.length} comparison tasks:`);
+debugDev(`${comparisonTasksTable.recordImport.map((task) => task.description).join('\n')}`);
+debugDev(`------------ HUMAN MERGE --------`);
+debugDev(`comparisonTasksTable.humanMerge has ${comparisonTasksTable.humanMerge.length} comparison tasks:`);
+debugDev(`${comparisonTasksTable.humanMerge.map((task) => task.description).join('\n')}`);
+
+// Manual merge: merge done manually in an UI
+function isUsableForManual(task) {
+  if (task.manual !== undefined && task.manual === false) {
+    debugDev(`${task.name} has manual: ${task.manual}`);
+    return false;
+  }
+  debugDev(`${task.name} has manual: ${task.manual}`);
+  return true;
+}
 
 // Internal merge: merging two records in the database together
 function isUsableForInternal(task) {
-  if (task.manual !== undefined && task.internal === false) {
+  if (task.internal !== undefined && task.internal === false) {
     debugDev(`${task.name} has internal: ${task.internal}`);
     return false;
   }

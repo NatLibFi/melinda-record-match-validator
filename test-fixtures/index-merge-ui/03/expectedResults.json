@@ -9,12 +9,30 @@
         "preference_message_fi": ""
     },
     {
+    "result": true,
+    "reason": "typeOfRecord",
+    "preference": false,
+    "validation": true,
+    "type": "warning",
+    "validation_message_fi": "tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään; yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot",
+    "preference_message_fi": ""
+  },
+  {
+    "result": true,
+    "reason": "bibliographicLevel",
+    "preference": false,
+    "validation": true,
+    "type": "error",
+    "validation_message_fi": "bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää",
+    "preference_message_fi": ""
+  },
+    {
         "result": "B",
-        "reason": "leader",
+        "reason": "recordLevel",
         "preference": true,
-        "validation": true,
+        "validation": false,
         "type": "warning",
-        "validation_message_fi": "ainestotyypiltään tai bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää",
+        "validation_message_fi": "",
         "preference_message_fi": "suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta"
     },
     {
@@ -133,15 +151,6 @@
         "type": "error",
         "validation_message_fi": "",
         "preference_message_fi": "suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA"
-    },
-    {
-        "result": true,
-        "reason": "fSID-for-import",
-        "preference": true,
-        "validation": true,
-        "type": "error",
-        "validation_message_fi": "tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää",
-        "preference_message_fi": "suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa"
     },
     {
         "result": "B",

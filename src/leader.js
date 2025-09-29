@@ -57,7 +57,7 @@ function mapTypeOfRecord(typeOfRecord) {
   throw new Error(`Invalid record type ${typeOfRecord}`);
 }
 
-function mapBibliographicalLevel(bibliographicLevel) {
+function mapBibliographicLevel(bibliographicLevel) {
   if (bibliographicLevel in bibliographicLevelHash) {
     return {level: bibliographicLevelHash[bibliographicLevel], code: bibliographicLevel};
   }
@@ -80,10 +80,10 @@ export function getTypeOfRecord(record) {
   return result;
 }
 
-export function getBibliographicalLevel(record) {
+export function getBibliographicLevel(record) {
   const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
   const result = {
-    bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw)
+    bibliographicLevel: mapBibliographicLevel(recordBibLevelRaw)
   };
   return result;
 }
@@ -101,46 +101,11 @@ export function getRecordInfo(record) {
 
   const result = {
     ...getTypeOfRecord(record),
-    ...getBibliographicalLevel(record),
+    ...getBibliographicLevel(record),
     ...getRecordLevel(record)
   };
 
   return result;
-
-  /*
-  const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
-  const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
-  const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
-
-  //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
-  //debug('Record type raw: %o', recordTypeRaw);
-  //debug('Record bib level raw: %o', recordBibLevelRaw);
-  //debug('Record completion level raw: %o', recordCompletionLevel);
-
-  const result = {
-    typeOfRecord: mapTypeOfRecord(recordTypeRaw),
-    bibliographicLevel: mapBibliographicalLevel(recordBibLevelRaw),
-    encodingLevel: mapEncodingLevel(recordCompletionLevel),
-    prepublicationLevel: getPrepublicationLevel(record, recordCompletionLevel)
-  };
-
-  /*
-  if (recordCompletionLevel === '8') {
-    return addPrepublicationLevel(result, record);
-  }
-  */
-
-
-  //return result;
-
-  /*
-  function addPrepublicationLevel(result, record) {
-    const level = getPrepublicationLevel(record);
-    result.prepublicationLevel = level; // eslint-disable-line functional/immutable-data
-    return result;
-  }
-  */
-
 }
 
 // DEVELOP:
@@ -213,13 +178,14 @@ function compareTypeOfRecord(a, b) {
   debugDev('Record A type: %o', a);
   debugDev('Record B type: %o', b);
   //nvdebug(`type of record: '${a}' vs '${b}', debugDev`);
+  // rateValues, no rateArray: no preference, just validation false - true
   return rateValues(a, b);
 }
 
-function compareBibliographicalLevel(a, b) {
+function compareBibliographicLevel(a, b) {
   debugDev('Record A bib level: %o', a);
   debugDev('Record B bib level: %o', b);
-
+  // rateValues, no rateArray: no preference, jsut validation false - true
   return rateValues(a, b);
 }
 
@@ -259,12 +225,38 @@ export function compareLeader(recordValuesA, recordValuesB) {
 
   const result = {
     typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord, f000B.typeOfRecord),
-    bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
+    bibliographicLevel: compareBibliographicLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
   };
   //nvdebug('NV WP9', debugDev);// eslint-disable-line no-console
   //nvdebug(JSON.stringify(result), debugDev); // eslint-disable-line no-console
   return result;
+}
+
+// check typeOfRecord (LDR/06)
+export function checkTypeOfRecord({record1, record2}) {
+  const recordInfo1 = getTypeOfRecord(record1);
+  const recordInfo2 = getTypeOfRecord(record2);
+
+  return compareTypeOfRecord(recordInfo1.typeOfRecord, recordInfo2.typeOfRecord);
+}
+
+// check bibliographicLevel (LDR/07)
+export function checkBibliographicLevel({record1, record2}) {
+  const recordInfo1 = getBibliographicLevel(record1);
+  const recordInfo2 = getBibliographicLevel(record2);
+
+  return compareBibliographicLevel(recordInfo1.bibliographicLevel, recordInfo2.bibliographicLevel);
+}
+
+// Check record encoding level + prepublication level, mostly for preference
+export function checkRecordLevel({record1, record2, record1External = {}, record2External = {}}) {
+  const recordInfo1 = getRecordLevel(record1);
+  const recordInfo2 = getRecordLevel(record2);
+  const recordSource1 = record1External.recordSource || undefined;
+  const recordSource2 = record2External.recordSource || undefined;
+
+  return compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordSource1, recordSource2);
 }
 
 
@@ -275,14 +267,15 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
   const recordSource1 = record1External.recordSource || undefined;
   const recordSource2 = record2External.recordSource || undefined;
 
+  debugDev(`checkLeader()`);
 
-  debugDev(`checkLeader()`); // eslint-disable-line no-console
-
+  // DEVELOP: this could use checkTypeOfRecord?
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
     debugDev(`LDR: type of record failed!`); // eslint-disable-line no-console
     return false;
   }
 
+  // DEVELOP: this could use checkBibliographicLevel?
   if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
     debugDev(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
     return false;
