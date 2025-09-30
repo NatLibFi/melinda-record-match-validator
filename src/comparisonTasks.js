@@ -53,7 +53,7 @@ function checkHostComponent({record1, record2}) {
   return true;
 }
 
-const originalComparisonTasks = [ // NB! These are/should be in priority order!
+const comparisonTasks = [ // NB! These are/should be in priority order!
   // undefined or deleted records cannot be merged (both automatic and human merge)
   {'name': 'existence',
     'description': 'existence (validation only)',
@@ -61,7 +61,8 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': false,
     'preference_message_fi': '',
-    'validation_message_fi': 'poistettuja tietueita ei voi yhdistää'},
+    'validation_message_fi': 'poistettuja tietueita ei voi yhdistää',
+    'tags': [{'tag': 'STA'}, {'tag': 'DEL'}, {'tag': 'LDR', 'chars': ['5']}]},
 
   // test records and non test records should not be merged
   {'name': 'test record',
@@ -70,16 +71,18 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': false,
     'preference_message_fi': '',
-    'validation_message_fi': 'testitietuetta ja normaalia tietuetta ei voi yhdistää'},
+    'validation_message_fi': 'testitietuetta ja normaalia tietuetta ei voi yhdistää',
+    'tags': [{'tag': 'STA'}]},
 
-  // test records and non test records should not be merged
+  // host an component records  should not be merged
   {'name': 'host/component',
     'description': 'host/component record',
     'function': checkHostComponent,
     'validation': true,
     'preference': false,
     'preference_message_fi': '',
-    'validation_message_fi': 'osakohdetta ja ei-osakohdetta ei voi yhdistää'},
+    'validation_message_fi': 'osakohdetta ja ei-osakohdetta ei voi yhdistää',
+    'tags': [{'tag': '773'}, {'tag': '973'}, {'tag': 'LDR', 'chars': ['7']}]},
 
   // checks record type LDR/06 && bibliographic level LDR/07 (validation) and LDR/17 for encoding level (preference)s
   // - fail merge if LDR/006-7 are mismatch
@@ -358,9 +361,9 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
 ];
 
 export const comparisonTasksTable = {
-  recordImport: [...originalComparisonTasks].filter(isUsableForImport),
+  recordImport: [...comparisonTasks].filter(isUsableForImport),
   // merge two records existing in database together, checked by human user in UI
-  humanMerge: [...originalComparisonTasks.filter(isUsableForInternal).filter(isUsableForManual)]
+  humanMerge: [...comparisonTasks.filter(isUsableForInternal).filter(isUsableForManual)]
 };
 
 debugDev(`------------ RECORD IMPORT --------`);

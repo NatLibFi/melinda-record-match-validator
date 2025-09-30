@@ -7,8 +7,8 @@ import {MarcRecord} from '@natlibfi/marc-record';
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
-// Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 
+// Apply some recursion evilness/madness/badness to perform only the tests we really really really want.
 function runComparisonTasks({nth, record1, record2, checkPreference = true, record1External = {}, record2External = {}, returnAll = false, comparisonTasks = comparisonTasksTable.recordImport}) {
 
   // DEVELOP: We could skip those tasks that are !validation if !checkPreference - but how?
@@ -46,7 +46,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
       reason: comparisonTasks[i].name,
       preference: comparisonTasks[i].preference,
       validation: comparisonTasks[i].validation,
-      type: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual,
+      level: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual,
       // eslint-disable-next-line camelcase
       validation_message_fi: comparisonTasks[i].validation_message_fi,
       // eslint-disable-next-line camelcase
@@ -118,29 +118,34 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
   return resultForMergeUi;
 
   // Return to Merge UI only results that require action, ie. those that fail merge or change preference
-  // MergeUI sends records non-preferred record as record1 and preferred record as record2
+  // MergeUI sends records non-preferred record as record1 and preferred record as record2, so preference result 'A' is a warning
   function filterResultsForMergeUI(allResults) {
     const failure = allResults
       .filter(r => r.result !== true) // Filter out passed tests
-      .filter(r => r.result !== 'B'); // Filter out passed preference tests
+      .filter(r => r.result !== 'B'); // Filter out passed preference tests (record2/B is preferred)
     debugDev(`MatchValidator failed: ${JSON.stringify(failure, null, 4)}`);
 
     const messages = failure
       // eslint-disable-next-line camelcase
-      .map(({result, type, validation_message_fi, preference_message_fi}) => ({
-        type: result === 'A' ? 'warning' : type,
+      .map(({result, level, validation_message_fi, preference_message_fi}) => ({
+        result: result === 'A' ? 'warning' : level, // all preference-results are warning in UI
+        type: result === 'A' ? 'preference' : 'validation', //
         // eslint-disable-next-line camelcase
         message: result === 'A' ? preference_message_fi : validation_message_fi
       })); // Convert to messages
 
-    if (failure) {
-      return {
+    return messages;
+
+    /*
+      if (failure.length > 0) {
+      const response = {
         result: false,
-        errors: messages.filter(({type}) => type === 'error').map(({message}) => message),
-        warnings: messages.filter(({type}) => type === 'warning').map(({message}) => message)
+        errors: messages.filter(({level}) => level === 'error').map(({message}) => message),
+        warnings: messages.filter(({level}) => level === 'warning').map(({message}) => message)
       };
+      return response;
     }
-    return {result: true};
+    return [];*/
   }
 }
 
