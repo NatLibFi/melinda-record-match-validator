@@ -1,5 +1,5 @@
-{
-    "action": false,
-    "message": "DVD vs Blu-Ray sanity check (validation only) failed",
-    "preference": false
-}
+[{
+    "result": "warning",
+    "message": "tietueissa on kuvailtu DVD- ja Bluray-levy, tarkista voiko ne yhdistää",
+    "type": "validation"
+}]

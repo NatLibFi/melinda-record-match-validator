@@ -53,7 +53,29 @@ function checkHostComponent({record1, record2}) {
   return true;
 }
 
-const comparisonTasks = [ // NB! These are/should be in priority order!
+// DEVELOP: move comparisonTask metadata mainly to the function files
+// DEVELOP: add tag information for highlighting problematic fields / positions / subfields for human user
+// DEVELOP: multilingual human readable messages
+
+/*
+name: short name for comparison task
+description: longer, original description for comparison task
+
+validation: comparison task is used for validation
+preference: comparison task is used for choosing preferred record
+
+manual: is comparison check usable in manual (internal) merge, type of fail if used [true/error/warning/false], defaults to: true/error if undefined
+internal: is comparison check usable in internal merge (ie. merging two database records) [true/false], defaults to true if undefined
+import: is comparison check usable in import merge (ie. merging an incoming record and a database record) [true/false], defaults to true if undefined
+
+preference_message_fi: human readable message in Finnish for comparing record preference for merging
+validation_message_fi: human readable message in Finnish for validating records for merging
+
+DEVELOP: tags: tags to highlight fields/subfields/positions of fields and field parts that caused the matchValidation error/warning
+*/
+
+
+const comparisonTasks = [ // NB! These are/should be in priority order for recordImport, which checks only until first failure!
   // undefined or deleted records cannot be merged (both automatic and human merge)
   {'name': 'existence',
     'description': 'existence (validation only)',
@@ -70,16 +92,22 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkTestRecord,
     'validation': true,
     'preference': false,
+    'import': true,
+    'internal': true,
+    'manual': 'error',
     'preference_message_fi': '',
     'validation_message_fi': 'testitietuetta ja normaalia tietuetta ei voi yhdistää',
     'tags': [{'tag': 'STA'}]},
 
-  // host an component records  should not be merged
+  // host and component records should not be merged
   {'name': 'host/component',
     'description': 'host/component record',
     'function': checkHostComponent,
     'validation': true,
     'preference': false,
+    'import': true,
+    'internal': true,
+    'manual': 'error',
     'preference_message_fi': '',
     'validation_message_fi': 'osakohdetta ja ei-osakohdetta ei voi yhdistää',
     'tags': [{'tag': '773'}, {'tag': '973'}, {'tag': 'LDR', 'chars': ['7']}]},
@@ -88,18 +116,18 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
   // - fail merge if LDR/006-7 are mismatch
   // - preference based on encoding level and more nuanced prepublication level for prepub records
   // Prioritize LDR/17 (encoding level)
-  // DEVELOP: we'll need more nuanced check for human merge:
-  //          record type & specific bibliographic level can be warnings,
-  //          generic non-component / component difference should prevent merge
-  //          we should currently be able to block merge for records that *have* components, but that needs Melinda-search or f774, so...
   {'name': 'leader',
     'description': 'leader (validation and preference)',
     'function': checkLeader,
     'validation': true,
     'preference': true,
     'manual': false,
+    'import': true,
+    'internal': true,
     'validation_message_fi': 'ainestotyypiltään tai bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
     'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
+
+  // Singular leader comparisons for Human/internal merge
 
   // leader typeOfRecord LDR/006
   // do not use same time as checkLeader that checks all three leader values
@@ -110,6 +138,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'preference': false,
     'manual': 'warning',
     'import': false,
+    'internal': true,
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään; yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
     'preference_message_fi': ''},
 
@@ -121,6 +150,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': false,
     'import': false,
+    'internal': true,
     'manual': 'error',
     'validation_message_fi': 'bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
     'preference_message_fi': ''},
@@ -133,6 +163,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'validation': false,
     'preference': true,
     'import': false,
+    'internal': true,
     'manual': 'warning',
     'validation_message_fi': '',
     'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
@@ -144,6 +175,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkPublisher,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': false, // let's not give too many preference warnings for a human user
     'preference_message_fi': 'suosi tietuetta, jossa julkaisutiedot ovat kentässä 264',
     'validation_message_fi': ''},
@@ -158,6 +191,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check008,
     'validation': true,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': 'suosi tietuetta, jossa on tarkemmin ilmoitettu julkaisuajan tyyppi/julkaisun tila',
     'validation_message_fi': 'tietueita, joissa on ristiriitainen julkaisuajan tyyppi/julkaisun tila ei voi yhdistää'},
@@ -169,6 +204,9 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkLOW,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
+    'manual': true,
     'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus',
     'validation_message_fi': ''},
 
@@ -180,6 +218,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'preference': false,
     'import': false,
     'internal': true,
+    'manual': 'error',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää'},
 
@@ -189,6 +228,9 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check042,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
+    'manual': true,
     'preference_message_fi': 'suosi tietuetta, jossa on Kansallisbibliografian tai Kansallisdiskografian autentikaatiokoodi',
     'validation_message_fi': ''},
 
@@ -197,6 +239,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkCAT,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': false, // let's not give too many preference warnings for a human cataloger
     'preference_message_fi': 'suosi tietuetta, jolla on paremmat kuvailuhistoriatiedot',
     'validation_message_fi': ''},
@@ -207,6 +251,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkAllTitleFeatures,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden nimeketiedot eroavat'},
@@ -220,6 +266,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check336,
     'validation': true,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat sisältötyyppitiedot',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden sisältötyyppitiedot eroavat'},
@@ -230,6 +278,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check337,
     'validation': true,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat mediatyyppitiedot',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden mediatyyppitiedot eroavat'},
@@ -240,6 +290,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check338,
     'validation': true,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat tallennetyyppitiedot',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden tallennetyyppitiedot eroavat'},
@@ -250,6 +302,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check773Internal,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': false,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
@@ -260,7 +314,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': false,
     'internal': false,
-    'manual': 'warning',
+    'import': true,
+    'manual': false,
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
 
@@ -269,6 +324,9 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check040b,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
+    'manual': true,
     'preference_message_fi': 'suosi tietuetta, jolla on soveltuvin kuvailukieli',
     'validation_message_fi': ''},
 
@@ -277,6 +335,9 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check040e,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
+    'manual': true,
     'preference_message_fi': 'suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA',
     'validation_message_fi': ''},
 
@@ -289,6 +350,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': true,
     'internal': false,
+    'import': true,
     'manual': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
     'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
@@ -300,6 +362,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': check005,
     'validation': false,
     'preference': true,
+    'internal': true,
+    'import': true,
     'manual': false, // let's not give too many preference warnings for a human cataloger
     'preference_message_fi': 'suosi tietuetta, jota on päivitetty viimeksi',
     'validation_message_fi': ''},
@@ -311,6 +375,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': performAudioSanityCheck,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueissa on kuvailtu CD- ja LP-levy, tarkista voiko ne yhdistää'},
@@ -322,6 +388,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': performDaisySanityCheck,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueissa on kuvailtu yleinen ja Daisy-äänikirja, tarkista voiko ne yhdistää'},
@@ -333,6 +401,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': performDvdSanityCheck,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueissa on kuvailtu DVD- ja Bluray-levy, tarkista voiko ne yhdistää'},
@@ -344,6 +414,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': performIsbnQualifierCheck,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueissa on eroava ISBN-tarkenne, tarkista voiko ne yhdistää'},
@@ -355,6 +427,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order!
     'function': compareRecordsPartSetFeatures,
     'validation': true,
     'preference': false,
+    'internal': true,
+    'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tietueissa on kuvailtu yksittäinen moniosaisen monografian osa ja moniosainen monografia kokonaisuutena, tarkista voiko ne yhdistää'}

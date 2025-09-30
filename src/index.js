@@ -104,6 +104,9 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
 // MergeUI is currently used for manual merging of two database records
+// Returns array of failure responses, empty array if matchValidator does not return failures
+// [{ "result": "error/warning", "type": "validation/preference", "message": "finnish message"}]
+
 export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
   debugDev(`Manual ${manual} (for Merge UI) - we have ${comparisonTasks.length} comparison tasks`);
 
@@ -113,7 +116,7 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
 
   const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true, comparisonTasks});
   debugDev(JSON.stringify(result));
-  // return result-array of all results
+  // return result-array failed results
   const resultForMergeUi = filterResultsForMergeUI(result);
   return resultForMergeUi;
 
@@ -133,19 +136,9 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
         // eslint-disable-next-line camelcase
         message: result === 'A' ? preference_message_fi : validation_message_fi
       })); // Convert to messages
+    debugDev(`MatchValidator results for MergeUI: ${JSON.stringify(messages, null, 4)}`);
 
     return messages;
-
-    /*
-      if (failure.length > 0) {
-      const response = {
-        result: false,
-        errors: messages.filter(({level}) => level === 'error').map(({message}) => message),
-        warnings: messages.filter(({level}) => level === 'warning').map(({message}) => message)
-      };
-      return response;
-    }
-    return [];*/
   }
 }
 
