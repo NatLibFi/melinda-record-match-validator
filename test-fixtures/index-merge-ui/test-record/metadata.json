@@ -1,0 +1,5 @@
+{
+    "description": "Fail validation if one of the records is a test record",
+    "skip": false,
+    "only": false
+}

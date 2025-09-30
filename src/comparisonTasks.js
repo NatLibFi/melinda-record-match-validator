@@ -355,7 +355,6 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
     'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
 
-
   // preference for record that's updated more recently
   {'name': 'f005',
     'description': '005 timestamp test (preference)',
