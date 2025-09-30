@@ -1,5 +1,5 @@
 {
     "description": "Fail merge if one of records is a component record (f973)",
     "skip": false,
-    "only": true
+    "only": false
 }

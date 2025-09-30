@@ -145,7 +145,7 @@
     },
     {
         "result": true,
-        "reason": "f773",
+        "reason": "f773-for-internal",
         "preference": false,
         "validation": true,
         "type": "warning",

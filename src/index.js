@@ -1,4 +1,3 @@
-
 import createDebugLogger from 'debug';
 import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melinda-commons';
 import {MarcRecord} from '@natlibfi/marc-record';
@@ -16,7 +15,7 @@ import {checkPublisher} from './field26X';
 //import {validateCompareResults} from './validateRecordCompareResults';
 import {check042} from './field042';
 import {check336, check337, check338} from './field33X';
-import {check773} from './field773';
+import {check773, check773Internal} from './field773';
 import {check984} from './field984';
 import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './leader';
 import {check005, check008} from './controlFields';
@@ -242,11 +241,21 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden tallennetyyppitiedot eroavat'},
 
   // human merge: warning for subfields q&g - $w actually should be different ...
-  {'name': 'f773',
+  {'name': 'f773-for-internal',
+    'description': '773 $wgq test (validation only)',
+    'function': check773Internal,
+    'validation': true,
+    'preference': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
+
+  {'name': 'f773-for-import',
     'description': '773 $wgq test (validation only)',
     'function': check773,
     'validation': true,
     'preference': false,
+    'internal': false,
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
