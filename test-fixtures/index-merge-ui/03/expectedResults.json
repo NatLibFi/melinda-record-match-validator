@@ -53,15 +53,7 @@
         "validation_message_fi": "",
         "preference_message_fi": "suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta"
     },
-    {
-        "result": true,
-        "reason": "RDA from publisher",
-        "preference": true,
-        "validation": false,
-        "type": "error",
-        "preference_message_fi": "suosi tietuetta, jossa julkaisutiedot ovat kentässä 264",
-        "validation_message_fi": ""
-    },
+
     {
         "result": true,
         "reason": "f008",
@@ -98,15 +90,7 @@
         "validation_message_fi": "",
         "preference_message_fi": "suosi tietuetta, jossa on Kansallisbibliografian tai Kansallisdiskografian autentikaatiokoodi"
     },
-    {
-        "result": true,
-        "reason": "CAT",
-        "preference": true,
-        "validation": false,
-        "type": "error",
-        "validation_message_fi": "",
-        "preference_message_fi": "suosi tietuetta, jolla on paremmat kuvailuhistoriatiedot"
-    },
+
     {
         "result": true,
         "reason": "title",
@@ -170,15 +154,7 @@
         "validation_message_fi": "",
         "preference_message_fi": "suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA"
     },
-    {
-        "result": "B",
-        "reason": "f005",
-        "preference": true,
-        "validation": false,
-        "type": "error",
-        "validation_message_fi": "",
-        "preference_message_fi": "suosi tietuetta, jota on päivitetty viimeksi"
-    },
+
     {
         "result": true,
         "reason": "audio-sanity",

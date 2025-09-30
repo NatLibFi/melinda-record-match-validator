@@ -142,6 +142,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkPublisher,
     'validation': false,
     'preference': true,
+    'manual': false, // let's not give too many preference warnings for a human user
     'preference_message_fi': 'suosi tietuetta, jossa julkaisutiedot ovat kentässä 264',
     'validation_message_fi': ''},
 
@@ -194,6 +195,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': checkCAT,
     'validation': false,
     'preference': true,
+    'manual': false, // let's not give too many preference warnings for a human cataloger
     'preference_message_fi': 'suosi tietuetta, jolla on paremmat kuvailuhistoriatiedot',
     'validation_message_fi': ''},
 
@@ -285,7 +287,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'validation': true,
     'preference': true,
     'internal': false,
-    //'manual': false,
+    'manual': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
     'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
 
@@ -296,6 +298,7 @@ const originalComparisonTasks = [ // NB! These are/should be in priority order!
     'function': check005,
     'validation': false,
     'preference': true,
+    'manual': false, // let's not give too many preference warnings for a human cataloger
     'preference_message_fi': 'suosi tietuetta, jota on päivitetty viimeksi',
     'validation_message_fi': ''},
 
