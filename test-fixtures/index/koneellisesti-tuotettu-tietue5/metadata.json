@@ -1,0 +1,7 @@
+{
+    "description": "No preference based on recordSource incase of encLvl 2 records with prepublicationLevel '0' (not a prepublication)",
+    "record1External": {"recordSource": "incomingRecord"},
+    "record2External": {"recordSource": "databaseRecord"},
+    "skip": false,
+    "only": false
+}

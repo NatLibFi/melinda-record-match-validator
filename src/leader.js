@@ -204,7 +204,9 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
 
     const prePubValue = rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
 
-    if (prePubValue === true) {
+    // we'll check recordSource only if we have '8' or '2' records which have same prePubValue
+    // and prepubLevel is something else than '0' (not a prepublication)
+    if (prePubValue === true && prePubA.code !== '0' && prePubB.code !== '0') {
       const valueA = {code: recordSourceA};
       const valueB = {code: recordSourceB};
       const rateArray = ['incomingRecord', 'databaseRecord', undefined];
