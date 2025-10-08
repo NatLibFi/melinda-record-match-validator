@@ -1,5 +1,7 @@
 {
-    "description": "Missing title - fail validation if one or both records are missing title",
-    "skip": true,
+    "description": "Prefer incoming record incase of encLvl 2 records with prepublicationLevel",
+    "record1External": {"recordSource": "incomingRecord"},
+    "record2External": {"recordSource": "databaseRecord"},
+    "skip": false,
     "only": false
 }

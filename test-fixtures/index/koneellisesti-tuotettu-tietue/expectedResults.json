@@ -1,5 +1,7 @@
 {
-    "action": false,
-    "message": "field 245 (title) failed",
-    "preference": false
+    "action": "merge",
+    "preference": {
+        "name": "A won leader (validation and preference)",
+        "value": "A"
+    }
 }

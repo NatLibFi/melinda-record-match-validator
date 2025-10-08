@@ -107,13 +107,9 @@ export function getRecordInfo(record) {
   }
   */
 
-  // DEVELOP:
-  // encoding level '2' && 'Koneellisesti tuotettu tietue'
+  // PrepublicationLevel should propably be renames secondaryEncodingLevel or something like that, because
+  // "Koneellisesti tuotettu tietue" records with encodingLevel "2" are not prepublication records as such
   function getPrepublicationLevel(record, encodingLevel = '8') {
-    if (encodingLevel !== '8' && encodingLevel !== '2') {
-      return {code: '0', level: 'Not a prepublication'};
-    }
-
     const fields = record.get(/^(?:500|594)$/u);
     if (fields) {
       if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
@@ -127,10 +123,13 @@ export function getRecordInfo(record) {
       if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
         return {code: '3', level: 'ENNAKKOTIETO'};
       }
-
-      return {code: '3', level: 'No prepublication type found'};
+      // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
+      if (encodingLevel === '8') {
+        return {code: '3', level: 'No prepublication type found'};
+      }
+      return {code: '0', level: 'Not a prepublication'};
     }
-
+    // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
     if (encodingLevel === '8') {
       return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
     }
@@ -200,7 +199,8 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
   nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debugDev);
   nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debugDev);
 
-  if (prePubA && prePubB && a.code === '8' && b.code === '8') { // Handle exception first: all prepublications are not equal!
+  // eslint-disable-next-line no-mixed-operators, no-extra-parens
+  if (prePubA && prePubB && (a.code === '8' && b.code === '8') || (a.code === '2' && b.code === '2')) { // Handle exception first: all prepublications are not equal!
 
     const prePubValue = rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
 
