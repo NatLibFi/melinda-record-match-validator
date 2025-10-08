@@ -110,7 +110,7 @@ export function getRecordInfo(record) {
   // DEVELOP:
   // encoding level '2' && 'Koneellisesti tuotettu tietue'
   function getPrepublicationLevel(record, encodingLevel = '8') {
-    if (encodingLevel !== '8') {
+    if (encodingLevel !== '8' && encodingLevel !== '2') {
       return {code: '0', level: 'Not a prepublication'};
     }
 
@@ -131,7 +131,10 @@ export function getRecordInfo(record) {
       return {code: '3', level: 'No prepublication type found'};
     }
 
-    return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
+    if (encodingLevel === '8') {
+      return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
+    }
+    return {code: '0', level: 'Not a prepublication'};
   }
 }
 

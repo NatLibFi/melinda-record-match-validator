@@ -1,6 +1,7 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
 import {compareValueContent} from './compareFunctions/compareUtils';
+import {getDefaultMissValue} from './collectFunctions/collectUtils';
 import {nvdebug} from './utils';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
@@ -18,7 +19,7 @@ export function get001(record) {
   debugDev('Record f001 value: %o', f001Value);
   debugDev('Record f001 value is melinda id: %o', isMelindaId);
 
-  return {value: f001Value, isMelindaId};
+  return {value: f001Value || getDefaultMissValue(), isMelindaId};
 }
 
 export function get005(record) {
