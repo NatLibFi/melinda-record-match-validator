@@ -1,7 +1,7 @@
 {
-    "description": "Prefer incoming record incase of encLvl 2 records with prepublicationLevel",
+    "description": "Prefer better prepubLvl incase of encLvl 2 records with prepublicationLevel",
     "record1External": {"recordSource": "incomingRecord"},
     "record2External": {"recordSource": "databaseRecord"},
-    "skip": true,
+    "skip": false,
     "only": false
 }
