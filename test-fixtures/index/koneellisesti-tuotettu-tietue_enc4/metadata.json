@@ -3,5 +3,5 @@
     "record1External": {"recordSource": "incomingRecord"},
     "record2External": {"recordSource": "databaseRecord"},
     "skip": false,
-    "only": true
+    "only": false
 }
