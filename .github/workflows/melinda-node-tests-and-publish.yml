@@ -80,6 +80,7 @@ jobs:
       # Add build step here if you don't have prepare script
       # Publish stable release with --tag=latest
       - name: Publish stable release
+        if: ${{!contains(github.ref, '-alpha')}}
         run: npm publish --tag=latest
       # Publish pre-release without --tag latest
       - name: Publish pre-release
