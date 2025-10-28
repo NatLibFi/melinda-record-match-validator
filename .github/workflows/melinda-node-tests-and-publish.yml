@@ -77,7 +77,7 @@ jobs:
         run: npm install -g npm@latest
       - name: Clean install
         run: npm ci
-	    # Add build step here if you don't have prepare script
+      # Add build step here if you don't have prepare script
       # Publish stable release with --tag=latest
       - name: Publish stable release
         run: npm publish --tag=latest
