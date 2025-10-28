@@ -1,9 +1,9 @@
 
 import createDebugLogger from 'debug';
-//import {nvdebug} from '../utils';
-import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils';
-import {compareValueContent} from './compareFunctions/compareUtils';
-//import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils';
+//import {nvdebug} from '../utils.js';
+import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils.js';
+import {compareValueContent} from './compareFunctions/compareUtils.js';
+//import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
 const debugDev = debug.extend('dev');

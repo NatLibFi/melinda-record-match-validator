@@ -1,4 +1,4 @@
-//import {getSubfieldValue/*, getSubfieldValues*/} from './collectFunctions/collectUtils';
+//import {getSubfieldValue/*, getSubfieldValues*/} from './collectFunctions/collectUtils.js';
 
 export function nvdebug(message, debug = undefined) {
   //console.info(message); // eslint-disable-line no-console

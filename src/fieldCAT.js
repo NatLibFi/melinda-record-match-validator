@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {hasFields} from './collectFunctions/collectUtils';
+import {hasFields} from './collectFunctions/collectUtils.js';
 import createDebugLogger from 'debug';
 
 
@@ -10,7 +10,7 @@ const debugDev = debug.extend('dev');
 export function getCAT(record) {
   // if not fields []
   const CATs = hasFields('CAT', record, catToJSON);
-  const [latest, ...otherCats] = CATs.reverse(); // eslint-disable-line functional/immutable-data
+  const [latest, ...otherCats] = CATs.reverse();
 
   if (latest === undefined) {
     return {latest: {cataloger: 'undefined', time: 'undefined'}, otherCats: [], noCats: true};
@@ -39,7 +39,7 @@ export function compareCAT(recordValuesA, recordValuesB) {
   return innerCompareCat(CATsA, CATsB);
 }
 
-// eslint-disable-next-line complexity, max-statements
+// eslint-disable-next-line max-lines-per-function
 function innerCompareCat(CATsA, CATsB) {
 
   debugDev('Comparing CATs: A: %o vs B: %o', CATsA, CATsB);

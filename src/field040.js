@@ -1,4 +1,4 @@
-import {getSubfieldValue, getSubfieldValues, hasField} from './collectFunctions/collectUtils';
+import {getSubfieldValue, getSubfieldValues, hasField} from './collectFunctions/collectUtils.js';
 
 //// Scores for various values in 040$b Language Cataloging
 // Sorry, my Finlandswedish colleagues and friends: I've given Finnis top priority.

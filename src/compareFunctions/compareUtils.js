@@ -105,7 +105,6 @@ export function compareArrayContent(arrayA, arrayB, prefix = '' /*, ifOtherEmpty
 }
 
 const threshold = 0.6;
-// eslint-disable-next-line max-statements
 export function compareValueContent(valueA, valueB, prefix = '') {
   if (valueA === 'undefined' && valueB === 'undefined') {
     debugDev(`${prefix}Value A and B are "undefined"`);

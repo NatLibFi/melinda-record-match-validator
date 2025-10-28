@@ -3,29 +3,29 @@ import createDebugLogger from 'debug';
 import {isDeletedRecord} from '@natlibfi/melinda-commons';
 import {MarcRecord} from '@natlibfi/marc-record';
 
-import {checkSID} from './fieldSID';
-import {checkLOW} from './fieldLOW';
-import {checkCAT} from './fieldCAT';
-import {check040b, check040e} from './field040';
-//import {check245} from './field245';
-import {checkAllTitleFeatures} from './title';
-import {checkPublisher} from './field26X';
-//import {getSubfieldValues} from './collectFunctions/collectUtils';
-//import {collectRecordValues} from './collectRecordValues';
-//import {compareRecordValues} from './compareRecordValues';
-//import {validateCompareResults} from './validateRecordCompareResults';
-import {check042} from './field042';
-import {check336, check337, check338} from './field33X';
-import {check773} from './field773';
-import {check984} from './field984';
-import {checkLeader} from './leader';
-import {check005, check008} from './controlFields';
-import {compareRecordsPartSetFeatures} from './partsAndSets';
-import {performAudioSanityCheck} from './sanityCheckAudio';
-import {performDaisySanityCheck} from './sanityCheckDaisy';
-import {performDvdSanityCheck} from './sanityCheckDvd';
-import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer';
-import {nvdebug} from './utils';
+import {checkSID} from './fieldSID.js';
+import {checkLOW} from './fieldLOW.js';
+import {checkCAT} from './fieldCAT.js';
+import {check040b, check040e} from './field040.js';
+//import {check245} from './field245.js';
+import {checkAllTitleFeatures} from './title.js';
+import {checkPublisher} from './field26X.js';
+//import {getSubfieldValues} from './collectFunctions/collectUtils.js';
+//import {collectRecordValues} from './collectRecordValues.js';
+//import {compareRecordValues} from './compareRecordValues.js';
+//import {validateCompareResults} from './validateRecordCompareResults.js';
+import {check042} from './field042.js';
+import {check336, check337, check338} from './field33X.js';
+import {check773} from './field773.js';
+import {check984} from './field984.js';
+import {checkLeader} from './leader.js';
+import {check005, check008} from './controlFields.js';
+import {compareRecordsPartSetFeatures} from './partsAndSets.js';
+import {performAudioSanityCheck} from './sanityCheckAudio.js';
+import {performDaisySanityCheck} from './sanityCheckDaisy.js';
+import {performDvdSanityCheck} from './sanityCheckDvd.js';
+import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer.js';
+import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
@@ -156,7 +156,7 @@ export default ({record1Object, record2Object, checkPreference = true, record1Ex
   //}
 /*
   // We never get here...
-  if (recordA === undefined || recordB === undefined) { // eslint-disable-line functional/no-conditional-statement
+  if (recordA === undefined || recordB === undefined) {
     throw new Error('Record missing!');
   }
   const recordValuesA = collectRecordValues(recordA);

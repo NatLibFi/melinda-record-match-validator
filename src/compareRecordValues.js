@@ -1,15 +1,15 @@
 
-import {compareLeader} from './leader';
-import {compareCAT} from './fieldCAT';
-import {compareLOW} from './fieldLOW';
-import {compareSID} from './fieldSID';
-import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers';
-import {compare001, compare005} from './controlFields';
-import {compare042} from './field042';
-import {compare245} from './field245';
-import {compareAllTitleFeatures} from './title';
-import {compare773} from './field773';
-import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X';
+import {compareLeader} from './leader.js';
+import {compareCAT} from './fieldCAT.js';
+import {compareLOW} from './fieldLOW.js';
+import {compareSID} from './fieldSID.js';
+import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers.js';
+import {compare001, compare005} from './controlFields.js';
+import {compare042} from './field042.js';
+import {compare245} from './field245.js';
+import {compareAllTitleFeatures} from './title.js';
+import {compare773} from './field773.js';
+import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X.js';
 
 import createDebugLogger from 'debug';
 

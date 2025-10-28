@@ -1,8 +1,8 @@
 
-import {expect} from 'chai';
+import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getAllTitleFeatures, compareAllTitleFeatures} from '../src/title';
+import {getAllTitleFeatures, compareAllTitleFeatures} from '../src/title.js';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 
@@ -16,7 +16,7 @@ testCheck();
 function testGet() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'title', 'getTitleFeatures'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'title', 'getTitleFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -29,14 +29,14 @@ function testGet() {
     debugData(record);
     const titleFeatures = getAllTitleFeatures(record);
     debugData(JSON.stringify(titleFeatures));
-    expect(titleFeatures).to.eql(expectedResults);
+    assert.deepEqual(titleFeatures, expectedResults);
   }
 }
 
 function testCheck() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'title', 'checkTitleFeatures'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'title', 'checkTitleFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -48,6 +48,6 @@ function testCheck() {
     //debug(recordValuesA);
     const checkResults = compareAllTitleFeatures(recordValuesA, recordValuesB);
     debug(`Result: ${JSON.stringify(checkResults)}`);
-    expect(checkResults).to.eql(expectedResults);
+    assert.deepEqual(checkResults, expectedResults);
   }
 }

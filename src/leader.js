@@ -1,6 +1,6 @@
 
 import createDebugLogger from 'debug';
-import {nvdebug} from './utils';
+import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
 const debugDev = debug.extend('dev');
@@ -74,9 +74,9 @@ function mapEncodingLevel(encodingLevel) {
 
 export function getRecordInfo(record) {
 
-  const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
-  const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
-  const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
+  const recordTypeRaw = record.leader[6];
+  const recordBibLevelRaw = record.leader[7];
+  const recordCompletionLevel = record.leader[17];
 
   //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
   //debug('Record type raw: %o', recordTypeRaw);
@@ -135,7 +135,6 @@ export function getRecordInfo(record) {
   }
 }
 
-// eslint-disable-next-line max-statements
 function rateValues(valueA, valueB, rateArray) {
   debugDev('%o vs %o', valueA, valueB);
   if (valueA.code === valueB.code) {
@@ -188,7 +187,6 @@ function compareBibliographicalLevel(a, b) {
   return rateValues(a, b);
 }
 
-// eslint-disable-next-line max-params
 function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourceB) {
   debugDev('Record A completion level: %o', a);
   debugDev('Record B completion level: %o', b);
@@ -227,8 +225,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
     bibliographicLevel: compareBibliographicalLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
   };
-  //nvdebug('NV WP9', debugDev);// eslint-disable-line no-console
-  //nvdebug(JSON.stringify(result), debugDev); // eslint-disable-line no-console
+  //nvdebug('NV WP9', debugDev);
+  //nvdebug(JSON.stringify(result), debugDev);
   return result;
 }
 
@@ -239,15 +237,15 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
   const recordSource2 = record2External.recordSource || undefined;
 
 
-  debugDev(`checkLeader()`); // eslint-disable-line no-console
+  debugDev(`checkLeader()`);
 
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
-    debugDev(`LDR: type of record failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: type of record failed!`);
     return false;
   }
 
   if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
-    debugDev(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: bibliographical level failed!`);
     return false;
   }
 

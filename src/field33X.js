@@ -2,9 +2,9 @@
 // Handle fields 336, 337 and 338.
 
 import createDebugLogger from 'debug';
-import {/*fieldHasValidNonRepeatableSubfield, */ nvdebug/*, subfieldSetsAreEqual*/} from './utils';
-import {hasFields, getSubfield} from './collectFunctions/collectUtils';
-import {compareArrayContent} from './compareFunctions/compareUtils';
+import {/*fieldHasValidNonRepeatableSubfield, */ nvdebug/*, subfieldSetsAreEqual*/} from './utils.js';
+import {hasFields, getSubfield} from './collectFunctions/collectUtils.js';
+import {compareArrayContent} from './compareFunctions/compareUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field33X');
 const debugDev = debug.extend('dev');
