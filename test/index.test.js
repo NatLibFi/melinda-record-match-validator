@@ -1,16 +1,16 @@
 
-import {expect} from 'chai';
+import assert from 'node:assert';
 //import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import validateRecordMatch from '../src/index';
+import validateRecordMatch from '../src/index.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index:test');
 
 generateTests({
   callback,
-  path: [__dirname, '..', 'test-fixtures', 'index'],
+  path: [import.meta.dirname, '..', 'test-fixtures', 'index'],
   useMetadataFile: true,
   recurse: false,
   fixura: {
@@ -26,5 +26,5 @@ function callback({getFixture, record1External, record2External}) {
   debug(record1Object);
   debug(record2Object);
   const compareResults = validateRecordMatch({record1Object, record2Object, record1External, record2External});
-  expect(compareResults).to.eql(expectedResults);
+  assert.deepEqual(compareResults, expectedResults);
 }

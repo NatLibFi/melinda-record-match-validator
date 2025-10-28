@@ -1,8 +1,8 @@
 
 import createDebugLogger from 'debug';
-import {nvdebug} from './utils';
-import {hasField, getSubfields} from './collectFunctions/collectUtils';
-//import {compareArrayContent} from './compareUtils';
+import {nvdebug} from './utils.js';
+import {hasField, getSubfields} from './collectFunctions/collectUtils.js';
+//import {compareArrayContent} from './compareUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field042');
 const debugDev = debug.extend('dev');

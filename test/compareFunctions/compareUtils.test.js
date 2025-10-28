@@ -1,8 +1,8 @@
-import {expect} from 'chai';
+import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent, compareArrayContentRequireAll} from '../../src/compareFunctions/compareUtils';
+import {compareArrayContent, compareValueContent, compareArrayContentRequireAll} from '../../src/compareFunctions/compareUtils.js';
 
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareUtils:test');
@@ -15,7 +15,7 @@ testArrayRequireAll();
 function testValue() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareValue'],
+    path: [import.meta.dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareValue'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -29,15 +29,15 @@ function testValue() {
     debugData(`Result: ${resultValue}`);
     debugData(`ExpectedResult: ${expectedResult}`);
 
-
-    expect(resultValue).to.eql(expectedResult);
+    assert.deepEqual(resultValue, expectedResult)
+    //expect(resultValue).to.eql(expectedResult);
   }
 }
 
 function testArray() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArray'],
+    path: [import.meta.dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArray'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -48,15 +48,14 @@ function testArray() {
   function callback({arrayA, arrayB, expectedResult}) {
 
     const result = compareArrayContent(arrayA, arrayB);
-
-    expect(result).to.eql(expectedResult);
+    assert.deepEqual(result, expectedResult)
   }
 }
 
 function testArrayRequireAll() {
   generateTests({
     callback,
-    path: [__dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArrayRequireAll'],
+    path: [import.meta.dirname, '..', '..', 'test-fixtures', 'compareFunctions', 'compareArrayRequireAll'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -68,6 +67,6 @@ function testArrayRequireAll() {
 
     const result = compareArrayContentRequireAll(arrayA, arrayB);
 
-    expect(result).to.eql(expectedResult);
+    assert.deepEqual(result, expectedResult)
   }
 }

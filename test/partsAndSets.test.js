@@ -1,8 +1,8 @@
 
-import {expect} from 'chai';
+import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from '../src/partsAndSets';
+import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from '../src/partsAndSets.js';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 
@@ -17,7 +17,7 @@ testTitle();
 function testGet() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'getPartSetFeatures'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'partsAndSets', 'getPartSetFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -30,14 +30,14 @@ function testGet() {
     debugData(record);
     const partSetFeatures = getPartSetFeatures(record);
     debugData(partSetFeatures);
-    expect(partSetFeatures.type).to.eql(expectedResults.type);
+    assert.deepEqual(partSetFeatures.type, expectedResults.type);
   }
 }
 
 function testCheck() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'checkPartSetFeatures'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'partsAndSets', 'checkPartSetFeatures'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -48,7 +48,7 @@ function testCheck() {
   function callback({recordValuesA, recordValuesB, expectedResults}) {
     const checkResults = checkPartSetFeatures({partSetFeatures1: recordValuesA, partSetFeatures2: recordValuesB});
     debug(`Result: ${checkResults}`);
-    expect(checkResults).to.eql(expectedResults);
+    assert.deepEqual(checkResults, expectedResults);
   }
 }
 
@@ -58,7 +58,7 @@ function testTitle() {
   function testGetTitleFeaturesType() {
     generateTests({
       callback,
-      path: [__dirname, '..', 'test-fixtures', 'partsAndSets', 'partsAndSetsTitleFeatures'],
+      path: [import.meta.dirname, '..', 'test-fixtures', 'partsAndSets', 'partsAndSetsTitleFeatures'],
       useMetadataFile: true,
       recurse: false,
       fixura: {
@@ -70,9 +70,7 @@ function testTitle() {
       debug(`Testing: ${JSON.stringify(title)}`);
       const type = getTitleFeaturesType(title);
       debug(`Result: ${type}`);
-      expect(type).to.eql(expectedResults);
+      assert(type, expectedResults);
     }
   }
-
-
 }

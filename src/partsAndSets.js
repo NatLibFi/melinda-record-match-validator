@@ -1,6 +1,6 @@
 
-import {getTitleFeatures} from './title';
-import {getExtentsForPartsAndSets} from './partsAndSetsExtent';
+import {getTitleFeatures} from './title.js';
+import {getExtentsForPartsAndSets} from './partsAndSetsExtent.js';
 
 import createDebugLogger from 'debug';
 

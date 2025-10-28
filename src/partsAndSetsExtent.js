@@ -1,5 +1,5 @@
 
-import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils';
+import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils.js';
 
 
 import createDebugLogger from 'debug';
@@ -74,10 +74,8 @@ export function parseExtentString(extentString) {
   const regexpExtent = /(?<amount>\p{N}+) (?<unit>[\p{L}\p{N}-]+)/mgu;
 
   const foundExtents = [];
-  // eslint-disable-next-line functional/no-loop-statements
   for (const match of punctlessString.matchAll(regexpExtent)) {
     debug(`amount: ${match.groups.amount} unit: ${match.groups.unit}`);
-    // eslint-disable-next-line functional/immutable-data
     foundExtents.push({amount: match.groups.amount, unit: match.groups.unit});
   }
 

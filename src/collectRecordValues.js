@@ -1,15 +1,15 @@
 
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
-import {getRecordInfo} from './leader';
-import {get001, get005, get008} from './controlFields';
-import {getCAT} from './fieldCAT';
-import {getLOW} from './fieldLOW';
-import {getSID} from './fieldSID';
-import {get042} from './field042';
-import {get245} from './field245';
-import {getAllTitleFeatures} from './title';
-import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X';
-import {get773} from './field773';
+import {getRecordInfo} from './leader.js';
+import {get001, get005, get008} from './controlFields.js';
+import {getCAT} from './fieldCAT.js';
+import {getLOW} from './fieldLOW.js';
+import {getSID} from './fieldSID.js';
+import {get042} from './field042.js';
+import {get245} from './field245.js';
+import {getAllTitleFeatures} from './title.js';
+import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X.js';
+import {get773} from './field773.js';
 
 export function collectRecordValues(record) {
   return {
