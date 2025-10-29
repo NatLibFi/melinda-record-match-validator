@@ -1,0 +1,7 @@
+{
+    "description": "Prefer record with better encodingLevel",
+    "record1External": {"recordSource": "incomingRecord"},
+    "record2External": {"recordSource": "databaseRecord"},
+    "skip": false,
+    "only": false
+}

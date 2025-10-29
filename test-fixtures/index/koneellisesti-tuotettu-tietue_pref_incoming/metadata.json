@@ -1,0 +1,7 @@
+{
+    "description": "Prefer incoming record in case of 2 encLvl 2 records with equal, existing prepublicationLevel",
+    "record1External": {"recordSource": "incomingRecord"},
+    "record2External": {"recordSource": "databaseRecord"},
+    "skip": false,
+    "only": false
+}
