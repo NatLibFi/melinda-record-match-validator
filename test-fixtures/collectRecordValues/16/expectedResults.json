@@ -1,0 +1,111 @@
+{
+  "245": {
+    "title": "Yhteiset vai omat tavoitteet",
+    "remainderOfTitle": "Euroopan unionin rahoituksen uudistaminen",
+    "numberOfPartInSectionOfAWork": "undefined",
+    "nameOfPartInSectionOfAWork": "undefined"
+  },
+  "336": {
+    "types": [
+      "txt"
+    ]
+  },
+  "337": {
+    "types": [
+      "c"
+    ]
+  },
+  "338": {
+    "types": [
+      "cr"
+    ]
+  },
+  "773": [],
+  "commonIdentifiers": {
+    "title": "Yhteiset vai omat tavoitteet",
+    "standardIdentifiers": [
+      "978-952-287-533-4",
+      "URN:ISBN:978-952-287-533-4"
+    ],
+    "deleted": false
+  },
+  "000": {
+    "typeOfRecord": {
+      "level": "Language material",
+      "code": "a"
+    },
+    "bibliographicLevel": {
+      "level": "Monograph/Item",
+      "code": "m"
+    },
+    "encodingLevel": {
+      "level": "Less-than-full level, material not examined",
+      "code": "2"
+    },
+    "prepublicationLevel": {
+      "code": "1",
+      "level": "Koneellisesti tuotettu tietue"
+    }
+  },
+  "001": {
+    "isMelindaId": false,
+    "value": "undefined"
+  },
+  "005": "Invalid date",
+  "008": {
+    "catalogingSource": {
+      "level": "Cooperative cataloging program",
+      "code": "c"
+    },
+    "publicationStatus": {
+      "level": "Single known/probable date",
+      "code": "s"
+    },
+    "formOfItem": {
+      "form": "Online",
+      "code": "o"
+    }
+  },
+  "042": [
+    "finb"
+  ],
+  "title": {
+    "titleFeatures": {
+      "title": "Yhteiset vai omat tavoitteet",
+      "remainderOfTitle": "Euroopan unionin rahoituksen uudistaminen",
+      "numbersOfPartInSectionOfAWork": [],
+      "namesOfPartInSectionOfAWork": []
+    },
+    "seriesFeatures": [
+      {
+        "seriesTitle": "Valtioneuvoston selvitys- ja tutkimustoiminnan julkaisusarja",
+        "seriesNumber": "29/2018"
+      }
+    ],
+    "f946Features": [
+      {
+        "title": "Yhteiset vai omat tavoitteet: Euroopan unionin rahoituksen uudistaminen",
+        "remainderOfTitle": "undefined",
+        "numbersOfPartInSectionOfAWork": [],
+        "namesOfPartInSectionOfAWork": []
+      }
+    ]
+  },
+  "CAT": {
+    "latest": {
+      "cataloger": "undefined",
+      "time": "undefined"
+    },
+    "otherCats": [],
+    "noCats": true
+  },
+  "LOW": [
+    "FIKKA"
+  ],
+  "SID": [
+    {
+      "id": "/10024/160718",
+      "database": "valto"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+    "description": "Should get prepublicationLevel also for encodingLevel '2' records (Koneellisesti tuotettu teitue)",
+    "skip": false,
+    "only": false
+}
