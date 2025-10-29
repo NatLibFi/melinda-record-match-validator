@@ -77,7 +77,7 @@ export function parseExtentString(extentString) {
   for (const match of punctlessString.matchAll(regexpExtent)) { // eslint-disable-line functional/no-loop-statements
     debug(`amount: ${match.groups.amount} unit: ${match.groups.unit}`);
     foundExtents.push({amount: match.groups.amount, unit: match.groups.unit}); // eslint-disable-line functional/immutable-data
-
+  }
   debugData(JSON.stringify(foundExtents));
   return foundExtents;
 }
