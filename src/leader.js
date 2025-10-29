@@ -112,31 +112,31 @@ export function getRecordInfo(record) {
 // "Koneellisesti tuotettu tietue" records with encodingLevel "2" are not prepublication records as such
 
 function getPrepublicationLevel(record, encodingLevel = '8') {
-    const fields = record.get(/^(?:500|594)$/u);
-    if (fields) {
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
-        return {code: '1', level: 'Koneellisesti tuotettu tietue'};
-      }
+  const fields = record.get(/^(?:500|594)$/u);
+  if (fields) {
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
+      return {code: '1', level: 'Koneellisesti tuotettu tietue'};
+    }
 
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
-        return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
-      }
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
+      return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
+    }
 
-      if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
-        return {code: '3', level: 'ENNAKKOTIETO'};
-      }
-      // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
-      if (encodingLevel === '8') {
-        return {code: '3', level: 'No prepublication type found'};
-      }
-      return {code: '0', level: 'Not a prepublication'};
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
+      return {code: '3', level: 'ENNAKKOTIETO'};
     }
     // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
     if (encodingLevel === '8') {
-      return {code: '3', level: 'No 500 or 594 fields found, cannot determine prepublication type'};
+      return {code: '3', level: 'No prepublication type found'};
     }
     return {code: '0', level: 'Not a prepublication'};
- }
+  }
+  // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
+  if (encodingLevel === '8') {
+    return {code: '3', level: 'No 500 or 594 fields found, cannot determine prepublication type'};
+  }
+  return {code: '0', level: 'Not a prepublication'};
+}
 
 // eslint-disable-next-line max-statements
 function rateValues(valueA, valueB, rateArray) {
