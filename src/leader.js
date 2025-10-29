@@ -108,6 +108,9 @@ export function getRecordInfo(record) {
   return result;
 }
 
+// PrepublicationLevel should probably be renamed secondaryEncodingLevel or something like that, because
+// "Koneellisesti tuotettu tietue" records with encodingLevel "2" are not prepublication records as such
+
 function getPrepublicationLevel(record, encodingLevel = '8') {
     const fields = record.get(/^(?:500|594)$/u);
     if (fields) {
@@ -130,7 +133,7 @@ function getPrepublicationLevel(record, encodingLevel = '8') {
     }
     // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
     if (encodingLevel === '8') {
-      return {code: '3', level: 'No 500 or 594 fields found, cant determine prepublication type'};
+      return {code: '3', level: 'No 500 or 594 fields found, cannot determine prepublication type'};
     }
     return {code: '0', level: 'Not a prepublication'};
  }
