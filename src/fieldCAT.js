@@ -10,7 +10,7 @@ const debugDev = debug.extend('dev');
 export function getCAT(record) {
   // if not fields []
   const CATs = hasFields('CAT', record, catToJSON);
-  const [latest, ...otherCats] = CATs.reverse(); // eslint-disable-line functional/immutable-data
+  const [latest, ...otherCats] = CATs.reverse();
 
   if (latest === undefined) {
     return {latest: {cataloger: 'undefined', time: 'undefined'}, otherCats: [], noCats: true};
