@@ -1,0 +1,12 @@
+{
+    "description": "Return true if there are no LOWs in both records",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "LOW": []
+    },
+    "recordValuesB": {
+        "LOW": []
+    },
+    "expectedResults": true
+}

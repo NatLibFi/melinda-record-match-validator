@@ -1,0 +1,12 @@
+{
+    "description": "Return true if there are no common LOWs, but a duplicate LOW  in one records",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "LOW": ["FIKKA", "FIKKA"]
+    },
+    "recordValuesB": {
+        "LOW": ["TEST"]
+    },
+    "expectedResults": true
+}

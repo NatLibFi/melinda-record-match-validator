@@ -1,7 +1,7 @@
 {
     "action": "merge",
     "preference": {
-        "name": "A won SID test (validation and preference)",
+        "name": "A won SID test (validation and preference), for import only",
         "value": "A"
     }
 }

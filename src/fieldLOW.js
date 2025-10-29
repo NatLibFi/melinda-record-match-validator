@@ -8,7 +8,8 @@ const debugDev = debug.extend('dev');
 const debugData = debug.extend('data');
 
 export function getLOW(record) {
-  const LOWs = hasFields('LOW', record, getSubfield, 'a');
+  // Do not return empty/non-existent LOW $a's as 'undefined'
+  const LOWs = hasFields('LOW', record, getSubfield, 'a').filter(element => element && element !== 'undefined');
   debugData('LOWs: %o', LOWs);
   return LOWs;
 }
@@ -68,10 +69,22 @@ function compareLOWValues(LOWsA, LOWsB) {
 }
 
 export function compareLOW(recordValuesA, recordValuesB) {
+  debugData(`We got recordValuesA (compareLOW): ${JSON.stringify(recordValuesA)}`);
   const LOWsA = recordValuesA.LOW;
   const LOWsB = recordValuesB.LOW;
   return compareLOWValues(LOWsA, LOWsB);
 }
+
+export function compareLOWinternal(recordValuesA, recordValuesB) {
+  debugData(`We got recordValuesA (compareLowInternal): ${JSON.stringify(recordValuesA)}`);
+  const LOWsA = recordValuesA.LOW || recordValuesA;
+  const LOWsB = recordValuesB.LOW || recordValuesB;
+  if (LOWsA.some(low => LOWsB.includes(low))) {
+    return false;
+  }
+  return true;
+}
+
 
 export function checkLOW({record1, record2}) {
   const low1 = getLOW(record1);
@@ -79,4 +92,11 @@ export function checkLOW({record1, record2}) {
   return compareLOWValues(low1, low2);
 }
 
+export function checkLOWinternal({record1, record2}) {
+  const low1 = getLOW(record1);
+  const low2 = getLOW(record2);
+  debugData('LOWs A: %o', low1);
+  debugData('LOWs B: %o', low2);
+  return compareLOWinternal(low1, low2);
+}
 

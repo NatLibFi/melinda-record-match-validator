@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/melinda-record-match-validator",
-  "version": "2.3.6",
+  "version": "2.4.0-alpha.13",
   "description": "Validates if two records matched by melinda-record-matching can be merged and sets merge priority",
   "main": "dist/index.js",
   "repository": {
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@natlibfi/marc-record": "^9.1.6",
-    "@natlibfi/melinda-commons": "^13.0.21",
+    "@natlibfi/melinda-commons": "^13.2.0-alpha.2",
     "debug": "^4.4.1",
     "isbn3": "^1.2.13",
     "moment": "^2.30.1"

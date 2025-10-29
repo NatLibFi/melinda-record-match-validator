@@ -1,0 +1,7 @@
+[
+    {
+        "result": "error",
+        "type": "validation",
+        "message": "testitietuetta ja normaalia tietuetta ei voi yhdistää"
+    }
+]

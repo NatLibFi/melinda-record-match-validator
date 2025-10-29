@@ -1,0 +1,5 @@
+{
+    "description": "Fail merge if one of records is a component record (LDR/07)",
+    "skip": false,
+    "only": false
+}

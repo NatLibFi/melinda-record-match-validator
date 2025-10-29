@@ -124,6 +124,16 @@ export function normalizeMelindaId(value) {
   return value;
 }
 
+
+export function isValidNormalizedMelindaId(value) {
+  const prefix = getMelindaDefaultPrefix();
+  const regexp = new RegExp(`(${prefix})[0-9]{9}$/`, 'u');
+  if (regexp.test(value)) {
+    return true;
+  }
+  return false;
+}
+
 /*
 export function isValidMelindaId(value = '') {
   const normalizedValue = normalizeMelindaId(value);
@@ -157,6 +167,13 @@ function getIdPrefix(id) {
   return id.substring(0, i + 1);
 }
 
+// Split array of ids to unique valid MelindaIds and those that are not that (otherIds)
+export function splitIds(ids) {
+  const internalIds = [...new Set(ids.map(value => normalizeMelindaId(value)).filter(value => isValidNormalizedMelindaId(value)))];
+  const otherIds = [...new Set(ids.map(value => normalizeMelindaId(value)).filter(value => !isValidNormalizedMelindaId(value)))];
+  return {internalIds, otherIds};
+}
+
 export function hasIdMismatch(otherId, idSet) {
   const otherPrefix = getIdPrefix(otherId);
   return idSet.some(id => {
@@ -174,4 +191,12 @@ export function hasIdMismatch(otherId, idSet) {
   });
 }
 
-
+export function hasIdMatch(otherId, idSet) {
+  return idSet.some(id => {
+    if (id === otherId) { // Identical values: there is an id match
+      //nvdebug(`SAME VALUE CAUSES APPROVAL: ${id}`);
+      return true;
+    }
+    return false; // No match
+  });
+}
