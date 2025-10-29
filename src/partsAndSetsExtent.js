@@ -74,10 +74,9 @@ export function parseExtentString(extentString) {
   const regexpExtent = /(?<amount>\p{N}+) (?<unit>[\p{L}\p{N}-]+)/mgu;
 
   const foundExtents = [];
-  for (const match of punctlessString.matchAll(regexpExtent)) {
+  for (const match of punctlessString.matchAll(regexpExtent)) { // eslint-disable-line functional/no-loop-statements
     debug(`amount: ${match.groups.amount} unit: ${match.groups.unit}`);
-    foundExtents.push({amount: match.groups.amount, unit: match.groups.unit});
-  }
+    foundExtents.push({amount: match.groups.amount, unit: match.groups.unit}); // eslint-disable-line functional/immutable-data
 
   debugData(JSON.stringify(foundExtents));
   return foundExtents;
