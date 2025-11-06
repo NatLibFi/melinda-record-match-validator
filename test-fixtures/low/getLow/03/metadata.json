@@ -1,0 +1,6 @@
+{
+    "description": "Return only subfield $a from LOWs",
+    "skip": false,
+    "only": false,
+    "expectedResults": ["FIKKA","BAAR"]
+}

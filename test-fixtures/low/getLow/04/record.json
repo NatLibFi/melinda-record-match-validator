@@ -1,0 +1,176 @@
+{
+  "leader": "05696cam a2201345 i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "018168371"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20240910175902.0"
+    },
+    {
+      "tag": "008",
+      "value": "220226t20222022fi ||||j      |0| 1|fin| "
+    },
+    {
+      "tag": "245",
+      "ind1": "1",
+      "ind2": "0",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Piiloleikki /"
+        },
+        {
+          "code": "c",
+          "value": "kuvittanut: Lemon Ribbon Studio ; suomentanut: Virve Lehväs."
+        }
+      ]
+    },
+    {
+      "tag": "264",
+      "ind1": " ",
+      "ind2": "1",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "Helsinki :"
+        },
+        {
+          "code": "b",
+          "value": "Kustannusosakeyhtiö Otava,"
+        },
+        {
+          "code": "c",
+          "value": "[2022]"
+        }
+      ]
+    },
+    {
+      "tag": "300",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "11 numeroimatonta sivua :"
+        },
+        {
+          "code": "b",
+          "value": "kuvitettu ;"
+        },
+        {
+          "code": "c",
+          "value": "26 cm"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "stillkuva"
+        },
+        {
+          "code": "b",
+          "value": "sti"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "336",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "teksti"
+        },
+        {
+          "code": "b",
+          "value": "txt"
+        },
+        {
+          "code": "2",
+          "value": "rdacontent"
+        }
+      ]
+    },
+    {
+      "tag": "337",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "käytettävissä ilman laitetta"
+        },
+        {
+          "code": "b",
+          "value": "n"
+        },
+        {
+          "code": "2",
+          "value": "rdamedia"
+        }
+      ]
+    },
+    {
+      "tag": "338",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "nide"
+        },
+        {
+          "code": "b",
+          "value": "nc"
+        },
+        {
+          "code": "2",
+          "value": "rdacarrier"
+        }
+      ]
+    },
+    {
+      "tag": "LOW",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "FIKKA"
+        },
+        {
+          "code": "b",
+          "value": "FOO"
+        }
+      ]
+    },
+    {
+      "tag": "LOW",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "b",
+          "value": "BAAR"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+    "description": "Do not fail merge for MergeUI : Same SID $b, different $c subfield",
+    "skip": false,
+    "only": false
+}

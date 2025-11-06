@@ -31,6 +31,8 @@ export function get005(record) {
   return time;
 }
 
+// 008-all materials 06 - Type of date/Publication status
+// https://www.loc.gov/marc/bibliographic/bd008a.html
 const publicationStatusHash = {
   'b': 'No dates given; B.C. date involved',
   'c': 'Continuing resource currently published',
@@ -49,6 +51,8 @@ const publicationStatusHash = {
   '|': 'No attempt to code'
 };
 
+// 008-all materials 39 - Cataloging source
+// https://www.loc.gov/marc/bibliographic/bd008a.html
 const catalogingSourceHash = {
   ' ': 'National bibliographical agency',
   'c': 'Cooperative cataloging program',
@@ -57,6 +61,10 @@ const catalogingSourceHash = {
   '|': 'No attempt to code'
 };
 
+//
+// 008-BK/CF/MU/SE/MX 23 - Form of item
+// 008-MP/VM 29 - Form of item
+//https://www.loc.gov/marc/bibliographic/bd008.html
 const formOfItemHash = {
   ' ': 'None of the following, expect for CF unknown or not specified',
   'a': 'Microfilm',
@@ -181,6 +189,7 @@ export function compare008(recordValuesA, recordValuesB) {
 }
 */
 
+// DEVELOP: we do do any comparison based on 008/39 here - is cataloguingSource used in some other comparison task?
 function innerCompare008(f008A, f008B) {
   nvdebug(`A 008: ${JSON.stringify(f008A)}`);
   nvdebug(`B 008: ${JSON.stringify(f008B)}`);
