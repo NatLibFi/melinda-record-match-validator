@@ -1,6 +1,6 @@
 
 import createDebugLogger from 'debug';
-import {nvdebug} from './utils';
+import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
 const debugDev = debug.extend('dev');
@@ -73,7 +73,12 @@ function mapEncodingLevel(encodingLevel) {
 }
 
 export function getTypeOfRecord(record) {
-  const recordTypeRaw = record.leader[6]; // eslint-disable-line prefer-destructuring
+
+  const recordTypeRaw = record.leader[6];
+
+  //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
+  //debug('Record type raw: %o', recordTypeRaw);
+
   const result = {
     typeOfRecord: mapTypeOfRecord(recordTypeRaw)
   };
@@ -138,7 +143,6 @@ function getPrepublicationLevel(record, encodingLevel = '8') {
   return {code: '0', level: 'Not a prepublication'};
 }
 
-// eslint-disable-next-line max-statements
 function rateValues(valueA, valueB, rateArray) {
   debugDev('%o vs %o', valueA, valueB);
   if (valueA.code === valueB.code) {
@@ -192,7 +196,6 @@ function compareBibliographicLevel(a, b) {
   return rateValues(a, b);
 }
 
-// eslint-disable-next-line max-params
 function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourceB) {
   debugDev('Record A completion level: %o', a);
   debugDev('Record B completion level: %o', b);
@@ -234,8 +237,8 @@ export function compareLeader(recordValuesA, recordValuesB) {
     bibliographicLevel: compareBibliographicLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
     encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
   };
-  //nvdebug('NV WP9', debugDev);// eslint-disable-line no-console
-  //nvdebug(JSON.stringify(result), debugDev); // eslint-disable-line no-console
+  //nvdebug('NV WP9', debugDev);
+  //nvdebug(JSON.stringify(result), debugDev);
   return result;
 }
 
@@ -275,15 +278,16 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
 
   debugDev(`checkLeader()`);
 
-  // DEVELOP: this could use checkTypeOfRecord?
+  debugDev(`checkLeader()`);
+
   if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
-    debugDev(`LDR: type of record failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: type of record failed!`);
     return false;
   }
 
   // DEVELOP: this could use checkBibliographicLevel?
   if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
-    debugDev(`LDR: bibliographical level failed!`); // eslint-disable-line no-console
+    debugDev(`LDR: bibliographical level failed!`);
     return false;
   }
 

@@ -3,6 +3,8 @@ import {comparisonTasksTable} from './comparisonTasks';
 import {check984} from './field984';
 import {nvdebug} from './utils';
 import {MarcRecord} from '@natlibfi/marc-record';
+import {MarcRecord} from '@natlibfi/marc-record';
+import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');

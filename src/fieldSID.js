@@ -1,7 +1,7 @@
 
 import createDebugLogger from 'debug';
-import {hasFields} from './collectFunctions/collectUtils';
-//import {nvdebug} from './utils';
+import {hasFields} from './collectFunctions/collectUtils.js';
+//import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:alephFunctions');
 const debugDev = debug.extend('dev');
@@ -36,7 +36,6 @@ function compareSIDValues(SIDsA, SIDsB) {
 
   return compareSIDContent();
 
-  // eslint-disable-next-line max-statements
   function compareSIDContent() {
     if (SIDsB.length === 0) {
       if (SIDsA.length > 0) {

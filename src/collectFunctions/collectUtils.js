@@ -1,5 +1,5 @@
 //import createDebugLogger from 'debug';
-//import {nvdebug} from '../utils';
+//import {nvdebug} from '../utils.js';
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:collectFields');
 
 export function hasFields(tag, record, useFunction, useFunctionParameters) {

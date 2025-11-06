@@ -1,8 +1,8 @@
 
-import {expect} from 'chai';
+import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {parseExtentString, getExtentType} from '../src/partsAndSetsExtent';
+import {parseExtentString, getExtentType} from '../src/partsAndSetsExtent.js';
 //import createDebugLogger from 'debug';
 
 
@@ -15,7 +15,7 @@ testGetExtentType();
 function testParseExtentString() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'parseExtentString'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'parseExtentString'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -26,7 +26,7 @@ function testParseExtentString() {
   function callback({string, expectedResults}) {
 
     const result = parseExtentString(string);
-    expect(result).to.eql(expectedResults);
+    assert.deepEqual(result, expectedResults);
   }
 }
 
@@ -34,7 +34,7 @@ function testParseExtentString() {
 function testGetExtentType() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'getExtentType'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'partsAndSetsExtent', 'getExtentType'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -45,7 +45,7 @@ function testGetExtentType() {
   function callback({array, expectedResults}) {
 
     const result = getExtentType(array);
-    expect(result).to.eql(expectedResults);
+    assert.deepEqual(result, expectedResults);
   }
 }
 

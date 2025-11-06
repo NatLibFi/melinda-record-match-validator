@@ -1,6 +1,6 @@
 import createDebugLogger from 'debug';
-import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './collectFunctions/collectUtils';
-import {hasIdMismatch, hasIdMatch, splitIds, normalizeMelindaId, nvdebug} from './utils';
+import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from './collectFunctions/collectUtils.js';
+import {hasIdMismatch, normalizeMelindaId, nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field773');
 const debugDev = debug.extend('dev');

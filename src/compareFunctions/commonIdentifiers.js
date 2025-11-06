@@ -1,5 +1,5 @@
 import createDebugLogger from 'debug';
-import {compareArrayContent, compareValueContent} from './compareUtils';
+import {compareArrayContent, compareValueContent} from './compareUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareRecordValues:compareCommonIdentifiers');
 const debugDev = debug.extend('dev');

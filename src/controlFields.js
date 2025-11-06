@@ -1,8 +1,7 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
-import {compareValueContent} from './compareFunctions/compareUtils';
-import {getDefaultMissValue} from './collectFunctions/collectUtils';
-import {nvdebug} from './utils';
+import {compareValueContent} from './compareFunctions/compareUtils.js';
+import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
 const debugDev = debug.extend('dev');
@@ -82,8 +81,8 @@ const formOfItemHash = {
 export function get008(record) {
   const [f008Value] = record.get('008').map(field => field.value);
 
-  const publicationStatus = f008Value ? f008Value[6] : '|'; // eslint-disable-line prefer-destructuring
-  const catalogingSource = f008Value ? f008Value[39] : '|'; // eslint-disable-line prefer-destructuring
+  const publicationStatus = f008Value ? f008Value[6] : '|';
+  const catalogingSource = f008Value ? f008Value[39] : '|';
   const formOfItem = getFormOfItem();
   //nvdebug(` get008(): ${publicationStatus}, ${catalogingSource}, ${formOfItem}`);
   //console.log(`LDR/07 ${recordBibLevelRaw}`); // eslint-disable-line no-console
@@ -218,7 +217,6 @@ function innerCompare008(f008A, f008B) {
     return true;
   }
 
-  // eslint-disable-next-line max-statements
   function mp06Comparison(mp06A, mp06B) {
     if (mp06A === mp06B) {
       return true;

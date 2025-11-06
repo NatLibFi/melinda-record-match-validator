@@ -1,6 +1,6 @@
 import ISBN from 'isbn3';
 //import createDebugLogger from 'debug';
-//import {nvdebug} from './utils';
+//import {nvdebug} from './utils.js';
 
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:sanityCheckIsbnQualifier');
 

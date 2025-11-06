@@ -1,7 +1,7 @@
 import createDebugLogger from 'debug';
-//import {nvdebug} from '../utils';
-import {hasFields, getSubfield, getSubfields, stripPunc, removeExtraSpaces} from './collectFunctions/collectUtils';
-import {compareValueContent, compareArrayContentRequireAll, compareStringToArray} from './compareFunctions/compareUtils';
+//import {nvdebug} from '../utils.js';
+import {hasFields, getSubfield, getSubfields, stripPunc, removeExtraSpaces} from './collectFunctions/collectUtils.js';
+import {compareValueContent, compareArrayContentRequireAll, compareStringToArray} from './compareFunctions/compareUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 const debugDev = debug.extend('dev');
