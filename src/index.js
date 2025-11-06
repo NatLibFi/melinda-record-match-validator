@@ -1,8 +1,6 @@
 import createDebugLogger from 'debug';
-import {comparisonTasksTable} from './comparisonTasks';
-import {check984} from './field984';
-import {nvdebug} from './utils';
-import {MarcRecord} from '@natlibfi/marc-record';
+import {comparisonTasksTable} from './comparisonTasks.js';
+import {check984} from './field984.js';
 import {MarcRecord} from '@natlibfi/marc-record';
 import {nvdebug} from './utils.js';
 

@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@natlibfi/marc-record": "next",
-    "@natlibfi/melinda-commons": "next",
+    "@natlibfi/melinda-commons": "^14.0.1-alpha.1",
     "debug": "^4.4.3",
     "isbn3": "^1.2.15",
     "moment": "^2.30.1"

@@ -1,6 +1,7 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
 import {compareValueContent} from './compareFunctions/compareUtils.js';
+import {getDefaultMissValue} from './collectFunctions/collectUtils.js';
 import {nvdebug} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
