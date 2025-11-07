@@ -1,47 +1,6 @@
 {
-    "description": "Return true",
+    "description": "Prefer record with preferred LOW (FIKKA)",
     "skip": false,
     "only": false,
-    "recordValuesA": {
-        "title": {
-            "titleFeatures": {
-                "title": "Piiloleikki",
-                "remainderOfTitle": "undefined",
-                "numbersOfPartInSectionOfAWork": [],
-                "namesOfPartInSectionOfAWork": []
-            },
-            "seriesFeatures": [
-                {
-                    "seriesTitle": "Vauva tunnustelee",
-                    "seriesNumber": "undefined"
-                }
-            ],
-            "f946Features": []
-        }
-    },
-    "recordValuesB": {
-        "title": {
-            "titleFeatures": {
-                "title": "Vauva tunnustelee",
-                "remainderOfTitle": "Piiloleikki",
-                "numbersOfPartInSectionOfAWork": [],
-                "namesOfPartInSectionOfAWork": []
-            },
-            "seriesFeatures": [
-                {
-                    "seriesTitle": "Vauva tunnustelee",
-                    "seriesNumber": "undefined"
-                }
-            ],
-            "f946Features": [
-                {
-                    "title": "Vauva tunnustelee",
-                    "remainderOfTitle": "Piiloleikki",
-                    "numbersOfPartInSectionOfAWork": [],
-                    "namesOfPartInSectionOfAWork": []
-                }
-            ]
-        }
-    },
-    "expectedResults": true
+    "expectedResults": "B"
 }

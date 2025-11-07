@@ -34,11 +34,14 @@ function compareLOWValues(LOWsA, LOWsB) {
   const score2 = lowFieldsToScore(LOWsB);
   nvdebug(`LOW scores: ${score1} vs ${score2}`, debugDev);
   if (score1 > score2) {
+    nvdebug(`LOW scores: A win ${score1} vs ${score2}`, debugDev);
     return 'A';
   }
   if (score1 < score2) {
+    nvdebug(`LOW scores: B win ${score1} vs ${score2}`, debugDev);
     return 'B';
   }
+  nvdebug(`LOW scores: same ${score1} vs ${score2}`, debugDev);
   return true; // never blocks
 
   function lowFieldsToScore(lows) {
@@ -70,6 +73,7 @@ function compareLOWValues(LOWsA, LOWsB) {
 
 export function compareLOW(recordValuesA, recordValuesB) {
   debugData(`We got recordValuesA (compareLOW): ${JSON.stringify(recordValuesA)}`);
+  debugData(`We got recordValuesB (compareLOW): ${JSON.stringify(recordValuesB)}`);
   const LOWsA = recordValuesA.LOW;
   const LOWsB = recordValuesB.LOW;
   return compareLOWValues(LOWsA, LOWsB);
@@ -77,8 +81,11 @@ export function compareLOW(recordValuesA, recordValuesB) {
 
 export function compareLOWinternal(recordValuesA, recordValuesB) {
   debugData(`We got recordValuesA (compareLowInternal): ${JSON.stringify(recordValuesA)}`);
+  debugData(`We got recordValuesB (compareLowInternal): ${JSON.stringify(recordValuesB)}`);
   const LOWsA = recordValuesA.LOW || recordValuesA;
   const LOWsB = recordValuesB.LOW || recordValuesB;
+  debugData(`We got LOWsA: ${JSON.stringify(LOWsA)}`);
+  debugData(`We got LOWsB: ${JSON.stringify(LOWsB)}`);
   if (LOWsA.some(low => LOWsB.includes(low))) {
     return false;
   }

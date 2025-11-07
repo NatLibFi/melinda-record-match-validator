@@ -16,7 +16,7 @@ function runComparisonTasks({nth, record1, record2, checkPreference = true, reco
   const currResult = comparisonTasks[nth].function({record1, record2, checkPreference, record1External, record2External});
   // NB! Aborts after the last task or after a failure (meaning currResult === false)! No further tests are performed. Recursion means optimization :D
   debugDev(`Running task ${nth} (${comparisonTasks[nth].name}) - returnAll: ${returnAll}`);
-  if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) { // eslint-disable-line no-extra-parens
+  if (nth === comparisonTasks.length - 1 || (!returnAll && currResult === false)) {
     return [currResult];
   }
   return [currResult].concat(runComparisonTasks({nth: nth + 1, record1, record2, checkPreference, record1External, record2External, returnAll, comparisonTasks}));
@@ -47,9 +47,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
       preference: comparisonTasks[i].preference,
       validation: comparisonTasks[i].validation,
       level: comparisonTasks[i].manual === undefined ? 'error' : comparisonTasks[i].manual,
-      // eslint-disable-next-line camelcase
       validation_message_fi: comparisonTasks[i].validation_message_fi,
-      // eslint-disable-next-line camelcase
       preference_message_fi: comparisonTasks[i].preference_message_fi
     }));
 
@@ -109,7 +107,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 
 export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
   debugDev(`Manual ${manual} (for Merge UI) - we have ${comparisonTasks.length} comparison tasks`);
-
+  debugDev(`FOOBAR`);
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
   const record1 = new MarcRecord(record1Object, {subfieldValues: false});
   const record2 = new MarcRecord(record2Object, {subfieldValues: false});
@@ -129,11 +127,9 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
     debugDev(`MatchValidator failed: ${JSON.stringify(failure, null, 4)}`);
 
     const messages = failure
-      // eslint-disable-next-line camelcase
       .map(({result, level, validation_message_fi, preference_message_fi}) => ({
         result: result === 'A' ? 'warning' : level, // all preference-results are warning in UI
         type: result === 'A' ? 'preference' : 'validation', //
-        // eslint-disable-next-line camelcase
         message: result === 'A' ? preference_message_fi : validation_message_fi
       })); // Convert to messages
     debugDev(`MatchValidator results for MergeUI: ${JSON.stringify(messages, null, 4)}`);
