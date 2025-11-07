@@ -4,257 +4,61 @@
     { "tag": "003", "value": "FI-MELINDA" },
     { "tag": "005", "value": "20190703163944.0" },
     { "tag": "008", "value": "950714s1994    ne |||||||||||||||||eng||" },
-    { "tag": "020", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "90-6779-080-X" },
-        { "code": "q", "value": "nidottu" }
-    ]},
-    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "(FI-MELINDA)001590014" }
-    ]},
-    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "eng" },
-        { "code": "a", "value": "fre" }
-    ]},
-    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "342.71" },
-        { "code": "x", "value": "(4)" }
-    ]},
-    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "316.7" },
-        { "code": "x", "value": "(4)" }
-    ]},
-    { "tag": "084", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "Ho:17.1" },
-        { "code": "2", "value": "z" }
-    ]},
-    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [
-        { "code": "a", "value": "European citizenship /" },
-        { "code": "c", "value": "edited by Epaminondas A. Marias." }
-    ]},
-    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "Maastricht :" },
-        { "code": "b", "value": "European Institute of Public Administration," },
-        { "code": "c", "value": "1994." }
-    ]},
-    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "xiii, 276 s" }
-    ]},
-    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "teksti" },
-        { "code": "b", "value": "txt" },
-        { "code": "2", "value": "rdacontent" }
-    ]},
-    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "käytettävissä ilman laitetta" },
-        { "code": "b", "value": "n" },
-        { "code": "2", "value": "rdamedia" }
-    ]},
-    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "nide" },
-        { "code": "b", "value": "nc" },
-        { "code": "2", "value": "rdacarrier" }
-    ]},
-    { "tag": "500", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "Contains contributions in both English and French." }
-    ]},
-    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [
-        { "code": "a", "value": "Euroopan unioni" },
-        { "code": "x", "value": "kansalaisuus." }
-    ]},
-    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [
-        { "code": "a", "value": "Euroopan unioni." }
-    ]},
-    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [
-        { "code": "a", "value": "Euroopan yhteisöjen tuomioistuin." }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "kansalaisuus" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2736" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "EY-oikeus" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p12348" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "liikkumisvapaus" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p16256" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "perusoikeudet" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p231" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "poliittiset oikeudet" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2404" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "medborgarskap" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2736" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "EG-rätt" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p12348" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "rörelsefrihet" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p16256" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "grundrättigheter" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p231" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "politiska rättigheter" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p2404" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "kansalais- ja poliittiset oikeudet" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "kansalaisuus" },
-        { "code": "z", "value": "Euroopan unioni" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "kansalaisuus" },
-        { "code": "z", "value": "Eurooppa" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "liikkumisvapaus" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "EY-tuomioistuin" },
-        { "code": "x", "value": "liikkumisvapaus" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "EY-oikeus" },
-        { "code": "x", "value": "liikkumisvapaus" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "EU-kansalaisuus" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "Euroopan unionin kansalaisuus" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "Euroopan oikeusasiamies" },
-        { "code": "2", "value": "eks" }
-    ]},
-    { "tag": "651", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "Eurooppa" },
-        { "code": "2", "value": "yso/fin" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p94111" }
-    ]},
-    { "tag": "651", "ind1": " ", "ind2": "7", "subfields" : [
-        { "code": "a", "value": "Europa" },
-        { "code": "2", "value": "yso/swe" },
-        { "code": "0", "value": "http://www.yso.fi/onto/yso/p94111" }
-    ]},
-    { "tag": "700", "ind1": "1", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "Marias, Epaminondas A." }
-    ]},
-    { "tag": "710", "ind1": "2", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "European Institute of Public Administration." }
-    ]},
-    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "c", "value": "772700" },
-        { "code": "b", "value": "helka" }
-    ]},
-    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "c", "value": "225753" },
-        { "code": "b", "value": "alma" }
-    ]},
-    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "c", "value": "271085" },
-        { "code": "b", "value": "josku" }
-    ]},
-    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "c", "value": "197324" },
-        { "code": "b", "value": "selma" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "CONV-ISBD" },
-        { "code": "b" },
-        { "code": "c", "value": "20120402" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "0829" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "c", "value": "20090529" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "1740" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "LOAD-FIX" },
-        { "code": "b", "value": "30" },
-        { "code": "c", "value": "20141231" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "1018" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "CONV-RDA" },
-        { "code": "b" },
-        { "code": "c", "value": "20160319" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "0835" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "LOAD-FIX" },
-        { "code": "b", "value": "30" },
-        { "code": "c", "value": "20170629" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "1858" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "LOAD-HELKA" },
-        { "code": "b" },
-        { "code": "c", "value": "20180503" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "2328" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "LOAD-YSO" },
-        { "code": "b", "value": "00" },
-        { "code": "c", "value": "20190703" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "1639" }
-    ]},
-    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "LOAD-YSO" },
-        { "code": "b", "value": "00" },
-        { "code": "c", "value": "20190705" },
-        { "code": "l", "value": "FIN01" },
-        { "code": "h", "value": "1135" }
-    ]},
-    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "SELMA" }
-    ]},
-    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "JOSKU" }
-    ]},
-    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "HELKA" }
-    ]},
-    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [
-        { "code": "a", "value": "ALMA" }
-    ]}
+    { "tag": "020", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "90-6779-080-X" }, { "code": "q", "value": "nidottu" }  ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "(FI-MELINDA)001590014" }  ]},
+    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [{ "code": "a", "value": "eng" }, { "code": "a", "value": "fre" }  ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "342.71" }, { "code": "x", "value": "(4)" }  ]},
+    { "tag": "080", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "316.7" }, { "code": "x", "value": "(4)" }  ]},
+    { "tag": "084", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Ho:17.1" }, { "code": "2", "value": "z" }  ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "European citizenship /" }, { "code": "c", "value": "edited by Epaminondas A. Marias." }  ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Maastricht :" }, { "code": "b", "value": "European Institute of Public Administration," }, { "code": "c", "value": "1994." }  ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "xiii, 276 s" }  ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "teksti" }, { "code": "b", "value": "txt" }, { "code": "2", "value": "rdacontent" }  ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "käytettävissä ilman laitetta" }, { "code": "b", "value": "n" }, { "code": "2", "value": "rdamedia" }  ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "nide" }, { "code": "b", "value": "nc" }, { "code": "2", "value": "rdacarrier" }  ]},
+    { "tag": "500", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Contains contributions in both English and French." }  ]},
+    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [{ "code": "a", "value": "Euroopan unioni" }, { "code": "x", "value": "kansalaisuus." }  ]},
+    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [{ "code": "a", "value": "Euroopan unioni." }  ]},
+    { "tag": "610", "ind1": "2", "ind2": "4", "subfields" : [{ "code": "a", "value": "Euroopan yhteisöjen tuomioistuin." }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "kansalaisuus" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p2736" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "EY-oikeus" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p12348" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "liikkumisvapaus" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p16256" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "perusoikeudet" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p231" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "poliittiset oikeudet" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p2404" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "medborgarskap" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p2736" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "EG-rätt" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p12348" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "rörelsefrihet" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p16256" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "grundrättigheter" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p231" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "politiska rättigheter" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p2404" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "kansalais- ja poliittiset oikeudet" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "kansalaisuus" }, { "code": "z", "value": "Euroopan unioni" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "kansalaisuus" }, { "code": "z", "value": "Eurooppa" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "liikkumisvapaus" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "EY-tuomioistuin" }, { "code": "x", "value": "liikkumisvapaus" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "EY-oikeus" }, { "code": "x", "value": "liikkumisvapaus" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "EU-kansalaisuus" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "Euroopan unionin kansalaisuus" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "650", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "Euroopan oikeusasiamies" }, { "code": "2", "value": "eks" }  ]},
+    { "tag": "651", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "Eurooppa" }, { "code": "2", "value": "yso/fin" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p94111" }  ]},
+    { "tag": "651", "ind1": " ", "ind2": "7", "subfields" : [{ "code": "a", "value": "Europa" }, { "code": "2", "value": "yso/swe" }, { "code": "0", "value": "http://www.yso.fi/onto/yso/p94111" }  ]},
+    { "tag": "700", "ind1": "1", "ind2": " ", "subfields" : [{ "code": "a", "value": "Marias, Epaminondas A." }  ]},
+    { "tag": "710", "ind1": "2", "ind2": " ", "subfields" : [{ "code": "a", "value": "European Institute of Public Administration." }  ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "772700" }, { "code": "b", "value": "helka" }  ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "225753" }, { "code": "b", "value": "alma" }  ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "271085" }, { "code": "b", "value": "josku" }  ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "197324" }, { "code": "b", "value": "selma" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "CONV-ISBD" },         { "code": "b" }, { "code": "c", "value": "20120402" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "0829" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "20090529" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "1740" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "LOAD-FIX" }, { "code": "b", "value": "30" }, { "code": "c", "value": "20141231" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "1018" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "CONV-RDA" },         { "code": "b" }, { "code": "c", "value": "20160319" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "0835" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "LOAD-FIX" }, { "code": "b", "value": "30" }, { "code": "c", "value": "20170629" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "1858" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "LOAD-HELKA" },         { "code": "b" }, { "code": "c", "value": "20180503" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "2328" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "LOAD-YSO" }, { "code": "b", "value": "00" }, { "code": "c", "value": "20190703" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "1639" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "LOAD-YSO" }, { "code": "b", "value": "00" }, { "code": "c", "value": "20190705" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "1135" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "SELMA" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "JOSKU" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "HELKA" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "ALMA" }  ]}
   ],
   "leader": "02865cam a22007334i 4500"
 }
