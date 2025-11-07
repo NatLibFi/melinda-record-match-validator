@@ -1,0 +1,6 @@
+{
+    "description": "No preference if neither record has LOWs",
+    "skip": false,
+    "only": false,
+    "expectedResults": true
+}

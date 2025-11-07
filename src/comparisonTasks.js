@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import createDebugLogger from 'debug';
 import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melinda-commons';
 
@@ -207,7 +206,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': true,
-    'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus',
+    'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus (tai tietuetta, jossa ylipäänsä on joku tietokantatunnus)',
     'validation_message_fi': ''},
 
   // database internal merge cannot merge two records with same low

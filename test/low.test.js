@@ -1,9 +1,9 @@
 
-import {expect} from 'chai';
+import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 //import {getLOW, checkLOW, checkLOWinternal} from '../src/fieldLOW.js';
-import {getLOW, compareLOWinternal} from '../src/fieldLOW.js';
+import {getLOW, checkLOW, compareLOWinternal} from '../src/fieldLOW.js';
 import createDebugLogger from 'debug';
 import {MarcRecord} from '@natlibfi/marc-record';
 
@@ -12,13 +12,13 @@ const debugData = debug.extend('data');
 
 testGetLow();
 
-//testCheckLow();
+testCheckLow();
 testCompareLOWinternal();
 
 function testGetLow() {
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'low', 'getLow'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'low', 'getLow'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
@@ -31,7 +31,8 @@ function testGetLow() {
     debugData(record);
     const lows = getLOW(record);
     debugData(JSON.stringify(lows));
-    expect(lows).to.eql(expectedResults);
+    assert.deepEqual(lows, expectedResults);
+    //expect(lows).to.eql(expectedResults);
   }
 }
 
@@ -39,11 +40,11 @@ function testCompareLOWinternal() {
 
   generateTests({
     callback,
-    path: [__dirname, '..', 'test-fixtures', 'low', 'compareLOWinternal'],
+    path: [import.meta.dirname, '..', 'test-fixtures', 'low', 'compareLOWinternal'],
     useMetadataFile: true,
     recurse: false,
     fixura: {
-      reader: READERS.JSON1
+      reader: READERS.JSON
     }
   });
 
@@ -53,34 +54,31 @@ function testCompareLOWinternal() {
     debugData(JSON.stringify(recordValuesB));
     const result = compareLOWinternal(recordValuesA, recordValuesB);
     debugData(JSON.stringify(result));
-    expect(result).to.eql(expectedResults);
+    assert.deepEqual(result, expectedResults);
+    //expect(result).to.eql(expectedResults);
   }
 }
 
 
-/*
-
 function testCheckLow() {
-  testGetTitleFeaturesType();
 
-  function testGetTitleFeaturesType() {
-    generateTests({
+  generateTests({
       callback,
-      path: [__dirname, '..', 'test-fixtures', 'low', 'checkLow'],
+      path: [import.meta.dirname, '..', 'test-fixtures', 'low', 'checkLow'],
       useMetadataFile: true,
       recurse: false,
       fixura: {
-        reader: READERS.JSON1
+        reader: READERS.JSON
       }
     });
 
-    function callback({title, expectedResults}) {
-      debug(`Testing: ${JSON.stringify(title)}`);
-      const type = getTitleFeaturesType(title);
-      debug(`Result: ${type}`);
-      expect(type).to.eql(expectedResults);
+    function callback({getFixture, expectedResults}) {
+    const recordA = new MarcRecord(getFixture('inputRecordA.json'), {subfieldValues: false});
+    const recordB = new MarcRecord(getFixture('inputRecordB.json'), {subfieldValues: false});
+      const result = checkLOW({record1: recordA, record2: recordB});
+      debug(`Result: ${result}`);
+      assert.deepEqual(result, expectedResults);
+      //expect(type).to.eql(expectedResults);
     }
   }
-}
-*/
 

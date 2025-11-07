@@ -86,7 +86,7 @@ export function getTypeOfRecord(record) {
 }
 
 export function getBibliographicLevel(record) {
-  const recordBibLevelRaw = record.leader[7]; // eslint-disable-line prefer-destructuring
+  const recordBibLevelRaw = record.leader[7];
   const result = {
     bibliographicLevel: mapBibliographicLevel(recordBibLevelRaw)
   };
@@ -94,7 +94,7 @@ export function getBibliographicLevel(record) {
 }
 
 export function getRecordLevel(record) {
-  const recordCompletionLevel = record.leader[17]; // eslint-disable-line prefer-destructuring
+  const recordCompletionLevel = record.leader[17];
   const result = {
     encodingLevel: mapEncodingLevel(recordCompletionLevel),
     prepublicationLevel: getPrepublicationLevel(record, recordCompletionLevel)
@@ -204,7 +204,6 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
   nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debugDev);
   nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debugDev);
 
-  // eslint-disable-next-line no-mixed-operators, no-extra-parens
   if (prePubA && prePubB && (a.code === '8' && b.code === '8') || (a.code === '2' && b.code === '2')) { // Handle exception first: all prepublications are not equal!
 
     const prePubValue = rateValues(prePubA, prePubB, ['0', '1', '2', '3']);

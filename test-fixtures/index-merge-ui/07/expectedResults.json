@@ -1,0 +1,7 @@
+  [
+    {
+      "message": "suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus (tai tietuetta, jossa ylipäänsä on joku tietokantatunnus)",
+      "result": "warning",
+      "type": "preference"
+    }
+  ]
