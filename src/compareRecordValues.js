@@ -1,5 +1,5 @@
 
-import {compareLeader} from './leader.js';
+import {compareLeader} from './compareFunctions/compareLeader.js';
 import {compareCAT} from './fieldCAT.js';
 import {compareLOW} from './fieldLOW.js';
 import {compareSID} from './fieldSID.js';

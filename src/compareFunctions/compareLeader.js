@@ -1,10 +1,10 @@
 import createDebugLogger from 'debug';
 
-import {getBibliographicLevel, getEncodingLevel, getRecordInfo, getTypeOfRecord, EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO} from './collectFunctions/collectLeader.js';
-import {nvdebug} from './utils.js';
+import {getBibliographicLevel, getEncodingLevel, getRecordInfo, getTypeOfRecord, EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO} from '../collectFunctions/collectLeader.js';
+import {nvdebug} from '../utils.js';
 
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareFunctions/compareLeader');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
