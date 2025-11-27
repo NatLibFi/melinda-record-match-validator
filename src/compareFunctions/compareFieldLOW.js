@@ -1,18 +1,12 @@
-import {hasFields, getSubfield} from './collectFunctions/collectUtils.js';
+
 import createDebugLogger from 'debug';
-//import {compareArrayContent} from './compareFunctions/compareUtils.js';
-import {nvdebug} from './utils.js';
+//import {compareArrayContent} from './compareUtils.js';
+import {nvdebug} from '../utils.js';
+import {getLOW} from '../collectFunctions/collectUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:fieldLOW');
 const debugDev = debug.extend('dev');
 const debugData = debug.extend('data');
-
-export function getLOW(record) {
-  // Do not return empty/non-existent LOW $a's as 'undefined'
-  const LOWs = hasFields('LOW', record, getSubfield, 'a').filter(element => element && element !== 'undefined');
-  debugData('LOWs: %o', LOWs);
-  return LOWs;
-}
 
 // Priority array for various LOW tags. Default value for an existing LOW is 50, and for no LOW 0.
 const LOW2Points = {

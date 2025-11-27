@@ -132,3 +132,11 @@ export function get338bCarrierType(record) { // Test-only
   return get33Xb(record, '338');
 }
 
+export function getLOW(record) {
+  // Do not return empty/non-existent LOW $a's as 'undefined'
+  const LOWs = hasFields('LOW', record, getSubfield, 'a').filter(element => element && element !== 'undefined');
+  //debugData('LOWs: %o', LOWs);
+  return LOWs;
+}
+
+

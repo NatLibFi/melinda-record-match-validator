@@ -1,7 +1,7 @@
 
 import {compareLeader} from './compareFunctions/compareLeader.js';
 import {compareCAT} from './fieldCAT.js';
-import {compareLOW} from './fieldLOW.js';
+import {compareLOW} from './compareFunctions/compareFieldLOW.js';
 import {compareSID} from './compareFunctions/compareFieldSID.js';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers.js';
 import {compare001, compare005} from './compareFunctions/compareControlFields.js';
