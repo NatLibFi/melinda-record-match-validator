@@ -1,26 +1,12 @@
 
 import createDebugLogger from 'debug';
-import {hasFields} from './collectFunctions/collectUtils.js';
+import {getSID} from '../collectFunctions/collectUtils.js';
 //import {nvdebug} from './utils.js';
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:alephFunctions');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectFunctions/collectFieldSID');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
-// Collect SID
-export function getSID(record) {
-  const SIDs = hasFields('SID', record).map(field => sidToJson(field));
-  debugDev('SIDs: %o', SIDs);
-
-  return SIDs;
-
-  function sidToJson(sid) {
-    const [database] = sid.subfields.filter(sub => sub.code === 'b').map(sub => sub.value);
-    const [id] = sid.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
-
-    return {id, database};
-  }
-}
 
 // Compare SID
 

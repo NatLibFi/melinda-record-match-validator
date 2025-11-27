@@ -1,7 +1,7 @@
 import createDebugLogger from 'debug';
 import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melinda-commons';
 
-import {checkSID} from './fieldSID.js';
+import {checkSID} from './compareFunctions/compareFieldSID.js';
 import {checkLOW, checkLOWinternal} from './fieldLOW.js';
 import {checkCAT} from './fieldCAT.js';
 import {check040b, check040e} from './field040.js';

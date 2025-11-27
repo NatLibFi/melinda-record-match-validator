@@ -75,3 +75,18 @@ export function removeExtraSpaces(value) {
 export function get042(record) {
   return hasField('042', record, getSubfields, 'a');
 }
+
+// Collect SID
+export function getSID(record) {
+  const SIDs = hasFields('SID', record).map(field => sidToJson(field));
+  //debugDev('SIDs: %o', SIDs);
+
+  return SIDs;
+
+  function sidToJson(sid) {
+    const [database] = sid.subfields.filter(sub => sub.code === 'b').map(sub => sub.value);
+    const [id] = sid.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
+
+    return {id, database};
+  }
+}
