@@ -1,4 +1,4 @@
-import {getSubfieldValue, getSubfieldValues, hasField} from './collectFunctions/collectUtils.js';
+import {recordGetSubfieldValuesFromNonRepeatableField} from '../utils.js';
 
 //// Scores for various values in 040$b Language Cataloging
 // Sorry, my Finlandswedish colleagues and friends: I've given Finnis top priority.
@@ -20,11 +20,11 @@ export function check040b({record1, record2}) {
   return true; // This test does not fail
 
   function recordScore040FieldLanguage(record) {
-    const b = hasField('040', record, getSubfieldValue, 'b');
-    if (b === null || !(b in scoreFor040b)) {
+    const bs = recordGetSubfieldValuesFromNonRepeatableField(record, '040', 'b');
+    if (bs.length !== 1 || !(bs[0] in scoreFor040b)) {
       return 0;
     }
-    return scoreFor040b[b];
+    return scoreFor040b[bs[0]];
   }
 }
 
@@ -41,16 +41,11 @@ export function check040e({record1, record2}) {
   return true; // This test does not fail
 
   function recordScore040FieldDescriptionConvention(record) {
-    const e = hasField('040', record, getSubfieldValues, 'e');
-    if (e.length !== 1) {
-      return 0;
-    }
+    const es = recordGetSubfieldValuesFromNonRepeatableField(record, '040', 'e');
     // Is multiple $e's a problem? Once I thought so, but not anymore. However, keep this comment here for discussion.
-    if (e.includes('rda')) {
+    if (es.includes('rda')) {
       return 1;
     }
-    // Now now... Should we assume that no 040$e is better than, say, 040$e FFS?
-    // Currently we take no sides, return same score for both, and hope that some other rule makes a good decision for us.
     return 0;
   }
 }

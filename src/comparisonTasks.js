@@ -4,7 +4,7 @@ import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melind
 import {checkSID} from './compareFunctions/compareFieldSID.js';
 import {checkLOW, checkLOWinternal} from './fieldLOW.js';
 import {checkCAT} from './fieldCAT.js';
-import {check040b, check040e} from './field040.js';
+import {check040b, check040e} from './compareFunctions/compareField040.js';
 //import {check245} from './field245.js';
 import {checkAllTitleFeatures} from './title.js';
 import {checkPublisher} from './compareFunctions/compareField26X.js';
