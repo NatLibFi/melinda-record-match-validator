@@ -70,3 +70,8 @@ export function stripPunc(value) {
 export function removeExtraSpaces(value) {
   return value.replace(/ +/u, ' ');
 }
+
+// In a wrong place, but I'm not adding a file for a one-liner:
+export function get042(record) {
+  return hasField('042', record, getSubfields, 'a');
+}

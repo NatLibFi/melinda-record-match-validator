@@ -1,16 +1,12 @@
 
 import createDebugLogger from 'debug';
-import {nvdebug} from './utils.js';
-import {hasField, getSubfields} from './collectFunctions/collectUtils.js';
+import {nvdebug} from '../utils.js';
+import {get042} from '../collectFunctions/collectUtils.js';
 //import {compareArrayContent} from './compareUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field042');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
-
-export function get042(record) {
-  return hasField('042', record, getSubfields, 'a');
-}
 
 function compare042Data(data1, data2) {
   // Look for NatLibFi authentication codes (finb and finbd) from within 042$a subfields, and give one point for each of the two.
@@ -26,8 +22,8 @@ function compare042Data(data1, data2) {
   return true; // This test does not fail
 
   function score042Field(authenticationCodes) {
-    nvdebug('FFS', debugDev);
     nvdebug(authenticationCodes.join(', '), debugDev);
+    // Uh, nowadays I think that finb + finbd is 1, not 2... Well, I'll come back to this eventually (or not)...
     return (authenticationCodes.includes('finb') ? 1 : 0) + (authenticationCodes.includes('finbd') ? 1 : 0);
   }
 

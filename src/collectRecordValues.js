@@ -5,7 +5,7 @@ import {get001, get005, get008} from './collectFunctions/collectControlFields.js
 import {getCAT} from './fieldCAT.js';
 import {getLOW} from './fieldLOW.js';
 import {getSID} from './fieldSID.js';
-import {get042} from './field042.js';
+import {get042} from './collectFunctions/collectUtils.js';
 import {get245} from './field245.js';
 import {getAllTitleFeatures} from './title.js';
 import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X.js';
