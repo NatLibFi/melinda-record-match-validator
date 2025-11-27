@@ -165,21 +165,4 @@ export function checkLeader({record1, record2, checkPreference = true, record1Ex
 
 
   return checkPreference ? encodingLevelPreference : true;
-
-  /*
-  if (checkPreference) {
-    return encodingLevelPreference;
-  }
-  return true;
-  */
-  // NB! Should we handle LDR/05 (record status) value p - Increase in encoding level from prepublication?
 }
-
-/* // An old comment with updates keys:
-'000': {
-    'bibliographicLevel': true,
-    'encodingLevel': 'A', // A has better value
-    'recordState': true, // What is this? Probably something that got dropped later on...
-    'typeOfRecord': true
-}
-*/
