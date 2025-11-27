@@ -6,7 +6,7 @@ import {getCAT} from './fieldCAT.js';
 import {getLOW} from './fieldLOW.js';
 import {get042, getSID} from './collectFunctions/collectUtils.js';
 import {get245} from './field245.js';
-import {getAllTitleFeatures} from './title.js';
+import {getAllTitleFeatures} from './collectFunctions/collectTitle.js';
 import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X.js';
 import {get773} from './field773.js';
 
