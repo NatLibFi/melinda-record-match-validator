@@ -19,10 +19,10 @@ import {check773, check773Internal} from './field773.js';
 import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './compareFunctions/compareLeader.js';
 import {check005, check008} from './compareFunctions/compareControlFields.js';
 import {compareRecordsPartSetFeatures} from './partsAndSets.js';
-import {performAudioSanityCheck} from './sanityCheckAudio.js';
-import {performDaisySanityCheck} from './sanityCheckDaisy.js';
-import {performDvdSanityCheck} from './sanityCheckDvd.js';
-import {performIsbnQualifierCheck} from './sanityCheckIsbnQualifer.js';
+import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
+import {performDaisySanityCheck} from './compareFunctions/sanityCheckDaisy.js';
+import {performDvdSanityCheck} from './compareFunctions/sanityCheckDvd.js';
+import {performIsbnQualifierCheck} from './compareFunctions/sanityCheckIsbnQualifer.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
