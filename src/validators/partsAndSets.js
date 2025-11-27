@@ -1,5 +1,5 @@
 
-import {getTitleFeatures} from './collectFunctions/collectTitle.js';
+import {getTitleFeatures} from '../collectFunctions/collectTitle.js';
 import {getExtentsForPartsAndSets} from './partsAndSetsExtent.js';
 
 import createDebugLogger from 'debug';
