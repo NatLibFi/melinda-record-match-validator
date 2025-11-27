@@ -7,7 +7,7 @@ import {checkCAT} from './fieldCAT.js';
 import {check040b, check040e} from './field040.js';
 //import {check245} from './field245.js';
 import {checkAllTitleFeatures} from './title.js';
-import {checkPublisher} from './field26X.js';
+import {checkPublisher} from './compareFunctions/compareField26X.js';
 //import {getSubfieldValues} from './collectFunctions/collectUtils.js';
 //import {collectRecordValues} from './collectRecordValues.js';
 //import {compareRecordValues} from './compareRecordValues.js';
