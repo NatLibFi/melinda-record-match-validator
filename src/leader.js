@@ -2,6 +2,11 @@
 import createDebugLogger from 'debug';
 import {nvdebug} from './utils.js';
 
+export const EI_ENNAKKOTIETO = '0';
+export const KONEELLISESTI_TUOTETTU_TIETUE = '1';
+export const TARKISTETTU_ENNAKKOTIETO = '2';
+export const ENNAKKOTIETO = '3';
+
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:leader');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
@@ -120,27 +125,27 @@ function getPrepublicationLevel(record, encodingLevel = '8') {
   const fields = record.get(/^(?:500|594)$/u);
   if (fields) {
     if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
-      return {code: '1', level: 'Koneellisesti tuotettu tietue'};
+      return {code: KONEELLISESTI_TUOTETTU_TIETUE, level: 'Koneellisesti tuotettu tietue'};
     }
 
     if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
-      return {code: '2', level: 'TARKISTETTU ENNAKKOTIETO'};
+      return {code: TARKISTETTU_ENNAKKOTIETO, level: 'TARKISTETTU ENNAKKOTIETO'};
     }
 
     if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
-      return {code: '3', level: 'ENNAKKOTIETO'};
+      return {code: ENNAKKOTIETO, level: 'ENNAKKOTIETO'};
     }
     // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
     if (encodingLevel === '8') {
-      return {code: '3', level: 'No prepublication type found'};
+      return {code: ENNAKKOTIETO, level: 'No prepublication type found'};
     }
-    return {code: '0', level: 'Not a prepublication'};
+    return {code: EI_ENNAKKOTIETO, level: 'Not a prepublication'};
   }
   // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
   if (encodingLevel === '8') {
-    return {code: '3', level: 'No 500 or 594 fields found, cannot determine prepublication type'};
+    return {code: ENNAKKOTIETO, level: 'No 500 or 594 fields found, cannot determine prepublication type'};
   }
-  return {code: '0', level: 'Not a prepublication'};
+  return {code: EI_ENNAKKOTIETO, level: 'Not a prepublication'};
 }
 
 function rateValues(valueA, valueB, rateArray) {
@@ -204,9 +209,9 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
   nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debugDev);
   nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debugDev);
 
-  if (prePubA && prePubB && (a.code === '8' && b.code === '8') || (a.code === '2' && b.code === '2')) { // Handle exception first: all prepublications are not equal!
+  if (prePubA && prePubB && a.code === b.code && ['2', '8'].includes(a.code)) { // Handle exception first: all prepublications are not equal!
 
-    const prePubValue = rateValues(prePubA, prePubB, ['0', '1', '2', '3']);
+    const prePubValue = rateValues(prePubA, prePubB, [EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO]);
 
     // we'll check recordSource only if we have '8' or '2' records which have same prePubValue
     // and prepubLevel is something else than '0' (not a prepublication)
