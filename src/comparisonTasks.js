@@ -17,7 +17,7 @@ import {check336, check337, check338} from './field33X.js';
 import {check773, check773Internal} from './field773.js';
 //import {check984} from './field984.js';
 import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './compareFunctions/compareLeader.js';
-import {check005, check008} from './controlFields.js';
+import {check005, check008} from './compareFunctions/compareControlFields.js';
 import {compareRecordsPartSetFeatures} from './partsAndSets.js';
 import {performAudioSanityCheck} from './sanityCheckAudio.js';
 import {performDaisySanityCheck} from './sanityCheckDaisy.js';

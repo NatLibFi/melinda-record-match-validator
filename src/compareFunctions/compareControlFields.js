@@ -1,10 +1,10 @@
 import createDebugLogger from 'debug';
 import moment from 'moment';
-import {compareValueContent} from './compareFunctions/compareUtils.js';
-import {get005, get008} from './collectFunctions/collectControlFields.js';
-import {nvdebug} from './utils.js';
+import {compareValueContent} from './compareUtils.js';
+import {get005, get008} from '../collectFunctions/collectControlFields.js';
+import {nvdebug} from '../utils.js';
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:controlFields');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectFunctions:collectControlFields');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
