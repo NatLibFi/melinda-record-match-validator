@@ -1,11 +1,14 @@
 
 import assert from 'node:assert';
-import {READERS} from '@natlibfi/fixura';
-import generateTests from '@natlibfi/fixugen';
-//import {getLOW, checkLOW, checkLOWinternal} from '../src/fieldLOW.js';
-import {getLOW, checkLOW, compareLOWinternal} from '../src/fieldLOW.js';
 import createDebugLogger from 'debug';
+
+import {READERS} from '@natlibfi/fixura';
 import {MarcRecord} from '@natlibfi/marc-record';
+import generateTests from '@natlibfi/fixugen';
+
+//import {checkLOW, checkLOWinternal} from '../src/fieldLOW.js';
+import {checkLOW, compareLOWinternal} from '../src/compareFunctions/compareFieldLOW.js';
+import {getLOW} from '../src/collectFunctions/collectUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:fieldLow:test');
 const debugData = debug.extend('data');
