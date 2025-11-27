@@ -7,7 +7,7 @@ import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers.js'
 import {compare001, compare005} from './compareFunctions/compareControlFields.js';
 import {compare042} from './compareFunctions/compareField042.js';
 import {compare245} from './field245.js';
-import {compareAllTitleFeatures} from './title.js';
+import {compareAllTitleFeatures} from './compareFunctions/compareTitle.js';
 import {compare773} from './field773.js';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X.js';
 

@@ -1,7 +1,7 @@
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils.js';
-import {compareValueContent, compareArrayContentRequireAll, compareStringToArray} from './compareFunctions/compareUtils.js';
-import {getAllTitleFeatures} from './collectFunctions/collectTitle.js';
+import {compareValueContent, compareArrayContentRequireAll, compareStringToArray} from './compareUtils.js';
+import {getAllTitleFeatures} from '../collectFunctions/collectTitle.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 const debugDev = debug.extend('dev');
