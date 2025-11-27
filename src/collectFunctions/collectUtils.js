@@ -76,6 +76,26 @@ export function get042(record) {
   return hasField('042', record, getSubfields, 'a');
 }
 
+// 245 n & p
+// tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
+// niissä tapauksissa, joissa tuodaan alunperin marc21-kirjastodataa tai yhdistetään Melindan tietueita, tää on oleellisehko
+export function get245(record) {
+  const [f245] = hasFields('245', record, f245ToJSON);
+  //debugDev('Field 245 info: %o', f245);
+
+  return f245;
+
+  function f245ToJSON(field) {
+    const title = stripPunc(getSubfield(field, 'a'));
+    const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
+    // Note: both $p and $n are repeatable, we get only first instances of them here?
+    const numberOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'n'));
+    const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
+
+    return {title, remainderOfTitle, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
+  }
+}
+
 // Collect SID
 export function getSID(record) {
   const SIDs = hasFields('SID', record).map(field => sidToJson(field));

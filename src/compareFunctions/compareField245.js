@@ -1,35 +1,16 @@
 
 import createDebugLogger from 'debug';
 //import {nvdebug} from '../utils.js';
-import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils.js';
-import {compareValueContent} from './compareFunctions/compareUtils.js';
+import {compareValueContent} from './compareUtils.js';
+import {get245} from '../collectFunctions/collectUtils.js';
 //import {fieldGetNonRepeatableValue, fieldToString, nvdebug, subfieldSetsAreEqual} from './utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field245');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
-// Note: title.js replaces this
+// Note: compareTitle.js (title.js) replaces this
 
-// 245 n & p
-// tosin nää ei varmaan kuitenkaan tuu onixista, eli KV:n ennakkotietotapauksessa toi blokkais kaikki, joissa Melindassa olis tehty noi valmiiksi nimekkeeseen
-// niissä tapauksissa, joissa tuodaan alunperin marc21-kirjastodataa tai yhdistetään Melindan tietueita, tää on oleellisehko
-export function get245(record) {
-  const [f245] = hasFields('245', record, f245ToJSON);
-  debugDev('Field 245 info: %o', f245);
-
-  return f245;
-
-  function f245ToJSON(field) {
-    const title = stripPunc(getSubfield(field, 'a'));
-    const remainderOfTitle = stripPunc(getSubfield(field, 'b')); // Do we want
-    // Note: both $p and $n are repeatable, we get only first instances of them here?
-    const numberOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'n'));
-    const nameOfPartInSectionOfAWork = stripPunc(getSubfield(field, 'p'));
-
-    return {title, remainderOfTitle, numberOfPartInSectionOfAWork, nameOfPartInSectionOfAWork};
-  }
-}
 
 function compare245data(f245A, f245B) {
   // NOTE: we do nothing with f245 $b remainderOfTitle here!
