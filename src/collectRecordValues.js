@@ -4,9 +4,8 @@ import {getRecordInfo} from './collectFunctions/collectLeader.js';
 import {get001, get005, get008} from './collectFunctions/collectControlFields.js';
 import {getCAT} from './fieldCAT.js';
 import {getLOW} from './fieldLOW.js';
-import {get042, get245, getSID} from './collectFunctions/collectUtils.js'; // Simple getTAG-functions are stored here
+import {get042, get245, get336bContentType, get337bMediaType, get338bCarrierType, getSID} from './collectFunctions/collectUtils.js'; // Simple getTAG-functions are stored here
 import {getAllTitleFeatures} from './collectFunctions/collectTitle.js';
-import {get336bContentType, get337bMediaType, get338bCarrierType} from './field33X.js';
 import {get773} from './field773.js';
 
 export function collectRecordValues(record) {

@@ -110,3 +110,25 @@ export function getSID(record) {
     return {id, database};
   }
 }
+
+// COLLECT:
+export function get33Xb(record, tag) {
+  const types = hasFields(tag, record, getSubfield, 'b');
+  //debugDev('Field %s types: %o', tag, types);
+  //nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debugDev);
+  return {types};
+}
+
+export function get336bContentType(record) { // Test-only
+  return get33Xb(record, '336');
+}
+
+export function get337bMediaType(record) { // Test-only
+  return get33Xb(record, '337');
+}
+
+export function get338bCarrierType(record) { // Test-only
+  // A component part should not have a 338 field. However, I don't think we need this sanity check...
+  return get33Xb(record, '338');
+}
+

@@ -9,7 +9,7 @@ import {compare042} from './compareFunctions/compareField042.js';
 import {compare245} from './compareFunctions/compareField245.js';
 import {compareAllTitleFeatures} from './compareFunctions/compareTitle.js';
 import {compare773} from './field773.js';
-import {compare336ContentType, compare337MediaType, compare338CarrierType} from './field33X.js';
+import {compare336ContentType, compare337MediaType, compare338CarrierType} from './compareFunctions/compareField33X.js';
 
 import createDebugLogger from 'debug';
 

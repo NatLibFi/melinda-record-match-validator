@@ -2,34 +2,13 @@
 // Handle fields 336, 337 and 338.
 
 import createDebugLogger from 'debug';
-import {/*fieldHasValidNonRepeatableSubfield, */ nvdebug/*, subfieldSetsAreEqual*/} from './utils.js';
-import {hasFields, getSubfield} from './collectFunctions/collectUtils.js';
-import {compareArrayContent} from './compareFunctions/compareUtils.js';
+import {compareArrayContent} from './compareUtils.js';
+import { get33Xb } from '../collectFunctions/collectUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field33X');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
-// COLLECT:
-function get33Xb(record, tag) {
-  const types = hasFields(tag, record, getSubfield, 'b');
-  debugDev('Field %s types: %o', tag, types);
-  nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debugDev);
-  return {types};
-}
-
-export function get336bContentType(record) { // Test-only
-  return get33Xb(record, '336');
-}
-
-export function get337bMediaType(record) { // Test-only
-  return get33Xb(record, '337');
-}
-
-export function get338bCarrierType(record) { // Test-only
-  // A component part should not have a 338 field. However, I don't think we need this sanity check...
-  return get33Xb(record, '338');
-}
 
 
 /*
