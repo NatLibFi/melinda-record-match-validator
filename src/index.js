@@ -105,7 +105,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 // Returns array of failure responses, empty array if matchValidator does not return failures
 // [{ "result": "error/warning", "type": "validation/preference", "message": "finnish message"}]
 
-export function matchValidationForMergeUi({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
+export function matchValidationForMergeUI({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
   debugDev(`Manual ${manual} (for Merge UI) - we have ${comparisonTasks.length} comparison tasks`);
   debugDev(`FOOBAR`);
   // Create MarcRecords here to avoid problems with differing MarcRecord versions etc.
@@ -115,8 +115,8 @@ export function matchValidationForMergeUi({record1Object, record2Object, checkPr
   const result = makeComparisons({record1, record2, checkPreference, record1External, record2External, returnAll: true, comparisonTasks});
   debugDev(JSON.stringify(result));
   // return result-array failed results
-  const resultForMergeUi = filterResultsForMergeUI(result);
-  return resultForMergeUi;
+  const resultForMergeUI = filterResultsForMergeUI(result);
+  return resultForMergeUI;
 
   // Return to Merge UI only results that require action, ie. those that fail merge or change preference
   // MergeUI sends records non-preferred record as record1 and preferred record as record2, so preference result 'A' is a warning
