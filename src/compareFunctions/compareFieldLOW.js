@@ -12,7 +12,7 @@ const debugData = debug.extend('data');
 const LOW2Points = {
   'FIKKA': 100,
   // DEVELOP: there's no FENNICA LOW ...
-  'FENNICA': 90,
+  'FENNI': 90,
   'VIOLA': 90,
   // 'HELKA': 80, // We could add more libraries here. Eg. HELKA is usually good.
   'undefined': 0 // not sure whether this default can happen here
