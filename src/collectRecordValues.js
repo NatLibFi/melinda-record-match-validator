@@ -1,6 +1,6 @@
 
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
-import {getRecordInfo} from './leader.js';
+import {getRecordInfo} from './collectFunctions/collectLeader.js';
 import {get001, get005, get008} from './controlFields.js';
 import {getCAT} from './fieldCAT.js';
 import {getLOW} from './fieldLOW.js';
