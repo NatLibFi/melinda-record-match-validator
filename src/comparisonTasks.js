@@ -3,7 +3,7 @@ import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melind
 
 import {checkSID} from './compareFunctions/compareFieldSID.js';
 import {checkLOW, checkLOWinternal} from './compareFunctions/compareFieldLOW.js';
-import {checkCAT} from './fieldCAT.js';
+import {checkCAT} from './validators/fieldCAT.js';
 import {check040b, check040e} from './compareFunctions/compareField040.js';
 //import {check245} from './field245.js';
 import {checkAllTitleFeatures} from './compareFunctions/compareTitle.js';
@@ -14,7 +14,7 @@ import {checkPublisher} from './compareFunctions/compareField26X.js';
 //import {validateCompareResults} from './validateRecordCompareResults.js';
 import {check042} from './compareFunctions/compareField042.js';
 import {check336, check337, check338} from './compareFunctions/compareField33X.js';
-import {check773, check773Internal} from './field773.js';
+import {check773, check773Internal} from './validators/field773.js';
 //import {check984} from './compareFunctions/compareField984.js';
 import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './compareFunctions/compareLeader.js';
 import {check005, check008} from './compareFunctions/compareControlFields.js';

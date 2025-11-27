@@ -1,6 +1,6 @@
 
 import {compareLeader} from './compareFunctions/compareLeader.js';
-import {compareCAT} from './fieldCAT.js';
+import {compareCAT} from './validators/fieldCAT.js';
 import {compareLOW} from './compareFunctions/compareFieldLOW.js';
 import {compareSID} from './compareFunctions/compareFieldSID.js';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers.js';
@@ -8,7 +8,7 @@ import {compare001, compare005} from './compareFunctions/compareControlFields.js
 import {compare042} from './compareFunctions/compareField042.js';
 import {compare245} from './compareFunctions/compareField245.js';
 import {compareAllTitleFeatures} from './compareFunctions/compareTitle.js';
-import {compare773} from './field773.js';
+import {compare773} from './validators/field773.js';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './compareFunctions/compareField33X.js';
 
 import createDebugLogger from 'debug';
