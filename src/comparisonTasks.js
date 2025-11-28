@@ -5,7 +5,6 @@ import {checkSID} from './compareFunctions/compareFieldSID.js';
 import {checkLOW, checkLOWinternal} from './compareFunctions/compareFieldLOW.js';
 import {checkCAT} from './validators/fieldCAT.js';
 import {check040b, check040e} from './compareFunctions/compareField040.js';
-//import {check245} from './field245.js';
 import {checkAllTitleFeatures} from './compareFunctions/compareTitle.js';
 import {checkPublisher} from './compareFunctions/compareField26X.js';
 //import {getSubfieldValues} from './collectFunctions/collectUtils.js';

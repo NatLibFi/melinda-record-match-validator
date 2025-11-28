@@ -5,8 +5,6 @@ import {hasFields, getSubfield, getSubfields, removeExtraSpaces, stripPunc} from
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:title');
 const debugData = debug.extend('data');
 
-// NOTE: do not use with field245 -matchValidator - these do partly same things
-
 // Compare titles from 245 betweeen records.
 // Compare f245 to f946
 // Compare f245 t0 combinations of f490+f245

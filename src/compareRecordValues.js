@@ -6,7 +6,6 @@ import {compareSID} from './compareFunctions/compareFieldSID.js';
 import {compareCommonIdentifiers} from './compareFunctions/commonIdentifiers.js';
 import {compare001, compare005} from './compareFunctions/compareControlFields.js';
 import {compare042} from './compareFunctions/compareField042.js';
-import {compare245} from './compareFunctions/compareField245.js';
 import {compareAllTitleFeatures} from './compareFunctions/compareTitle.js';
 import {compare773} from './validators/field773.js';
 import {compare336ContentType, compare337MediaType, compare338CarrierType} from './compareFunctions/compareField33X.js';
@@ -27,7 +26,6 @@ export function compareRecordValues(recordValuesA, recordValuesB) {
     '001': compare001(recordValuesA, recordValuesB),
     '005': compare005(recordValuesA, recordValuesB), // A is more recently updated
     '042': compare042(recordValuesA, recordValuesB), // A nor B has any fikka or viola
-    '245': compare245(recordValuesA, recordValuesB),
     'title': compareAllTitleFeatures(recordValuesA, recordValuesB),
     '336': compare336ContentType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
     '337': compare337MediaType(recordValuesA, recordValuesB), // All-match = true, One-all-from-other = partialA tai partialB ja no-matches = false
