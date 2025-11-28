@@ -1,0 +1,5 @@
+{
+    "description": "Check language for human merge, warn for validation if languages differ too much",
+    "skip": false,
+    "only": false
+}

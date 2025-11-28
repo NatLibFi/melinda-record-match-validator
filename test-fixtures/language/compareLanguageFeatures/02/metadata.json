@@ -1,0 +1,8 @@
+{
+    "description": "Return false partially matching languages (1 match, 2 mismatches, 5 missing)",
+    "recordValuesA": {"language": ["eng","dan","sme"]},
+    "recordValuesB": {"language": ["eng","fin","swe","nor","lat","heb","ara","spa"]},
+    "expectedResults": false,
+    "skip": false,
+    "only": false
+}
