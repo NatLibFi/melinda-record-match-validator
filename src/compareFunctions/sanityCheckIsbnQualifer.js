@@ -29,14 +29,24 @@ function normalizeIsbn(value) {
     return value; // Not an ISBN. Return the original value.
   }
 
-  const auditResult = ISBN.audit(normalizedValue);
-  if (!auditResult.validIsbn) {
+  if (invalidISBN(normalizedValue)) {
     return value;
   }
 
   const parsedIsbn = ISBN.parse(normalizedValue);
   //nvdebug(`NORM ${value} TO ${parsedIsbn.isIsbn10}`);
   return parsedIsbn.isbn10;
+}
+
+function invalidISBN(isbn) { // aped from melinda-record-match-validator's src/isbn-issn.js
+  try {
+    const auditedIsbn = ISBN.audit(isbn);
+    return !auditedIsbn.validIsbn;
+  }
+  catch {
+    return true;
+  }
+
 }
 
 function fieldsShareIsbn(field1, field2) {
