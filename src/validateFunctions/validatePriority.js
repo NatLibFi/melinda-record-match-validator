@@ -1,5 +1,5 @@
 import createDebugLogger from 'debug';
-import {isValidValue} from './validateUtils';
+import {isValidValue} from './validateUtils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:validateRecordCompareResults:validatePriority');
 

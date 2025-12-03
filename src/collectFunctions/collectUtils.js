@@ -1,5 +1,5 @@
 //import createDebugLogger from 'debug';
-//import {nvdebug} from '../utils';
+//import {nvdebug} from '../utils.js';
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collectRecordValues:collectFields');
 
 export function hasFields(tag, record, useFunction, useFunctionParameters) {
@@ -70,3 +70,54 @@ export function stripPunc(value) {
 export function removeExtraSpaces(value) {
   return value.replace(/ +/u, ' ');
 }
+
+// In a wrong place, but I'm not adding a file for a one-liner:
+export function get042(record) {
+  return hasField('042', record, getSubfields, 'a');
+}
+
+
+// Collect SID
+export function getSID(record) {
+  const SIDs = hasFields('SID', record).map(field => sidToJson(field));
+  //debugDev('SIDs: %o', SIDs);
+
+  return SIDs;
+
+  function sidToJson(sid) {
+    const [database] = sid.subfields.filter(sub => sub.code === 'b').map(sub => sub.value);
+    const [id] = sid.subfields.filter(sub => sub.code === 'c').map(sub => sub.value);
+
+    return {id, database};
+  }
+}
+
+// COLLECT:
+export function get33Xb(record, tag) {
+  const types = hasFields(tag, record, getSubfield, 'b');
+  //debugDev('Field %s types: %o', tag, types);
+  //nvdebug(`NV Field ${tag} has types: ${types.join(', ')}`, debugDev);
+  return {types};
+}
+
+export function get336bContentType(record) { // Test-only
+  return get33Xb(record, '336');
+}
+
+export function get337bMediaType(record) { // Test-only
+  return get33Xb(record, '337');
+}
+
+export function get338bCarrierType(record) { // Test-only
+  // A component part should not have a 338 field. However, I don't think we need this sanity check...
+  return get33Xb(record, '338');
+}
+
+export function getLOW(record) {
+  // Do not return empty/non-existent LOW $a's as 'undefined'
+  const LOWs = hasFields('LOW', record, getSubfield, 'a').filter(element => element && element !== 'undefined');
+  //debugData('LOWs: %o', LOWs);
+  return LOWs;
+}
+
+

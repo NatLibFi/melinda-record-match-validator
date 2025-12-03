@@ -1,0 +1,12 @@
+{
+    "description": "Return false if there are several common LOWs",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "LOW": ["FIKKA", "TEST"]
+    },
+    "recordValuesB": {
+        "LOW": ["TEST", "FOO", "FIKKA"]
+    },
+    "expectedResults": false
+}

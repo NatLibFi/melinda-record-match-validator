@@ -15,11 +15,6 @@
   },
   "005": "A",
   "042": true,
-  "245": {
-    "nameOfPartInSectionOfAWork": "undefined",
-    "numberOfPartInSectionOfAWork": "undefined",
-    "title": true
-  },
   "title": true,
   "336": true,
   "337": true,

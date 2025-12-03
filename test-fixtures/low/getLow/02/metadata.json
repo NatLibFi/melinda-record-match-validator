@@ -1,0 +1,6 @@
+{
+    "description": "Get empty array if there are no LOWs",
+    "skip": false,
+    "only": false,
+    "expectedResults": []
+}

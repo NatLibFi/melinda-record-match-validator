@@ -1,0 +1,6 @@
+{
+    "description": "Prefer record which has LOWs",
+    "skip": false,
+    "only": false,
+    "expectedResults": "B"
+}

@@ -1,64 +1,11 @@
 {
-  "leader": "01092cas a22003494i 4500",
-  "fields": [
-    {
-      "tag": "001",
-      "value": "001275158"
-    },
-    {
-      "tag": "003",
-      "value": "FI-MELINDA"
-    },
-    {
-      "tag": "005",
-      "value": "20201104004608.0"
-    },
-    {
-      "tag": "008",
-      "value": "010101c19879999nr |||p| ||||||||||0eng|c"
-    },
-    {
-      "tag": "773",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "w",
-          "value": "FCC000000666"
-        },
-        {
-          "code": "w",
-          "value": "123456789"
-        },
-        {
-          "code": "t",
-          "value": "Levy"
-        },
-        {
-          "code": "g",
-          "value": "Raita 2"
-        },
-        {
-          "code": "q",
-          "value": "Fake value"
-        }
-      ]
-    },
-
-    {
-      "tag": "245",
-      "ind1": "0",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "African dental journal /"
-        },
-        {
-          "code": "c",
-          "value": "Federation of African Dental Associations, FADA."
-        }
-      ]
-    }
-  ]
+  "fields" : [
+    { "tag": "001", "value": "001275158" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20201104004608.0" },
+    { "tag": "008", "value": "010101c19879999nr |||p| ||||||||||0eng|c" },
+    { "tag": "773", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "w", "value": "FCC000000666" }, { "code": "w", "value": "123456789" }, { "code": "t", "value": "Levy" }, { "code": "g", "value": "Raita 2" }, { "code": "q", "value": "Fake value" }  ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "African dental journal /" }, { "code": "c", "value": "Federation of African Dental Associations, FADA." }  ]}
+  ],
+  "leader": "01092cas a22003494i 4500"
 }

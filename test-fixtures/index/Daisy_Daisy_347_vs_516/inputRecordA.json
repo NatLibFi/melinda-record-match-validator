@@ -1,69 +1,14 @@
 {
-  "leader": "01092cas a22003494i 4500",
-  "fields": [
-    {
-      "tag": "001",
-      "value": "001275158"
-    },
-    {
-      "tag": "003",
-      "value": "FI-MELINDA"
-    },
-    {
-      "tag": "005",
-      "value": "20201104004608.0"
-    },
-    {
-      "tag": "008",
-      "value": "010101c19879999nr |||p| ||||||||||0eng|c"
-    },
-    {
-      "tag": "022",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "0794-7348"
-        }
-      ]
-    },
-    {
-      "tag": "035",
-      "ind1": " ",
-      "ind2": " ",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "(FI-MELINDA)001275159"
-        }
-      ]
-    },
-    {
-      "tag": "245",
-      "ind1": "0",
-      "ind2": "0",
-      "subfields": [
-        {
-          "code": "a",
-          "value": "African dental journal /"
-        },
-        {
-          "code": "c",
-          "value": "Federation of African Dental Associations, FADA."
-        }
-      ]
-    },
-    { "tag": "300", "ind1": " ", "ind2": " ",
-      "subfields": [
-        { "code": "a", "value": "2 CD-äänilevyä (määrä ei merkkaa mitään) +"},
-        { "code": "e", "value": "1 LP-äänilevy ei meinaa tässä mitään"}
-      ]
-    },
-    { "tag": "347", "ind1": " ", "ind2": " ", "subfields": [
-      { "code": "a", "value": "äänitiedosto"},
-      { "code": "b", "value": "MP3"},
-      { "code": "b", "value": "Daisy"}
-    ]}
-  ]
+  "fields" : [
+    { "tag": "001", "value": "001275158" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20201104004608.0" },
+    { "tag": "008", "value": "010101c19879999nr |||p| ||||||||||0eng|c" },
+    { "tag": "022", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "0794-7348" }  ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "(FI-MELINDA)001275159" }  ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "African dental journal /" }, { "code": "c", "value": "Federation of African Dental Associations, FADA." }  ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "2 CD-äänilevyä (määrä ei merkkaa mitään) +" }, { "code": "e", "value": "1 LP-äänilevy ei meinaa tässä mitään" }  ]},
+    { "tag": "347", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "äänitiedosto" }, { "code": "b", "value": "MP3" }, { "code": "b", "value": "Daisy" }  ]}
+  ],
+  "leader": "01092cas a22003494i 4500"
 }

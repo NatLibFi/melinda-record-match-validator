@@ -1,0 +1,23 @@
+{
+  "leader": "00654nac a22002293i 4500",
+  "fields" : [
+    { "tag": "001", "value": "004633754" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20020321154855.0" },
+    { "tag": "007", "value": "tu" },
+    { "tag": "008", "value": "020321c19619999xx ||| | ||||||||||0swe||" },
+    { "tag": "022", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "0562-3022" }  ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "(FI-MELINDA)004633754" }  ]},
+    { "tag": "041", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "swe" }  ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "Studia Romanica Upsaliensia." }  ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Uppsala :" }, { "code": "b", "value": "Acta Universitatis Upsaliensis," }, { "code": "c", "value": "1961-" }  ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "teksti" }, { "code": "b", "value": "txt" }, { "code": "2", "value": "rdacontent" }  ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "käytettävissä ilman laitetta" }, { "code": "b", "value": "n" }, { "code": "2", "value": "rdamedia" }  ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "nide" }, { "code": "b", "value": "nc" }, { "code": "2", "value": "rdacarrier" }  ]},
+    { "tag": "773", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Osakohteen emon nimeke" }, { "code": "w", "value": "[Emon id]" }  ]},
+    { "tag": "SID", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "c", "value": "873414" }, { "code": "b", "value": "vaari" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "CONV-ISBD" },         { "code": "b" }, { "code": "c", "value": "20120402" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "0908" }  ]},
+    { "tag": "CAT", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "CONV-RDA" },         { "code": "b" }, { "code": "c", "value": "20160319" }, { "code": "l", "value": "FIN01" }, { "code": "h", "value": "0839" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "VAARI" }  ]}
+  ]
+}

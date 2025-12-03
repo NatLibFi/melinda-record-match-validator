@@ -15,11 +15,6 @@
   },
   "005": "B",
   "042": "B",
-  "245": {
-    "nameOfPartInSectionOfAWork": "undefined",
-    "numberOfPartInSectionOfAWork": "undefined",
-    "title": false
-  },
   "title": false,
   "336": false,
   "337": false,

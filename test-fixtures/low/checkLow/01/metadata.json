@@ -1,0 +1,6 @@
+{
+    "description": "Prefer record with preferred LOW (FIKKA)",
+    "skip": false,
+    "only": false,
+    "expectedResults": "B"
+}

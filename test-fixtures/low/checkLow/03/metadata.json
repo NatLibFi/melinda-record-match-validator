@@ -1,0 +1,6 @@
+{
+    "description": "No preference if both have LOWs but neither has preferred LOWs",
+    "skip": false,
+    "only": false,
+    "expectedResults": true
+}

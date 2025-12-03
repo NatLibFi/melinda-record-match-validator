@@ -1,0 +1,7 @@
+[
+    {
+        "result": "error",
+        "message": "tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää",
+        "type": "validation"
+   }
+]
