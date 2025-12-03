@@ -1,5 +1,5 @@
 
-import {hasFields, getSubfield, stripPunc} from './collectFunctions/collectUtils.js';
+import {hasFields, getSubfield, stripPunc} from '../collectFunctions/collectUtils.js';
 
 
 import createDebugLogger from 'debug';

@@ -2,7 +2,8 @@
 import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getAllTitleFeatures, compareAllTitleFeatures} from '../src/title.js';
+import {getAllTitleFeatures} from '../src/collectFunctions/collectTitle.js';
+import {compareAllTitleFeatures} from '../src/compareFunctions/compareTitle.js';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 

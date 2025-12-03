@@ -1,4 +1,4 @@
-export function getPublisherFields(record) {
+function getPublisherFields(record) {
   return record.fields.filter(field => isPublisherField(field));
 
   function isPublisherField(field) {

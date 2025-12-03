@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {hasFields} from './collectFunctions/collectUtils.js';
+import {hasFields} from '../collectFunctions/collectUtils.js';
 import createDebugLogger from 'debug';
 
 

@@ -2,7 +2,7 @@
 import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from '../src/partsAndSets.js';
+import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from '../src/validators/partsAndSets.js';
 import {MarcRecord} from '@natlibfi/marc-record';
 import createDebugLogger from 'debug';
 

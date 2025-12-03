@@ -2,7 +2,7 @@
 import assert from 'node:assert';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {parseExtentString, getExtentType} from '../src/partsAndSetsExtent.js';
+import {parseExtentString, getExtentType} from '../src/validators/partsAndSetsExtent.js';
 //import createDebugLogger from 'debug';
 
 

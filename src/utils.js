@@ -8,6 +8,24 @@ export function nvdebug(message, debug = undefined) {
   }
 }
 
+function recordGetNonRepeatableField(record, tag) {
+  const fields = record.get(tag);
+  if (fields.length === 1) {
+    return fields[0];
+  }
+  return undefined;
+}
+
+export function recordGetSubfieldValuesFromNonRepeatableField(record, tag, subfieldCode) {
+  const field = recordGetNonRepeatableField(record, tag);
+  if (!field || !field.subfields) {
+    return [];
+  }
+  const subfields = field.subfields.filter(sf => sf.code === subfieldCode);
+  return subfields.map(sf => sf.value);
+}
+
+
 /*
 const validValuesForSubfield = {
   '336‡b': ['prm', 'tdi', 'tdm', 'ntm', 'spw', 'sti', 'txt', 'snd'],
