@@ -39,7 +39,6 @@ export function compareCAT(recordValuesA, recordValuesB) {
   return innerCompareCat(CATsA, CATsB);
 }
 
-// eslint-disable-next-line max-lines-per-function
 function innerCompareCat(CATsA, CATsB) {
 
   debugDev('Comparing CATs: A: %o vs B: %o', CATsA, CATsB);
