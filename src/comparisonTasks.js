@@ -434,7 +434,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
   // import: do not use, this is done in matcher
   // - fail merge, if languages in records differ too much
   {'name': 'language',
-    'description': 'Parts vs sets test (validation)',
+    'description': 'Language (validation)',
     'function': checkLanguage,
     'validation': true,
     'preference': false,
