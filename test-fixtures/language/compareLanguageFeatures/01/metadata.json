@@ -1,0 +1,8 @@
+{
+    "description": "Return true if both records have same languageFeature.language",
+    "recordValuesA": {"language": ["eng"]},
+    "recordValuesB": {"language": ["eng"]},
+    "expectedResults": true,
+    "skip": false,
+    "only": false
+}

@@ -22,6 +22,7 @@ import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
 import {performDaisySanityCheck} from './compareFunctions/sanityCheckDaisy.js';
 import {performDvdSanityCheck} from './compareFunctions/sanityCheckDvd.js';
 import {performIsbnQualifierCheck} from './compareFunctions/sanityCheckIsbnQualifer.js';
+import {checkLanguage} from './validators/language.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
@@ -428,7 +429,20 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tietueissa on kuvailtu yksittäinen moniosaisen monografian osa ja moniosainen monografia kokonaisuutena, tarkista voiko ne yhdistää'}
+    'validation_message_fi': 'tietueissa on kuvailtu yksittäinen moniosaisen monografian osa ja moniosainen monografia kokonaisuutena, tarkista voiko ne yhdistää'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - fail merge, if languages in records differ too much
+  {'name': 'language',
+    'description': 'Language (validation)',
+    'function': checkLanguage,
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot erovat'}
 ];
 
 export const comparisonTasksTable = {

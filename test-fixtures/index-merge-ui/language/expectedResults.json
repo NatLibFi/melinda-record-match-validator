@@ -1,0 +1,7 @@
+  [
+    {
+      "message": "tarkista voiko tietueet yhdistää, kielitiedot erovat",
+      "result": "warning",
+      "type": "validation"
+    }
+  ]
