@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/melinda-record-match-validator",
-  "version": "3.1.1-alpha.1",
+  "version": "3.0.1",
   "description": "Validates if two records matched by melinda-record-matching can be merged and sets merge priority",
   "main": "dist/index.js",
   "repository": {
@@ -33,31 +33,23 @@
     "build": "esbuild \"src/**/*.js\" --sourcemap --platform=node --outdir=dist",
     "test:base": "node --test --test-force-exit --experimental-test-coverage --test-reporter=spec './test/**/*.test.js'",
     "test:base:only": "node --test --test-only --test-force-exit --experimental-test-coverage --test-reporter=spec './test/**/*.test.js'",
+    "test:dev:collect": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/collectRecordValues.spec.js",
+    "test:dev:compare": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/compareRecordValues.spec.js",
     "dev:test": "cross-env DEBUG=@natlibfi/* NODE_ENV=test node --watch --test --experimental-test-coverage --test-reporter=spec './test/**/*.test.js'",
     "test": "npm run lint && npm run test:base"
   },
-  "oldScripts": {
-    "test:base": "cross-env NODE_ENV=test nyc mocha --require @babel/register",
-    "test:dev": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- --recursive test && npm run coverage",
-    "test:dev:collect": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/collectRecordValues.spec.js && npm run coverage",
-    "test:dev:compare": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/compareRecordValues.spec.js && npm run coverage",
-    "coverage": "nyc check-coverage --per-file",
-    "build": "babel src --source-maps --copy-files --delete-dir-on-start --out-dir=dist",
-    "watch:test": "cross-env NODE_ENV=test nodemon -w src -w test-fixtures --exec 'npm run test:dev'"
-  },
   "dependencies": {
-    "@natlibfi/marc-record": "^10.0.0",
-    "@natlibfi/melinda-commons": "^14.0.1-alpha.1",
-    "@natlibfi/melinda-record-matching": "^5.0.0",
+    "@natlibfi/marc-record": "^10.0.1",
+    "@natlibfi/melinda-commons": "^14.0.1",
     "debug": "^4.4.3",
-    "isbn3": "^1.2.19",
+    "isbn3": "^2.0.1",
     "moment": "^2.30.1"
   },
   "devDependencies": {
     "@natlibfi/fixugen": "^3.0.0",
     "@natlibfi/fixura": "^4.0.0",
-    "cross-env": "^7.0.3",
-    "esbuild": "^0.25.12",
+    "cross-env": "^10.1.0",
+    "esbuild": "^0.27.0",
     "eslint": "^9.39.1"
   }
 }

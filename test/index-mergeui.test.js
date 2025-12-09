@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import createDebugLogger from 'debug';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
-import {matchValidationForMergeUi as validateRecordMatch} from '../src/index.js';
+import {matchValidationForMergeUI as validateRecordMatch} from '../src/index.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index-merge-ui:test');
 

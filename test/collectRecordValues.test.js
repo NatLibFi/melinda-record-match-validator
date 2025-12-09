@@ -20,10 +20,10 @@ function callback({getFixture}) {
   const expectedResults = getFixture('expectedResults.json');
   const recordValues = collectRecordValues(record);
 
-  console.log('HALUTTIIN:');
-  console.log(JSON.stringify(expectedResults));
-  console.log('SAATIIN:');
-  console.log(JSON.stringify(recordValues));
+  //console.log('HALUTTIIN:');
+  //console.log(JSON.stringify(expectedResults));
+  //console.log('SAATIIN:');
+  //console.log(JSON.stringify(recordValues));
 
   assert.deepEqual(recordValues, expectedResults);
 }
