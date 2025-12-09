@@ -1,0 +1,6 @@
+{
+    "description": "Return language feature array containing single language",
+    "expectedResults": {"language": ["eng"]},
+    "skip": false,
+    "only": false
+}
