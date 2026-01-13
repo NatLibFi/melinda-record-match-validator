@@ -1,6 +1,6 @@
 {
   "name": "@natlibfi/melinda-record-match-validator",
-  "version": "3.1.1",
+  "version": "3.1.2-alpha.1",
   "description": "Validates if two records matched by melinda-record-matching can be merged and sets merge priority",
   "main": "dist/index.js",
   "repository": {
@@ -40,17 +40,17 @@
   },
   "dependencies": {
     "@natlibfi/marc-record": "^10.0.1",
-    "@natlibfi/melinda-commons": "^14.0.1",
-    "@natlibfi/melinda-record-matching": "^5.0.0",
+    "@natlibfi/melinda-commons": "^14.0.2",
+    "@natlibfi/melinda-record-matching": "^5.0.1",
     "debug": "^4.4.3",
-    "isbn3": "^2.0.1",
+    "isbn3": "^2.0.3",
     "moment": "^2.30.1"
   },
   "devDependencies": {
     "@natlibfi/fixugen": "^3.0.0",
     "@natlibfi/fixura": "^4.0.0",
     "cross-env": "^10.1.0",
-    "esbuild": "^0.27.1",
-    "eslint": "^9.39.1"
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2"
   }
 }

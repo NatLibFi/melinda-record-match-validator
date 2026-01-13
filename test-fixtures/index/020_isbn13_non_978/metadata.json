@@ -1,0 +1,5 @@
+{
+    "description": "Two ISBN-13s which do not convert into ISBN-10. Test erronously succeeds, if normalization uses isbn-10 but correctly fails isbn-13 normalization is used.",
+    "skip": false,
+    "only": false
+}
