@@ -1,6 +1,6 @@
 import ISBN from 'isbn3';
 //import createDebugLogger from 'debug';
-//import {nvdebug} from './utils.js';
+//import {nvdebug} from '../utils.js';
 
 //const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:sanityCheckIsbnQualifier');
 
@@ -34,8 +34,9 @@ function normalizeIsbn(value) {
   }
 
   const parsedIsbn = ISBN.parse(normalizedValue);
-  //nvdebug(`NORM ${value} TO ${parsedIsbn.isIsbn10}`);
-  return parsedIsbn.isbn10;
+  const result = parsedIsbn.isbn13; // isbn10 should not be used, as it works only with isbn13s that start with
+  // nvdebug(`NORM ${value} TO ${result}`);
+  return result;
 }
 
 function invalidISBN(isbn) { // aped from melinda-record-match-validator's src/isbn-issn.js
