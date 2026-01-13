@@ -34,7 +34,7 @@ function normalizeIsbn(value) {
   }
 
   const parsedIsbn = ISBN.parse(normalizedValue);
-  const result = parsedIsbn.isbn13; // isbn10 should not be used, as it works only with isbn13s that start with
+  const result = parsedIsbn.isbn13; // isbn10 should not be used, as it works only with isbn13s that start with 978...
   // nvdebug(`NORM ${value} TO ${result}`);
   return result;
 }
