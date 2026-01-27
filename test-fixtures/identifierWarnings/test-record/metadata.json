@@ -1,0 +1,5 @@
+{
+    "description": "Warn if records have different ISBNs",
+    "skip": false,
+    "only": true
+}

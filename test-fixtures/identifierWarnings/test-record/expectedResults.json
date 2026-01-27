@@ -1,0 +1,7 @@
+[
+    {
+        "result": "warning",
+        "type": "validation",
+        "message": "tarkista voiko tietueet yhdistää: eroava ISBN"
+    }
+]
