@@ -41,7 +41,7 @@
   "dependencies": {
     "@natlibfi/marc-record": "^10.0.1",
     "@natlibfi/melinda-commons": "^14.0.2",
-    "@natlibfi/melinda-record-matching": "file:/Users/ammsalme/melinda-rest-api-local/melinda-record-matching-js",
+    "@natlibfi/melinda-record-matching": "^5.0.1",
     "debug": "^4.4.3",
     "isbn3": "^2.0.3",
     "moment": "^2.30.1"
