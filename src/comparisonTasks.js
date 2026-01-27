@@ -23,7 +23,7 @@ import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
 import {performDaisySanityCheck} from './compareFunctions/sanityCheckDaisy.js';
 import {performDvdSanityCheck} from './compareFunctions/sanityCheckDvd.js';
 import {performIsbnQualifierCheck} from './compareFunctions/sanityCheckIsbnQualifer.js';
-import {checkLanguage} from './validators/language.js';
+//import {checkLanguage} from './validators/language.js';
 import { getCheckFeature } from './validators/matchingFeatureChecks.js';
 //import { checkAllFeatures } from './validators/matchingFeatureChecks.js';
 
@@ -438,7 +438,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
   // - fail merge, if languages in records differ too much
   {'name': 'language',
     'description': 'Language (validation)',
-    'function': checkLanguage,
+    'function': getCheckFeature({featureName: 'language'}),
     'validation': true,
     'preference': false,
     'internal': true,
