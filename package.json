@@ -30,7 +30,7 @@
     "cli": "node dist/cli.js",
     "lint": "eslint src",
     "lint:dev": "eslint --fix src",
-    "build": "esbuild \"src/**/*.js\" --sourcemap --platform=node --outdir=dist",
+    "build": "esbuild \"src/**/*.js\" \"src/*.js\"  --sourcemap --platform=node --outdir=dist",
     "test:base": "node --test --test-force-exit --experimental-test-coverage --test-reporter=spec './test/**/*.test.js'",
     "test:base:only": "node --test --test-only --test-force-exit --experimental-test-coverage --test-reporter=spec './test/**/*.test.js'",
     "test:dev:collect": "npm run lint:dev && DEBUG='@natlibfi/*' npm run test:base -- test/collectRecordValues.spec.js",
