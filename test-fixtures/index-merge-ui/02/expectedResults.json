@@ -1,7 +1,7 @@
 [
     {
         "result": "error",
-        "message": "tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää",
+        "message": "tietueita, joissa on saman paikalliskannan tietokantatunnus (LOW), ei voi yhdistää",
         "type": "validation"
    }
 ]

@@ -444,7 +444,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': false,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot erovat (008, 041)'},
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot eroavat (008, 041)'},
       // human merge: warning
   // import: do not use, this is done in matcher
   // - warn if ISBNs  differ too much
