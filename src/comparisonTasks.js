@@ -24,7 +24,8 @@ import {performDaisySanityCheck} from './compareFunctions/sanityCheckDaisy.js';
 import {performDvdSanityCheck} from './compareFunctions/sanityCheckDvd.js';
 import {performIsbnQualifierCheck} from './compareFunctions/sanityCheckIsbnQualifer.js';
 import {checkLanguage} from './validators/language.js';
-import { checkISBN } from './validators/identifierWarnings.js';
+import { getCheckFeature } from './validators/matchingFeatureChecks.js';
+//import { checkAllFeatures } from './validators/matchingFeatureChecks.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
@@ -445,19 +446,57 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'manual': 'warning',
     'preference_message_fi': '',
     'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot eroavat (008, 041)'},
-      // human merge: warning
+  // human merge: warning
   // import: do not use, this is done in matcher
   // - warn if ISBNs  differ too much
   {'name': 'ISBN',
     'description': 'ISBN (validation)',
-    'function': checkISBN,
+    'function': getCheckFeature({featureName: 'isbn'}),
     'validation': true,
     'preference': false,
     'internal': true,
     'import': false,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava ISBN (020)'}
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava ISBN (020)'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - warn if ISSNs  differ too much
+    {'name': 'ISSN',
+    'description': 'ISSN (validation)',
+    'function': getCheckFeature({featureName: 'issn'}),
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava ISSN (022)'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - warn if ISBNs  differ too much
+    {'name': 'otherStandardIdentifier',
+    'description': 'otherStandardIdentifier (validation)',
+    'function': getCheckFeature({featureName: 'otherStandardIdentifier'}),
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava muu standarditunniste (024)'}
+    /*
+    {'name': 'allMatchingFeatures',
+    'description': 'allMatchingFeatures (validation)',
+    'function': checkAllFeatures,
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'foobar'},
+*/
 ];
 
 export const comparisonTasksTable = {

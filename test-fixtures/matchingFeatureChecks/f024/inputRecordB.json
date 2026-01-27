@@ -1,0 +1,19 @@
+{
+  "leader": "02684cam a22006977i 4500",
+  "fields" : [
+    { "tag": "001", "value": "001034875" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20220425113408.0" },
+    { "tag": "008", "value": "871026s1984    fi |||||||||||||||||fin||" },
+    { "tag": "024", "ind1": "7", "ind2": " ", "subfields" : [{ "code": "a", "value": "URN:ISBN:foobar" }, { "code": "2", "value": "urn" }  ]},
+    { "tag": "035", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "(FI-MELINDA)001034875" }  ]},
+    { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [{ "code": "a", "value": "fin" }  ]},
+    { "tag": "100", "ind1": "0", "ind2": " ", "subfields" : [{ "code": "a", "value": "Aaltonen, Esko." }  ]},
+    { "tag": "245", "ind1": "1", "ind2": "0", "subfields" : [{ "code": "a", "value": "Entisajan Forssaa ja sen väkeä /" }, { "code": "c", "value": "Esko Aaltonen." }  ]},
+    { "tag": "260", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "Forssa :" }, { "code": "b", "value": "Forssan kustannus," }, { "code": "c", "value": "1984-86." }  ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "2 vol." }  ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "teksti" }, { "code": "b", "value": "txt" }, { "code": "2", "value": "rdacontent" }  ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "käytettävissä ilman laitetta" }, { "code": "b", "value": "n" }, { "code": "2", "value": "rdamedia" }  ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "nide" }, { "code": "b", "value": "nc" }, { "code": "2", "value": "rdacarrier" }  ]}
+  ]
+}

@@ -1,0 +1,5 @@
+{
+    "description": "Warn if records have different ISSNs",
+    "skip": false,
+    "only": false
+}

@@ -6,11 +6,11 @@ import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import {matchValidationForMergeUI as validateRecordMatch} from '../src/index.js';
 
-const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:identifier-warnings-merge-ui:test');
+const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:matching-feature-checks-merge-ui:test');
 
 generateTests({
   callback,
-  path: [import.meta.dirname, '..', 'test-fixtures', 'identifierWarnings'],
+  path: [import.meta.dirname, '..', 'test-fixtures', 'matchingFeatureChecks'],
   useMetadataFile: true,
   recurse: false,
   fixura: {
