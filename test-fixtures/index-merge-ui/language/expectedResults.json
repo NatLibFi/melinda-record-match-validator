@@ -1,6 +1,6 @@
   [
     {
-      "message": "tarkista voiko tietueet yhdistää, kielitiedot erovat",
+      "message": "tarkista voiko tietueet yhdistää, kielitiedot eroavat (008, 041)",
       "result": "warning",
       "type": "validation"
     }

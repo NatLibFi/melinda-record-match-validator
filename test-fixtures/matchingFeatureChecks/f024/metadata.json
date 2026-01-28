@@ -1,0 +1,5 @@
+{
+    "description": "Warn if records have different other standard identifiers",
+    "skip": false,
+    "only": false
+}

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import createDebugLogger from 'debug';
 import {isDeletedRecord, isTestRecord, isComponentRecord} from '@natlibfi/melinda-commons';
 
@@ -22,7 +23,9 @@ import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
 import {performDaisySanityCheck} from './compareFunctions/sanityCheckDaisy.js';
 import {performDvdSanityCheck} from './compareFunctions/sanityCheckDvd.js';
 import {performIsbnQualifierCheck} from './compareFunctions/sanityCheckIsbnQualifer.js';
-import {checkLanguage} from './validators/language.js';
+//import {checkLanguage} from './validators/language.js';
+import { getCheckFeature } from './validators/matchingFeatureChecks.js';
+//import { checkAllFeatures } from './validators/matchingFeatureChecks.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:index');
 const debugDev = debug.extend('dev');
@@ -123,8 +126,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'manual': false,
     'import': true,
     'internal': true,
-    'validation_message_fi': 'ainestotyypiltään tai bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
-    'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
+    'validation_message_fi': 'ainestotyypiltään tai bibliografiselta (LDR/06-07) tasoltaan eroavia tietueita ei voi yhdistää',
+    'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan (LDR/17) parempaa tietuetta'},
 
   // Singular leader comparisons for Human/internal merge
 
@@ -138,10 +141,10 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'manual': 'warning',
     'import': false,
     'internal': true,
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään; yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään (LDR/06); yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
     'preference_message_fi': ''},
 
-  // leader bibliographicLevel LDR/006
+  // leader bibliographicLevel LDR/007
   // do not use same time as checkLeader that checks all three leader values
   {'name': 'bibliographicLevel',
     'description': 'leader: bibliographicLevel (validation)',
@@ -151,7 +154,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': false,
     'internal': true,
     'manual': 'error',
-    'validation_message_fi': 'bibliografiselta tasoltaan eroavia tietueita ei voi yhdistää',
+    'validation_message_fi': 'bibliografiselta tasoltaan (LDR/07) eroavia tietueita ei voi yhdistää',
     'preference_message_fi': ''},
 
   // leader encodingLevel LDR/017 + f500/f594
@@ -165,7 +168,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'manual': 'warning',
     'validation_message_fi': '',
-    'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta'},
+    'preference_message_fi': 'suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta (LDR/17)'},
 
   // just preference also for human merge (we like records with 264 instead of 260, they are probably more RDA-compatible)
   // Bit high on the preference list, isn't it?
@@ -193,8 +196,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': 'warning',
-    'preference_message_fi': 'suosi tietuetta, jossa on tarkemmin ilmoitettu julkaisuajan tyyppi/julkaisun tila',
-    'validation_message_fi': 'tietueita, joissa on ristiriitainen julkaisuajan tyyppi/julkaisun tila ei voi yhdistää'},
+    'preference_message_fi': 'suosi tietuetta, jossa on tarkemmin ilmoitettu julkaisuajan tyyppi/julkaisun tila (008/06)',
+    'validation_message_fi': 'tietueita, joissa on ristiriitainen julkaisuajan tyyppi/julkaisun tila (008/06) ei voi yhdistää'},
 
   // This test checks is just for preference despite its description!
   // Priority order: FIKKA > ANY > NONE
@@ -206,7 +209,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': true,
-    'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus (tai tietuetta, jossa ylipäänsä on joku tietokantatunnus)',
+    'preference_message_fi': 'suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus (LOW) (tai tietuetta, jossa ylipäänsä on joku tietokantatunnus)',
     'validation_message_fi': ''},
 
   // database internal merge cannot merge two records with same low
@@ -219,7 +222,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'manual': 'error',
     'preference_message_fi': '',
-    'validation_message_fi': 'tietueita, joissa on saman paikalliskannan tietokantatunnus, ei voi yhdistää'},
+    'validation_message_fi': 'tietueita, joissa on saman paikalliskannan tietokantatunnus (LOW), ei voi yhdistää'},
 
   // This test check 042 to preference
   {'name': 'f042-authentication-code',
@@ -230,7 +233,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': true,
-    'preference_message_fi': 'suosi tietuetta, jossa on Kansallisbibliografian tai Kansallisdiskografian autentikaatiokoodi',
+    'preference_message_fi': 'suosi tietuetta, jossa on Kansallisbibliografian tai Kansallisdiskografian autentikaatiokoodi (042)',
     'validation_message_fi': ''},
 
   {'name': 'CAT',
@@ -254,7 +257,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden nimeketiedot eroavat'},
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden nimeketiedot (245) eroavat'},
 
   // Do not use old check f245 same time as checkAllTitleFeatures
   //{'name': 'title-old', 'description': 'field 245 (title)', 'function': check245, 'validation': true, 'preference': false, 'manual': 'warning'},
@@ -268,8 +271,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': 'warning',
-    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat sisältötyyppitiedot',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden sisältötyyppitiedot eroavat'},
+    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat sisältötyyppitiedot (336)',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden sisältötyyppitiedot (336) eroavat'},
 
   // human merge: warning
   {'name': 'f337',
@@ -280,8 +283,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': 'warning',
-    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat mediatyyppitiedot',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden mediatyyppitiedot eroavat'},
+    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat mediatyyppitiedot (337)',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden mediatyyppitiedot (337) eroavat'},
 
   // human merge: warning
   {'name': 'f338',
@@ -292,8 +295,8 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': 'warning',
-    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat tallennetyyppitiedot',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden tallennetyyppitiedot eroavat'},
+    'preference_message_fi': 'suosi tietuetta, jolla on tarkemmat tallennetyyppitiedot (338)',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, niiden tallennetyyppitiedot (338) eroavat'},
 
   // human merge: warning for subfields q&g - $w actually should be different ...
   {'name': 'f773-for-internal',
@@ -305,7 +308,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': false,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat (773)'},
 
   {'name': 'f773-for-import',
     'description': '773 $wgq test (validation only)',
@@ -316,7 +319,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': true,
     'manual': false,
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat'},
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, osakohteen sijaintitiedot eroavat (773)'},
 
   {'name': 'f040b',
     'description': '040$b (language of cataloging) (preference only)',
@@ -326,7 +329,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': true,
-    'preference_message_fi': 'suosi tietuetta, jolla on soveltuvin kuvailukieli',
+    'preference_message_fi': 'suosi tietuetta, jolla on soveltuvin kuvailukieli (040)',
     'validation_message_fi': ''},
 
   {'name': 'f040e',
@@ -337,7 +340,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'internal': true,
     'import': true,
     'manual': true,
-    'preference_message_fi': 'suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA',
+    'preference_message_fi': 'suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA (040)',
     'validation_message_fi': ''},
 
   // SID for import (do not use for manual database internal merge)
@@ -352,7 +355,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': true,
     'manual': false,
     'preference_message_fi': 'suosi tietuetta, jolla on enemmän linkkejä vastintietueisiin paikalliskannoissa',
-    'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää'},
+    'validation_message_fi': 'tietueita, joilla on samassa paikalliskannassa eri vastintietue ei voi yhdistää (SID)'},
 
   // preference for record that's updated more recently
   {'name': 'f005',
@@ -416,7 +419,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'import': true,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tietueissa on eroava ISBN-tarkenne, tarkista voiko ne yhdistää'},
+    'validation_message_fi': 'tietueissa on eroava ISBN-tarkenne (020), tarkista voiko ne yhdistää'},
 
   // human merge: warning
   // - fail merge, part of a multipart monograph vs whole set of multipart monographs
@@ -435,14 +438,65 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
   // - fail merge, if languages in records differ too much
   {'name': 'language',
     'description': 'Language (validation)',
-    'function': checkLanguage,
+    'function': getCheckFeature({featureName: 'language'}),
     'validation': true,
     'preference': false,
     'internal': true,
     'import': false,
     'manual': 'warning',
     'preference_message_fi': '',
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot erovat'}
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, kielitiedot eroavat (008, 041)'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - warn if ISBNs  differ too much
+  {'name': 'ISBN',
+    'description': 'ISBN (validation)',
+    'function': getCheckFeature({featureName: 'isbn'}),
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava ISBN (020)'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - warn if ISSNs  differ too much
+    {'name': 'ISSN',
+    'description': 'ISSN (validation)',
+    'function': getCheckFeature({featureName: 'issn'}),
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava ISSN (022)'},
+  // human merge: warning
+  // import: do not use, this is done in matcher
+  // - warn if ISBNs  differ too much
+    {'name': 'otherStandardIdentifier',
+    'description': 'otherStandardIdentifier (validation)',
+    'function': getCheckFeature({featureName: 'otherStandardIdentifier'}),
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää: eroava muu standarditunniste (024)'}
+    /*
+    {'name': 'allMatchingFeatures',
+    'description': 'allMatchingFeatures (validation)',
+    'function': checkAllFeatures,
+    'validation': true,
+    'preference': false,
+    'internal': true,
+    'import': false,
+    'manual': 'warning',
+    'preference_message_fi': '',
+    'validation_message_fi': 'foobar'},
+*/
 ];
 
 export const comparisonTasksTable = {
