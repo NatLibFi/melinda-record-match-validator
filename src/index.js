@@ -134,7 +134,33 @@ export function matchValidationForMergeUI({record1Object, record2Object, checkPr
       })); // Convert to messages
     debugDev(`MatchValidator results for MergeUI: ${JSON.stringify(messages, null, 4)}`);
 
-    return messages;
+    const sortedMessages = messages.sort(sortMessages);
+    debugDev(`Sorted matchValidator results for MergeUI: ${JSON.stringify(sortedMessages, null, 4)}`);
+
+    return sortedMessages;
+
+    // sort results: errors, validation warnings, preference warnings
+    function sortMessages(a, b) {
+      // sort errors before warnings
+      if (a.result !== b.result) {
+        if (a.result === 'error') {
+          return -1;
+        }
+        if (b.result === 'error') {
+          return 1;
+        }
+      }
+     // sort validation warnings before preference warnings
+     if (a.type !== b.type) {
+      if (a.type === 'validation') {
+        return -1;
+      }
+      if (b.type === 'validation') {
+        return 1;
+      }
+     }
+     return 0;
+    }
   }
 }
 
