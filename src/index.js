@@ -103,6 +103,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
 // record1External/record2External includes external information for record (for example whether it is an incomingRecord or databaseRecord)
 // MergeUI is currently used for manual merging of two database records
 // Returns array of failure responses, empty array if matchValidator does not return failures
+// sorts returned messages "error" - "validation warning" - "preference warning"
 // [{ "result": "error/warning", "type": "validation/preference", "message": "finnish message"}]
 
 export function matchValidationForMergeUI({record1Object, record2Object, checkPreference = true, record1External = {'recordSource': 'databaseRecord'}, record2External = {'recordSource': 'databaseRecord'}, manual = true, comparisonTasks = comparisonTasksTable.humanMerge}) {
@@ -119,7 +120,7 @@ export function matchValidationForMergeUI({record1Object, record2Object, checkPr
   return resultForMergeUI;
 
   // Return to Merge UI only results that require action, ie. those that fail merge or change preference
-  // MergeUI sends records non-preferred record as record1 and preferred record as record2, so preference result 'A' is a warning
+  // MergeUI sends records non-preferred record as record1 and preferred record as record2, so preference result 'A' is a warning and prefence result 'B' does nor require action
   function filterResultsForMergeUI(allResults) {
     const failure = allResults
       .filter(r => r.result !== true) // Filter out passed tests
@@ -151,6 +152,7 @@ export function matchValidationForMergeUI({record1Object, record2Object, checkPr
         }
       }
      // sort validation warnings before preference warnings
+     // this would sort also validation errors before preference errors, if there we some
      if (a.type !== b.type) {
       if (a.type === 'validation') {
         return -1;
