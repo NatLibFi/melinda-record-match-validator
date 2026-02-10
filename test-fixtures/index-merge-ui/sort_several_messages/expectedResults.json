@@ -1,0 +1,17 @@
+[
+    {
+        "result": "error",
+        "message": "osakohdetta ja ei-osakohdetta ei voi yhdistää",
+        "type": "validation"
+   },
+       {
+      "message": "tarkista voiko tietueet yhdistää: eroava ISSN (022)",
+      "result": "warning",
+      "type": "validation"
+    },
+     {
+      "message": "suosi tietuetta, jossa on Kansalliskirjaston tietokantatunnus (LOW) (tai tietuetta, jossa ylipäänsä on joku tietokantatunnus)",
+      "result": "warning",
+      "type": "preference"
+    }
+]
