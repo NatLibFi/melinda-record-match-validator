@@ -16,7 +16,7 @@ import {check042} from './compareFunctions/compareField042.js';
 import {check336, check337, check338} from './compareFunctions/compareField33X.js';
 import {check773, check773Internal} from './validators/field773.js';
 //import {check984} from './compareFunctions/compareField984.js';
-import {checkLeader, checkTypeOfRecord, checkRecordLevel} from './compareFunctions/compareLeader.js';
+import {checkLeader, checkTypeOfRecord, checkRecordLevel, checkBibliographicLevel} from './compareFunctions/compareLeader.js';
 import {check005, check008} from './compareFunctions/compareControlFields.js';
 import {compareRecordsPartSetFeatures} from './validators/partsAndSets.js';
 import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
@@ -141,14 +141,14 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
     'manual': 'warning',
     'import': false,
     'internal': true,
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat ainestotyypiltään (LDR/06); yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
+    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat aineistotyypiltään (LDR/06); yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
     'preference_message_fi': ''},
 
   // leader bibliographicLevel LDR/007
   // do not use same time as checkLeader that checks all three leader values
   {'name': 'bibliographicLevel',
     'description': 'leader: bibliographicLevel (validation)',
-    'function': checkTypeOfRecord,
+    'function': checkBibliographicLevel,
     'validation': true,
     'preference': false,
     'import': false,
