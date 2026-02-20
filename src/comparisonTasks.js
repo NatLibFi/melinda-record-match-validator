@@ -133,20 +133,22 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
 
   // leader typeOfRecord LDR/006
   // do not use same time as checkLeader that checks all three leader values
+  // we need to error these in MergeUI as mergeReducers refuse to handle records with differing LDR/06
   {'name': 'typeOfRecord',
     'description': 'leader: typeOfRecord (validation)',
     'function': checkTypeOfRecord,
     'validation': true,
     'preference': false,
-    'manual': 'warning',
+    //'manual': 'warning',
+    'manual': 'error',
     'import': false,
     'internal': true,
-    'validation_message_fi': 'tarkista voiko tietueet yhdistää, ne eroavat aineistotyypiltään (LDR/06); yhdistettyäsi tarkista kentän 008 merkkipaikkojen arvot',
+    'validation_message_fi': 'aineistotyypiltään (LDR/06) eroavia tietueita ei voi yhdistää',
     'preference_message_fi': ''},
 
   // leader bibliographicLevel LDR/007
   // do not use same time as checkLeader that checks all three leader values
-  // Currently not in use
+  // Currently not in use, we check components with different check
   {'name': 'bibliographicLevel',
     'description': 'leader: bibliographicLevel (validation)',
     'function': checkBibliographicLevel,
