@@ -146,13 +146,14 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
 
   // leader bibliographicLevel LDR/007
   // do not use same time as checkLeader that checks all three leader values
+  // Currently not in use
   {'name': 'bibliographicLevel',
     'description': 'leader: bibliographicLevel (validation)',
     'function': checkBibliographicLevel,
     'validation': true,
     'preference': false,
     'import': false,
-    'internal': true,
+    'internal': false,
     'manual': 'error',
     'validation_message_fi': 'bibliografiselta tasoltaan (LDR/07) eroavia tietueita ei voi yhdistää',
     'preference_message_fi': ''},
