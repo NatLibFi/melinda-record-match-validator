@@ -1,7 +1,7 @@
 {
     "description": "Return true if both records have same languageFeature.language",
-    "recordValuesA": {"language": ["eng"]},
-    "recordValuesB": {"language": ["eng"]},
+    "recordValuesA": [ [ { "tag": "041", "ind1": "0", "ind2": " ", "subfields": [ { "code": "a", "value": "eng" } ] } ], "record-1" ],
+    "recordValuesB": [ [ { "tag": "041", "ind1": "0", "ind2": " ", "subfields": [ { "code": "a", "value": "eng" } ] } ], "record-2" ],
     "expectedResults": true,
     "skip": false,
     "only": false
