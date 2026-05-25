@@ -1,6 +1,9 @@
 {
-    "description": "Return language feature array containing single language",
-    "expectedResults": {"language": ["eng"]},
+    "description": "Return language fields",
+    "expectedResults": { "language": [ [
+        { "tag": "008", "value": "010101c19879999nr |||p| ||||||||||0eng|c" },
+        { "tag": "041", "ind1": "0", "ind2": " ", "subfields" : [{ "code": "a", "value": "eng" }  ]}
+    ], "record" ] },
     "skip": false,
     "only": false
 }
