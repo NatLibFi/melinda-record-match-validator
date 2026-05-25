@@ -1,7 +1,26 @@
 {
     "description": "Return false partially matching languages (1 match, 2 mismatches, 5 missing)",
-    "recordValuesA": {"language": ["eng","dan","sme"]},
-    "recordValuesB": {"language": ["eng","fin","swe","nor","lat","heb","ara","spa"]},
+    "recordValuesA": [
+        [
+            { "tag": "008", "value": "831017s1983    fi |||||||||||||||||eng||" },
+            { "tag": "041", "ind1": "0", "ind2": " ", "subfields": [ { "code": "a", "value": "smi" }, { "code": "a", "value": "sma" } ] }
+        ],
+        "record-1" ],
+    "recordValuesB": [
+        [
+            {"tag": "041", "subfields": [
+                { "code": "a", "value": "eng"},
+                { "code": "a", "value": "fin"},
+                { "code": "a", "value": "swe"},
+                { "code": "a", "value": "nor"},
+                { "code": "a", "value": "lat"},
+                { "code": "a", "value": "heb"},
+                { "code": "a", "value": "ara"},
+                { "code": "a", "value": "spa"}
+            ] }
+        ],
+        "record-2"
+    ],
     "expectedResults": false,
     "skip": false,
     "only": false

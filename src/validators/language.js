@@ -20,7 +20,7 @@ export function getLanguageFeatures(record, recordExternal = {}) {
 export function compareLanguageFeatures({languageFeatures1, languageFeatures2}) {
     debugDev(JSON.stringify(languageFeatures1));
     debugDev(JSON.stringify(languageFeatures2));
-    const compareResult = compare(languageFeatures1.language, languageFeatures2.language)
+    const compareResult = compare(languageFeatures1, languageFeatures2)
     debug(`CompareResult: ${compareResult}`);
     // convert point result to boolean
     return convertPointsToBoolean(compareResult);
