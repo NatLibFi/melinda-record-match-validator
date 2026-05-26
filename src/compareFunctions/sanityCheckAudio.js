@@ -186,12 +186,20 @@ export function performAudioSanityCheck({record1, record2}) {
     return false;
   }
 
-  if (checkLp && results1.containsLpAanilevy !== results2.containsLpAanilevy) {
-    return false;
+
+  if (checkLp) { // This is triggered iff a CD is present
+    if (results1.containsLpAanilevy !== results2.containsLpAanilevy) {
+      return false;
+    }
+    // Fail if we have CD-äänilevy vs non-CD-äänilevy pair:
+    // NB! "checkLP" is triggered iff a CD is present. The rules below aren't necessarily about LP, but it's triggered by checkLp condition.
+    if (containsNonCdAanilevy(results1) || containsNonCdAanilevy(results2)) {
+      return false;
+    }
   }
 
   // NB! Same as above: won't fail is X has, say, cassette, and the other one has not.
-  // Fails only if cassette-vs-
+  // Fails only if there unexpected X-vs-Y combinations:
   const checkKasetti = results1.containsAanilevy || results2.containsAanilevy || results1.containsAanikela || results2.containsAanikela;
   const checkAanilevy = results1.containsKasetti || results2.containsKasetti || results1.containsAanikela || results2.containsAanikela;
   const checkAanikela =  results1.containsAanilevy || results2.containsAanilevy || results1.containsKasetti || results2.containsKasetti;
@@ -199,13 +207,19 @@ export function performAudioSanityCheck({record1, record2}) {
   if (checkKasetti && results1.containsKasetti !== results2.containsKasetti) {
     return false;
   }
-  if (checkAanilevy) {
-    if (results1.containsAanilevy !== results2.containsAanilevy) {
-      return false;
-    }
+  if (checkAanilevy && results1.containsAanilevy !== results2.containsAanilevy) {
+    return false;
   }
+
   if (checkAanikela && results1.containsAanikela !== results2.containsAanikela) {
     return false;
   }
   return true;
+
+  function containsNonCdAanilevy(results) {
+    if (results.containsCdAanilevy) {
+      return false;
+    }
+    return results.containsAanilevy;
+  }
 }
