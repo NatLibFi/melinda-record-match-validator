@@ -8,8 +8,9 @@ const debugData = debug.extend('data');
 
 
 
-// NB! Skipping $e subfields on purpose
+// NB! f300: only subfield $a is checked. Sometimes other subfields (mainly $e) could contain relevant data.
 // NB! I've used Finnish terms in English variables (eg. "checkKasetti"), as kasetti is the most common term that we are looking for.
+// NB! Current definition of a music CD is "CD-äänilevy", and "CD-levy" is ignored (it could be cd-rom etc). 
 
 function containsCdAanilevy(subfield) {
   if (subfield.code !== 'a') {
