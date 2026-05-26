@@ -71,10 +71,12 @@ function physicalDescriptionContainsKasetti(fields300) {
   return fields300.some(field => field.subfields.some(subfield => containsKasetti(subfield)));
 
   function containsKasetti(subfield) {
-    if (subfield.code !== 'a') {
+    if (subfield.code !== 'a' || !subfield.value) {
       return false;
     }
-    if (subfield.value?.match(/(?:casette|kasetti|kassett)/ui)) {
+    // Prevent videokasetti from giving false positives:
+    const value = subfield.value.replace(/video.?[ck]as+ett/iug, 'VIDEO');
+    if (value.match(/[ck]as+ett/ui)) { // matches "kasetti", "cassette" "kassett"...
     return true;
   }
   return false;
