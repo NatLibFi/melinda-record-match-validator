@@ -1,6 +1,5 @@
 
 import {getRecordTitle, getRecordStandardIdentifiers, isDeletedRecord} from '@natlibfi/melinda-commons';
-import {getRecordInfo} from './collectFunctions/collectLeader.js';
 import {get001, get005, get008} from './collectFunctions/collectControlFields.js';
 import {getCAT} from './validators/fieldCAT.js';
 import {get042, get336bContentType, get337bMediaType, get338bCarrierType, getLOW, getSID} from './collectFunctions/collectUtils.js'; // Simple getTAG-functions are stored here
@@ -14,7 +13,6 @@ export function collectRecordValues(record) {
       standardIdentifiers: getRecordStandardIdentifiers(record),
       deleted: isDeletedRecord(record)
     },
-    '000': getRecordInfo(record),
     '001': get001(record),
     '005': get005(record),
     '008': get008(record),
