@@ -1,46 +1,75 @@
+// NB! Type of record currently supports only bibs. Should we support auths (LDR/06='z') or even holdings?
 import createDebugLogger from 'debug';
 
-import {getBibliographicLevel, getEncodingLevel, getRecordInfo, getTypeOfRecord, EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO} from '../collectFunctions/collectLeader.js';
-import {nvdebug} from '../utils.js';
-
+const EI_ENNAKKOTIETO = '0';
+const KONEELLISESTI_TUOTETTU_TIETUE = '1';
+const TARKISTETTU_ENNAKKOTIETO = '2';
+const ENNAKKOTIETO = '3';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:compareFunctions/compareLeader');
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
+function getPrepublicationLevel(record, encodingLevel = '8') {
+  const fields = record.get(/^(?:500|594)$/u);
+  if (fields) {
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('Koneellisesti tuotettu tietue')))) {
+      return {code: KONEELLISESTI_TUOTETTU_TIETUE, level: 'Koneellisesti tuotettu tietue'};
+    }
+
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('TARKISTETTU ENNAKKOTIETO') || sf.value.includes('Tarkistettu ennakkotieto')))) {
+      return {code: TARKISTETTU_ENNAKKOTIETO, level: 'TARKISTETTU ENNAKKOTIETO'};
+    }
+
+    if (fields.some(f => f.subfields.some(sf => sf.value.includes('ENNAKKOTIETO') || sf.value.includes('Ennakkotieto')))) {
+      return {code: ENNAKKOTIETO, level: 'ENNAKKOTIETO'};
+    }
+    // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
+    if (encodingLevel === '8') {
+      return {code: ENNAKKOTIETO, level: 'No prepublication type found'};
+    }
+    return {code: EI_ENNAKKOTIETO, level: 'Not a prepublication'};
+  }
+  // If our encLevel is '8' (for actual prepublication records), let's give a lower prepubLevel if information is not found
+  if (encodingLevel === '8') {
+    return {code: ENNAKKOTIETO, level: 'No 500 or 594 fields found, cannot determine prepublication type'};
+  }
+  return {code: EI_ENNAKKOTIETO, level: 'Not a prepublication'};
+}
+
 
 function rateValues(valueA, valueB, rateArray) {
   // NB! Assumes { code: ... } which is bad!
   debugDev('%o vs %o', valueA, valueB);
-  if (valueA.code === valueB.code) {
+  if (valueA === valueB) {
     debugDev('Both same: returning true');
     return true;
   }
 
   if (rateArray) { // Preference array, [0] is the best (=1).
-    const ratingOfA = rateArray.indexOf(valueA.code) + 1;
-    const ratingOfB = rateArray.indexOf(valueB.code) + 1;
+    const ratingOfA = rateArray.indexOf(valueA) + 1;
+    const ratingOfB = rateArray.indexOf(valueB) + 1;
 
     if (ratingOfA === 0) {
       if (ratingOfB !== 0) {
-        debugDev('A\'s value not found in array. Return B');
+        debugDev('A value not found in array. Return B');
         return 'B';
       }
       //debugDev('Value not found from array');
       return false;
     }
     if (ratingOfB === 0) {
-      debugDev('B\'s value not found in array. Return A');
+      debugDev('B not found in array. Return A');
       return 'A';
     }
 
 
     if (ratingOfA < ratingOfB) {
-      debugDev('A better: returning A');
+      debugDev('A is better: returning A');
       return 'A';
     }
 
-    debugDev('B better: returning B');
+    debugDev('B is better: returning B');
     return 'B';
   }
 
@@ -48,40 +77,60 @@ function rateValues(valueA, valueB, rateArray) {
   return false;
 }
 
-function compareTypeOfRecord(a, b) {
-  debugDev('Record A type: %o', a);
-  debugDev('Record B type: %o', b);
-  //nvdebug(`type of record: '${a}' vs '${b}', debugDev`);
-  // rateValues, no rateArray: no preference, just validation false - true
-  return rateValues(a, b);
+export function checkTypeOfRecord({record1, record2, checkPreference = true}) { //  ?.recordSource);
+  const typeA = record1.leader[6];
+  const typeB = record2.leader[6];
+  debug("CTOR...");
+
+  // Default case: same type
+  if (typeA === typeB) {
+    if (!isValidTypeOfRecord(typeA)) {
+      // Should we crash or just fail? I prefer fail...
+      debug(`ERROR: unsupported type of record '${typeA}'`);
+      return false;
+    }
+    return true;
+  }
+  debug(`CTOR exception ${typeA} vs ${typeB}`);
+  // Expections: soitionopas (MELKEHITYS-3499)
+  if (typeA === 'a' && isSoitonopas(record2)) {
+    return checkPreference ? 'B' : true;
+  }
+  if (typeB === 'a' && isSoitonopas(record1)) {
+    return checkPreference ? 'A' : true;
+  }
+
+  return false;
+
+  function isValidTypeOfRecord(typeOfRecord) {
+    return ['a', 'c', 'd', 'e', 'f', 'g', 'i', 'j', 'k', 'm', 'o', 'p', 'r', 't'].includes(typeOfRecord);
+  }
+
+  function isSoitonopas(record) {
+    if (record.leader[6] !== 'c') {
+      return false;
+    }
+    const f300 = record.get('300');
+    return f300.some(f => f.subfields.some(sf => sf.code === 'a' && sf.value.match(/(?:instumentskola|soitonopas)/ui)));
+  }
 }
 
-function compareBibliographicLevel(a, b) {
-  debugDev('Record A bib level: %o', a);
-  debugDev('Record B bib level: %o', b);
-  // rateValues, no rateArray: no preference, jsut validation false - true
-  return rateValues(a, b);
-}
 
-function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourceB) {
-  debugDev('Record A completion level: %o', a);
-  debugDev('Record B completion level: %o', b);
-  nvdebug(prePubA ? `Record A prepub level: ${JSON.stringify(prePubA)}` : 'N/A', debugDev);
-  nvdebug(prePubB ? `Record B prepub level: ${JSON.stringify(prePubB)}` : 'N/A', debugDev);
-  nvdebug(recordSourceA ? `Record A external type: ${JSON.stringify(recordSourceA)}` : 'N/A', debugDev);
-  nvdebug(recordSourceB ? `Record B external type: ${JSON.stringify(recordSourceB)}` : 'N/A', debugDev);
+export function checkEncodingLevel({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) { //  ?.recordSource);
+  const encodingLevelA = record1.leader[17];
+  const encodingLevelB = record2.leader[17];
 
-  if (prePubA && prePubB && a.code === b.code && ['2', '8'].includes(a.code)) { // Handle exception first: all prepublications are not equal!
+  if (encodingLevelA === encodingLevelB && ['2', '8'].includes(encodingLevelA)) { // Handle exception first: all prepublications are not equal!
+    const prepublicationLevelA = getPrepublicationLevel(record1, encodingLevelA);
+    const prepublicationLevelB = getPrepublicationLevel(record2, encodingLevelB);
 
-    const prePubValue = rateValues(prePubA, prePubB, [EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO]);
+    const prePubValue = rateValues(prepublicationLevelA.code, prepublicationLevelB.code, [EI_ENNAKKOTIETO, KONEELLISESTI_TUOTETTU_TIETUE, TARKISTETTU_ENNAKKOTIETO, ENNAKKOTIETO]);
 
-    // we'll check recordSource only if we have '8' or '2' records which have same prePubValue
-    // and prepubLevel is something else than '0' (not a prepublication)
-    if (prePubValue === true && prePubA.code !== '0' && prePubB.code !== '0') {
-      const valueA = {code: recordSourceA};
-      const valueB = {code: recordSourceB};
-      const rateArray = ['incomingRecord', 'databaseRecord', undefined];
-      return rateValues(valueA, valueB, rateArray);
+    // We'll check recordSource only if we have '8' or '2' records which have same prePubValue and prepubLevel is not a prepublication:
+    if (prePubValue === true && prepublicationLevelA.code !== EI_ENNAKKOTIETO && prepublicationLevelB.code !== EI_ENNAKKOTIETO) {
+      const recordSourceA = record1External?.recordSource;
+      const recordSourceB = record2External?.recordSource;
+      return rateValues(recordSourceA, recordSourceB,  ['incomingRecord', 'databaseRecord', undefined]);
     }
 
     return prePubValue;
@@ -90,79 +139,62 @@ function compareEncodingLevel(a, b, prePubA, prePubB, recordSourceA, recordSourc
   // Best first, see encodingLevelHash above.
   // const rateArray = [' ', '1', '2', '3', '4', '5', '7', 'u', 'z', '8'];
   const rateArray = [' ', '1', '4', '5', '2', '7', '3', 'u', 'z', '8']; // MET-145
-
-  return rateValues(a, b, rateArray);
+  return rateValues(encodingLevelA, encodingLevelB, rateArray);
 }
 
-export function compareLeader(recordValuesA, recordValuesB) {
-  const f000A = recordValuesA['000'];
-  const f000B = recordValuesB['000'];
 
-  const result = {
-    typeOfRecord: compareTypeOfRecord(f000A.typeOfRecord, f000B.typeOfRecord),
-    bibliographicLevel: compareBibliographicLevel(f000A.bibliographicLevel, f000B.bibliographicLevel),
-    encodingLevel: compareEncodingLevel(f000A.encodingLevel, f000B.encodingLevel, f000A.prepublicationLevel, f000B.prepublicationLevel)
-  };
-  //nvdebug('NV WP9', debugDev);
-  //nvdebug(JSON.stringify(result), debugDev);
-  return result;
-}
-
-// check typeOfRecord (LDR/06)
-export function checkTypeOfRecord({record1, record2}) {
-  const recordInfo1 = getTypeOfRecord(record1);
-  const recordInfo2 = getTypeOfRecord(record2);
-
-  return compareTypeOfRecord(recordInfo1.typeOfRecord, recordInfo2.typeOfRecord);
-}
 
 // check bibliographicLevel (LDR/07)
 export function checkBibliographicLevel({record1, record2}) {
-  const recordInfo1 = getBibliographicLevel(record1);
-  const recordInfo2 = getBibliographicLevel(record2);
-
-  return compareBibliographicLevel(recordInfo1.bibliographicLevel, recordInfo2.bibliographicLevel);
+  const levelA = record1.leader[7];
+  const levelB = record2.leader[7];
+  if (levelA !== levelB) {
+    return false;
+  }
+  return(['a', 'b', 'c', 'd', 'i', 'm', 's'].includes(levelA));
 }
 
-// Check record encoding level + prepublication level, mostly for preference
-export function checkRecordLevel({record1, record2, record1External = {}, record2External = {}}) {
-  const recordInfo1 = getEncodingLevel(record1);
-  const recordInfo2 = getEncodingLevel(record2);
-  const recordSource1 = record1External.recordSource || undefined;
-  const recordSource2 = record2External.recordSource || undefined;
 
-  return compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordSource1, recordSource2);
-}
 
+
+// record1External.recordSource
 
 // Check all values from leader
 export function checkLeader({record1, record2, checkPreference = true, record1External = {}, record2External = {}}) {
-  const recordInfo1 = getRecordInfo(record1);
-  const recordInfo2 = getRecordInfo(record2);
-  const recordSource1 = record1External.recordSource || undefined;
-  const recordSource2 = record2External.recordSource || undefined;
-
-  debugDev(`checkLeader()`);
-
-  debugDev(`checkLeader()`);
-
-  if (recordInfo1.typeOfRecord.code !== recordInfo2.typeOfRecord.code) {
-    debugDev(`LDR: type of record failed!`);
+  // Check leades lengths:
+  if (record1.leader.length !== 24 || record2.leader.length !== 24) {
+    debugDev(`LDR: wrong leader length!`);
     return false;
   }
 
-  // DEVELOP: this could use checkBibliographicLevel?
-  if (recordInfo1.bibliographicLevel.code !== recordInfo2.bibliographicLevel.code) {
-    debugDev(`LDR: bibliographical level failed!`);
+  const typeOfRecordResult = checkTypeOfRecord({record1, record2, checkPreference});
+  if (!typeOfRecordResult) {
+    debugDev(`LDR: type of record (LDR/06) mismatch`);
     return false;
   }
 
-  const encodingLevelPreference = compareEncodingLevel(recordInfo1.encodingLevel, recordInfo2.encodingLevel, recordInfo1.prepublicationLevel, recordInfo2.prepublicationLevel, recordSource1, recordSource2);
-  if (encodingLevelPreference === false) {
-    debugDev(`LDR: encoding level failed!`);
+  const bibliographicLevelResult = checkBibliographicLevel({record1, record2});
+  if (!bibliographicLevelResult) {
+    debugDev(`LDR: bibliographic level (LDR/07) mismatch`);
     return false;
   }
 
+  const encodingLevelResult = checkEncodingLevel({record1, record2, checkPreference, record1External, record2External});
+  if (!encodingLevelResult) {
+    debugDev(`LDR: encoding level (LDR/17) error`);
+    return false;
+  }
 
-  return checkPreference ? encodingLevelPreference : true;
+  if (!checkPreference) {
+    return true;
+  }
+
+  if (typeOfRecordResult !== true) { // soitonopas > book
+    return typeOfRecordResult;
+  }
+  // Bibliographic level is always a Boolean value, so no need to check it
+  if (encodingLevelResult !== true) {
+    return encodingLevelResult;
+  }
+  return true;
 }
