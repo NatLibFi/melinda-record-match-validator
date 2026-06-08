@@ -1,5 +1,5 @@
 {
     "description": "LDR/06 mismatch, but still ok since MELKEHITYS-3499 ('soitonopas')",
     "skip": false,
-    "only": true
+    "only": false
 }
