@@ -23,24 +23,6 @@
     ],
     "deleted": false
   },
-  "000": {
-    "typeOfRecord": {
-      "level": "Language material",
-      "code": "a"
-    },
-    "bibliographicLevel": {
-      "level": "Monograph/Item",
-      "code": "m"
-    },
-    "encodingLevel": {
-      "level": "Less-than-full level, material not examined",
-      "code": "2"
-    },
-    "prepublicationLevel": {
-      "code": "1",
-      "level": "Koneellisesti tuotettu tietue"
-    }
-  },
   "001": {
     "isMelindaId": false,
     "value": "undefined"

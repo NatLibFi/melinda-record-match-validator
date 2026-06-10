@@ -16,7 +16,7 @@ import {check042} from './compareFunctions/compareField042.js';
 import {check336, check337, check338} from './compareFunctions/compareField33X.js';
 import {check773, check773Internal} from './validators/field773.js';
 //import {check984} from './compareFunctions/compareField984.js';
-import {checkLeader, checkTypeOfRecord, checkRecordLevel, checkBibliographicLevel} from './compareFunctions/compareLeader.js';
+import {checkLeader, checkTypeOfRecord, checkEncodingLevel, checkBibliographicLevel} from './compareFunctions/compareLeader.js';
 import {check005, check008} from './compareFunctions/compareControlFields.js';
 import {compareRecordsPartSetFeatures} from './validators/partsAndSets.js';
 import {performAudioSanityCheck} from './compareFunctions/sanityCheckAudio.js';
@@ -131,14 +131,15 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
 
   // Singular leader comparisons for Human/internal merge
 
-  // leader typeOfRecord LDR/006
+  // leader typeOfRecord LDR/006 ('a' vs 'c' && f300 $a soitonopas, which prefers soitonopas)
   // do not use same time as checkLeader that checks all three leader values
   // we need to error these in MergeUI as mergeReducers refuse to handle records with differing LDR/06
+  // 
   {'name': 'typeOfRecord',
     'description': 'leader: typeOfRecord (validation)',
     'function': checkTypeOfRecord,
     'validation': true,
-    'preference': false,
+    'preference': true,
     //'manual': 'warning',
     'manual': 'error',
     'import': false,
@@ -164,7 +165,7 @@ const comparisonTasks = [ // NB! These are/should be in priority order for recor
   // do not use same time as checkLeader that checks all three leader values
   {'name': 'recordLevel',
     'description': 'leader + 500/594: recordLevel (preference)',
-    'function': checkRecordLevel,
+    'function': checkEncodingLevel,
     'validation': false,
     'preference': true,
     'import': false,

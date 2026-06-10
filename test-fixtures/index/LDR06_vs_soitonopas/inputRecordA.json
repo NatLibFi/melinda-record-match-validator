@@ -1,0 +1,8 @@
+{
+  "fields" : [
+    { "tag": "001", "value": "000000666" },
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "The minimalist papers." }  ]},
+    { "tag": "300", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "1 soitonopas (165 sivua)" }  ]}
+  ],
+  "leader": "01092ccs a22003494i 4500"
+}

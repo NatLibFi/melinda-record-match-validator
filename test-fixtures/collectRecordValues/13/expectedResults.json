@@ -28,24 +28,6 @@
     ]
   },
   "773": [],
-  "000": {
-    "bibliographicLevel": {
-      "code": "s",
-      "level": "Serial"
-    },
-    "encodingLevel": {
-      "code": "8",
-      "level": "Prepublication level"
-    },
-    "prepublicationLevel": {
-      "code": "1",
-      "level": "Koneellisesti tuotettu tietue"
-    },
-    "typeOfRecord": {
-      "code": "a",
-      "level": "Language material"
-    }
-  },
   "001": {
     "isMelindaId": true,
     "value": "004543730"

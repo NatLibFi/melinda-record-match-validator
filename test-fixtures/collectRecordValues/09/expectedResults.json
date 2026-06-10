@@ -25,24 +25,6 @@
         ]
     },
     "773": [],
-    "000": {
-        "bibliographicLevel": {
-            "code": "s",
-            "level": "Serial"
-        },
-        "encodingLevel": {
-            "code": " ",
-            "level": "Full level"
-        },
-        "prepublicationLevel": {
-            "code": "0",
-            "level": "Not a prepublication"
-        },
-        "typeOfRecord": {
-            "code": "a",
-            "level": "Language material"
-        }
-    },
     "001": {
         "isMelindaId": true,
         "value": "000680737"
