@@ -4,11 +4,6 @@
     "standardIdentifiers": true,
     "title": true
   },
-  "000": {
-    "bibliographicLevel": false,
-    "encodingLevel": "A",
-    "typeOfRecord": true
-  },
   "001": {
     "isMelindaId": true,
     "value": true

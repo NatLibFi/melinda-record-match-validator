@@ -1,5 +1,3 @@
-
-import {compareLeader} from './compareFunctions/compareLeader.js';
 import {compareCAT} from './validators/fieldCAT.js';
 import {compareLOW} from './compareFunctions/compareFieldLOW.js';
 import {compareSID} from './compareFunctions/compareFieldSID.js';
@@ -22,7 +20,6 @@ export function compareRecordValues(recordValuesA, recordValuesB) {
 
   return {
     'commonIdentifiers': compareCommonIdentifiers(recordValuesA, recordValuesB),
-    '000': compareLeader(recordValuesA, recordValuesB),
     '001': compare001(recordValuesA, recordValuesB),
     '005': compare005(recordValuesA, recordValuesB), // A is more recently updated
     '042': compare042(recordValuesA, recordValuesB), // A nor B has any fikka or viola
