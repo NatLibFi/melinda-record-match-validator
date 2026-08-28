@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v7
       with:
@@ -44,7 +44,7 @@ jobs:
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
     - name: nodejsscan scan
       id: njsscan
       uses: ajinabraham/njsscan-action@master
@@ -57,7 +57,7 @@ jobs:
     container: node:24
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: mikaelvesavuori/license-compliance-action@v1.0.3
         with:
           exclude_pattern: /^@natlibfi/
@@ -72,7 +72,7 @@ jobs:
     if: contains(github.ref, 'refs/tags/')
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Clean install
         run: npm ci
       # Add build step here if you don't have prepare script
