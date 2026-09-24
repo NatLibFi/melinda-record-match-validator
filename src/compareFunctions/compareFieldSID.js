@@ -7,6 +7,10 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collec
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
+// Databases where mismatching SIDs (same database, different id) are tolerated by the special case
+const SPECIAL_CASE_DATABASES = ['tati'];
+// Databases where the records must share at least one matching SID (same database + same id) for the special case to apply
+const SUPPLIER_DATABASES = ['FI-BTJ'];
 
 // Compare SID
 
@@ -37,10 +41,23 @@ function compareSIDValues(SIDsA, SIDsB) {
       return 'B';
     }
 
-    // Same database & different id => HARD failure
-    if (SIDsA.some(sidA => SIDsB.some(sidB => sidA.database === sidB.database && sidA.id !== sidB.id))) {
-      debugDev('SIDs: same db but diffent ids: fail');
-      return false;
+    // Same database & different id => HARD failure, unless the special case applies
+    const mismatchingDatabases = SIDsA
+      .filter(sidA => SIDsB.some(sidB => sidA.database === sidB.database && sidA.id !== sidB.id))
+      .map(sid => sid.database);
+    if (mismatchingDatabases.length > 0) {
+      // Special case: if the only mismatching SIDs are for libraries in SPECIAL_CASE_DATABASES
+      // and the records share at least one matching SID for libraries in SUPPLIER_DATABASES, we accept the match
+      const allMismatchedAreSpecialCase = mismatchingDatabases.every(db => SPECIAL_CASE_DATABASES.includes(db));
+      const hasMatchingSupplierSID = SIDsA.some(sidA => SIDsB.some(sidB => sidA.database === sidB.database && sidA.id === sidB.id && SUPPLIER_DATABASES.includes(sidA.database)));
+      const specialCase = allMismatchedAreSpecialCase && hasMatchingSupplierSID;
+      debugDev(`Mismatching SIDs in databases: ${[...new Set(mismatchingDatabases)].join(', ')} - special case applies: ${specialCase}`);
+
+      if (!specialCase) {
+        debugDev('SIDs: same db but different ids: fail');
+        return false;
+      }
+      debugDev('SIDs: special case applies, continuing with set comparison');
     }
 
     const onlyA = SIDsA.filter(SIDA => SIDsB.every(SIDB => SIDA.database !== SIDB.database));

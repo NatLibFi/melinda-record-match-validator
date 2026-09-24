@@ -1,0 +1,4 @@
+{
+    "description": "Mismatch in a database outside the special case list (valto), even though a supplier SID matches: hard fail",
+    "skip": false
+}

@@ -1,0 +1,4 @@
+{
+    "description": "One BTJ SID, two TATI SIDs - special case applies (matching FI-BTJ SID), merge with no preference",
+    "skip": false
+}

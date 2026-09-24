@@ -1,0 +1,4 @@
+{
+    "description": "Only special case databases mismatch (tati), but no matching supplier SID: hard fail",
+    "skip": false
+}
