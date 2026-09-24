@@ -7,6 +7,9 @@ const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:collec
 const debugDev = debug.extend('dev');
 //const debugData = debug.extend('data');
 
+// Switch for the SID special case exception: set to true to enable it
+const SID_SPECIAL_CASE_ENABLED = false;
+
 // Databases where mismatching SIDs (same database, different id) are tolerated by the special case
 const SPECIAL_CASE_DATABASES = ['tati'];
 // Databases where the records must share at least one matching SID (same database + same id) for the special case to apply
@@ -50,7 +53,7 @@ function compareSIDValues(SIDsA, SIDsB) {
       // and the records share at least one matching SID for libraries in SUPPLIER_DATABASES, we accept the match
       const allMismatchedAreSpecialCase = mismatchingDatabases.every(db => SPECIAL_CASE_DATABASES.includes(db));
       const hasMatchingSupplierSID = SIDsA.some(sidA => SIDsB.some(sidB => sidA.database === sidB.database && sidA.id === sidB.id && SUPPLIER_DATABASES.includes(sidA.database)));
-      const specialCase = allMismatchedAreSpecialCase && hasMatchingSupplierSID;
+      const specialCase = SID_SPECIAL_CASE_ENABLED && allMismatchedAreSpecialCase && hasMatchingSupplierSID;
       debugDev(`Mismatching SIDs in databases: ${[...new Set(mismatchingDatabases)].join(', ')} - special case applies: ${specialCase}`);
 
       if (!specialCase) {
