@@ -1,0 +1,6 @@
+{
+  "description": "continuing: d vs u (status unknown) → prefer A",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

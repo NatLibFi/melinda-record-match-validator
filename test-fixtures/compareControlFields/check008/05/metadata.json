@@ -1,0 +1,6 @@
+{
+  "description": "mp06 b (B.C.) vs s → prefer non-b (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}
