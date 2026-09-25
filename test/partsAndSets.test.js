@@ -70,7 +70,7 @@ function testTitle() {
       debug(`Testing: ${JSON.stringify(title)}`);
       const type = getTitleFeaturesType(title);
       debug(`Result: ${type}`);
-      assert(type, expectedResults);
+      assert.deepEqual(type, expectedResults);
     }
   }
 }

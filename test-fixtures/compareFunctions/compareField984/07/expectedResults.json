@@ -1,0 +1,6 @@
+{
+  "description": "A snubbed, B preferred → B (score -1 < 1)",
+  "record1": { "fields": [{ "tag": "984", "subfields": [{ "code": "a", "value": "NEVER-PREFER-IN-MERGE" }] }] },
+  "record2": { "fields": [{ "tag": "984", "subfields": [{ "code": "a", "value": "ALWAYS-PREFER-IN-MERGE" }] }] },
+  "expected": "B"
+}

@@ -1,0 +1,8 @@
+{
+  "description": "Both records neutral (no 984 fields) → true (equal scores 0=0)",
+  "inputRecordA": { "fields": [] },
+  "inputRecordB": { "fields": [] },
+  "metadata": {
+    "description": "Both records neutral (no 984 fields) → true (equal scores 0=0)"
+  }
+}

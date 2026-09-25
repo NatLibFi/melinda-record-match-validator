@@ -145,7 +145,8 @@ export function normalizeMelindaId(value) {
 
 export function isValidNormalizedMelindaId(value) {
   const prefix = getMelindaDefaultPrefix();
-  const regexp = new RegExp(`(${prefix})[0-9]{9}$/`, 'u');
+  const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regexp = new RegExp(`${escapedPrefix}[0-9]{9}$`, 'u');
   if (regexp.test(value)) {
     return true;
   }

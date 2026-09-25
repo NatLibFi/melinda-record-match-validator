@@ -1,0 +1,6 @@
+{
+  "description": "Both records neutral (no 984 fields) → true (equal scores 0=0)",
+  "record1": { "fields": [] },
+  "record2": { "fields": [] },
+  "expected": true
+}
