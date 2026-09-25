@@ -1,0 +1,6 @@
+{
+  "description": "Encoding level preference propagates to checkLeader (8 vs 4 -> B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

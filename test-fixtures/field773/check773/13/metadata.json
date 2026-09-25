@@ -1,0 +1,9 @@
+{
+  "description": "Shared internal host ID with requireHostIdMatch=true - should pass",
+  "skip": false,
+  "only": false,
+  "expectedResults": true,
+  "options": {
+    "requireHostIdMatch": true
+  }
+}

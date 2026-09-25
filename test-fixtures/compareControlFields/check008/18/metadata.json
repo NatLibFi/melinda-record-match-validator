@@ -1,0 +1,6 @@
+{
+  "description": "mp06 i (inclusive, unscored) vs s (scored) → no preference (fallthrough)",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

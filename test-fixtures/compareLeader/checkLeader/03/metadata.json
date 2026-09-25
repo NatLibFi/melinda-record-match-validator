@@ -1,0 +1,6 @@
+{
+  "description": "Soitonopas preference propagates to checkLeader (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

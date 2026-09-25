@@ -1,0 +1,12 @@
+{
+  "description": "Same last modified time",
+  "skip": false,
+  "only": false,
+  "recordValuesA": {
+    "005": "2024-09-10T17:59:02"
+  },
+  "recordValuesB": {
+    "005": "2024-09-10T17:59:02"
+  },
+  "expectedResults": true
+}

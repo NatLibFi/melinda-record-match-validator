@@ -1,0 +1,6 @@
+{
+  "description": "single-part scores: q vs n (unknown) → prefer A",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

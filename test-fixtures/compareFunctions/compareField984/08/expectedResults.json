@@ -1,0 +1,9 @@
+{
+  "description": "A has preferred+snubbed (both present → preferred wins, score 1), B neutral → A (score 1 > 0)",
+  "record1": { "fields": [
+    { "tag": "984", "subfields": [{ "code": "a", "value": "ALWAYS-PREFER-IN-MERGE" }] },
+    { "tag": "984", "subfields": [{ "code": "a", "value": "NEVER-PREFER-IN-MERGE" }] }
+  ]},
+  "record2": { "fields": [] },
+  "expected": "A"
+}

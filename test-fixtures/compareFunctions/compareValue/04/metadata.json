@@ -1,0 +1,7 @@
+{
+    "description": "Return 'undefined' when both values are the string 'undefined'",
+    "valueA": "undefined",
+    "valueB": "undefined",
+    "expectedResult": "undefined",
+    "skip": false
+}

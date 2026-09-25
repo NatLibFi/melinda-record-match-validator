@@ -1,0 +1,12 @@
+{
+  "description": "CAT without $a subfield — cataloger becomes the string \"undefined\"",
+  "skip": false,
+  "only": false,
+  "expectedResults": {
+    "latest": {
+      "cataloger": "undefined",
+      "time": "2014-05-20T00:18:00"
+    },
+    "otherCats": []
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "description": "538$a mentions Daisy vs non-Daisy record: check fails (check538 branch)",
+  "skip": false,
+  "expectedResults": false
+}

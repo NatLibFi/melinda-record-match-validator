@@ -1,0 +1,12 @@
+{
+  "description": "Single CAT field",
+  "skip": false,
+  "only": false,
+  "expectedResults": {
+    "latest": {
+      "cataloger": "LOAD-HELKA",
+      "time": "2014-05-20T00:18:00"
+    },
+    "otherCats": []
+  }
+}

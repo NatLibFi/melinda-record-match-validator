@@ -1,0 +1,6 @@
+{
+  "description": "Level 8: A has 500 without keyword (line 28-30 fallback), B has no 500 (line 34-37) - equal codes",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

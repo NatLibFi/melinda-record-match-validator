@@ -1,0 +1,6 @@
+{
+  "description": "Equal level 2: koneellisesti (A) better than ENNAKKOTIETO (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

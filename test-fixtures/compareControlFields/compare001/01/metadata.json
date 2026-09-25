@@ -1,0 +1,21 @@
+{
+  "description": "Both are Melinda ids, same value",
+  "skip": false,
+  "only": false,
+  "recordValuesA": {
+    "001": {
+      "value": "(FI-MELINDA)001234567",
+      "isMelindaId": true
+    }
+  },
+  "recordValuesB": {
+    "001": {
+      "value": "(FI-MELINDA)001234567",
+      "isMelindaId": true
+    }
+  },
+  "expectedResults": {
+    "value": true,
+    "isMelindaId": true
+  }
+}

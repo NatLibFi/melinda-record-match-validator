@@ -1,0 +1,6 @@
+{
+  "description": "Level 5 (A) beats 3 (B) via general rate array",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

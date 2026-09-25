@@ -1,0 +1,14 @@
+{
+  "description": "recordSource: both unknown sources - false (rateValues both missing)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false,
+  "options": {
+    "record1External": {
+      "recordSource": "x"
+    },
+    "record2External": {
+      "recordSource": "y"
+    }
+  }
+}

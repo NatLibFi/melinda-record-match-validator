@@ -1,0 +1,43 @@
+{
+  "leader": "00000cam a2200000 i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "000000001"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20240101120000.0"
+    },
+    {
+      "tag": "773",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "(FI-MELINDA)111222333"
+        },
+        {
+          "code": "g",
+          "value": "part 1"
+        }
+      ]
+    },
+    {
+      "tag": "973",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "(FI-MELINDA)444555666"
+        },
+        {
+          "code": "g",
+          "value": "part 2"
+        }
+      ]
+    }
+  ]
+}

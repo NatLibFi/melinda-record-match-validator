@@ -1,0 +1,6 @@
+{
+  "description": "continuing: c (currently) vs d (ceased) → prefer B",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

@@ -1,0 +1,13 @@
+{
+  "description": "No CAT fields — noCats",
+  "skip": false,
+  "only": false,
+  "expectedResults": {
+    "latest": {
+      "cataloger": "undefined",
+      "time": "undefined"
+    },
+    "otherCats": [],
+    "noCats": true
+  }
+}

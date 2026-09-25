@@ -1,0 +1,13 @@
+{
+  "description": "Filter digit-only $w values away from recordControlNumbers",
+  "skip": false,
+  "only": false,
+  "expectedResults": [
+    {
+      "tag": "773",
+      "recordControlNumbers": [],
+      "relatedParts": "part 1",
+      "enumerationAndFirstPage": "undefined"
+    }
+  ]
+}

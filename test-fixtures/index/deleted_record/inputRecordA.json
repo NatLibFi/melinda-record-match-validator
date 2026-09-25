@@ -1,0 +1,9 @@
+{
+  "fields" : [
+    { "tag": "001", "value": "000000999" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20200101000000.0" },
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "Deleted record title." }  ]}
+  ],
+  "leader": "01092das a22003494i 4500"
+}

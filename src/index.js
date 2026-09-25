@@ -55,7 +55,7 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
       // Add f984 overide result (check preference override from records f984)
       const field984OverrideResult = getField984OverrideResult();
       if (field984OverrideResult) {
-        return allResults.concatenate(field984OverrideResult);
+        return allResults.concat([field984OverrideResult]);
       }
       return allResults;
     }
@@ -94,7 +94,13 @@ function makeComparisons({record1, record2, checkPreference = true, record1Exter
   function getField984OverrideResult() {
     const field984Override = check984({record1, record2});
     if (field984Override === 'A' || field984Override === 'B') {
-      return {result: field984Override, reason: 'Field 984 override applied (MRA-744)'};
+      // The message does not quote the marker values, because the override fires on both
+      // ALWAYS-PREFER-IN-MERGE and NEVER-PREFER-IN-MERGE markers
+      return {
+        result: field984Override,
+        reason: 'Field 984 override applied (MRA-744)',
+        preference_message_fi: 'tarkista suosittavan tietueen valinta, tietueissa on 984-kenttiä'
+      };
     }
     return;
   }

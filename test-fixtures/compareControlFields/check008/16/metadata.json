@@ -1,0 +1,6 @@
+{
+  "description": "mp06 i (inclusive, unscored) vs x (invalid → |) → | is ultimate loser (A)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

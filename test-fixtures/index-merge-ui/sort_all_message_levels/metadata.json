@@ -1,0 +1,5 @@
+{
+  "description": "MergeUI: five actionable results at once (error: shared LOW, validation warning: title, preference warnings: recordLevel 'A', f040b 'A', f040e 'A') → verifies sortMessages ordering: errors before validation warnings, validation warnings before preference warnings; preference 'B' results (f008, f005) are filtered out. The preference tasks that run after the title task (f040b/f040e) ensure the preference-vs-validation sort comparison (index.js sortMessages, lines 166-168) is exercised by V8's sort.",
+  "skip": false,
+  "only": false
+}

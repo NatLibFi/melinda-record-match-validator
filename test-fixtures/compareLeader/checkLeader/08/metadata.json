@@ -1,0 +1,6 @@
+{
+  "description": "Identical records, checkPreference true - all pass, final return true",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

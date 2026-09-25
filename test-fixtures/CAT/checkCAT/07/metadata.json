@@ -1,0 +1,6 @@
+{
+  "description": "B has no CATs, A has a non-automatic (human) CAT — A preferred (mirror of 06)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

@@ -1,0 +1,19 @@
+{
+  "description": "Return both 773 and 973 fields concatenated",
+  "skip": false,
+  "only": false,
+  "expectedResults": [
+    {
+      "tag": "773",
+      "recordControlNumbers": ["(FI-MELINDA)111222333"],
+      "relatedParts": "part 1",
+      "enumerationAndFirstPage": "undefined"
+    },
+    {
+      "tag": "973",
+      "recordControlNumbers": ["(FI-MELINDA)444555666"],
+      "relatedParts": "part 2",
+      "enumerationAndFirstPage": "undefined"
+    }
+  ]
+}

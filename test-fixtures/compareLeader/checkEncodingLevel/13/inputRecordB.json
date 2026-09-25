@@ -1,0 +1,20 @@
+{
+  "leader": "00000nam a22000002i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "000000001"
+    },
+    {
+      "tag": "500",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "irrelevant text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "description": "Return 973 fields (Viola multihost links)",
+  "skip": false,
+  "only": false,
+  "expectedResults": [
+    {
+      "tag": "973",
+      "recordControlNumbers": ["(FI-MELINDA)987654321"],
+      "relatedParts": "part 2",
+      "enumerationAndFirstPage": "undefined"
+    }
+  ]
+}

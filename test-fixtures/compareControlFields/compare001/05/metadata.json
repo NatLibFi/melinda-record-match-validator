@@ -1,0 +1,21 @@
+{
+  "description": "Both non-Melinda ids, same value",
+  "skip": false,
+  "only": false,
+  "recordValuesA": {
+    "001": {
+      "value": "123456789",
+      "isMelindaId": false
+    }
+  },
+  "recordValuesB": {
+    "001": {
+      "value": "123456789",
+      "isMelindaId": false
+    }
+  },
+  "expectedResults": {
+    "value": true,
+    "isMelindaId": false
+  }
+}

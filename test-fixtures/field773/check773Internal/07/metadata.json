@@ -1,0 +1,6 @@
+{
+  "description": "No shared internal host ID, external IDs with unrelated source prefixes - should pass",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

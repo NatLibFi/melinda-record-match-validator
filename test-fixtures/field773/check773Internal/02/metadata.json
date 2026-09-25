@@ -1,0 +1,6 @@
+{
+  "description": "Internal host IDs don't match - should fail with failHostIdMatch=true",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

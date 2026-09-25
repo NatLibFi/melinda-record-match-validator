@@ -1,0 +1,5 @@
+{
+  "description": "Record A (record1, non-preferred by default) has 984$a ALWAYS-PREFER-IN-MERGE → 984 override (MRA-744) makes A preferred → preference warning with preference_message_fi in MergeUI",
+  "only": false,
+  "skip": false
+}

@@ -1,0 +1,6 @@
+{
+  "description": "Book (a) vs other non-c type (b) - isSoitonopas guard on non-c record - false",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

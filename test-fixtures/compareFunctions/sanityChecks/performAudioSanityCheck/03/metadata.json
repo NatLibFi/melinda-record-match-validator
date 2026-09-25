@@ -1,0 +1,5 @@
+{
+  "description": "007-based detection: kasetti (ss...) vs LP (sd...e...p): check fails",
+  "skip": false,
+  "expectedResults": false
+}

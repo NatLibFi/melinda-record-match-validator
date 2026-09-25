@@ -1,0 +1,10 @@
+{
+  "description": "Shared internal host ID + external ID mismatch with requireHostIdMatch=true - should fail on otherIds mismatch",
+  "skip": false,
+  "only": false,
+  "expectedResults": false,
+  "options": {
+    "failHostIdMatch": false,
+    "requireHostIdMatch": true
+  }
+}

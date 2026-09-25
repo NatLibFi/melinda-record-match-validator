@@ -1,0 +1,6 @@
+{
+  "description": "Equal invalid bibliographic level (x/x)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

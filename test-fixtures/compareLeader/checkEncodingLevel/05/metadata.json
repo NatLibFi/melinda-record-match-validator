@@ -1,0 +1,6 @@
+{
+  "description": "Equal level 8, no 500/594 fields on either - both default to ENNAKKOTIETO",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

@@ -1,0 +1,6 @@
+{
+  "description": "mp06 | (no attempt) vs s → prefer non-| (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

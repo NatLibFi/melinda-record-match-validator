@@ -1,0 +1,21 @@
+{
+  "description": "Missing 001 values (both \"undefined\")",
+  "skip": false,
+  "only": false,
+  "recordValuesA": {
+    "001": {
+      "value": "undefined",
+      "isMelindaId": false
+    }
+  },
+  "recordValuesB": {
+    "001": {
+      "value": "undefined",
+      "isMelindaId": false
+    }
+  },
+  "expectedResults": {
+    "value": "undefined",
+    "isMelindaId": false
+  }
+}

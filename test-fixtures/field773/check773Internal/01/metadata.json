@@ -1,0 +1,6 @@
+{
+  "description": "Shared internal host ID - should fail with default failHostIdMatch=true",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

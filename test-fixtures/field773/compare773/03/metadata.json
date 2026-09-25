@@ -1,0 +1,6 @@
+{
+  "description": "One record has no 773, other has 773 - should pass (missing 773 does not fail)",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

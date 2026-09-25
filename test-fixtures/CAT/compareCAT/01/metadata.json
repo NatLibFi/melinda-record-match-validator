@@ -1,0 +1,6 @@
+{
+  "description": "Neither recordValues object has CATs — passes",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

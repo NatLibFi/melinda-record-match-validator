@@ -1,0 +1,6 @@
+{
+  "description": "Internal host IDs match - should pass",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

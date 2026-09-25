@@ -1,0 +1,6 @@
+{
+  "description": "Book (a) vs instumentskola (c) - regex alternative - B preferred",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

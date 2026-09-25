@@ -1,0 +1,27 @@
+[
+  {
+    "result": "error",
+    "type": "validation",
+    "message": "tietueita, joissa on saman paikalliskannan tietokantatunnus (LOW), ei voi yhdistää"
+  },
+  {
+    "result": "warning",
+    "type": "validation",
+    "message": "tarkista voiko tietueet yhdistää, niiden nimeketiedot (245) eroavat"
+  },
+  {
+    "result": "warning",
+    "type": "preference",
+    "message": "suosi koodaus- ja ennakkotietotasoltaan parempaa tietuetta (LDR/17)"
+  },
+  {
+    "result": "warning",
+    "type": "preference",
+    "message": "suosi tietuetta, jolla on soveltuvin kuvailukieli (040)"
+  },
+  {
+    "result": "warning",
+    "type": "preference",
+    "message": "suosi tietuetta, jonka kuvailusäännöiksi on merkitty RDA (040)"
+  }
+]

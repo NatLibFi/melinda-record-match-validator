@@ -1,0 +1,6 @@
+{
+  "description": "Same invalid type of record (x/x)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

@@ -1,0 +1,6 @@
+{
+  "leader": "01092cas a22003494i 4500",
+  "fields" : [
+    { "tag": "020", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "123456789Z" }, { "code": "q", "value": "epub" }] }
+  ]
+}

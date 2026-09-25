@@ -1,0 +1,6 @@
+{
+  "description": "Equal level 8: TARKISTETTU ENNAKKOTIETO (A, upper case keyword) beats ENNAKKOTIETO (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

@@ -1,0 +1,6 @@
+{
+  "description": "A preferred, B neutral → A (score 1 > 0)",
+  "record1": { "fields": [{ "tag": "984", "subfields": [{ "code": "a", "value": "ALWAYS-PREFER-IN-MERGE" }] }] },
+  "record2": { "fields": [] },
+  "expected": "A"
+}

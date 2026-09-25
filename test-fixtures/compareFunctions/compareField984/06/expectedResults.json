@@ -1,0 +1,6 @@
+{
+  "description": "A neutral, B snubbed → B (score 0 > -1, so A wins → B returns because A score > B score means A wins, but wait: score1=0, score2=-1, so 0 > -1, returns A)\nActually: A neutral (0), B snubbed (-1), 0 > -1 → A",
+  "record1": { "fields": [] },
+  "record2": { "fields": [{ "tag": "984", "subfields": [{ "code": "a", "value": "NEVER-PREFER-IN-MERGE" }] }] },
+  "expected": "A"
+}

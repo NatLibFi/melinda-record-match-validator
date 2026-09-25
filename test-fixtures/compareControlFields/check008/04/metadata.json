@@ -1,0 +1,6 @@
+{
+  "description": "formOfItem o vs s (electronic) → pairable, rest equal → true",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}
