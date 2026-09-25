@@ -1,0 +1,6 @@
+{
+  "description": "No 773 fields in either record - should pass",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

@@ -1,0 +1,6 @@
+{
+  "description": "Both records pass - matching 773 fields",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

@@ -1,0 +1,12 @@
+{
+  "leader": "00000cam a2200000 i 4500",
+  "fields": [
+    {
+      "tag": "773",
+      "subfields": [
+        { "code": "w", "value": "123456" },
+        { "code": "g", "value": "part 1" }
+      ]
+    }
+  ]
+}

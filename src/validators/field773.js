@@ -1,6 +1,6 @@
 import createDebugLogger from 'debug';
 import {hasFields, getSubfield, getSubfieldValues, getDefaultMissValue} from '../collectFunctions/collectUtils.js';
-import {hasIdMismatch, normalizeMelindaId, nvdebug} from '../utils.js';
+import {hasIdMismatch, hasIdMatch, normalizeMelindaId, nvdebug, splitIds} from '../utils.js';
 
 const debug = createDebugLogger('@natlibfi/melinda-record-match-validator:field773');
 const debugDev = debug.extend('dev');
@@ -64,7 +64,7 @@ export function check773Internal({record1, record2, failMultipleHostLinks = fals
 }
 
 // default options to original functionality
-function compare773values({f773sA, f773sB, failMultipleHostLinks = true, failF973 = true, requireHostIdMatch = false, failHostIdMatch = false}) {
+function compare773values({f773sA = [], f773sB = [], failMultipleHostLinks = true, failF973 = true, requireHostIdMatch = false, failHostIdMatch = false}) {
 
   debugDev('Collected f773s: %o vs %o', f773sA, f773sB);
   nvdebug('compare773values() in...', debugDev);

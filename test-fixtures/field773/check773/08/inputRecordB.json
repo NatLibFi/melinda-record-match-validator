@@ -1,0 +1,22 @@
+{
+  "leader": "00000cam a2200000 i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "444444444"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "773",
+      "subfields": [
+        {
+          "code": "w",
+          "value": "OTHER-456"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Multiple 773 in record1 with failMultipleHostLinks=false and matching host ID - should pass",
+  "skip": false,
+  "only": false,
+  "expectedResults": true,
+  "options": {
+    "failMultipleHostLinks": false
+  }
+}

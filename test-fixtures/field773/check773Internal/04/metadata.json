@@ -1,0 +1,6 @@
+{
+  "description": "Mixed internal and external IDs - internal match fails with failHostIdMatch=true before otherIds check",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

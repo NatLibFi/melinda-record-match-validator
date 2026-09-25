@@ -1,0 +1,6 @@
+{
+  "description": "External IDs with same prefix mismatch - should fail (fallback checks all IDs)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}
