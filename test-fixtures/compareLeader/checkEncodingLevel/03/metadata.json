@@ -1,0 +1,14 @@
+{
+  "description": "Equal prepub level: recordSource incomingRecord (A) beats databaseRecord (B)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A",
+  "options": {
+    "record1External": {
+      "recordSource": "incomingRecord"
+    },
+    "record2External": {
+      "recordSource": "databaseRecord"
+    }
+  }
+}

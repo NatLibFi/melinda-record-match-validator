@@ -1,0 +1,6 @@
+{
+  "description": "Equal level 8: lowercase keyword variants Tarkistettu/Ennakkotieto",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

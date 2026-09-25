@@ -1,0 +1,6 @@
+{
+  "description": "Soitonopas (c) vs book (a) - A preferred",
+  "skip": false,
+  "only": false,
+  "expectedResults": "A"
+}

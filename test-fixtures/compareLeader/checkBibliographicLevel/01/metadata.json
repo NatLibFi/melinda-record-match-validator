@@ -1,0 +1,6 @@
+{
+  "description": "Equal valid bibliographic level (m/m)",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

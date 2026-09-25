@@ -1,0 +1,6 @@
+{
+  "description": "Encoding level failure propagates (6 vs 9, neither in rate array -> false)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

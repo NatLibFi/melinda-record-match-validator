@@ -1,0 +1,6 @@
+{
+  "description": "Same unsupported auth type (z/z)",
+  "skip": false,
+  "only": false,
+  "expectedResults": false
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Identical records, checkPreference false - true",
+  "skip": false,
+  "only": false,
+  "expectedResults": true,
+  "options": {
+    "checkPreference": false
+  }
+}

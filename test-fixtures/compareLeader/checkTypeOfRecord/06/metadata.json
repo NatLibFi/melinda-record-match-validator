@@ -1,0 +1,9 @@
+{
+  "description": "Book vs soitonopas, checkPreference false",
+  "skip": false,
+  "only": false,
+  "expectedResults": true,
+  "options": {
+    "checkPreference": false
+  }
+}

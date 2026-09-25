@@ -1,0 +1,6 @@
+{
+  "description": "594 field counts as prepublication info (A) - equal codes, no external data",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

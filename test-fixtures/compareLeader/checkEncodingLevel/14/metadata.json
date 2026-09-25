@@ -1,0 +1,14 @@
+{
+  "description": "recordSource: A unknown source, B known - B wins (rateValues not-in-array, A missing)",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B",
+  "options": {
+    "record1External": {
+      "recordSource": "unknownSource"
+    },
+    "record2External": {
+      "recordSource": "incomingRecord"
+    }
+  }
+}

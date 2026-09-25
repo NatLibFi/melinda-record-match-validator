@@ -1,0 +1,9 @@
+{
+  "description": "Soitonopas case with checkPreference false - true",
+  "skip": false,
+  "only": false,
+  "expectedResults": true,
+  "options": {
+    "checkPreference": false
+  }
+}
