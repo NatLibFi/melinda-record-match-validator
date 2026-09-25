@@ -1,0 +1,18 @@
+{
+    "description": "Return false when both records are missing title features (both-undefined branch)",
+    "skip": false,
+    "only": false,
+    "recordValuesA": {
+        "title": {
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "recordValuesB": {
+        "title": {
+            "seriesFeatures": [],
+            "f946Features": []
+        }
+    },
+    "expectedResults": false
+}

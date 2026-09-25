@@ -1,0 +1,5 @@
+{
+  "description": "C-kasetti vs LP-äänilevy (no 007): kasetti mismatch fails, covers 300-based kasetti and LP detection",
+  "skip": false,
+  "expectedResults": false
+}

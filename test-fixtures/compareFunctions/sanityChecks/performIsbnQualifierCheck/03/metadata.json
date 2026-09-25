@@ -1,0 +1,5 @@
+{
+  "description": "10-char 020$a with invalid check char (Z): ISBN.audit throws, caught by invalidISBN (catch branch)",
+  "skip": false,
+  "expectedResults": true
+}

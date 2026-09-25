@@ -1,0 +1,5 @@
+{
+  "description": "300$a DVD-videolevy vs 300$a Blu-Ray-videolevy (no 007): check fails, covers 300-based Blu-Ray detection",
+  "skip": false,
+  "expectedResults": false
+}

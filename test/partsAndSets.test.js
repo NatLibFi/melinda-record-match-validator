@@ -1,5 +1,6 @@
 
 import assert from 'node:assert';
+import {test} from 'node:test';
 import {READERS} from '@natlibfi/fixura';
 import generateTests from '@natlibfi/fixugen';
 import {getPartSetFeatures, checkPartSetFeatures, getTitleFeaturesType} from '../src/validators/partsAndSets.js';
@@ -74,3 +75,11 @@ function testTitle() {
     }
   }
 }
+
+// Direct test for the undefined-title branch (partsAndSets.js lines 98-100):
+// JSON fixtures cannot express `undefined` (null would fail the destructure
+// at line 102), so this case is set up directly in the test file.
+
+test('getTitleFeaturesType returns unknown for an undefined title', () => {
+  assert.equal(getTitleFeaturesType(undefined), 'unknown');
+});

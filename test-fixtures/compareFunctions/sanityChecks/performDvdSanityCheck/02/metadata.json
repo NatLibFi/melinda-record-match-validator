@@ -1,0 +1,5 @@
+{
+  "description": "Both records have DVD-videolevy, but only B also has Blu-Ray-videolevy: Blu-Ray mismatch branch fails",
+  "skip": false,
+  "expectedResults": false
+}

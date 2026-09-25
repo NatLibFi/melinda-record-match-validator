@@ -1,0 +1,5 @@
+{
+  "description": "Bad check digit (13 chars) in 020$a: ISBN.audit reports invalid, normalizeIsbn returns original value",
+  "skip": false,
+  "expectedResults": true
+}

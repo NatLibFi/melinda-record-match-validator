@@ -1,0 +1,5 @@
+{
+  "description": "Invalid ISBN (14 chars) in 020$a: normalizeIsbn returns original value, no conflict",
+  "skip": false,
+  "expectedResults": true
+}
