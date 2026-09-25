@@ -1,0 +1,16 @@
+{
+  "leader": "01092cas a22003494i 4500",
+  "fields" : [
+    { "tag": "001", "value": "001000001" },
+    { "tag": "003", "value": "FI-MELINDA" },
+    { "tag": "005", "value": "20200101000000.0" },
+    { "tag": "008", "value": "010101c19879999nr |||p| ||||||||||0eng|c" },
+    { "tag": "041", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "eng" }  ]},
+    { "tag": "040", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "FI-MELINDA" }, { "code": "b", "value": "fin" }, { "code": "e", "value": "rda" }  ]},
+    { "tag": "245", "ind1": "0", "ind2": "0", "subfields" : [{ "code": "a", "value": "Whatever journal of linguistics /" }, { "code": "c", "value": "Some association." }  ]},
+    { "tag": "336", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "teksti" }, { "code": "b", "value": "txt" }, { "code": "2", "value": "rdacontent" }  ]},
+    { "tag": "337", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "ei tiedetty" }, { "code": "b", "value": "z" }, { "code": "2", "value": "rdamedia" }  ]},
+    { "tag": "338", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "ei tiedetty" }, { "code": "b", "value": "zz" }, { "code": "2", "value": "rdacarrier" }  ]},
+    { "tag": "LOW", "ind1": " ", "ind2": " ", "subfields" : [{ "code": "a", "value": "VAARI" }  ]}
+  ]
+}

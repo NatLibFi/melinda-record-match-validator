@@ -1,0 +1,5 @@
+{
+  "description": "Record A is deleted (LDR/05 = d) → existence task fails → action false",
+  "skip": false,
+  "only": false
+}
