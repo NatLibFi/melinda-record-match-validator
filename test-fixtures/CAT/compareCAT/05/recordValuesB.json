@@ -1,0 +1,14 @@
+{
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-BBB",
+      "time": "2014-02-02T00:00:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": null,
+        "time": "2013-01-01T00:00:00"
+      }
+    ]
+  }
+}

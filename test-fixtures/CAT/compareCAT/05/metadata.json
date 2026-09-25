@@ -1,0 +1,6 @@
+{
+  "description": "CAT with null cataloger in otherCats — never matches, no preference (compareIfArrayContainsCat null guard)",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

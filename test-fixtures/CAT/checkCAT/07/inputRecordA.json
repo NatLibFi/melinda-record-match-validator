@@ -1,0 +1,55 @@
+{
+  "leader": "00000cam a2200000 i 4500",
+  "fields": [
+    {
+      "tag": "001",
+      "value": "111111111"
+    },
+    {
+      "tag": "003",
+      "value": "FI-MELINDA"
+    },
+    {
+      "tag": "005",
+      "value": "20240101120000.0"
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "CONV-ISBD"
+        },
+        {
+          "code": "c",
+          "value": "20120402"
+        },
+        {
+          "code": "h",
+          "value": "0819"
+        }
+      ]
+    },
+    {
+      "tag": "CAT",
+      "ind1": " ",
+      "ind2": " ",
+      "subfields": [
+        {
+          "code": "a",
+          "value": "KVP1008"
+        },
+        {
+          "code": "c",
+          "value": "20201104"
+        },
+        {
+          "code": "h",
+          "value": "0046"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "CAT": {
+    "latest": {
+      "cataloger": "LOAD-HELKA",
+      "time": "2014-05-20T00:18:00"
+    },
+    "otherCats": [
+      {
+        "cataloger": "CONV-ISBD",
+        "time": "2012-04-02T08:19:00"
+      }
+    ]
+  }
+}

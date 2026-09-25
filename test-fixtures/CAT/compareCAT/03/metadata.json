@@ -1,0 +1,6 @@
+{
+  "description": "B recordValues has an extra CAT after A's latest — B preferred",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

@@ -1,0 +1,12 @@
+{
+  "description": "CAT without $h subfield — moment strict parse fails, time is \"Invalid date\"",
+  "skip": false,
+  "only": false,
+  "expectedResults": {
+    "latest": {
+      "cataloger": "LOAD-HELKA",
+      "time": "Invalid date"
+    },
+    "otherCats": []
+  }
+}

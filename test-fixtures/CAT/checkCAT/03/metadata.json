@@ -1,0 +1,6 @@
+{
+  "description": "B has an extra CAT after A's latest CAT — B preferred",
+  "skip": false,
+  "only": false,
+  "expectedResults": "B"
+}

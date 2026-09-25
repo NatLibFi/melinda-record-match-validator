@@ -1,0 +1,6 @@
+{
+  "description": "common CAT history branch (innerCompareCat lines 82-101) intentionally not covered; related to skipped index fixture CAT_fork2",
+  "skip": true,
+  "only": false,
+  "expectedResults": null
+}

@@ -1,0 +1,6 @@
+{
+  "description": "Same latest CAT in both recordValues — passes",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}

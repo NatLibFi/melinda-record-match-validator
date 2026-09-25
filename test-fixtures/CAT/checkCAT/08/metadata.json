@@ -1,0 +1,6 @@
+{
+  "description": "Unrelated CAT histories, no common CAT — no preference (fallthrough)",
+  "skip": false,
+  "only": false,
+  "expectedResults": true
+}
